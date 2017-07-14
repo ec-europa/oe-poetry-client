@@ -24,7 +24,7 @@ class PoetryServiceProvider implements ServiceProviderInterface
 
         $container['renderer.engine'] = function (Container $container) {
             $root = $container['renderer.engine.template_folder'];
-            $engine = (new Engine())
+            $engine = (new Engine($root))
                 ->setFileExtension('tpl.php')
                 ->addFolder('client', $root.'/client')
                 ->addFolder('components', $root.'/components')
