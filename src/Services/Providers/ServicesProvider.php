@@ -1,30 +1,31 @@
 <?php
 
-namespace EC\Poetry\Services;
+namespace EC\Poetry\Services\Providers;
 
 use EC\Poetry\Server;
+use EC\Poetry\Services\Renderer;
 use League\Plates\Engine;
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 use Symfony\Component\Validator\ValidatorBuilder;
 
 /**
- * Class PoetryServiceProvider
+ * Class ServicesProvider
  *
- * @package EC\Poetry\Services
+ * @package EC\Poetry\Services\Providers
  */
-class PoetryServiceProvider implements ServiceProviderInterface
+class ServicesProvider implements ServiceProviderInterface
 {
     /**
      * {@inheritdoc}
      */
     public function register(Container $container)
     {
-        $container['renderer.engine.template_folder'] = __DIR__.'/../../templates';
+        $container['renderer.engine.template_folder'] = __DIR__.'/../../../templates';
 
         $container['renderer.engine'] = function (Container $container) {
             $root = $container['renderer.engine.template_folder'];
-            $engine = (new Engine())
+            $engine = (new Engine($root))
                 ->setFileExtension('tpl.php')
                 ->addFolder('client', $root.'/client')
                 ->addFolder('components', $root.'/components')

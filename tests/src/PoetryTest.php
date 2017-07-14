@@ -2,6 +2,7 @@
 
 namespace EC\Poetry\Tests;
 
+use EC\Poetry\Messages\Client\GetStatus;
 use EC\Poetry\Poetry;
 use EC\Poetry\Services\Renderer;
 use League\Plates\Engine;
@@ -15,6 +16,37 @@ use Symfony\Component\Validator\Validator\RecursiveValidator;
  */
 class PoetryTest extends TestCase
 {
+    /**
+     * Test message container.
+     */
+    public function testMessageContainer()
+    {
+        $poetry = new Poetry();
+        /** @var \EC\Poetry\Messages\Client\GetStatus $message */
+        $message = $poetry->get('message.client.get_status');
+        expect($message)->to->be->instanceof(GetStatus::class);
+
+        /** @var \Symfony\Component\Validator\ConstraintViolationListInterface $violations */
+        $violations = $poetry->get('validator')->validate($message);
+        expect($violations->count())->not->to->be->empty();
+
+        $poetry = new Poetry([
+            'identifier' => [
+                'code' => 'DGT',
+                'year' => '2017',
+                'number' => '0001',
+                'version' => '01',
+                'part' => '00',
+                'product' => 'ABC',
+            ],
+        ]);
+        $message = $poetry->get('message.client.get_status');
+        $violations = $poetry->get('validator')->validate($message);
+        expect($violations->count())->to->be->empty();
+
+        return;
+    }
+
     /**
      * Test container.
      */

@@ -2,6 +2,7 @@
 
 namespace EC\Poetry\Services;
 
+use EC\Poetry\Messages\AbstractMessage;
 use EC\Poetry\Messages\RenderableInterface;
 use League\Plates\Engine;
 
@@ -28,12 +29,15 @@ class Renderer
     }
 
     /**
-     * @param \EC\Poetry\Messages\RenderableInterface $message
+     * @param \EC\Poetry\Messages\AbstractMessage $message
      *
      * @return string
      */
-    public function render(RenderableInterface $message)
+    public function render(AbstractMessage $message)
     {
-        return $this->engine->render($message->getTemplate(), ['message' => $message]);
+        return $this->engine->render($message->getTemplate(), [
+            'identifier' => $message->getIdentifier()->getFormattedIdentifier(),
+            'message' => $message,
+        ]);
     }
 }
