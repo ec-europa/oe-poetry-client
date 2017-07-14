@@ -25,5 +25,23 @@ class PoetryTest extends \PHPUnit_Framework_TestCase
 
         $service = $poetry->get('validator');
         expect($service)->to->be->instanceof(RecursiveValidator::class);
+
+
+        /** @var \EC\Poetry\Server $server */
+        $server = $poetry->get('server');
+        $callback = $server->getCallback();
+        expect($callback)->is->null();
+
+        $value = 'callback';
+        $poetry = new Poetry([
+            'server.callback' => function () use ($value) {
+                return "I'm the {$value}";
+            },
+        ]);
+
+        /** @var \EC\Poetry\Server $server */
+        $server = $poetry->get('server');
+        $callback = $server->getCallback();
+        expect($callback)->is->equal("I'm the callback");
     }
 }

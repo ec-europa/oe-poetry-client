@@ -19,6 +19,9 @@ class Poetry extends Container
     {
         parent::__construct($values);
         $this->register(new PoetryServiceProvider());
+        foreach ($values as $name => $value) {
+            $this->extend($name, $value);
+        }
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace EC\Poetry\Services;
 
+use EC\Poetry\Server;
 use League\Plates\Engine;
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
@@ -28,5 +29,12 @@ class PoetryServiceProvider implements ServiceProviderInterface
         $container['validator'] = $container->factory(function (Container $container) {
             return (new ValidatorBuilder())->getValidator();
         });
+
+        $container['server.callback'] = function () {
+        };
+
+        $container['server'] = function (Container $container) {
+            return new Server($container['server.callback']);
+        };
     }
 }
