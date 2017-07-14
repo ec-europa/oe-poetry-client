@@ -2,12 +2,10 @@
 
 namespace EC\Poetry\Messages\Components;
 
-use EC\Poetry\Components\ComponentInterface;
-
 /**
- * Class AbstractErrorMessage
+ * Class AbstractComponent
  *
- * @package EC\Poetry\Messages\Server
+ * @package EC\Poetry\Messages\Components
  */
 abstract class AbstractComponent implements ComponentInterface
 {

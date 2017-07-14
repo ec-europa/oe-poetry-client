@@ -14,5 +14,5 @@ interface ValidatableInterface
     /**
      * @param \Symfony\Component\Validator\Mapping\ClassMetadata $metadata
      */
-    public static function loadValidatorMetadata(ClassMetadata $metadata);
+    public static function getConstraints(ClassMetadata $metadata);
 }

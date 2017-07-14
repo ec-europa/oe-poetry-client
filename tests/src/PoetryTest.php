@@ -4,6 +4,7 @@ namespace EC\Poetry\Tests;
 
 use EC\Poetry\Poetry;
 use League\Plates\Engine;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Validator\Validator\RecursiveValidator;
 
 /**
@@ -11,7 +12,7 @@ use Symfony\Component\Validator\Validator\RecursiveValidator;
  *
  * @package EC\Poetry\Tests
  */
-class PoetryTest extends \PHPUnit_Framework_TestCase
+class PoetryTest extends TestCase
 {
     /**
      * Test container.
@@ -25,7 +26,14 @@ class PoetryTest extends \PHPUnit_Framework_TestCase
 
         $service = $poetry->get('validator');
         expect($service)->to->be->instanceof(RecursiveValidator::class);
+    }
 
+    /**
+     * Test possibility to override service container parameters.
+     */
+    public function testParameterOverrides()
+    {
+        $poetry = new Poetry();
 
         /** @var \EC\Poetry\Server $server */
         $server = $poetry->get('server');

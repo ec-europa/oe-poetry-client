@@ -1,6 +1,6 @@
 <?php
 
-namespace EC\Poetry\Components;
+namespace EC\Poetry\Messages\Components;
 
 use EC\Poetry\Messages\ValidatableInterface;
 

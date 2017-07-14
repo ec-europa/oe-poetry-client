@@ -27,7 +27,7 @@ class PoetryServiceProvider implements ServiceProviderInterface
         };
 
         $container['validator'] = $container->factory(function (Container $container) {
-            return (new ValidatorBuilder())->getValidator();
+            return (new ValidatorBuilder())->addMethodMapping('getConstraints')->getValidator();
         });
 
         $container['server.callback'] = function () {
