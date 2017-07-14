@@ -1,4 +1,4 @@
 /vendor/
-robo.yml
 grumphp.yml
 phpunit.xml
+composer.lock
