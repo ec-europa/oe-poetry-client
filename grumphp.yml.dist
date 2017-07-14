@@ -1,0 +1,18 @@
+parameters:
+  ascii:
+    failed: ~
+    succeeded: ~
+  tasks:
+    phpunit: ~
+    phpmd: ~
+    git_commit_message:
+      matchers:
+        - '/^Issue (#\d+): [A-Z].+\./'
+      case_insensitive: false
+      multiline: false
+    phpcs:
+      standard: vendor/escapestudios/symfony2-coding-standard/Symfony2
+      ignore_patterns:
+        - vendor/
+      triggered_by:
+        - php
