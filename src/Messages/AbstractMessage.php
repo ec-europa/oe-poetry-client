@@ -37,4 +37,30 @@ abstract class AbstractMessage implements MessageInterface
             new Assert\Valid(),
         ]);
     }
+
+    /**
+     * Get Identifier property.
+     *
+     * @return \EC\Poetry\Messages\Components\Identifier
+     *   Property value.
+     */
+    public function getIdentifier()
+    {
+        return $this->identifier;
+    }
+
+    /**
+     * Set Identifier property.
+     *
+     * @param \EC\Poetry\Messages\Components\Identifier $identifier
+     *   Property value.
+     *
+     * @return $this
+     */
+    public function setIdentifier($identifier)
+    {
+        $this->identifier = $identifier;
+
+        return $this;
+    }
 }

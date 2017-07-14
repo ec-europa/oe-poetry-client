@@ -52,6 +52,23 @@ class Identifier extends AbstractComponent
     }
 
     /**
+     * @return string
+     */
+    public function getFormattedIdentifier()
+    {
+        $parts = [
+            $this->code,
+            $this->year,
+            $this->number,
+            $this->version,
+            $this->part,
+            $this->product,
+        ];
+
+        return implode('/', $parts);
+    }
+
+    /**
      * Get Code property.
      *
      * @return mixed

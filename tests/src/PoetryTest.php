@@ -3,6 +3,7 @@
 namespace EC\Poetry\Tests;
 
 use EC\Poetry\Poetry;
+use EC\Poetry\Services\Renderer;
 use League\Plates\Engine;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Validator\Validator\RecursiveValidator;
@@ -22,6 +23,9 @@ class PoetryTest extends TestCase
         $poetry = new Poetry();
 
         $service = $poetry->get('renderer');
+        expect($service)->to->be->instanceof(Renderer::class);
+
+        $service = $poetry->get('renderer.engine');
         expect($service)->to->be->instanceof(Engine::class);
 
         $service = $poetry->get('validator');

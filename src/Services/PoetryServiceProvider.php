@@ -20,10 +20,10 @@ class PoetryServiceProvider implements ServiceProviderInterface
      */
     public function register(Container $container)
     {
-        $container['renderer.template_folder'] = __DIR__.'/../../templates';
+        $container['renderer.engine.template_folder'] = __DIR__.'/../../templates';
 
-        $container['renderer'] = function (Container $container) {
-            $root = $container['renderer.template_folder'];
+        $container['renderer.engine'] = function (Container $container) {
+            $root = $container['renderer.engine.template_folder'];
             $engine = (new Engine())
                 ->setFileExtension('tpl.php')
                 ->addFolder('client', $root.'/client')
@@ -32,6 +32,10 @@ class PoetryServiceProvider implements ServiceProviderInterface
                 ->addFolder('server', $root.'/server');
 
             return $engine;
+        };
+
+        $container['renderer'] = function (Container $container) {
+            return new Renderer($container['renderer.engine']);
         };
 
         $container['validator'] = $container->factory(function (Container $container) {
