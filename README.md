@@ -1,7 +1,5 @@
 # Poetry Client Library
 
-_**Note:** This is just a sketch for review purposes._
-
 The Poetry Client Library aims to hide Poetry service complexity behind and easy-to-use client library so that
 users don't have to worry about building their own request messages nor implementing SOAP interactions.  
 
