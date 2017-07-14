@@ -27,10 +27,16 @@ several message types, such as the request ID, details, source documents, etc.
 You can build your messages as follow:
 
 ```php
-use Poetry\Messages\Client as Message;
-use Poetry\Messages\Components as Component;
+use EC\Poetry\Messages\Components as Component;
+use EC\Poetry\Messages\Client as Message;
 
-$id = new Component\Id('DGT', '2013', '0001', '00', 'TRA');
+$id = new Component\Identifier();
+$id->setCode('DGT')
+  ->setYear(2017)
+  ->setNumber('00001')
+  ->setVersion('01')
+  ->setPart('00')
+  ->setProduct('TRA');
 
 $details = new Component\Details();
 $source = new Component\SourceDocument();
@@ -46,7 +52,6 @@ $message->setDetails($details)
   ->addReference($reference2);
 ```
 
-
 ### Client
 
 The client object is able to perform SOAP requests by receiving a fully built message object, all SOAP implementation
@@ -61,8 +66,8 @@ The client will perform the following operations:
 You can send a message to the Poetry Service in the following way:
 
 ```php
-$client = ClientFactory::getInstance();
-$client->send($message);
+$poetry = new Poetry();
+$poetry->get('client')->send($message);
 ```
 
 ### Server
@@ -80,8 +85,10 @@ Upon receiving a message from the Poetry Service the server will perform the fol
 You can retrieve a Poetry Service response in the following way.
 
 ```php
-/** @var \Poetry\Messages\Client\PublishRequest $message */
-$message = $server->getResponse();
+/** @var \EC\Poetry\Messages\Client\PublishRequest $message */
+$poetry = new Poetry();
+$message = $poetry->get('server')->getResponse();
+
 $id = $message->getId();
 $detail_name = $message->getDetails()->getName();
 $contacts = $message->getContacts();
