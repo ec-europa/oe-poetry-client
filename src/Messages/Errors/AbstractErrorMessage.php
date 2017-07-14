@@ -2,6 +2,7 @@
 
 namespace EC\Poetry\Messages\ErrorMessageInterface;
 
+use EC\Poetry\Messages\AbstractMessage;
 use EC\Poetry\Messages\Errors\ErrorMessageInterface;
 
 /**
@@ -9,7 +10,7 @@ use EC\Poetry\Messages\Errors\ErrorMessageInterface;
  *
  * @package EC\Poetry\Messages\Server
  */
-abstract class AbstractErrorMessage implements ErrorMessageInterface
+abstract class AbstractErrorMessage extends AbstractMessage implements ErrorMessageInterface
 {
 
 }

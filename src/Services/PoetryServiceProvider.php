@@ -23,7 +23,15 @@ class PoetryServiceProvider implements ServiceProviderInterface
         $container['renderer.template_folder'] = __DIR__.'/../../templates';
 
         $container['renderer'] = function (Container $container) {
-            return new Engine($container['renderer.template_folder']);
+            $root = $container['renderer.template_folder'];
+            $engine = (new Engine())
+                ->setFileExtension('tpl.php')
+                ->addFolder('client', $root.'/client')
+                ->addFolder('components', $root.'/components')
+                ->addFolder('errors', $root.'/errors')
+                ->addFolder('server', $root.'/server');
+
+            return $engine;
         };
 
         $container['validator'] = $container->factory(function (Container $container) {
