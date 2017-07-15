@@ -43,8 +43,6 @@ class PoetryTest extends TestCase
         $message = $poetry->get('message.client.get_status');
         $violations = $poetry->get('validator')->validate($message);
         expect($violations->count())->to->be->empty();
-
-        return;
     }
 
     /**

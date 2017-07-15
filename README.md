@@ -52,6 +52,36 @@ $message->setDetails($details)
   ->addReference($reference2);
 ```
 
+Alternatively Poetry can also create messages for you, taking care of using all necessary dependencies:
+
+```php
+$poetry = new Poetry();
+$message = $poetry->get('message.client.get_status');
+```
+
+In this case you'll still need to set-up all required data by yourself (such as `Identifier` properties).
+
+The Poetry object also accepts global configuration that will be passed along to the right objects and services,
+for example:
+
+```php
+$poetry = new Poetry([
+    'identifier' => [
+        'code' => 'DGT',
+        'year' => '2017',
+        'number' => '0001',
+        'version' => '01',
+        'part' => '00',
+        'product' => 'ABC',
+    ],
+]);
+
+$message = $poetry->get('message.client.get_status');
+$violations = $poetry->get('validator')->validate($message); // No violations.
+```
+
+The above example returns a valid message.
+
 ### Client
 
 The client object is able to perform SOAP requests by receiving a fully built message object, all SOAP implementation
