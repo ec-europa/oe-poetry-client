@@ -39,10 +39,7 @@ abstract class AbstractMessage implements MessageInterface
     }
 
     /**
-     * Get Identifier property.
-     *
-     * @return \EC\Poetry\Messages\Components\Identifier
-     *   Property value.
+     * {@inheritdoc}
      */
     public function getIdentifier()
     {

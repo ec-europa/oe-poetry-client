@@ -2,6 +2,7 @@
 
 namespace EC\Poetry\Messages\Components;
 
+use EC\Poetry\Messages\RenderableInterface;
 use EC\Poetry\Messages\ValidatableInterface;
 
 /**
@@ -9,7 +10,7 @@ use EC\Poetry\Messages\ValidatableInterface;
  *
  * @package EC\Poetry\Messages
  */
-interface ComponentInterface extends ValidatableInterface
+interface ComponentInterface extends RenderableInterface, ValidatableInterface
 {
 
 }

@@ -3,8 +3,9 @@
 namespace EC\Poetry\Services\Providers;
 
 use EC\Poetry\Server;
-use EC\Poetry\Services\Renderer;
 use League\Plates\Engine;
+use EC\Poetry\Services\Plates\ComponentExtension;
+use EC\Poetry\Services\Renderer;
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 use Symfony\Component\Validator\ValidatorBuilder;
@@ -27,6 +28,7 @@ class ServicesProvider implements ServiceProviderInterface
             $root = $container['renderer.engine.template_folder'];
             $engine = (new Engine($root))
                 ->setFileExtension('tpl.php')
+                ->loadExtension(new ComponentExtension())
                 ->addFolder('client', $root.'/client')
                 ->addFolder('components', $root.'/components')
                 ->addFolder('errors', $root.'/errors')

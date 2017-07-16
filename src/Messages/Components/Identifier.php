@@ -22,6 +22,14 @@ class Identifier extends AbstractComponent
     /**
      * {@inheritdoc}
      */
+    public function getTemplate()
+    {
+        return 'components::identifier';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public static function getConstraints(ClassMetadata $metadata)
     {
         $metadata->addPropertyConstraints('code', [

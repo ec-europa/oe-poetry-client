@@ -4,15 +4,15 @@
  * Template file.
  *
  * @var \League\Plates\Template\Template $this
- * @var \EC\Poetry\Messages\Components\Identifier $message
+ * @var \EC\Poetry\Messages\Components\Identifier $component
  */
 ?>
 <demandeId>
-    <codeDemandeur><?= $this->e($message->getCode()) ?></codeDemandeur>
-    <annee><?= $this->e($message->getYear()) ?></annee>
-    <numero><?= $this->e($message->getNumber()) ?></numero>
-    <version><?= $this->e($message->getVersion()) ?></version>
-    <partie><?= $this->e($message->getPart()) ?></partie>
-    <produit><?= $this->e($message->getProduct()) ?></produit>
+    <codeDemandeur><?= $component->getCode() ?></codeDemandeur>
+    <annee><?= $component->getYear() ?></annee>
+    <numero><?= $component->getNumber() ?></numero>
+    <version><?= $component->getVersion() ?></version>
+    <partie><?= $component->getPart() ?></partie>
+    <produit><?= $component->getProduct() ?></produit>
 </demandeId>
 

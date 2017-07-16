@@ -3,7 +3,6 @@
 namespace EC\Poetry\Services;
 
 use EC\Poetry\Messages\AbstractMessage;
-use EC\Poetry\Messages\RenderableInterface;
 use League\Plates\Engine;
 
 /**

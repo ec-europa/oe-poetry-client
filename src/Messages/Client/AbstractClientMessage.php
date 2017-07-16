@@ -9,7 +9,7 @@ use EC\Poetry\Messages\AbstractMessage;
  *
  * @package EC\Poetry\Messages\Server
  */
-abstract class AbstractClientMessage extends AbstractMessage implements ClientMessageInterface
+abstract class AbstractClientMessage extends AbstractMessage
 {
 
 }
