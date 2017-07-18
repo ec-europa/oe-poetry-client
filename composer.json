@@ -5,6 +5,7 @@
     "license": "EUPL-1.1",
     "require": {
         "symfony/validator": "^3.3",
+        "symfony/expression-language": "^3.3",
         "league/plates": "^3.3",
         "pimple/pimple": "^3.1"
     },
