@@ -8,19 +8,49 @@
  */
 ?>
 <demande>
-  <userReference><?= $component->getClientID() ?></userReference>
-  <applicationReference><?= $component->getApplicationID() ?></applicationReference>
-  <organisationAuteur><?= $component->getAuthor() ?></organisationAuteur>
-  <serviceDemandeur><?= $component->getRequester() ?></serviceDemandeur>
-  <titre><?= $component->getTitle() ?></titre>
-  <remarque><?= $component->getRemark() ?></remarque>
-  <type><?= $component->getType() ?></type>
-  <destination><?= $component->getDestination() ?></destination>
-  <procedure><?= $component->getProcedure() ?></procedure>
-  <delai><?= $component->getDelai() ?></delai>
-  <dateDemande><?= $component->getRequestDate() ?></dateDemande>
-  <statusDemande><?= $component->getStatus() ?></statusDemande>
-  <consultationInterServices><?= $component->getInterServices() ?></consultationInterServices>
-  <procedureInterInstitution><?= $component->getInterInstitution() ?></procedureInterInstitution>
-  <referenceFilesNote><?= $component->getReferenceFilesRemark() ?></referenceFilesNote>
+    <?php if ($component->getClientID()) : ?>
+        <userReference><?= $component->getClientID() ?></userReference>
+    <?php endif ?>
+    <?php if ($component->getApplicationID()) : ?>
+        <applicationReference><?= $component->getApplicationID() ?></applicationReference>
+    <?php endif ?>
+    <?php if ($component->getAuthor()) : ?>
+        <organisationAuteur><?= $component->getAuthor() ?></organisationAuteur>
+    <?php endif ?>
+    <?php if ($component->getRequester()) : ?>
+        <serviceDemandeur><?= $component->getRequester() ?></serviceDemandeur>
+    <?php endif ?>
+    <?php if ($component->getTitle()) : ?>
+        <titre><?= $component->getTitle() ?></titre>
+    <?php endif ?>
+    <?php if ($component->getRemark()) : ?>
+        <remarque><?= $component->getRemark() ?></remarque>
+    <?php endif ?>
+    <?php if ($component->getType()) : ?>
+        <type><?= $component->getType() ?></type>
+    <?php endif ?>
+    <?php if ($component->getDestination()) : ?>
+        <destination><?= $component->getDestination() ?></destination>
+    <?php endif ?>
+    <?php if ($component->getProcedure()) : ?>
+        <procedure><?= $component->getProcedure() ?></procedure>
+    <?php endif ?>
+    <?php if ($component->getDelai()) : ?>
+        <delai><?= $component->getDelai() ?></delai>
+    <?php endif ?>
+    <?php if ($component->getRequestDate()) : ?>
+        <dateDemande><?= $component->getRequestDate() ?></dateDemande>
+    <?php endif ?>
+    <?php if ($component->getStatus()) : ?>
+        <statusDemande><?= $component->getStatus() ?></statusDemande>
+    <?php endif ?>
+    <?php if ($component->getInterServices()) : ?>
+        <consultationInterServices><?= $component->getInterServices() ?></consultationInterServices>
+    <?php endif ?>
+    <?php if ($component->getInterInstitution()) : ?>
+        <procedureInterInstitution><?= $component->getInterInstitution() ?></procedureInterInstitution>
+    <?php endif ?>
+    <?php if ($component->getReferenceFilesRemark()) : ?>
+        <referenceFilesNote><?= $component->getReferenceFilesRemark() ?></referenceFilesNote>
+    <?php endif ?>
 </demande>
