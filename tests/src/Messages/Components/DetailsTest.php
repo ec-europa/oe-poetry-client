@@ -3,8 +3,7 @@
 namespace EC\Poetry\Messages\Components;
 
 use EC\Poetry\Poetry;
-use PHPUnit\Framework\TestCase;
-use Symfony\Component\Validator\ConstraintViolationListInterface;
+use EC\Poetry\Tests\AbstractTest as TestCase;
 
 /**
  * Class DetailsTest
@@ -31,20 +30,5 @@ class DetailsTest extends TestCase
         foreach ($this->getViolations($violations) as $name => $violation) {
             expect($violation)->to->be->equal($expected[$name]);
         }
-    }
-
-    /**
-     * @param \Symfony\Component\Validator\ConstraintViolationListInterface $violations
-     *
-     * @return array
-     */
-    protected function getViolations(ConstraintViolationListInterface $violations)
-    {
-        $collection = [];
-        foreach ($violations as $violation) {
-            $collection[$violation->getPropertyPath()] = $violation->getMessage();
-        }
-
-        return $collection;
     }
 }

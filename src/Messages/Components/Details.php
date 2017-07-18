@@ -12,8 +12,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Details extends AbstractComponent
 {
-    private $clientID;
-    private $applicationID;
+    private $clientId;
+    private $applicationId;
     private $author;
     private $requester;
     private $title;
@@ -109,18 +109,18 @@ class Details extends AbstractComponent
     /**
      * @return mixed
      */
-    public function getClientID()
+    public function getClientId()
     {
-        return $this->clientID;
+        return $this->clientId;
     }
 
     /**
-     * @param mixed $clientID
+     * @param mixed $clientId
      * @return Details
      */
-    public function setClientID($clientID)
+    public function setClientId($clientId)
     {
-        $this->clientID = $clientID;
+        $this->clientId = $clientId;
 
         return $this;
     }
@@ -128,18 +128,18 @@ class Details extends AbstractComponent
     /**
      * @return mixed
      */
-    public function getApplicationID()
+    public function getApplicationId()
     {
-        return $this->applicationID;
+        return $this->applicationId;
     }
 
     /**
-     * @param mixed $applicationID
+     * @param mixed $applicationId
      * @return Details
      */
-    public function setApplicationID($applicationID)
+    public function setApplicationId($applicationId)
     {
-        $this->applicationID = $applicationID;
+        $this->applicationId = $applicationId;
 
         return $this;
     }

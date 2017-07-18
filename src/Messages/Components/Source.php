@@ -31,7 +31,7 @@ class Source extends AbstractComponent
      */
     public function getTemplate()
     {
-        return 'components::identifier';
+        return 'components::source';
     }
 
     /**

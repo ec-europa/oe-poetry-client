@@ -8,11 +8,11 @@
  */
 ?>
 <demande>
-    <?php if ($component->getClientID()) : ?>
-        <userReference><?= $component->getClientID() ?></userReference>
+    <?php if ($component->getClientId()) : ?>
+        <userReference><?= $component->getClientId() ?></userReference>
     <?php endif ?>
-    <?php if ($component->getApplicationID()) : ?>
-        <applicationReference><?= $component->getApplicationID() ?></applicationReference>
+    <?php if ($component->getApplicationId()) : ?>
+        <applicationReference><?= $component->getApplicationId() ?></applicationReference>
     <?php endif ?>
     <?php if ($component->getAuthor()) : ?>
         <organisationAuteur><?= $component->getAuthor() ?></organisationAuteur>

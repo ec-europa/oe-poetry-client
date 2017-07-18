@@ -4,9 +4,9 @@ namespace EC\Poetry\Tests;
 
 use EC\Poetry\Messages\Client\GetStatus;
 use EC\Poetry\Poetry;
+use EC\Poetry\Tests\AbstractTest as TestCase;
 use EC\Poetry\Services\Renderer;
 use League\Plates\Engine;
-use PHPUnit\Framework\TestCase;
 use Symfony\Component\Validator\Validator\RecursiveValidator;
 
 /**

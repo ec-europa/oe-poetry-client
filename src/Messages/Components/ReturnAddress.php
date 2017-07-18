@@ -26,7 +26,7 @@ class ReturnAddress extends AbstractComponent
      */
     public function getTemplate()
     {
-        return 'components::return_address';
+        return 'components::return-address';
     }
 
     /**

@@ -30,7 +30,7 @@ class Target extends AbstractComponent
      */
     public function getTemplate()
     {
-        return 'components::identifier';
+        return 'components::target';
     }
 
     /**

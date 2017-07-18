@@ -12,4 +12,11 @@
     <?php if ($component->getPath()) : ?>
         <documentSourcePath><?= $component->getPath() ?></documentSourcePath>
     <?php endif ?>
+    <?php foreach ($component->getLanguages() as $languageCode => $languagePages) : ?>
+        <documentSourceLang lgCode="<?= $languageCode ?>"><documentSourceLangPages><?= $languagePages ?></documentSourceLangPages></documentSourceLang>
+    <?php endforeach ?>
+    <?php if ($component->getSize()) : ?>
+        <documentSourceSize><?= $component->getSize() ?></documentSourceSize>
+    <?php endif ?>
+    <documentSourceName><?= $component->getName() ?></documentSourceName>
 </documentSource>
