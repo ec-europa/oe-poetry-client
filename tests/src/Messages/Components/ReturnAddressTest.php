@@ -6,31 +6,29 @@ use EC\Poetry\Poetry;
 use EC\Poetry\Tests\AbstractTest as TestCase;
 
 /**
- * Class IdentifierTest
+ * Class ReturnAddressTest
  *
  * @package EC\Poetry\Messages\Components
  */
-class IdentifierTest extends TestCase
+class ReturnAddressTest extends TestCase
 {
     /**
-     * Test identifier validation.
+     * Test details validation.
      */
     public function testValidation()
     {
         /** @var \Symfony\Component\Validator\Validator\RecursiveValidator $validator */
         $validator = (new Poetry())->get('validator');
-        $identifier = (new Identifier())->setYear(1234);
+        $returnAddress = (new ReturnAddress())->setType('email');
+        $returnAddress->setPassword('PASSWORD');
 
-        $violations = $validator->validate($identifier);
+        $violations = $validator->validate($returnAddress);
         expect($violations->count())->to->be->above(0);
 
         $expected = [
-          'code' => "This value should not be blank.",
-          'number' => "This value should not be blank.",
-          'part' => "This value should not be blank.",
-          'product' => "This value should not be blank.",
-          'version' => "This value should not be blank.",
-          'year' => "This value should be greater than 2000.",
+            'address' => "This value should not be blank.",
+            'password' => "The return type you selected can't have a password.",
+            'path' => "The return type you selected can't have a path.",
         ];
         foreach ($this->getViolations($violations) as $name => $violation) {
             expect($violation)->to->be->equal($expected[$name]);

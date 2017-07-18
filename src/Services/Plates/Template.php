@@ -17,6 +17,7 @@ use EC\Poetry\Messages\Components\ComponentInterface;
  * template files.
  *
  * @method component(ComponentInterface $component)
+ * @method attributes(array $attributes)
  *
  * @package EC\Poetry\Services\Plates
  */
