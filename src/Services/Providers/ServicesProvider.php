@@ -3,6 +3,7 @@
 namespace EC\Poetry\Services\Providers;
 
 use EC\Poetry\Server;
+use EC\Poetry\Services\Plates\AttributesExtension;
 use League\Plates\Engine;
 use EC\Poetry\Services\Plates\ComponentExtension;
 use EC\Poetry\Services\Renderer;
@@ -29,6 +30,7 @@ class ServicesProvider implements ServiceProviderInterface
             $engine = (new Engine($root))
                 ->setFileExtension('tpl.php')
                 ->loadExtension(new ComponentExtension())
+                ->loadExtension(new AttributesExtension())
                 ->addFolder('client', $root.'/client')
                 ->addFolder('components', $root.'/components')
                 ->addFolder('errors', $root.'/errors')

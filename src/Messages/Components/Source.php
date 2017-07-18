@@ -112,6 +112,24 @@ class Source extends AbstractComponent
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function getAttributes()
+    {
+        $attributes = array(
+            'channel' => $this->getChannel(),
+            'dealine' => $this->getDeadline(),
+            'statusDealine' => $this->getDeadlineStatus(),
+            'marked' => $this->getConfidential(),
+            'format' => $this->getFormat(),
+            'legisWrite' => $this->getLegiswriteFormat(),
+            'trackChanges' => $this->getTrackChanges(),
+        );
+
+        return array_filter($attributes);
+    }
+
+    /**
      * @return mixed
      */
     public function getFormat()

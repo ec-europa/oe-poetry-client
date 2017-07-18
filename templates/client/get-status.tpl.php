@@ -9,9 +9,4 @@
  */
 ?>
 <?php $this->layout('layout', ['identifier' => $identifier, 'type' => 'getStatus']) ?>
-<?= $this->component($message->getIdentifier()) ?>
-<status>
-  <attribute>A</attribute>
-  <attribute>B</attribute>
-  <attribute>C</attribute>
-</status>
+<?= $this->component($message->getIdentifier());

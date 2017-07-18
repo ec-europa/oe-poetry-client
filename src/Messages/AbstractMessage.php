@@ -39,6 +39,17 @@ abstract class AbstractMessage implements MessageInterface
     }
 
     /**
+     * Get rendered attributes.
+     *
+     * @return array
+     *   Array of attributes.
+     */
+    public function getAttributes()
+    {
+        return array();
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function getIdentifier()

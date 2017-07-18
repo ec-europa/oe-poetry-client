@@ -7,7 +7,7 @@
  * @var \EC\Poetry\Messages\Components\Source $component
  */
 ?>
-<documentSource <?= $attributes ?>>
+<documentSource <?= $this->attributes($component->getAttributes()) ?>>
     <documentSourceName><?= $component->getName() ?></documentSourceName>
     <?php if ($component->getPath()) : ?>
         <documentSourcePath><?= $component->getPath() ?></documentSourcePath>

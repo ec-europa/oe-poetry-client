@@ -22,7 +22,7 @@ class Contact extends AbstractComponent
      */
     public function getTemplate()
     {
-        return 'components::identifier';
+        return 'components::contact';
     }
 
     /**

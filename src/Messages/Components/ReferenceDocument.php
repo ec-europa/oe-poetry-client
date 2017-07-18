@@ -86,6 +86,21 @@ class ReferenceDocument extends AbstractComponent
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function getAttributes()
+    {
+        $attributes = array(
+            'lgCode' => $this->getLanguage(),
+            'format' => $this->getFormat(),
+            'type' => $this->getType(),
+            'action' => $this->getAction(),
+        );
+
+        return array_filter($attributes);
+    }
+
+    /**
      * @return mixed
      */
     public function getLanguage()

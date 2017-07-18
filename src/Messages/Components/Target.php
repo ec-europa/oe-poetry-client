@@ -94,6 +94,21 @@ class Target extends AbstractComponent
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function getAttributes()
+    {
+        $attributes = array(
+            'lgCode' => $this->getLanguage(),
+            'format' => $this->getFormat(),
+            'trackChanges' => $this->getTrackChanges(),
+            'action' => $this->getAction(),
+        );
+
+        return array_filter($attributes);
+    }
+
+    /**
      * @return mixed
      */
     public function getFormat()

@@ -7,7 +7,7 @@
  * @var \EC\Poetry\Messages\Components\ReferenceDocument $component
  */
 ?>
-<documentReference>
+<documentReference <?= $this->attributes($component->getAttributes()) ?>>
     <documentReferenceName><?= $component->getName() ?></documentReferenceName>
     <?php if ($component->getPath()) : ?>
         <documentReferencePath><?= $component->getPath() ?></documentReferencePath>

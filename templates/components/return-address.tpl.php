@@ -7,7 +7,7 @@
  * @var \EC\Poetry\Messages\Components\ReturnAddress $component
  */
 ?>
-<retour>
+<retour <?= $this->attributes($component->getAttributes()) ?>>
     <?php if ($component->getUser()) : ?>
         <retourUser><?= $component->getUser() ?></retourUser>
     <?php endif ?>

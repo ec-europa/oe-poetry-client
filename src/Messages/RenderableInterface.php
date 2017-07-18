@@ -17,4 +17,12 @@ interface RenderableInterface
      * @return string
      */
     public function getTemplate();
+
+    /**
+     * Get rendered attributes.
+     *
+     * @return array
+     *   Array of attributes.
+     */
+    public function getAttributes();
 }
