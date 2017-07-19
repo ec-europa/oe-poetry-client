@@ -56,7 +56,7 @@ Alternatively Poetry can also create messages for you, taking care of using all 
 
 ```php
 $poetry = new Poetry();
-$message = $poetry->get('message.client.get_status');
+$message = $poetry->get('message.request');
 ```
 
 In this case you'll still need to set-up all required data by yourself (such as `Identifier` properties).
@@ -66,6 +66,7 @@ for example:
 
 ```php
 $poetry = new Poetry([
+    'type' => RequestMessage::REQUEST_STATUS,
     'identifier' => [
         'code' => 'DGT',
         'year' => '2017',
@@ -76,7 +77,7 @@ $poetry = new Poetry([
     ],
 ]);
 
-$message = $poetry->get('message.client.get_status');
+$message = $poetry->get('message.request');
 $violations = $poetry->get('validator')->validate($message); // No violations.
 ```
 

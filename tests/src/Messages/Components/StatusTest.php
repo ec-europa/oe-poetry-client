@@ -22,8 +22,6 @@ class StatusTest extends TestCase
         $contact = (new Status())->setType('demande');
         $contact->setCode(1);
 
-
-
         $violations = $validator->validate($contact);
         expect($violations->count())->to->be->above(0);
         $expected = [

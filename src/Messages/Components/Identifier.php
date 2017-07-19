@@ -220,8 +220,6 @@ class Identifier extends AbstractComponent implements GroupSequenceProviderInter
         return $this;
     }
 
-
-
     /**
      * Get Part property.
      *

@@ -5,7 +5,6 @@ namespace EC\Poetry\Messages;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\GroupSequenceProviderInterface;
-
 use EC\Poetry\Messages\Components\Contact;
 use EC\Poetry\Messages\Components\Details;
 use EC\Poetry\Messages\Components\ReturnAddress;
@@ -49,12 +48,12 @@ class RequestMessage extends AbstractMessage implements GroupSequenceProviderInt
                 RequestMessage::REQUEST_NEW,
                 RequestMessage::REQUEST_POST,
                 RequestMessage::REQUEST_NEWPOST,
-                RequestMessage::REQUEST_NEWPOST,
-                RequestMessage::REQUEST_NEWPOST,
-                RequestMessage::REQUEST_NEWPOST,
-                RequestMessage::REQUEST_NEWPOST,
-                RequestMessage::REQUEST_NEWPOST,
-                RequestMessage::REQUEST_NEWPOST,
+                RequestMessage::REQUEST_MODIFICATION,
+                RequestMessage::REQUEST_MODIFICATIONPOST,
+                RequestMessage::REQUEST_DELETE,
+                RequestMessage::REQUEST_STATUS,
+                RequestMessage::REQUEST_TRANSLATION,
+                RequestMessage::REQUEST_CONTACTS,
             ]),
         ]);
         $metadata->addGetterConstraints('identifier', [
