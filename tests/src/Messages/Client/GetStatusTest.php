@@ -2,7 +2,7 @@
 
 namespace EC\Poetry\Tests\Messages\Client;
 
-use EC\Poetry\Messages\Client\GetStatus;
+use EC\Poetry\Messages\RequestMessage;
 use EC\Poetry\Messages\Components\Identifier;
 use EC\Poetry\Poetry;
 use PHPUnit\Framework\TestCase;
@@ -29,8 +29,8 @@ class GetStatusTest extends TestCase
           ->setVersion('01')
           ->setPart('00')
           ->setProduct('TRA');
-        $message = new GetStatus($identifier);
-
+        $message = new RequestMessage($identifier);
+        $message->setType(RequestMessage::REQUEST_STATUS);
         $output = $renderer->render($message);
         expect($output)
           ->to->not->be->empty()

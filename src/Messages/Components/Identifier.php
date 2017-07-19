@@ -4,17 +4,19 @@ namespace EC\Poetry\Messages\Components;
 
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\GroupSequenceProviderInterface;
 
 /**
  * Class Identifier
  *
  * @package EC\Poetry\Messages\Components
  */
-class Identifier extends AbstractComponent
+class Identifier extends AbstractComponent implements GroupSequenceProviderInterface
 {
     private $code;
     private $year;
     private $number;
+    private $sequence;
     private $version;
     private $part;
     private $product;
@@ -32,6 +34,17 @@ class Identifier extends AbstractComponent
      */
     public static function getConstraints(ClassMetadata $metadata)
     {
+        $metadata->setGroupSequenceProvider(true);
+        $metadata->addConstraint(new Assert\Expression(array(
+            'expression' => 'this.getSequence() || this.getNumber() ',
+            'message' => 'An identifier must have a number or a sequence.',
+        )));
+
+        $metadata->addConstraint(new Assert\Expression(array(
+            'expression' => '(this.getSequence() && this.getNumber()) == false ',
+            'message' => 'An identifier can\'t have both a number and a sequence.',
+        )));
+
         $metadata->addPropertyConstraints('code', [
             new Assert\NotBlank(),
             new Assert\Type('alpha'),
@@ -42,8 +55,16 @@ class Identifier extends AbstractComponent
             new Assert\GreaterThan(2000),
         ]);
         $metadata->addPropertyConstraints('number', [
-            new Assert\NotBlank(),
-            new Assert\Type('scalar'),
+            new Assert\Type(array(
+                'type' => 'scalar',
+                'groups' => 'number',
+            )),
+        ]);
+        $metadata->addPropertyConstraints('sequence', [
+            new Assert\Type(array(
+                'type' => 'string',
+                'groups' => 'sequence',
+            )),
         ]);
         $metadata->addPropertyConstraints('version', [
             new Assert\NotBlank(),
@@ -181,6 +202,25 @@ class Identifier extends AbstractComponent
     }
 
     /**
+     * @return mixed
+     */
+    public function getSequence()
+    {
+        return $this->sequence;
+    }
+
+    /**
+     * @param mixed $sequence
+     * @return Identifier
+     */
+    public function setSequence($sequence)
+    {
+        $this->sequence = $sequence;
+
+        return $this;
+    }
+
+    /**
      * Get Part property.
      *
      * @return mixed
@@ -230,5 +270,21 @@ class Identifier extends AbstractComponent
         $this->product = $product;
 
         return $this;
+    }
+
+    /**
+     * Returns which validation groups should be used for a certain state
+     * of the object.
+     *
+     * @return array An array of validation groups
+     */
+    public function getGroupSequence()
+    {
+        return [
+            [
+                'Identifier',
+                empty($this->getNumber()) ? 'sequence' : 'number',
+            ],
+        ];
     }
 }

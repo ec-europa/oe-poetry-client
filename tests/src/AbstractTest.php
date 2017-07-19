@@ -22,7 +22,7 @@ abstract class AbstractTest extends TestCase
     {
         $collection = [];
         foreach ($violations as $violation) {
-            $collection[$violation->getPropertyPath()] = $violation->getMessage();
+            $collection[$violation->getPropertyPath() ? $violation->getPropertyPath() : 'object'] = $violation->getMessage();
         }
 
         return $collection;

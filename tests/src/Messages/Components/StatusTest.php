@@ -6,31 +6,26 @@ use EC\Poetry\Poetry;
 use EC\Poetry\Tests\AbstractTest as TestCase;
 
 /**
- * Class IdentifierTest
+ * Class StatusTest
  *
  * @package EC\Poetry\Messages\Components
  */
-class IdentifierTest extends TestCase
+class StatusTest extends TestCase
 {
     /**
-     * Test identifier validation.
+     * Test details validation.
      */
     public function testValidation()
     {
         /** @var \Symfony\Component\Validator\Validator\RecursiveValidator $validator */
         $validator = (new Poetry())->get('validator');
-        $identifier = (new Identifier())->setYear(1234);
+        $contact = (new Status())->setType('demande');
+        $contact->setCode(1);
 
-        $violations = $validator->validate($identifier);
+        $violations = $validator->validate($contact);
         expect($violations->count())->to->be->above(0);
-
         $expected = [
-          'code' => "This value should not be blank.",
-          'object' => "An identifier must have a number or a sequence.",
-          'part' => "This value should not be blank.",
-          'product' => "This value should not be blank.",
-          'version' => "This value should not be blank.",
-          'year' => "This value should be greater than 2000.",
+            'code' => "The value you selected is not a valid choice.",
         ];
         foreach ($this->getViolations($violations) as $name => $violation) {
             expect($violation)->to->be->equal($expected[$name]);

@@ -4,6 +4,8 @@ namespace EC\Poetry\Services\Providers;
 
 use EC\Poetry\Messages\Client;
 use EC\Poetry\Messages\Components\Identifier;
+use EC\Poetry\Messages\RequestMessage;
+use EC\Poetry\Messages\StatusMessage;
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 
@@ -45,7 +47,8 @@ class MessagesProvider implements ServiceProviderInterface
 
         // Messages.
         $messages = [
-          'client.get_status' => Client\GetStatus::class,
+          'request' => RequestMessage::class,
+          'status' => StatusMessage::class,
         ];
         foreach ($messages as $name => $class) {
             $container['message.'.$name] = function (Container $container) use ($class) {
