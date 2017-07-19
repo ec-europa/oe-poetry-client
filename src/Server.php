@@ -2,6 +2,8 @@
 
 namespace EC\Poetry;
 
+use EC\Poetry\Services\Parser;
+
 /**
  * Class Server
  *
@@ -17,13 +19,22 @@ class Server
     private $callback;
 
     /**
+     * Custom XML parser.
+     *
+     * @var Parser
+     */
+    private $parser;
+
+    /**
      * Server constructor.
      *
      * @param string $callback
+     * @param Parser $parser
      */
-    public function __construct($callback)
+    public function __construct($callback, $parser)
     {
         $this->callback = $callback;
+        $this->parser = $parser;
     }
 
     /**

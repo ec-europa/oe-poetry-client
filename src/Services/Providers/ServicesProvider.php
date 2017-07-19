@@ -3,6 +3,8 @@
 namespace EC\Poetry\Services\Providers;
 
 use EC\Poetry\Server;
+use EC\Poetry\Services\Client;
+use EC\Poetry\Services\Parser;
 use EC\Poetry\Services\Plates\AttributesExtension;
 use League\Plates\Engine;
 use EC\Poetry\Services\Plates\ComponentExtension;
@@ -47,13 +49,19 @@ class ServicesProvider implements ServiceProviderInterface
             return (new ValidatorBuilder())->addMethodMapping('getConstraints')->getValidator();
         });
 
+        $container['client'] = function (Container $container) {
+            return new Client($container['renderer'], $container['validator']);
+        };
 
+        $container['parser'] = function (Container $container) {
+            return new Parser();
+        };
 
         $container['server.callback'] = function () {
         };
 
         $container['server'] = function (Container $container) {
-            return new Server($container['server.callback']);
+            return new Server($container['server.callback'], $container['parser']);
         };
     }
 }
