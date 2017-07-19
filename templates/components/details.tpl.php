@@ -35,8 +35,8 @@
     <?php if ($component->getProcedure()) : ?>
         <procedure><?= $component->getProcedure() ?></procedure>
     <?php endif ?>
-    <?php if ($component->getDelai()) : ?>
-        <delai><?= $component->getDelai() ?></delai>
+    <?php if ($component->getDelay()) : ?>
+        <delai><?= $component->getDelay() ?></delai>
     <?php endif ?>
     <?php if ($component->getRequestDate()) : ?>
         <dateDemande><?= $component->getRequestDate() ?></dateDemande>

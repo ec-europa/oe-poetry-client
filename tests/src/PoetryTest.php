@@ -2,7 +2,7 @@
 
 namespace EC\Poetry\Tests;
 
-use EC\Poetry\Messages\Client\GetStatus;
+use EC\Poetry\Messages\RequestMessage;
 use EC\Poetry\Poetry;
 use EC\Poetry\Tests\AbstractTest as TestCase;
 use EC\Poetry\Services\Renderer;
@@ -22,15 +22,16 @@ class PoetryTest extends TestCase
     public function testMessageContainer()
     {
         $poetry = new Poetry();
-        /** @var \EC\Poetry\Messages\Client\GetStatus $message */
-        $message = $poetry->get('message.client.get_status');
-        expect($message)->to->be->instanceof(GetStatus::class);
+        /** @var \EC\Poetry\Messages\RequestMessage $message */
+        $message = $poetry->get('message.request');
+        expect($message)->to->be->instanceof(RequestMessage::class);
 
         /** @var \Symfony\Component\Validator\ConstraintViolationListInterface $violations */
         $violations = $poetry->get('validator')->validate($message);
         expect($violations->count())->not->to->be->empty();
 
         $poetry = new Poetry([
+            'type' => RequestMessage::REQUEST_STATUS,
             'identifier' => [
                 'code' => 'DGT',
                 'year' => '2017',
@@ -40,7 +41,7 @@ class PoetryTest extends TestCase
                 'product' => 'ABC',
             ],
         ]);
-        $message = $poetry->get('message.client.get_status');
+        $message = $poetry->get('message.request');
         $violations = $poetry->get('validator')->validate($message);
         expect($violations->count())->to->be->empty();
     }
