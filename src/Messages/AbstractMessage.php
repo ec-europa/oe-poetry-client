@@ -46,7 +46,7 @@ abstract class AbstractMessage implements MessageInterface
      */
     public function getAttributes()
     {
-        return array();
+        return [];
     }
 
     /**

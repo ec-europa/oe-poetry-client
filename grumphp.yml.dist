@@ -4,7 +4,10 @@ parameters:
     succeeded: ~
   tasks:
     phpunit: ~
-    phpmd: ~
+    phpmd:
+      exclude:
+        - callback.php
+        - tests/
     git_commit_message:
       matchers:
         - '/^Issue (#\d+): [A-Z].+\./'
@@ -14,5 +17,6 @@ parameters:
       standard: vendor/escapestudios/symfony2-coding-standard/Symfony2
       ignore_patterns:
         - vendor/
+        - callback.php
       triggered_by:
         - php

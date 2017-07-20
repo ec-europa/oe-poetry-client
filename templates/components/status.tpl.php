@@ -3,7 +3,7 @@
  * @file
  * Template file.
  *
- * @var \League\Plates\Template\Template $this
+ * @var \EC\Poetry\Services\Plates\Template $this
  * @var \EC\Poetry\Messages\Components\Status $component
  */
 ?>

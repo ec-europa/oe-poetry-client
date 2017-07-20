@@ -35,27 +35,31 @@ class ReturnAddress extends AbstractComponent
     public static function getConstraints(ClassMetadata $metadata)
     {
         $metadata->addPropertyConstraints('type', [
-            new Assert\Choice(array('webService', 'email')),
+            new Assert\Choice(['webService', 'email']),
             new Assert\NotBlank(),
         ]);
         $metadata->addPropertyConstraints('action', [
-            new Assert\Choice(array('INSERT', 'UPDATE')),
+            new Assert\Choice(['INSERT', 'UPDATE']),
         ]);
         $metadata->addPropertyConstraints('address', [
             new Assert\Type('string'),
             new Assert\NotBlank(),
         ]);
         $metadata->addPropertyConstraints('password', [
-            new Assert\Expression(array(
+            new Assert\Expression(
+                [
                 'expression' => 'this.getType() == "WebService"',
                 'message' => 'The return type you selected can\'t have a password.',
-            )),
+                ]
+            ),
         ]);
         $metadata->addPropertyConstraints('path', [
-            new Assert\Expression(array(
+            new Assert\Expression(
+                [
                 'expression' => 'this.getType() == "WebService"',
                 'message' => 'The return type you selected can\'t have a path.',
-            )),
+                ]
+            ),
         ]);
     }
 
@@ -64,10 +68,10 @@ class ReturnAddress extends AbstractComponent
      */
     public function getAttributes()
     {
-        $attributes = array(
+        $attributes = [
             'type' => $this->getType(),
             'action' => $this->getAction(),
-        );
+        ];
 
         return array_filter($attributes);
     }

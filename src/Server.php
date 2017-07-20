@@ -12,54 +12,61 @@ use EC\Poetry\Services\Parser;
 class Server
 {
     /**
-     * Callable callback.
-     *
-     * @var callable
-     */
-    private $callback;
-
-    /**
      * Custom XML parser.
      *
-     * @var Parser
+     * @var \EC\Poetry\Services\Parser
      */
-    private $parser;
+    protected $parser;
+
+    /**
+     * @var \SoapServer
+     */
+    protected $soapServer;
+
+    /**
+     * @var mixed
+     */
+    protected $response;
 
     /**
      * Server constructor.
      *
-     * @param string $callback
-     * @param Parser $parser
+     * @param \SoapServer                $soapServer
+     * @param \EC\Poetry\Services\Parser $parser
      */
-    public function __construct($callback, $parser)
+    public function __construct(\SoapServer $soapServer, Parser $parser)
     {
-        $this->callback = $callback;
+        $this->soapServer = $soapServer;
         $this->parser = $parser;
     }
 
     /**
-     * Get Callback property.
+     * @param string $soapRequest
+     */
+    public function handle($soapRequest = null)
+    {
+        $this->soapServer->handle($soapRequest);
+    }
+
+    /**
+     * Get Response property.
      *
      * @return mixed
      *   Property value.
      */
-    public function getCallback()
+    public function getResponse()
     {
-        return $this->callback;
+        return $this->response;
     }
 
     /**
-     * Set Callback property.
+     * Set Response property.
      *
-     * @param mixed $callback
+     * @param mixed $response
      *   Property value.
-     *
-     * @return $this
      */
-    public function setCallback($callback)
+    public function setResponse($response)
     {
-        $this->callback = $callback;
-
-        return $this;
+        $this->response = $response;
     }
 }

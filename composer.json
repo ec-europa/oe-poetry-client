@@ -16,7 +16,8 @@
         "phpro/grumphp": "^0.11.6",
         "peridot-php/leo": "^1.6",
         "escapestudios/symfony2-coding-standard": "^2.11",
-        "phpmd/phpmd": "^2.6"
+        "phpmd/phpmd": "^2.6",
+        "mockery/mockery": "^0.9.9"
     },
     "autoload": {
         "psr-4": {

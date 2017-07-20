@@ -35,15 +35,19 @@ class Identifier extends AbstractComponent implements GroupSequenceProviderInter
     public static function getConstraints(ClassMetadata $metadata)
     {
         $metadata->setGroupSequenceProvider(true);
-        $metadata->addConstraint(new Assert\Expression(array(
+        $metadata->addConstraint(new Assert\Expression(
+            [
             'expression' => 'this.getSequence() || this.getNumber() ',
             'message' => 'An identifier must have a number or a sequence.',
-        )));
+            ]
+        ));
 
-        $metadata->addConstraint(new Assert\Expression(array(
+        $metadata->addConstraint(new Assert\Expression(
+            [
             'expression' => '(this.getSequence() && this.getNumber()) == false ',
             'message' => 'An identifier can\'t have both a number and a sequence.',
-        )));
+            ]
+        ));
 
         $metadata->addPropertyConstraints('code', [
             new Assert\NotBlank(),
@@ -55,16 +59,20 @@ class Identifier extends AbstractComponent implements GroupSequenceProviderInter
             new Assert\GreaterThan(2000),
         ]);
         $metadata->addPropertyConstraints('number', [
-            new Assert\Type(array(
+            new Assert\Type(
+                [
                 'type' => 'scalar',
                 'groups' => 'number',
-            )),
+                ]
+            ),
         ]);
         $metadata->addPropertyConstraints('sequence', [
-            new Assert\Type(array(
+            new Assert\Type(
+                [
                 'type' => 'string',
                 'groups' => 'sequence',
-            )),
+                ]
+            ),
         ]);
         $metadata->addPropertyConstraints('version', [
             new Assert\NotBlank(),

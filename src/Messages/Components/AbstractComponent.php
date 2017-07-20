@@ -17,6 +17,6 @@ abstract class AbstractComponent implements ComponentInterface
      */
     public function getAttributes()
     {
-        return array();
+        return [];
     }
 }

@@ -38,7 +38,8 @@ class ReferenceDocument extends AbstractComponent
     {
         $metadata->addPropertyConstraints('format', [
             new Assert\NotBlank(),
-            new Assert\Choice(array(
+            new Assert\Choice(
+                [
                 'DOC',
                 'DOCX',
                 'FAX',
@@ -59,26 +60,31 @@ class ReferenceDocument extends AbstractComponent
                 'XML',
                 'XMW',
                 'ZIP',
-            )),
+                ]
+            ),
         ]);
         $metadata->addPropertyConstraints('language', [
             new Assert\NotBlank(),
         ]);
         $metadata->addPropertyConstraints('type', [
             new Assert\NotBlank(),
-            new Assert\Choice(array(
+            new Assert\Choice(
+                [
                 'CMP',
                 'PRT',
                 'RAU',
                 'REF',
-            )),
+                ]
+            ),
         ]);
         $metadata->addPropertyConstraints('action', [
-            new Assert\Choice(array(
+            new Assert\Choice(
+                [
                 'INSERT',
                 'UPDATE',
                 'DELETE',
-            )),
+                ]
+            ),
         ]);
         $metadata->addPropertyConstraints('name', [
             new Assert\NotBlank(),
@@ -90,12 +96,12 @@ class ReferenceDocument extends AbstractComponent
      */
     public function getAttributes()
     {
-        $attributes = array(
+        $attributes = [
             'lgCode' => $this->getLanguage(),
             'format' => $this->getFormat(),
             'type' => $this->getType(),
             'action' => $this->getAction(),
-        );
+        ];
 
         return array_filter($attributes);
     }

@@ -2,7 +2,6 @@
 
 namespace EC\Poetry\Tests\Messages\Client;
 
-use EC\Poetry\Messages\Client\NewRequest;
 use EC\Poetry\Messages\Components\Identifier;
 use EC\Poetry\Messages\Components\Details;
 use EC\Poetry\Messages\RequestMessage;

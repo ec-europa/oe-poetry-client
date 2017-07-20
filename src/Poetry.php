@@ -4,6 +4,7 @@ namespace EC\Poetry;
 
 use EC\Poetry\Services\PoetryServiceProvider;
 use EC\Poetry\Services\Providers\MessagesProvider;
+use EC\Poetry\Services\Providers\ParametersProvider;
 use EC\Poetry\Services\Providers\ServicesProvider;
 use Pimple\Container;
 
@@ -15,6 +16,11 @@ use Pimple\Container;
 class Poetry extends Container
 {
     /**
+     * @var \EC\Poetry\Poetry
+     */
+    static private $container = null;
+
+    /**
      * {@inheritdoc}
      */
     public function __construct(array $values = [])
@@ -22,13 +28,16 @@ class Poetry extends Container
         parent::__construct($values);
 
         // Register services.
+        $this->register(new ParametersProvider());
         $this->register(new ServicesProvider());
         $this->register(new MessagesProvider());
 
-        // Allow for container parameters and services to be overridden.
         foreach ($values as $name => $value) {
             $this->offsetSet($name, $value);
         }
+
+        self::$container = $this;
+        require_once __DIR__.'/../callback.php';
     }
 
     /**
@@ -41,5 +50,33 @@ class Poetry extends Container
     public function get($name)
     {
         return $this[$name];
+    }
+
+    /**
+     * @return \EC\Poetry\Client
+     */
+    public function getClient()
+    {
+        return $this['client'];
+    }
+
+    /**
+     * @return \EC\Poetry\Server
+     */
+    public function getServer()
+    {
+        return $this['server'];
+    }
+
+    /**
+     * @return \EC\Poetry\Poetry
+     */
+    public static function getInstance()
+    {
+        if (empty(self::$container)) {
+            new self();
+        }
+
+        return self::$container;
     }
 }

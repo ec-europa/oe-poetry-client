@@ -2,6 +2,9 @@
 
 namespace EC\Poetry\Tests;
 
+use EC\Poetry\Messages\Components\Identifier;
+use EC\Poetry\Messages\RequestMessage;
+use EC\Poetry\Poetry;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 
@@ -12,6 +15,29 @@ use Symfony\Component\Validator\ConstraintViolationListInterface;
  */
 abstract class AbstractTest extends TestCase
 {
+    /**
+     * @return \EC\Poetry\Poetry
+     */
+    protected function getContainer()
+    {
+        return new Poetry();
+    }
+
+    /**
+     * @return \EC\Poetry\Messages\Components\Identifier
+     */
+    protected function getValidIdentifier()
+    {
+        $identifier = new Identifier();
+        $identifier->setCode('DGT')
+          ->setYear(2017)
+          ->setNumber('00001')
+          ->setVersion('3')
+          ->setPart('0')
+          ->setProduct('TRA');
+
+        return $identifier;
+    }
 
     /**
      * @param \Symfony\Component\Validator\ConstraintViolationListInterface $violations
@@ -26,5 +52,13 @@ abstract class AbstractTest extends TestCase
         }
 
         return $collection;
+    }
+
+    /**
+     * @return \Mockery\MockInterface
+     */
+    protected function getSoapClientMock()
+    {
+        return \Mockery::mock(\SoapClient::class);
     }
 }

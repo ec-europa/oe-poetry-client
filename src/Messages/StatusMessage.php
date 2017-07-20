@@ -15,8 +15,7 @@ use EC\Poetry\Messages\Components\Status;
  */
 class StatusMessage extends AbstractMessage
 {
-
-    private $statuses;
+    private $statuses = [];
 
     /**
      * {@inheritdoc}
@@ -51,7 +50,8 @@ class StatusMessage extends AbstractMessage
 
     /**
      * @param array $statuses
-     * @return RequestMessage
+     *
+     * @return $this
      */
     public function setStatuses($statuses)
     {
@@ -61,10 +61,11 @@ class StatusMessage extends AbstractMessage
     }
 
     /**
-     * @param Status $status
-     * @return RequestMessage
+     * @param mixed $status
+     *
+     * @return $this
      */
-    public function addStatus($status)
+    public function addStatus(Status $status)
     {
         $this->statuses[] = $status;
 

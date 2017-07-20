@@ -54,7 +54,8 @@ class Details extends AbstractComponent
             new Assert\Type('string'),
         ]);
         $metadata->addPropertyConstraints('type', [
-            new Assert\Choice(array(
+            new Assert\Choice(
+                [
                 'AUTRE',
                 'COMP',
                 'IMG',
@@ -63,10 +64,12 @@ class Details extends AbstractComponent
                 'INTRA',
                 'LEGTF',
                 'PUB',
-            )),
+                ]
+            ),
         ]);
         $metadata->addPropertyConstraints('destination', [
-            new Assert\Choice(array(
+            new Assert\Choice(
+                [
                 'AUTRE',
                 'COMMISR',
                 'EM',
@@ -77,10 +80,12 @@ class Details extends AbstractComponent
                 'PRESSE',
                 'PUBLIC',
                 'RST',
-            )),
+                ]
+            ),
         ]);
         $metadata->addPropertyConstraints('procedure', [
-            new Assert\Choice(array(
+            new Assert\Choice(
+                [
                 'DEGHP',
                 'NEANT',
                 'PROAC',
@@ -90,7 +95,8 @@ class Details extends AbstractComponent
                 'REUNAU',
                 'PROCH',
                 'PROCD',
-            )),
+                ]
+            ),
         ]);
         $metadata->addPropertyConstraints('delay', [
             new Assert\DateTime(),

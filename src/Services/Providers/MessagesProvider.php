@@ -33,14 +33,13 @@ class MessagesProvider implements ServiceProviderInterface
 
         // Identifier component.
         $container['component.identifier'] = function (Container $container) {
-            $identifier = $container['identifier'];
             $component = (new Identifier())
-              ->setCode($identifier['code'])
-              ->setYear($identifier['year'])
-              ->setNumber($identifier['number'])
-              ->setVersion($identifier['version'])
-              ->setPart($identifier['part'])
-              ->setProduct($identifier['product']);
+              ->setCode($container['identifier.code'])
+              ->setYear($container['identifier.year'])
+              ->setNumber($container['identifier.number'])
+              ->setVersion($container['identifier.version'])
+              ->setPart($container['identifier.part'])
+              ->setProduct($container['identifier.product']);
 
             return $component;
         };

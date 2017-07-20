@@ -19,10 +19,10 @@ class StatusTest extends TestCase
     {
         /** @var \Symfony\Component\Validator\Validator\RecursiveValidator $validator */
         $validator = (new Poetry())->get('validator');
-        $contact = (new Status())->setType('demande');
-        $contact->setCode(1);
+        $status = (new Status())->setType('demande');
+        $status->setCode(1);
 
-        $violations = $validator->validate($contact);
+        $violations = $validator->validate($status);
         expect($violations->count())->to->be->above(0);
         $expected = [
             'code' => "The value you selected is not a valid choice.",

@@ -32,14 +32,12 @@ class PoetryTest extends TestCase
 
         $poetry = new Poetry([
             'type' => RequestMessage::REQUEST_STATUS,
-            'identifier' => [
-                'code' => 'DGT',
-                'year' => '2017',
-                'number' => '0001',
-                'version' => '01',
-                'part' => '00',
-                'product' => 'ABC',
-            ],
+            'identifier.code' => 'DGT',
+            'identifier.year' => '2017',
+            'identifier.number' => '0001',
+            'identifier.version' => '01',
+            'identifier.part' => '00',
+            'identifier.product' => 'ABC',
         ]);
         $message = $poetry->get('message.request');
         $violations = $poetry->get('validator')->validate($message);
@@ -61,30 +59,5 @@ class PoetryTest extends TestCase
 
         $service = $poetry->get('validator');
         expect($service)->to->be->instanceof(RecursiveValidator::class);
-    }
-
-    /**
-     * Test possibility to override service container parameters.
-     */
-    public function testParameterOverrides()
-    {
-        $poetry = new Poetry();
-
-        /** @var \EC\Poetry\Server $server */
-        $server = $poetry->get('server');
-        $callback = $server->getCallback();
-        expect($callback)->is->null();
-
-        $value = 'callback';
-        $poetry = new Poetry([
-            'server.callback' => function () use ($value) {
-                return "I'm the {$value}";
-            },
-        ]);
-
-        /** @var \EC\Poetry\Server $server */
-        $server = $poetry->get('server');
-        $callback = $server->getCallback();
-        expect($callback)->is->equal("I'm the callback");
     }
 }

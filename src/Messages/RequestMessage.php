@@ -21,9 +21,9 @@ class RequestMessage extends AbstractMessage implements GroupSequenceProviderInt
 {
     const REQUEST_NEW = 'new';
     const REQUEST_POST = 'post';
-    const REQUEST_NEWPOST = 'newPost';
+    const REQUEST_NEW_POST = 'newPost';
     const REQUEST_MODIFICATION = 'modification';
-    const REQUEST_MODIFICATIONPOST = 'modificationPost';
+    const REQUEST_MODIFICATION_POST = 'modificationPost';
     const REQUEST_DELETE = 'delete';
     const REQUEST_STATUS = 'getStatus';
     const REQUEST_TRANSLATION = 'getTranslationFile';
@@ -47,9 +47,9 @@ class RequestMessage extends AbstractMessage implements GroupSequenceProviderInt
             new Assert\Choice([
                 RequestMessage::REQUEST_NEW,
                 RequestMessage::REQUEST_POST,
-                RequestMessage::REQUEST_NEWPOST,
+                RequestMessage::REQUEST_NEW_POST,
                 RequestMessage::REQUEST_MODIFICATION,
-                RequestMessage::REQUEST_MODIFICATIONPOST,
+                RequestMessage::REQUEST_MODIFICATION_POST,
                 RequestMessage::REQUEST_DELETE,
                 RequestMessage::REQUEST_STATUS,
                 RequestMessage::REQUEST_TRANSLATION,

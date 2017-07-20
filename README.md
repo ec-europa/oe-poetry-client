@@ -66,15 +66,18 @@ for example:
 
 ```php
 $poetry = new Poetry([
-    'type' => RequestMessage::REQUEST_STATUS,
-    'identifier' => [
-        'code' => 'DGT',
-        'year' => '2017',
-        'number' => '0001',
-        'version' => '01',
-        'part' => '00',
-        'product' => 'ABC',
-    ],
+    'identifier.code' => 'DGT',
+    'identifier.year' => '2017',
+    'identifier.number' => '0001',
+    'identifier.version' => '01',
+    'identifier.part' => '00',
+    'identifier.product' => 'ABC',
+    'authentication.username' => 'foo',
+    'authentication.password' => 'bar',
+    'server.uri' => 'http://my-site.com/poetry-callback',
+    'server.callback' => function ($user, $password, $message) {
+        // Do something with message and return response.
+    },    
 ]);
 
 $message = $poetry->get('message.request');
@@ -82,6 +85,8 @@ $violations = $poetry->get('validator')->validate($message); // No violations.
 ```
 
 The above example returns a valid message.
+
+You can check all possible configuration parameters in `\EC\Poetry\Services\Providers\ParametersProvider::register()`.
 
 ### Client
 
@@ -97,8 +102,8 @@ The client will perform the following operations:
 You can send a message to the Poetry Service in the following way:
 
 ```php
-$poetry = new Poetry();
-$poetry->get('client')->send($message);
+$poetry = new Poetry(...);
+$response = $poetry->getClient()->send($message);
 ```
 
 ### Server
@@ -116,13 +121,15 @@ Upon receiving a message from the Poetry Service the server will perform the fol
 You can retrieve a Poetry Service response in the following way.
 
 ```php
-/** @var \EC\Poetry\Messages\Client\PublishRequest $message */
-$poetry = new Poetry();
-$message = $poetry->get('server')->getResponse();
+// Call this in the application code handling the 'server.uri' parameter.
+$poetry = new Poetry(...);
+$poetry->getServer()->handle();
 
-$id = $message->getId();
-$detail_name = $message->getDetails()->getName();
-$contacts = $message->getContacts();
+/** @var \EC\Poetry\Messages\StatusMessage $response */
+$response = $poetry->getServer()->getResponse();
+
+$id = $response->getIdentifier();
+$type = $response->getStatuses()[0]->getType();
 ```
 
 ## Dependencies

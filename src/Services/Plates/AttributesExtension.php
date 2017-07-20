@@ -36,9 +36,9 @@ class AttributesExtension implements ExtensionInterface
      */
     public function render(array $attributes)
     {
-        $renderedAttributes = array();
+        $renderedAttributes = [];
         foreach ($attributes as $key => $value) {
-            $renderedAttributes[] = $key.'="'.$value.'"';
+            $renderedAttributes[] = $key.'="'.htmlspecialchars($value, ENT_XML1).'"';
         }
 
         return implode(' ', $renderedAttributes);

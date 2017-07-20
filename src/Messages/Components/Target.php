@@ -40,7 +40,8 @@ class Target extends AbstractComponent
     {
         $metadata->addPropertyConstraints('format', [
             new Assert\NotBlank(),
-            new Assert\Choice(array(
+            new Assert\Choice(
+                [
                 'DOC',
                 'DOCX',
                 'HTM',
@@ -57,23 +58,28 @@ class Target extends AbstractComponent
                 'XML',
                 'XMW',
                 'ZIP',
-            )),
+                ]
+            ),
         ]);
         $metadata->addPropertyConstraints('language', [
             new Assert\NotBlank(),
         ]);
         $metadata->addPropertyConstraints('trackChanges', [
-            new Assert\Choice(array(
+            new Assert\Choice(
+                [
                 'Yes',
                 'No',
-            )),
+                ]
+            ),
         ]);
         $metadata->addPropertyConstraints('action', [
-            new Assert\Choice(array(
+            new Assert\Choice(
+                [
                 'INSERT',
                 'UPDATE',
                 'DELETE',
-            )),
+                ]
+            ),
         ]);
         $metadata->addPropertyConstraints('delay', [
             new Assert\DateTime(),
@@ -82,14 +88,18 @@ class Target extends AbstractComponent
             new Assert\DateTime(),
         ]);
         $metadata->addPropertyConstraints('returnAddresses', [
-            new Assert\Valid(array(
+            new Assert\Valid(
+                [
                 'traverse' => true,
-            )),
+                ]
+            ),
         ]);
         $metadata->addPropertyConstraints('contacts', [
-            new Assert\Valid(array(
+            new Assert\Valid(
+                [
                 'traverse' => true,
-            )),
+                ]
+            ),
         ]);
     }
 
@@ -98,12 +108,12 @@ class Target extends AbstractComponent
      */
     public function getAttributes()
     {
-        $attributes = array(
+        $attributes = [
             'lgCode' => $this->getLanguage(),
             'format' => $this->getFormat(),
             'trackChanges' => $this->getTrackChanges(),
             'action' => $this->getAction(),
-        );
+        ];
 
         return array_filter($attributes);
     }

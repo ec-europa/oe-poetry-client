@@ -41,7 +41,8 @@ class Source extends AbstractComponent
     {
         $metadata->addPropertyConstraints('format', [
             new Assert\NotBlank(),
-            new Assert\Choice(array(
+            new Assert\Choice(
+                [
                 'DOC',
                 'DOCX',
                 'HTM',
@@ -58,43 +59,54 @@ class Source extends AbstractComponent
                 'XML',
                 'XMW',
                 'ZIP',
-            )),
+                ]
+            ),
         ]);
         $metadata->addPropertyConstraints('legiswriteFormat', [
             new Assert\NotBlank(),
-            new Assert\Choice(array(
+            new Assert\Choice(
+                [
                 'Yes',
                 'No',
-            )),
+                ]
+            ),
         ]);
         $metadata->addPropertyConstraints('trackChanges', [
-            new Assert\Choice(array(
+            new Assert\Choice(
+                [
                 'Yes',
                 'No',
-            )),
+                ]
+            ),
         ]);
         $metadata->addPropertyConstraints('channel', [
-            new Assert\Choice(array(
+            new Assert\Choice(
+                [
                 'POETRY',
                 'RUE',
                 'USB',
                 'PAPER',
-            )),
+                ]
+            ),
         ]);
         $metadata->addPropertyConstraints('confidential', [
-            new Assert\Choice(array(
+            new Assert\Choice(
+                [
                 'Yes',
                 'No',
-            )),
+                ]
+            ),
         ]);
         $metadata->addPropertyConstraints('deadline', [
             new Assert\Datetime(),
         ]);
         $metadata->addPropertyConstraints('deadlineStatus', [
-            new Assert\Choice(array(
+            new Assert\Choice(
+                [
                 'PUBLIC',
                 'DELETED',
-            )),
+                ]
+            ),
         ]);
         $metadata->addPropertyConstraints('name', [
             new Assert\NotBlank(),
@@ -103,11 +115,13 @@ class Source extends AbstractComponent
             new Assert\NotBlank(),
         ]);
         $metadata->addPropertyConstraints('languages', [
-            new Assert\Count(array(
+            new Assert\Count(
+                [
                 'min' => 0,
                 'max' => 5,
                 'maxMessage' => 'Only 5 source languages are allowed.',
-            )),
+                ]
+            ),
         ]);
     }
 
@@ -116,7 +130,7 @@ class Source extends AbstractComponent
      */
     public function getAttributes()
     {
-        $attributes = array(
+        $attributes = [
             'channel' => $this->getChannel(),
             'dealine' => $this->getDeadline(),
             'statusDealine' => $this->getDeadlineStatus(),
@@ -124,7 +138,7 @@ class Source extends AbstractComponent
             'format' => $this->getFormat(),
             'legisWrite' => $this->getLegiswriteFormat(),
             'trackChanges' => $this->getTrackChanges(),
-        );
+        ];
 
         return array_filter($attributes);
     }

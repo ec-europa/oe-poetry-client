@@ -36,11 +36,13 @@ class Status extends AbstractComponent implements GroupSequenceProviderInterface
         $metadata->setGroupSequenceProvider(true);
         $metadata->addPropertyConstraints('type', [
             new Assert\NotBlank(),
-            new Assert\Choice(array(
+            new Assert\Choice(
+                [
                 'demande',
                 'attribution',
                 'request',
-            )),
+                ]
+            ),
         ]);
         $metadata->addPropertyConstraints('code', [
             new Assert\Choice([
@@ -76,11 +78,11 @@ class Status extends AbstractComponent implements GroupSequenceProviderInterface
      */
     public function getAttributes()
     {
-        $attributes = array(
+        $attributes = [
             'lgCode' => $this->getLanguage(),
             'type' => $this->getType(),
             'code' => $this->getCode(),
-        );
+        ];
 
         return array_filter($attributes);
     }
