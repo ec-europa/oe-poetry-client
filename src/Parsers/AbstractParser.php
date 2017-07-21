@@ -3,6 +3,7 @@
 namespace EC\Poetry\Parsers;
 
 use EC\Poetry\Services\Crawler;
+use Pimple\Container;
 
 /**
  * Class AbstractParser
@@ -17,19 +18,19 @@ abstract class AbstractParser implements ParserInterface
     protected $crawler;
 
     /**
-     * List of auxiliary parser services.
+     * List of auxiliary component parsers.
      *
-     * @var array
+     * @var \Pimple\Container
      */
-    private $parsers = [];
+    private $parsers;
 
     /**
      * AbstractParser constructor.
      *
      * @param \EC\Poetry\Services\Crawler $crawler
-     * @param array                       $parsers
+     * @param \Pimple\Container|null      $parsers
      */
-    public function __construct(Crawler $crawler, $parsers = [])
+    public function __construct(Crawler $crawler, Container $parsers = null)
     {
         $this->crawler = $crawler;
         $this->parsers = $parsers;
@@ -42,6 +43,6 @@ abstract class AbstractParser implements ParserInterface
      */
     protected function getParser($name)
     {
-        return $this->parsers[$name];
+        return $this->parsers['parser.component.'.$name];
     }
 }

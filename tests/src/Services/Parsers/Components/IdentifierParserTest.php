@@ -29,7 +29,7 @@ class IdentifierParserTest extends AbstractTest
     {
         /** @var \EC\Poetry\Parsers\Components\IdentifierParser $parser */
         /** @var \EC\Poetry\Messages\Components\Identifier $component */
-        $parser = $this->getContainer()->get('parser.identifier');
+        $parser = $this->getContainer()->get('parser.component.identifier');
         $component = $parser->parse($xml);
 
         expect($component->getCode())->to->equal($code);
@@ -45,6 +45,6 @@ class IdentifierParserTest extends AbstractTest
      */
     public function parserProvider()
     {
-        return Yaml::parse($this->getFixture('parser.identifier.yml'));
+        return Yaml::parse($this->getFixture('parsers/components/identifier.yml'));
     }
 }

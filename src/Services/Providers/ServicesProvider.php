@@ -55,9 +55,9 @@ class ServicesProvider implements ServiceProviderInterface
             return new \SoapClient($container['client.wsdl'], $container['client.options']);
         };
 
-        $container['crawler'] = function (Container $container) {
+        $container['crawler'] = $container->factory(function (Container $container) {
             return new Crawler();
-        };
+        });
 
         $container['soap.server'] = function (Container $container) {
             $wsdl = $container['renderer.engine']->render('server::callback', ['uri' => $container['server.uri']]);

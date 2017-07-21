@@ -20,6 +20,8 @@ class StatusParser extends AbstractParser
     {
         $crawler = $this->crawler;
         $crawler->addXmlContent($xml);
+
+        // @todo: Consider multiple statuses.
         $component = (new Status())
           ->setDate($crawler->getContent('POETRY/request/status/statusDate'))
           ->setTime($crawler->getContent('POETRY/request/status/statusTime'))

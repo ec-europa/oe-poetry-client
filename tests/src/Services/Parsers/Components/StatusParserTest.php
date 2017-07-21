@@ -27,7 +27,7 @@ class StatusParserTest extends AbstractTest
     public function testParsing($xml, $date, $time, $message, $code, $type)
     {
         /** @var \EC\Poetry\Parsers\Components\StatusParser $parser */
-        $parser = $this->getContainer()->get('parser.status');
+        $parser = $this->getContainer()->get('parser.component.status');
         $component = $parser->parse($xml);
 
         expect($component->getDate())->to->equal($date);
@@ -42,6 +42,6 @@ class StatusParserTest extends AbstractTest
      */
     public function parserProvider()
     {
-        return Yaml::parse($this->getFixture('parser.status.yml'));
+        return Yaml::parse($this->getFixture('parsers/components/status.yml'));
     }
 }

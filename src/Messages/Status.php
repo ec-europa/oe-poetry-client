@@ -3,6 +3,7 @@
 namespace EC\Poetry\Messages;
 
 use Symfony\Component\Validator\Mapping\ClassMetadata;
+use EC\Poetry\Messages\Components as Component;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -62,7 +63,7 @@ class Status extends AbstractMessage
      *
      * @return $this
      */
-    public function addStatus(Status $status)
+    public function addStatus(Component\Status $status)
     {
         $this->statuses[] = $status;
 
