@@ -7,11 +7,11 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\GroupSequenceProviderInterface;
 
 /**
- * Class Status
+ * Class StatusComponent
  *
  * @package EC\Poetry\Messages\Components
  */
-class Status extends AbstractComponent implements GroupSequenceProviderInterface
+class StatusComponent extends AbstractComponent implements GroupSequenceProviderInterface
 {
     private $type;
     private $code;
@@ -97,7 +97,8 @@ class Status extends AbstractComponent implements GroupSequenceProviderInterface
 
     /**
      * @param mixed $type
-     * @return Status
+     *
+     * @return StatusComponent
      */
     public function setType($type)
     {
@@ -116,7 +117,8 @@ class Status extends AbstractComponent implements GroupSequenceProviderInterface
 
     /**
      * @param mixed $code
-     * @return Status
+     *
+     * @return StatusComponent
      */
     public function setCode($code)
     {
@@ -135,7 +137,8 @@ class Status extends AbstractComponent implements GroupSequenceProviderInterface
 
     /**
      * @param mixed $language
-     * @return Status
+     *
+     * @return StatusComponent
      */
     public function setLanguage($language)
     {
@@ -154,7 +157,8 @@ class Status extends AbstractComponent implements GroupSequenceProviderInterface
 
     /**
      * @param mixed $date
-     * @return Status
+     *
+     * @return StatusComponent
      */
     public function setDate($date)
     {
@@ -173,7 +177,8 @@ class Status extends AbstractComponent implements GroupSequenceProviderInterface
 
     /**
      * @param mixed $time
-     * @return Status
+     *
+     * @return StatusComponent
      */
     public function setTime($time)
     {
@@ -192,7 +197,8 @@ class Status extends AbstractComponent implements GroupSequenceProviderInterface
 
     /**
      * @param mixed $message
-     * @return Status
+     *
+     * @return StatusComponent
      */
     public function setMessage($message)
     {
@@ -212,7 +218,7 @@ class Status extends AbstractComponent implements GroupSequenceProviderInterface
 
         return [
             [
-                'Status',
+                'StatusComponent',
                 $this->getType() == 'request' ? 'request' : 'component',
             ],
         ];

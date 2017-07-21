@@ -1,6 +1,6 @@
 # Poetry Client Library
 
-[![Build Status](https://travis-ci.org/ec-europa/oe-poetry-client.svg?branch=master)](https://travis-ci.org/ec-europa/oe-poetry-client)
+[![Build StatusComponent](https://travis-ci.org/ec-europa/oe-poetry-client.svg?branch=master)](https://travis-ci.org/ec-europa/oe-poetry-client)
 
 The Poetry Client Library aims to hide Poetry service complexity behind and easy-to-use client library so that
 users don't have to worry about building their own request messages nor implementing SOAP interactions.  
@@ -125,7 +125,7 @@ You can retrieve a Poetry Service response in the following way.
 $poetry = new Poetry(...);
 $poetry->getServer()->handle();
 
-/** @var \EC\Poetry\Messages\Status $response */
+/** @var \EC\Poetry\Messages\StatusComponent $response */
 $response = $poetry->getServer()->getResponse();
 
 $id = $response->getIdentifier();

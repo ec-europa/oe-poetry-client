@@ -5,7 +5,7 @@ namespace EC\Poetry\Parsers;
 use EC\Poetry\Messages\Status;
 
 /**
- * Class StatusParser
+ * Class StatusComponentParser
  *
  * @package EC\Poetry\Parsers
  */

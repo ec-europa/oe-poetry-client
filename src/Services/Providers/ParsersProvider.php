@@ -22,7 +22,7 @@ class ParsersProvider implements ServiceProviderInterface
         // Component parsers.
         $components = [
           'identifier' => Component\IdentifierParser::class,
-          'status' => Component\StatusParser::class,
+          'status' => Component\StatusComponentParser::class,
         ];
         foreach ($components as $name => $class) {
             $container['parser.component.'.$name] = function (Container $container) use ($class) {

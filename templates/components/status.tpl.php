@@ -4,7 +4,7 @@
  * Template file.
  *
  * @var \EC\Poetry\Services\Plates\Template $this
- * @var \EC\Poetry\Messages\Components\Status $component
+ * @var \EC\Poetry\Messages\Components\StatusComponent $component
  */
 ?>
 <status <?= $this->attributes($component->getAttributes()) ?>>
