@@ -2,7 +2,8 @@
 
 namespace EC\Poetry\Services\Providers;
 
-use EC\Poetry\Services\Parsers\IdentifierParser;
+use EC\Poetry\Services\Parsers\Components\IdentifierParser;
+use EC\Poetry\Services\Parsers\Components\StatusParser;
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 
@@ -21,6 +22,7 @@ class ParsersProvider implements ServiceProviderInterface
         // Parsers.
         $messages = [
           'identifier' => IdentifierParser::class,
+          'status' => StatusParser::class,
         ];
         foreach ($messages as $name => $class) {
             $container['parser.'.$name] = function (Container $container) use ($class) {
