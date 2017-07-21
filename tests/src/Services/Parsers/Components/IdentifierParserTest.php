@@ -27,7 +27,7 @@ class IdentifierParserTest extends AbstractTest
      */
     public function testParsing($xml, $code, $year, $number, $version, $part, $product)
     {
-        /** @var \EC\Poetry\Services\Parsers\Components\IdentifierParser $parser */
+        /** @var \EC\Poetry\Parsers\Components\IdentifierParser $parser */
         /** @var \EC\Poetry\Messages\Components\Identifier $component */
         $parser = $this->getContainer()->get('parser.identifier');
         $component = $parser->parse($xml);

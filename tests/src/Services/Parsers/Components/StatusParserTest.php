@@ -26,7 +26,7 @@ class StatusParserTest extends AbstractTest
      */
     public function testParsing($xml, $date, $time, $message, $code, $type)
     {
-        /** @var \EC\Poetry\Services\Parsers\Components\StatusParser $parser */
+        /** @var \EC\Poetry\Parsers\Components\StatusParser $parser */
         $parser = $this->getContainer()->get('parser.status');
         $component = $parser->parse($xml);
 

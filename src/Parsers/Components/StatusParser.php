@@ -1,15 +1,15 @@
 <?php
 
-namespace EC\Poetry\Services\Parsers\Components;
+namespace EC\Poetry\Parsers\Components;
 
 use EC\Poetry\Messages\Components\Identifier;
 use EC\Poetry\Messages\Components\Status;
-use EC\Poetry\Services\Parsers\AbstractParser;
+use EC\Poetry\Parsers\AbstractParser;
 
 /**
  * Class StatusParser
  *
- * @package EC\Poetry\Services\Parsers\Components
+ * @package EC\Poetry\Parsers\Components
  */
 class StatusParser extends AbstractParser
 {

@@ -1,13 +1,13 @@
 <?php
 
-namespace EC\Poetry\Services\Parsers;
+namespace EC\Poetry\Parsers;
 
 use EC\Poetry\Services\Crawler;
 
 /**
  * Class AbstractParser
  *
- * @package EC\Poetry\Services\Parsers
+ * @package EC\Poetry\Parsers
  */
 abstract class AbstractParser implements ParserInterface
 {

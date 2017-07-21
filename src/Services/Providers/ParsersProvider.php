@@ -2,8 +2,8 @@
 
 namespace EC\Poetry\Services\Providers;
 
-use EC\Poetry\Services\Parsers\Components\IdentifierParser;
-use EC\Poetry\Services\Parsers\Components\StatusParser;
+use EC\Poetry\Parsers\Components\IdentifierParser;
+use EC\Poetry\Parsers\Components\StatusParser;
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 

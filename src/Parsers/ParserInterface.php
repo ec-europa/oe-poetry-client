@@ -1,11 +1,11 @@
 <?php
 
-namespace EC\Poetry\Services\Parsers;
+namespace EC\Poetry\Parsers;
 
 /**
  * Class ParserInterface
  *
- * @package EC\Poetry\Services\Parsers
+ * @package EC\Poetry\Parsers
  */
 interface ParserInterface
 {
