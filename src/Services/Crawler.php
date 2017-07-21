@@ -37,10 +37,8 @@ class Crawler extends DomCrawler\Crawler
      */
     public function getAttribute($xpath, $attribute)
     {
-        try {
-            return $this->filterXPath($xpath)->html();
-        } catch (\InvalidArgumentException $e) {
-            return null;
-        }
+        $attributes = $this->filterXPath($xpath)->extract([$attribute]);
+
+        return $attributes[0] === '' ? null : $attributes[0];
     }
 }

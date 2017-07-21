@@ -23,7 +23,9 @@ class StatusParser extends AbstractParser
         $component = (new Status())
           ->setDate($crawler->getContent('POETRY/request/status/statusDate'))
           ->setTime($crawler->getContent('POETRY/request/status/statusTime'))
-          ->setMessage($crawler->getContent('POETRY/request/status/statusMessage'));
+          ->setMessage($crawler->getContent('POETRY/request/status/statusMessage'))
+          ->setType($crawler->getAttribute('POETRY/request/status', 'type'))
+          ->setCode($crawler->getAttribute('POETRY/request/status', 'code'));
 
         return $component;
     }

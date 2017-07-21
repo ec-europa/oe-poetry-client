@@ -19,10 +19,12 @@ class StatusParserTest extends AbstractTest
      * @param string $date
      * @param string $time
      * @param string $message
+     * @param string $code
+     * @param string $type
      *
      * @dataProvider parserProvider
      */
-    public function testParsing($xml, $date, $time, $message)
+    public function testParsing($xml, $date, $time, $message, $code, $type)
     {
         /** @var \EC\Poetry\Services\Parsers\Components\StatusParser $parser */
         $parser = $this->getContainer()->get('parser.status');
@@ -31,6 +33,8 @@ class StatusParserTest extends AbstractTest
         expect($component->getDate())->to->equal($date);
         expect($component->getTime())->to->equal($time);
         expect($component->getMessage())->to->equal($message);
+        expect($component->getCode())->to->equal($code);
+        expect($component->getType())->to->equal($type);
     }
 
     /**
