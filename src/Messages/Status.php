@@ -5,15 +5,12 @@ namespace EC\Poetry\Messages;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Symfony\Component\Validator\Constraints as Assert;
 
-
-use EC\Poetry\Messages\Components\Status;
-
 /**
- * Class StatusMessage
+ * Class Status
  *
  * @package EC\Poetry\Messages\Client
  */
-class StatusMessage extends AbstractMessage
+class Status extends AbstractMessage
 {
     private $statuses = [];
 

@@ -4,7 +4,7 @@
  * Template file.
  *
  * @var \EC\Poetry\Services\Plates\Template $this
- * @var \EC\Poetry\Messages\StatusMessage $message
+ * @var \EC\Poetry\Messages\Status $message
  * @var string $identifier
  */
 ?>

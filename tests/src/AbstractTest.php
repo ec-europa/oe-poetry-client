@@ -3,7 +3,7 @@
 namespace EC\Poetry\Tests;
 
 use EC\Poetry\Messages\Components\Identifier;
-use EC\Poetry\Messages\RequestMessage;
+use EC\Poetry\Messages\Request;
 use EC\Poetry\Poetry;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Validator\ConstraintViolationListInterface;

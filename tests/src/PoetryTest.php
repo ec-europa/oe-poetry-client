@@ -2,7 +2,7 @@
 
 namespace EC\Poetry\Tests;
 
-use EC\Poetry\Messages\RequestMessage;
+use EC\Poetry\Messages\Request;
 use EC\Poetry\Poetry;
 use EC\Poetry\Tests\AbstractTest as TestCase;
 use EC\Poetry\Services\Renderer;
@@ -22,16 +22,16 @@ class PoetryTest extends TestCase
     public function testMessageContainer()
     {
         $poetry = new Poetry();
-        /** @var \EC\Poetry\Messages\RequestMessage $message */
+        /** @var \EC\Poetry\Messages\Request $message */
         $message = $poetry->get('message.request');
-        expect($message)->to->be->instanceof(RequestMessage::class);
+        expect($message)->to->be->instanceof(Request::class);
 
         /** @var \Symfony\Component\Validator\ConstraintViolationListInterface $violations */
         $violations = $poetry->get('validator')->validate($message);
         expect($violations->count())->not->to->be->empty();
 
         $poetry = new Poetry([
-            'type' => RequestMessage::REQUEST_STATUS,
+            'type' => Request::REQUEST_STATUS,
             'identifier.code' => 'DGT',
             'identifier.year' => '2017',
             'identifier.number' => '0001',

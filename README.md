@@ -125,7 +125,7 @@ You can retrieve a Poetry Service response in the following way.
 $poetry = new Poetry(...);
 $poetry->getServer()->handle();
 
-/** @var \EC\Poetry\Messages\StatusMessage $response */
+/** @var \EC\Poetry\Messages\Status $response */
 $response = $poetry->getServer()->getResponse();
 
 $id = $response->getIdentifier();
