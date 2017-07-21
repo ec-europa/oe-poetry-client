@@ -61,4 +61,14 @@ abstract class AbstractTest extends TestCase
     {
         return \Mockery::mock(\SoapClient::class);
     }
+
+    /**
+     * @param $name
+     *
+     * @return bool|string
+     */
+    protected function getFixture($name)
+    {
+        return file_get_contents(__DIR__.'/fixtures/'.$name);
+    }
 }

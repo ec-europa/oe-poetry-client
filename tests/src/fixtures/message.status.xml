@@ -1,0 +1,22 @@
+<POETRY xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="">
+    <request communication="asynchrone" id="DGT/2017/0001/01/00/ABC" type="status">
+        <demandeId>
+            <codeDemandeur>DGT</codeDemandeur>
+            <annee>2017</annee>
+            <numero>0001</numero>
+            <version>01</version>
+            <partie>00</partie>
+            <produit>ABC</produit>
+        </demandeId>
+        <status code="0" type="request">
+            <statusDate format="dd/mm/yyyy">15/01/2017</statusDate>
+            <statusTime format="hh:mm:ss">12:30:00</statusTime>
+            <statusMessage>OK</statusMessage>
+        </status>
+        <status code="0" type="demande">
+            <statusDate format="dd/mm/yyyy">15/01/2017</statusDate>
+            <statusTime format="hh:mm:ss">12:30:00</statusTime>
+            <statusMessage>OK</statusMessage>
+        </status>
+    </request>
+</POETRY>

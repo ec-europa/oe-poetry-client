@@ -11,7 +11,7 @@ use EC\Poetry\Services\Plates\ComponentExtension;
 use EC\Poetry\Services\Renderer;
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
-use Symfony\Component\DomCrawler\Crawler;
+use EC\Poetry\Services\Crawler;
 use Symfony\Component\Validator\ValidatorBuilder;
 
 /**
