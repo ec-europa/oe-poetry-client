@@ -4,7 +4,6 @@ namespace EC\Poetry\Services\Providers;
 
 use EC\Poetry\Server;
 use EC\Poetry\Client;
-use EC\Poetry\Services\Parser;
 use EC\Poetry\Services\Plates\AttributesExtension;
 use League\Plates\Engine;
 use EC\Poetry\Services\Plates\ComponentExtension;
@@ -60,10 +59,6 @@ class ServicesProvider implements ServiceProviderInterface
             return new Crawler();
         };
 
-        $container['parser'] = function (Container $container) {
-            return new Parser($container['crawler']);
-        };
-
         $container['soap.server'] = function (Container $container) {
             $wsdl = $container['renderer.engine']->render('server::callback', ['uri' => $container['server.uri']]);
             $file = 'data://text/plain;base64,'.base64_encode($wsdl);
@@ -73,7 +68,7 @@ class ServicesProvider implements ServiceProviderInterface
             return $server;
         };
         $container['server'] = function (Container $container) {
-            return new Server($container['soap.server'], $container['parser']);
+            return new Server($container['soap.server'], []);
         };
     }
 }

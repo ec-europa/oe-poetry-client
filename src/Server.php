@@ -2,7 +2,7 @@
 
 namespace EC\Poetry;
 
-use EC\Poetry\Services\Parser;
+use EC\Poetry\Services\Parsers\ParserInterface;
 
 /**
  * Class Server
@@ -12,11 +12,11 @@ use EC\Poetry\Services\Parser;
 class Server
 {
     /**
-     * Custom XML parser.
+     * Parser services.
      *
-     * @var \EC\Poetry\Services\Parser
+     * @var \EC\Poetry\Services\Parsers\ParserInterface[]
      */
-    protected $parser;
+    protected $parsers;
 
     /**
      * @var \SoapServer
@@ -31,13 +31,13 @@ class Server
     /**
      * Server constructor.
      *
-     * @param \SoapServer                $soapServer
-     * @param \EC\Poetry\Services\Parser $parser
+     * @param \SoapServer                                   $soapServer
+     * @param \EC\Poetry\Services\Parsers\ParserInterface[] $parsers
      */
-    public function __construct(\SoapServer $soapServer, Parser $parser)
+    public function __construct(\SoapServer $soapServer, array $parsers)
     {
         $this->soapServer = $soapServer;
-        $this->parser = $parser;
+        $this->parsers = $parsers;
     }
 
     /**
