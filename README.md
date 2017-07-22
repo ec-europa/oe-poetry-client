@@ -142,3 +142,5 @@ The Poetry Client Library depends on the following projects:
   XML payload.
 - [Symfony Validator Component](https://symfony.com/doc/current/components/validator.html): provides tools to validate
   message objects and their components.
+- [Symfony DomCrawler Component](https://symfony.com/doc/current/components/dom_crawler.html): provides components to
+  ease DOM navigation for HTML and XML documents.
