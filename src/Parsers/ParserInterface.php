@@ -12,7 +12,7 @@ interface ParserInterface
     /**
      * @param string $xml
      *
-     * @return \EC\Poetry\Messages\Components\ComponentInterface|\EC\Poetry\Messages\MessageInterface
+     * @return \EC\Poetry\Messages\Components\ComponentInterface|\EC\Poetry\Messages\MessageInterface | array
      */
     public function parse($xml);
 }

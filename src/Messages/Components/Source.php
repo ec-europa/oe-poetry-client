@@ -136,7 +136,7 @@ class Source extends AbstractComponent
             'statusDealine' => $this->getDeadlineStatus(),
             'marked' => $this->getConfidential(),
             'format' => $this->getFormat(),
-            'legisWrite' => $this->getLegiswriteFormat(),
+            'legiswrite' => $this->getLegiswriteFormat(),
             'trackChanges' => $this->getTrackChanges(),
         ];
 
@@ -320,6 +320,17 @@ class Source extends AbstractComponent
     public function getLanguages()
     {
         return $this->languages;
+    }
+
+    /**
+     * @param array $languages
+     * @return Source
+     */
+    public function setLanguages($languages)
+    {
+        $this->languages = $languages;
+
+        return $this;
     }
 
     /**

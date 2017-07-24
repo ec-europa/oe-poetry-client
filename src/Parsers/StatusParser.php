@@ -21,11 +21,10 @@ class StatusParser extends AbstractParser
 
         /** @var \EC\Poetry\Messages\Components\Identifier $identifier */
         $identifier = $this->getParser('identifier')->parse($xml);
-        $status = $this->getParser('status')->parse($xml);
+        $statuses = $this->getParser('status')->parse($xml);
 
         $message = new Status($identifier);
-        // @todo: Consider multiple statuses.
-        $message->addStatus($status);
+        $message->setStatuses($statuses);
 
         return $message;
     }

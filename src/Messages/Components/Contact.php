@@ -60,6 +60,19 @@ class Contact extends AbstractComponent
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function getAttributes()
+    {
+        $attributes = [
+            'type' => $this->getType(),
+            'action' => $this->getAction(),
+        ];
+
+        return array_filter($attributes);
+    }
+
+    /**
      * @return mixed
      */
     public function getType()

@@ -23,10 +23,16 @@ class ParsersProvider implements ServiceProviderInterface
         $components = [
           'identifier' => Component\IdentifierParser::class,
           'status' => Component\StatusComponentParser::class,
+          'contact' => Component\ContactParser::class,
+          'details' => Component\DetailsParser::class,
+          'referenceDocument' => Component\ReferenceDocumentParser::class,
+          'source' => Component\SourceParser::class,
+          'target' => Component\TargetParser::class,
+          'returnAddress' => Component\ReturnAddressParser::class,
         ];
         foreach ($components as $name => $class) {
             $container['parser.component.'.$name] = function (Container $container) use ($class) {
-                return new $class($container['crawler']);
+                return new $class($container['crawler'], $container);
             };
         }
 

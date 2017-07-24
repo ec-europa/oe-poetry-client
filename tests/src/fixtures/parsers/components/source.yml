@@ -1,0 +1,32 @@
+-
+  -
+    <POETRY xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="">
+        <request communication="asynchrone" id="DGT/2017/0001/01/00/ABC" type="status">
+            <documentSource channel="POETRY" format="HTML" deadline="11/07/2007" statusDeadline="PUBLIC" marked="No" legiswrite="Yes" trackChanges="No">
+                <documentSourceName>Name</documentSourceName>
+                <documentSourcePath>Path</documentSourcePath>
+                <documentSourceLang lgCode="en">
+                    <documentSourceLangPages>1</documentSourceLangPages>
+                </documentSourceLang>
+                <documentSourceLang lgCode="fr">
+                    <documentSourceLangPages>2</documentSourceLangPages>
+                </documentSourceLang>
+                <documentSourceSize>10kB</documentSourceSize>
+                <documentSourceFile>File</documentSourceFile>
+            </documentSource>
+        </request>
+    </POETRY>
+  - getChannel : "POETRY"
+    getFormat : "HTML"
+    getDeadline : "11/07/2007"
+    getDeadlineStatus : "PUBLIC"
+    getConfidential : "No"
+    getLegiswriteFormat : "Yes"
+    getTrackChanges : "No"
+    getName : "Name"
+    getPath : "Path"
+    getLanguages :
+      0 : en
+      1 : fr
+    getSize : "10kB"
+    getFile : "File"

@@ -28,13 +28,14 @@ class StatusParserTest extends AbstractTest
     {
         /** @var \EC\Poetry\Parsers\Components\StatusComponentParser $parser */
         $parser = $this->getContainer()->get('parser.component.status');
-        $component = $parser->parse($xml);
+        $components = $parser->parse($xml);
+        expect(count($components))->to->be->equal(1);
 
-        expect($component->getDate())->to->equal($date);
-        expect($component->getTime())->to->equal($time);
-        expect($component->getMessage())->to->equal($message);
-        expect($component->getCode())->to->equal($code);
-        expect($component->getType())->to->equal($type);
+        expect($components[0]->getDate())->to->equal($date);
+        expect($components[0]->getTime())->to->equal($time);
+        expect($components[0]->getMessage())->to->equal($message);
+        expect($components[0]->getCode())->to->equal($code);
+        expect($components[0]->getType())->to->equal($type);
     }
 
     /**
@@ -43,5 +44,33 @@ class StatusParserTest extends AbstractTest
     public function parserProvider()
     {
         return Yaml::parse($this->getFixture('parsers/components/status.yml'));
+    }
+
+    /**
+     * Test parsing.
+     *
+     * @param string $xml
+     * @param string $firstType
+     * @param string $secondType
+     *
+     * @dataProvider multipleParserProvider
+     */
+    public function testMultipleParsing($xml, $firstType, $secondType)
+    {
+        /** @var \EC\Poetry\Parsers\Components\StatusComponentParser $parser */
+        $parser = $this->getContainer()->get('parser.component.status');
+        $components = $parser->parse($xml);
+        expect(count($components))->to->be->equal(2);
+
+        expect($components[0]->getType())->to->equal($firstType);
+        expect($components[1]->getType())->to->equal($secondType);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function multipleParserProvider()
+    {
+        return Yaml::parse($this->getFixture('parsers/components/statuses.yml'));
     }
 }

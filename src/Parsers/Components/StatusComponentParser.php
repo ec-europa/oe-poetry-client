@@ -2,9 +2,9 @@
 
 namespace EC\Poetry\Parsers\Components;
 
-use EC\Poetry\Messages\Components\Identifier;
 use EC\Poetry\Messages\Components\StatusComponent;
 use EC\Poetry\Parsers\AbstractParser;
+use EC\Poetry\Services\Crawler;
 
 /**
  * Class StatusComponentParser
@@ -20,15 +20,16 @@ class StatusComponentParser extends AbstractParser
     {
         $crawler = $this->crawler;
         $crawler->addXmlContent($xml);
+        $components = [];
+        $crawler->filterXPath("POETRY/request/status")->each(function (Crawler $status) use (&$components) {
+            $components[] = (new StatusComponent())
+                ->setDate($status->getContent('status/statusDate'))
+                ->setTime($status->getContent('status/statusTime'))
+                ->setMessage($status->getContent('status/statusMessage'))
+                ->setType($status->attr('type'))
+                ->setCode($status->attr('code'));
+        });
 
-        // @todo: Consider multiple statuses.
-        $component = (new StatusComponent())
-          ->setDate($crawler->getContent('POETRY/request/status/statusDate'))
-          ->setTime($crawler->getContent('POETRY/request/status/statusTime'))
-          ->setMessage($crawler->getContent('POETRY/request/status/statusMessage'))
-          ->setType($crawler->getAttribute('POETRY/request/status', 'type'))
-          ->setCode($crawler->getAttribute('POETRY/request/status', 'code'));
-
-        return $component;
+        return $components;
     }
 }
