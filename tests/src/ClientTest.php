@@ -2,8 +2,8 @@
 
 namespace EC\Poetry\Tests;
 
-use EC\Poetry\Messages\RequestMessage;
-use EC\Poetry\Messages\StatusMessage;
+use EC\Poetry\Messages\Request;
+use EC\Poetry\Messages\Status;
 use EC\Poetry\Poetry;
 
 /**
@@ -22,8 +22,8 @@ class ClientTest extends AbstractTest
      */
     public function testSend($username, $password, $method)
     {
-        $request = new RequestMessage($this->getValidIdentifier());
-        $status = new StatusMessage($this->getValidIdentifier());
+        $request = new Request($this->getValidIdentifier());
+        $status = new Status($this->getValidIdentifier());
 
         $rendererRequest = $this->getContainer()->get('renderer')->render($request);
         $rendererStatus = $this->getContainer()->get('renderer')->render($status);

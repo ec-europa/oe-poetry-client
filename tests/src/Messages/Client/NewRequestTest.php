@@ -4,7 +4,7 @@ namespace EC\Poetry\Tests\Messages\Client;
 
 use EC\Poetry\Messages\Components\Identifier;
 use EC\Poetry\Messages\Components\Details;
-use EC\Poetry\Messages\RequestMessage;
+use EC\Poetry\Messages\Request;
 use EC\Poetry\Poetry;
 use PHPUnit\Framework\TestCase;
 
@@ -30,8 +30,8 @@ class NewRequestTest extends TestCase
           ->setVersion('01')
           ->setPart('00')
           ->setProduct('TRA');
-        $message = new RequestMessage($identifier);
-        $message->setType(RequestMessage::REQUEST_NEW);
+        $message = new Request($identifier);
+        $message->setType(Request::REQUEST_NEW);
         $details = new Details();
         $details->setClientId("clientID");
         $details->setApplicationId("applicationId");

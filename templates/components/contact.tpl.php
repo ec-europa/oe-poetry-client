@@ -7,7 +7,7 @@
  * @var \EC\Poetry\Messages\Components\Contact $component
  */
 ?>
-<contacts>
+<contacts <?= $this->attributes($component->getAttributes()) ?>>
     <contactNickname><?= $component->getNickname() ?></contactNickname>
     <?php if ($component->getEmail()) : ?>
         <contactEmail><?= $component->getEmail() ?></contactEmail>

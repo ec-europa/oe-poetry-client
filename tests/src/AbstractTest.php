@@ -3,7 +3,6 @@
 namespace EC\Poetry\Tests;
 
 use EC\Poetry\Messages\Components\Identifier;
-use EC\Poetry\Messages\RequestMessage;
 use EC\Poetry\Poetry;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
@@ -60,5 +59,15 @@ abstract class AbstractTest extends TestCase
     protected function getSoapClientMock()
     {
         return \Mockery::mock(\SoapClient::class);
+    }
+
+    /**
+     * @param $name
+     *
+     * @return bool|string
+     */
+    protected function getFixture($name)
+    {
+        return file_get_contents(__DIR__.'/fixtures/'.$name);
     }
 }

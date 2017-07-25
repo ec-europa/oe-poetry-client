@@ -13,11 +13,11 @@ use EC\Poetry\Messages\Components\Target;
 use EC\Poetry\Messages\Components\ReferenceDocument;
 
 /**
- * Class RequestMessage
+ * Class Request
  *
  * @package EC\Poetry\Messages\Client
  */
-class RequestMessage extends AbstractMessage implements GroupSequenceProviderInterface
+class Request extends AbstractMessage implements GroupSequenceProviderInterface
 {
     const REQUEST_NEW = 'new';
     const REQUEST_POST = 'post';
@@ -45,15 +45,15 @@ class RequestMessage extends AbstractMessage implements GroupSequenceProviderInt
         $metadata->setGroupSequenceProvider(true);
         $metadata->addPropertyConstraints('type', [
             new Assert\Choice([
-                RequestMessage::REQUEST_NEW,
-                RequestMessage::REQUEST_POST,
-                RequestMessage::REQUEST_NEW_POST,
-                RequestMessage::REQUEST_MODIFICATION,
-                RequestMessage::REQUEST_MODIFICATION_POST,
-                RequestMessage::REQUEST_DELETE,
-                RequestMessage::REQUEST_STATUS,
-                RequestMessage::REQUEST_TRANSLATION,
-                RequestMessage::REQUEST_CONTACTS,
+                Request::REQUEST_NEW,
+                Request::REQUEST_POST,
+                Request::REQUEST_NEW_POST,
+                Request::REQUEST_MODIFICATION,
+                Request::REQUEST_MODIFICATION_POST,
+                Request::REQUEST_DELETE,
+                Request::REQUEST_STATUS,
+                Request::REQUEST_TRANSLATION,
+                Request::REQUEST_CONTACTS,
             ]),
         ]);
         $metadata->addGetterConstraints('identifier', [
@@ -110,7 +110,8 @@ class RequestMessage extends AbstractMessage implements GroupSequenceProviderInt
 
     /**
      * @param mixed $type
-     * @return RequestMessage
+     *
+     * @return Request
      */
     public function setType($type)
     {
@@ -129,7 +130,8 @@ class RequestMessage extends AbstractMessage implements GroupSequenceProviderInt
 
     /**
      * @param Details $details
-     * @return RequestMessage
+     *
+     * @return Request
      */
     public function setDetails($details)
     {
@@ -148,7 +150,8 @@ class RequestMessage extends AbstractMessage implements GroupSequenceProviderInt
 
     /**
      * @param array $contacts
-     * @return RequestMessage
+     *
+     * @return Request
      */
     public function setContacts($contacts)
     {
@@ -159,7 +162,8 @@ class RequestMessage extends AbstractMessage implements GroupSequenceProviderInt
 
     /**
      * @param contact $contact
-     * @return RequestMessage
+     *
+     * @return Request
      */
     public function addContact($contact)
     {
@@ -178,7 +182,8 @@ class RequestMessage extends AbstractMessage implements GroupSequenceProviderInt
 
     /**
      * @param ReturnAddress $returnAddress
-     * @return RequestMessage
+     *
+     * @return Request
      */
     public function setReturnAddress($returnAddress)
     {
@@ -197,7 +202,8 @@ class RequestMessage extends AbstractMessage implements GroupSequenceProviderInt
 
     /**
      * @param Source $source
-     * @return RequestMessage
+     *
+     * @return Request
      */
     public function setSource($source)
     {
@@ -216,7 +222,8 @@ class RequestMessage extends AbstractMessage implements GroupSequenceProviderInt
 
     /**
      * @param array $targets
-     * @return RequestMessage
+     *
+     * @return Request
      */
     public function setTargets($targets)
     {
@@ -227,7 +234,7 @@ class RequestMessage extends AbstractMessage implements GroupSequenceProviderInt
 
     /**
      * @param Target $target
-     * @return RequestMessage
+     * @return Request
      */
     public function addTarget($target)
     {
@@ -246,7 +253,8 @@ class RequestMessage extends AbstractMessage implements GroupSequenceProviderInt
 
     /**
      * @param array $referenceDocuments
-     * @return RequestMessage
+     *
+     * @return Request
      */
     public function setReferenceDocuments($referenceDocuments)
     {
@@ -257,7 +265,8 @@ class RequestMessage extends AbstractMessage implements GroupSequenceProviderInt
 
     /**
      * @param ReferenceDocument $referenceDocument
-     * @return RequestMessage
+     *
+     * @return Request
      */
     public function addReferenceDocuments($referenceDocument)
     {
@@ -281,7 +290,7 @@ class RequestMessage extends AbstractMessage implements GroupSequenceProviderInt
             $this::REQUEST_TRANSLATION,
             $this::REQUEST_CONTACTS,
         ];
-        $sequence = ['RequestMessage'];
+        $sequence = ['Request'];
         if (in_array($this->getType(), $simpleRequests)) {
             $sequence[] = 'simple';
         }

@@ -5,6 +5,7 @@ namespace EC\Poetry;
 use EC\Poetry\Services\PoetryServiceProvider;
 use EC\Poetry\Services\Providers\MessagesProvider;
 use EC\Poetry\Services\Providers\ParametersProvider;
+use EC\Poetry\Services\Providers\ParsersProvider;
 use EC\Poetry\Services\Providers\ServicesProvider;
 use Pimple\Container;
 
@@ -31,12 +32,17 @@ class Poetry extends Container
         $this->register(new ParametersProvider());
         $this->register(new ServicesProvider());
         $this->register(new MessagesProvider());
+        $this->register(new ParsersProvider());
 
+        // Override container values.
         foreach ($values as $name => $value) {
             $this->offsetSet($name, $value);
         }
 
+        // Set static cache.
         self::$container = $this;
+
+        // Require SOAP global callback function.
         require_once __DIR__.'/../callback.php';
     }
 
