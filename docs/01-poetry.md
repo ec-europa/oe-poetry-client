@@ -72,7 +72,7 @@ For an overview of all available services please refer to the following service 
 
 - [`EC\Poetry\Services\Providers\ParametersProvider`](src/Services/Providers/ParametersProvider.php): 
   Define list of valid configuration parameters that can be passed in the `Poetry` factory object constructor. 
-- [`EC\Poetry\Services\Providers\ServicesProvider`](/Users/ademarco/Sites/oe-poetry-client/src/Services/Providers/ServicesProvider.php):
+- [`EC\Poetry\Services\Providers\ServicesProvider`](src/Services/Providers/ServicesProvider.php):
   Exposes generic services such as the template system, the client, the server, etc. Services are configured by the
   parameters specified in the `ParametersProvider`.
 - [`EC\Poetry\Services\Providers\MessagesProvider`](src/Services/Providers/MessagesProvider.php): 
