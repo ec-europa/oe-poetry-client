@@ -19,3 +19,15 @@ operations:
 - **Build request message object** and send it to the Poetry service via the client component.
 - **Handle Poetry asynchronous requests** via the server component, requests will be modelled using message objects.
 
+## Dependencies
+
+The Poetry Client Library depends on the following projects:
+
+- [Pimple](https://pimple.symfony.com/): a simple PHP Dependency Injection Container, it is used to instantiate services
+  and manage object dependency and configuration.
+- [Plates](http://platesphp.com/): a lightweight, native PHP template system that is used to render messages into SOAP
+  XML payload.
+- [Symfony Validator Component](https://symfony.com/doc/current/components/validator.html): provides tools to validate
+  message objects and their components.
+- [Symfony DomCrawler Component](https://symfony.com/doc/current/components/dom_crawler.html): provides components to
+  ease DOM navigation for HTML and XML documents.
