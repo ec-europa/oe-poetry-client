@@ -72,7 +72,7 @@ class Client
      *
      * @throws \EC\Poetry\Exceptions\ValidationException
      *
-     * @return mixed
+     * @return \EC\Poetry\Messages\Status
      */
     public function send(AbstractMessage $message)
     {

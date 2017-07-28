@@ -25,6 +25,7 @@ class ContactParserTest extends AbstractTest
     public function testParsing($xml, $type, $nickname, $email)
     {
         /** @var \EC\Poetry\Parsers\Components\ContactParser $parser */
+        /** @var \EC\Poetry\Messages\Components\Contact[] $components */
         $parser = $this->getContainer()->get('parser.component.contact');
         $components = $parser->parse($xml);
         expect(count($components))->to->be->equal(1);
