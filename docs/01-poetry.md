@@ -78,13 +78,13 @@ $server = $poetry->getServer();
 
 For an overview of all available services please refer to the following service providers:
 
-- [`EC\Poetry\Services\Providers\ParametersProvider`](src/Services/Providers/ParametersProvider.php): 
+- [`EC\Poetry\Services\Providers\ParametersProvider`](../src/Services/Providers/ParametersProvider.php): 
   Defines the list of valid configuration parameters that can be passed in the `Poetry` factory object constructor. 
-- [`EC\Poetry\Services\Providers\ServicesProvider`](src/Services/Providers/ServicesProvider.php):
+- [`EC\Poetry\Services\Providers\ServicesProvider`](../src/Services/Providers/ServicesProvider.php):
   Exposes generic services such as the template system, the client, the server, etc. Services are configured by the
   parameters specified in the `ParametersProvider`.
-- [`EC\Poetry\Services\Providers\MessagesProvider`](src/Services/Providers/MessagesProvider.php): 
+- [`EC\Poetry\Services\Providers\MessagesProvider`](../src/Services/Providers/MessagesProvider.php): 
   Exposes message and component objects as services. Components, such as `Identifier` are configured by the parameters
   specified in the `ParametersProvider`.
-- [`EC\Poetry\Services\Providers\ParsersProvider`](src/Services/Providers/ParsersProvider.php):
+- [`EC\Poetry\Services\Providers\ParsersProvider`](../src/Services/Providers/ParsersProvider.php):
   Exposes message and component parsers as services.
