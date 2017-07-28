@@ -1,7 +1,6 @@
 # Server
 
-The server object will receive an XML message from the Poetry Service and it will return a valid message object, all
-SOAP implementation details are hidden from the final user.
+The server object will receive an XML message from the Poetry Service and it will return a valid message object.
 
 Upon receiving a message from the Poetry Service the server will perform the following operations:
 
@@ -23,3 +22,18 @@ $response = $poetry->getServer()->getResponse();
 $id = $response->getIdentifier();
 $type = $response->getStatuses()[0]->getType();
 ```
+
+## Server callback
+
+The host application can set a callback function by passing the following parameters to the `Poetry` object constructor:
+
+```php
+$poetry = new Poetry([
+    'server.uri' => 'http://my-site.com/poetry-callback',
+    'server.callback' => function ($user, $password, $message) {
+        // Do something with message and return response.
+    },
+]);
+```
+
+Also, the server should handle requests sent by the remote Poetry server to the URI specified in `server.uri`.

@@ -1,18 +1,19 @@
 # Poetry factory object
 
-The `Poetry` object allows to access every component provided by the Poetry Client library, be it the client, the server
-or a generic Poetry message object. It also provides a simple way of configuring its services by accepting a list of parameters.
+The `Poetry` object allows to access any component provided by the Poetry Client library, be it the client, the server
+or a message object. It also provides the host application for a simple way of configuring its services.
 
 The `Poetry` object is essentially a dependency injection container based on [Pimple](https://pimple.symfony.com/) whose only
-responsibility is to provide ready-to-use services.
+responsibility is to build and provide ready-to-use, fully configured services.
 
-Services are exposed by service providers. Each service provider class defines how each object should be constructed and
-which dependencies it should be injected with. Dependency injection allows the code to be fully decoupled and easily
-testable. 
+Internally services are exposed by service providers. Each service provider class defines how services should be
+constructed and which dependencies they should be injected with.
+
+Finally, dependency injection allows the code to be fully decoupled and easily testable. 
 
 ## Configuration
 
-To start using the Poetry Client library you can just create a new instance of the `Poetry` factory object as follow:
+To start using the Poetry Client library it's enough to create a new instance of the `Poetry` factory as follow:
 
 ```php
 $poetry = new Poetry();
@@ -20,7 +21,7 @@ $poetry = new Poetry();
 
 However the code above returns a non-configured `Poetry` object.
 
-Alternatively, you can pass the following optional configuration parameters to the constructor:
+Alternatively, you can pass the following (optional) configuration parameters to the constructor:
 
 | Parameter                 | Description |
 |---------------------------|-------------|
@@ -35,7 +36,7 @@ Alternatively, you can pass the following optional configuration parameters to t
 | `server.uri`              | Your application **callback URI**, the library's server should be handling its incoming requests |
 | `server.callback`         | Your application **callback function**, it will be called by the Poetry service receiving an XML message |
 
-Below an example of a fully configured `Poerty` factory object instance:
+Below an example of a fully configured `Poerty` factory, ready to be used:
 
 ```php
 $poetry = new Poetry([
@@ -54,29 +55,35 @@ $poetry = new Poetry([
 ]);
 ```
 
-## Services
+The parameters above will be injected into Poetry services allowing the host application to control their behavior, namely:
 
-Once instantiated you can access the `Poetry` factory object anywhere in your application by calling:
+- `identifier.*` will be passed to the [`Identifier` component](02-messages.md).
+- `authentication.*` will be passed to the [Client](03-client.md).
+- `server.*` will be passed to the [Server](04-server.md).
+
+Once instantiated the `Poetry` factory object can be accessed anywhere by calling:
 
 ```php
 $poetry = Poetry::getInstance();
 ```
 
-Services can be accessed by:
+## Services
+
+Services can be accessed by using their machine name, for example:
 
 ```php
 $renderer = $poetry->get('renderer');
 $output = $renderer->render($message);
 ```
 
-Poetry client and server can be accessed by their own convenience methods:
+Client and server can be accessed using the following convenience methods:
 
 ```php
-$client = $poetry->getClient();
-$server = $poetry->getServer();
+$response = $poetry->getClient()->send($message);
+$response = $poetry->getServer()->handle($request);
 ``` 
 
-For an overview of all available services please refer to the following service providers:
+For an overview of all available services and their machine names please refer to the service providers below:
 
 - [`EC\Poetry\Services\Providers\ParametersProvider`](../src/Services/Providers/ParametersProvider.php): 
   Defines the list of valid configuration parameters that can be passed in the `Poetry` factory object constructor. 

@@ -1,22 +1,24 @@
 # Messages
 
-The library is built around message objects, each message represents an interaction with the Poetry service. At the moment
-the library provides the following message types:
+The library is built around message objects, each message represents an interaction with the remote Poetry service.
+The library provides the following message types:
 
 - **Request message:** represents a request sent by the client to the Poetry service, such as creating a new translation
   request, add a target language, etc. 
-- **Status message:** represents messages returned by the Poetry service and describes the status of a request, such as
-  the acknowledgement of received date, an error, etc.
+- **Status message:** represents messages returned by the Poetry service describing the status of a request, the
+  acknowledgement of received date, an error, etc.
+
+_**Note:** Message types might be extended and refactored in future._
 
 ## Message components
 
-Message objects are built using message components which, in turn, abstract XML details at a component level.
+Messages are built using message components which, in turn, abstract XML details at a component level.
 
-Both messages and message component provide:
+Both messages and message components provide:
 
 - **Fluent setters and getters** to access and manipulate their properties.
 - **Validation rules** to make sure that their data is valid and can be safely sent to the Poetry service.
-- **Renderable information** such as which template has to be used by the renderer service in order to produce and actual
+- **Renderable information** such as which template has to be used by the renderer service in order to produce an actual
   SOAP XML message.
 
 For example, let's look at the following status message:
@@ -46,15 +48,15 @@ The message above contains two components:
 - The message identifier: `<demandeId>...</demandeId>`
 - The status information: `<status>...</status>`
 
-## Interact with messages
-
 The Poetry Client library models the XML message above by using the following objects:
 
 - `EC\Poetry\Messages\Status`: The status message object itself
 - `EC\Poetry\Messages\Components\Identifier`: The identifier object
 - `EC\Poetry\Messages\Components\StatusComponent`: The status object
 
-Buy using the objects above the library user can interact with the status message as follows:
+## Interact with messages
+
+Library users can interact with a message as follows:
 
 ```php
 use EC\Poetry\Messages\Components as Component;
@@ -77,7 +79,7 @@ $message->addStatus($component);
 
 ## Get messages from the service container
 
-Alternatively Poetry can also create messages for you, taking care of settings all necessary dependencies:
+Alternatively Poetry can also create messages taking care of settings all necessary dependencies:
 
 ```php
 $component = new Component\StatusComponent();
@@ -86,4 +88,15 @@ $component->setCode('OK');
 $poetry = new Poetry();
 $message = $poetry->get('message.status');
 $message->addStatus($component);
+```
+
+In this case the `Identifier` object is created by the service container (eventually using configuration parameters)
+and it is used to instantiate a status message object.
+
+## Validate messages
+
+Messages can be validated by using the validator service as shown below:
+
+```php
+$violations = $poetry->get('validator')->validate($message); // No violations.
 ```
