@@ -97,7 +97,7 @@ class Request extends AbstractMessage implements GroupSequenceProviderInterface
      */
     public function getTemplate()
     {
-        return 'client::request';
+        return 'messages::request';
     }
 
     /**

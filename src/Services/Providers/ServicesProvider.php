@@ -31,9 +31,8 @@ class ServicesProvider implements ServiceProviderInterface
                 ->setFileExtension('tpl.php')
                 ->loadExtension(new ComponentExtension())
                 ->loadExtension(new AttributesExtension())
-                ->addFolder('client', $root.'/client')
+                ->addFolder('messages', $root.'/messages')
                 ->addFolder('components', $root.'/components')
-                ->addFolder('errors', $root.'/errors')
                 ->addFolder('server', $root.'/server');
 
             return $engine;

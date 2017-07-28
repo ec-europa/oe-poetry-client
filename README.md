@@ -5,59 +5,10 @@
 The Poetry Client Library aims to hide Poetry service complexity behind and easy-to-use client library so that
 users don't have to worry about building their own request messages nor implementing SOAP interactions.  
 
-## Architectural overview
+For more information check the documentation [here](docs/00-overview.md).
 
-### Messages
 
-The library is built around the concept of messages, each message represents a an interaction with the Poetry server and
-bundles within itself information about how to validate its data or how to get rendered into a valid SOAP request XML
-document.
 
-We have three types of messages:
-
-- **Client messages:** represent actions the client can perform on the Poetry service, such as creating a new translation
-  request, add a target language, etc. 
-- **Server messages:** represent messages returned after the Poetry service performs a request on the local SOAP 
-  endpoint, such as the acknowledgement of received date.
-- **Error messages:** represent errors returned by the Poetry service server or by the local server. 
-
-All the message types above share components, i.e. atomic portions of a message that are meant to be reused across
-several message types, such as the request ID, details, source documents, etc.
-
-You can build your messages as follow:
-
-```php
-use EC\Poetry\Messages\Components as Component;
-use EC\Poetry\Messages\Client as Message;
-
-$id = new Component\Identifier();
-$id->setCode('DGT')
-  ->setYear(2017)
-  ->setNumber('00001')
-  ->setVersion('01')
-  ->setPart('00')
-  ->setProduct('TRA');
-
-$details = new Component\Details();
-$source = new Component\SourceDocument();
-$reference1 = new Component\ReferenceDocument();
-$reference2 = new Component\ReferenceDocument();
-
-$message = new Message\PublishRequest($id);
-$message->setDetails($details)
-  ->addContact('responsible', 'Gino Rossi')
-  ->addContact('secretary', 'John Smith')
-  ->setSource($source)
-  ->addReference($reference1)
-  ->addReference($reference2);
-```
-
-Alternatively Poetry can also create messages for you, taking care of using all necessary dependencies:
-
-```php
-$poetry = new Poetry();
-$message = $poetry->get('message.request');
-```
 
 In this case you'll still need to set-up all required data by yourself (such as `Identifier` properties).
 

@@ -1,4 +1,4 @@
-# The Poetry factory object
+# Poetry factory object
 
 The `Poetry` object allows to access every component provided by the Poetry Client library, be it the client, the server
 or a generic Poetry message object. It also provides a simple way of configuring its services by accepting a list of parameters.

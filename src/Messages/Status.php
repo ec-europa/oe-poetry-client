@@ -35,7 +35,7 @@ class Status extends AbstractMessage
      */
     public function getTemplate()
     {
-        return 'client::status';
+        return 'messages::status';
     }
 
     /**
