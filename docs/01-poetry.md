@@ -1,18 +1,26 @@
-## The Poetry factory object
+# The Poetry factory object
 
 The `Poetry` object allows to access every component provided by the Poetry Client library, be it the client, the server
 or a generic Poetry message object. It also provides a simple way of configuring its services by accepting a list of parameters.
 
-To start using the Poetry Client library you just create a new instance of the `Poetry` factory object as follow:
+The `Poetry` object is essentially a dependency injection container based on [Pimple](https://pimple.symfony.com/) whose only
+responsibility is to provide ready-to-use services.
+
+Services are exposed by service providers. Each service provider class defines how each object should be constructed and
+which dependencies it should be injected with. Dependency injection allows the code to be fully decoupled and easily
+testable. 
+
+## Configuration
+
+To start using the Poetry Client library you can just create a new instance of the `Poetry` factory object as follow:
 
 ```php
 $poetry = new Poetry();
 ``` 
 
-### Configuration
+However the code above returns a non-configured `Poetry` object.
 
-The code above returns a non-configured `Poetry`. Alternatively you can pass the following optional configuration
-parameters to the object constructor:
+Alternatively, you can pass the following optional configuration parameters to the constructor:
 
 | Parameter                 | Description |
 |---------------------------|-------------|
@@ -46,9 +54,9 @@ $poetry = new Poetry([
 ]);
 ```
 
-### Access Poetry services
+## Services
 
-Once instantiated you can access the `Poetry` factory object in whichever part of your application by calling:
+Once instantiated you can access the `Poetry` factory object anywhere in your application by calling:
 
 ```php
 $poetry = Poetry::getInstance();
@@ -71,7 +79,7 @@ $server = $poetry->getServer();
 For an overview of all available services please refer to the following service providers:
 
 - [`EC\Poetry\Services\Providers\ParametersProvider`](src/Services/Providers/ParametersProvider.php): 
-  Define list of valid configuration parameters that can be passed in the `Poetry` factory object constructor. 
+  Defines the list of valid configuration parameters that can be passed in the `Poetry` factory object constructor. 
 - [`EC\Poetry\Services\Providers\ServicesProvider`](src/Services/Providers/ServicesProvider.php):
   Exposes generic services such as the template system, the client, the server, etc. Services are configured by the
   parameters specified in the `ParametersProvider`.
