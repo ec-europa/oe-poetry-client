@@ -1,22 +1,6 @@
+imports:
+  - { resource: vendor/ec-europa/oe-code-review/dist/library-conventions.yml }
 parameters:
-  ascii:
-    failed: ~
-    succeeded: ~
-  tasks:
-    phpunit: ~
-    phpmd:
-      exclude:
-        - callback.php
-        - tests/
-    git_commit_message:
-      matchers:
-        - '/^Issue (#\d+): [A-Z].+\./'
-      case_insensitive: false
-      multiline: false
-    phpcs:
-      standard: vendor/escapestudios/symfony2-coding-standard/Symfony2
-      ignore_patterns:
-        - vendor/
-        - callback.php
-      triggered_by:
-        - php
+  tasks.phpcs.ignore_patterns:
+    - vendor/
+    - callback.php

@@ -17,12 +17,12 @@ class TargetParserTest extends AbstractTest
      *
      * @param string $xml
      * @param array  $targetProperties
-     * @param array  $returnAddressProperties
+     * @param array  $addressProperties
      * @param array  $contactProperties
      *
      * @dataProvider parserProvider
      */
-    public function testParsing($xml, $targetProperties, $returnAddressProperties, $contactProperties)
+    public function testParsing($xml, $targetProperties, $addressProperties, $contactProperties)
     {
         /** @var \EC\Poetry\Parsers\Components\TargetParser $parser */
         /** @var \EC\Poetry\Messages\Components\Target $target */
@@ -36,7 +36,7 @@ class TargetParserTest extends AbstractTest
         }
         expect(count($target->getReturnAddresses()))->to->equal(1);
         $returnAddress = $target->getReturnAddresses()[0];
-        foreach ($returnAddressProperties as $method => $value) {
+        foreach ($addressProperties as $method => $value) {
             expect($returnAddress->$method())->to->equal($value);
         }
         expect(count($target->getContacts()))->to->equal(1);

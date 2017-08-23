@@ -2,6 +2,8 @@
     "name": "ec-europa/oe-poetry-client",
     "description": "Client library for the European Commission Poetry Service",
     "type": "library",
+    "minimum-stability": "alpha",
+    "prefer-stable": true,
     "license": "EUPL-1.1",
     "require": {
         "symfony/validator": "^3.3",
@@ -12,11 +14,9 @@
         "ext-soap": "*"
     },
     "require-dev": {
+        "ec-europa/oe-code-review": "^0.0.2",
         "phpunit/phpunit": "^5",
-        "phpro/grumphp": "^0.11.6",
         "peridot-php/leo": "^1.6",
-        "escapestudios/symfony2-coding-standard": "^2.11",
-        "phpmd/phpmd": "^2.6",
         "mockery/mockery": "^0.9.9"
     },
     "autoload": {
