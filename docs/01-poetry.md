@@ -33,6 +33,7 @@ Alternatively, you can pass the following (optional) configuration parameters to
 | `identifier.product`      | The **product** part in an identifier string, i.e. `ABC` in `DGT/2017/0001/01/00/ABC` |
 | `authentication.username` | The Poetry client **username**, as provided by the Poetry service |
 | `authentication.password` | The Poetry client **password**, as provided by the Poetry service |
+| `client.wsdl`             | WSDL URL |
 | `server.uri`              | Your application **callback URI**, the library's server should be handling its incoming requests |
 | `server.callback`         | Your application **callback function**, it will be called by the Poetry service receiving an XML message |
 

@@ -2,6 +2,7 @@
 
 namespace EC\Poetry;
 
+use EC\Poetry\Messages\Request;
 use EC\Poetry\Services\PoetryServiceProvider;
 use EC\Poetry\Services\Providers\MessagesProvider;
 use EC\Poetry\Services\Providers\ParametersProvider;
@@ -101,6 +102,6 @@ function callback($user, $password, $msg)
     $response = $callback($user, $password, $msg);
     Poetry::getInstance()->getServer()->setResponse($response);
 
-    return  $response;
+    return $response;
 }
 // @codingStandardsIgnoreEnd
