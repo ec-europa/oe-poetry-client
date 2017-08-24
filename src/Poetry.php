@@ -41,9 +41,6 @@ class Poetry extends Container
 
         // Set static cache.
         self::$container = $this;
-
-        // Require SOAP global callback function.
-        require_once __DIR__.'/../callback.php';
     }
 
     /**
@@ -86,3 +83,24 @@ class Poetry extends Container
         return self::$container;
     }
 }
+
+// @codingStandardsIgnoreStart
+/**
+ * Callback defined in Poetry WSDL.
+ *
+ * @param string $user
+ * @param string $password
+ * @param string $msg
+ *
+ * @return string
+ *    Response in plain XML.
+ */
+function callback($user, $password, $msg)
+{
+    $callback = Poetry::getInstance()->raw('server.callback');
+    $response = $callback($user, $password, $msg);
+    Poetry::getInstance()->getServer()->setResponse($response);
+
+    return  $response;
+}
+// @codingStandardsIgnoreEnd

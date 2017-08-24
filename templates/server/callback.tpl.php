@@ -27,7 +27,7 @@
     </message>
 
     <portType name="FPFISPoetryIntegrationPort">
-        <operation name="FPFISPoetryIntegrationRequest">
+        <operation name="EC\Poetry\callback">
             <input message="tns:FPFISPoetryIntegrationMessage" />
             <output message="tns:FPFISPoetryIntegrationResponse" />
         </operation>
@@ -35,8 +35,8 @@
 
     <binding name="FPFISPoetryIntegrationBinding" type="tns:FPFISPoetryIntegrationPort">
         <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http" />
-        <operation name="FPFISPoetryIntegrationRequest">
-            <soap:operation soapAction="urn:FPFISPoetryIntegration#FPFISPoetryIntegrationRequest" />
+        <operation name="EC\Poetry\callback">
+            <soap:operation soapAction="urn:FPFISPoetryIntegration#EC\Poetry\callback" />
             <input>
                 <soap:body use="encoded" namespace="urn:FPFISPoetryIntegration"
                            encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />

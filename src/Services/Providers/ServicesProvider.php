@@ -62,7 +62,7 @@ class ServicesProvider implements ServiceProviderInterface
             $wsdl = $container['renderer.engine']->render('server::callback', ['uri' => $container['server.uri']]);
             $file = 'data://text/plain;base64,'.base64_encode($wsdl);
             $server = new \SoapServer($file, $container['server.options']);
-            $server->AddFunction("FPFISPoetryIntegrationRequest");
+            $server->AddFunction("EC\Poetry\callback");
 
             return $server;
         };

@@ -20,7 +20,7 @@ class ServerTest extends AbstractTest
         /** @var \SoapServer $soapServer */
         $soapServer = $this->getContainer()->get('soap.server');
         $functions = $soapServer->getFunctions();
-        expect($functions)->to->equal(['FPFISPoetryIntegrationRequest']);
+        expect($functions)->to->equal(['EC\Poetry\callback']);
 
         /** @var \EC\Poetry\Server $server */
         $server = $this->getContainer()->get('server');
@@ -40,7 +40,7 @@ class ServerTest extends AbstractTest
         ]);
 
         $expected = "I'm the callback called with john smith message";
-        $response = FPFISPoetryIntegrationRequest('john', 'smith', 'message');
+        $response = \EC\Poetry\callback('john', 'smith', 'message');
         expect($response)->to->equal($expected);
         expect($poetry->getServer()->getResponse())->to->equal($expected);
     }
