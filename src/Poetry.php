@@ -76,6 +76,14 @@ class Poetry extends Container implements ContainerInterface
     }
 
     /**
+     * @return \Psr\Log\LoggerInterface
+     */
+    public function getLogger()
+    {
+        return $this['logger'];
+    }
+
+    /**
      * @return \EC\Poetry\Poetry
      */
     public static function getInstance()
@@ -101,9 +109,19 @@ class Poetry extends Container implements ContainerInterface
  */
 function callback($user, $password, $msg)
 {
-    $callback = Poetry::getInstance()->raw('server.callback');
+    $container = Poetry::getInstance();
+
+    $container->getLogger()->info("[Poetry] Callback arguments: {user} {password} {message} ", [
+      'user' => $user,
+      'password' => $password,
+      'message' => $msg,
+    ]);
+    $callback = $container->raw('server.callback');
     $response = $callback($user, $password, $msg);
-    Poetry::getInstance()->getServer()->setResponse($response);
+    $container->getLogger()->info("[Poetry] Callback response: {message} ", [
+      'message' => $response,
+    ]);
+    $container->getServer()->setResponse($response);
 
     return $response;
 }
