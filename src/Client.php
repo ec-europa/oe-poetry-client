@@ -6,6 +6,7 @@ use EC\Poetry\Exceptions\ValidationException;
 use EC\Poetry\Messages\AbstractMessage;
 use EC\Poetry\Messages\MessageInterface;
 use EC\Poetry\Services\Renderer;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
@@ -48,6 +49,11 @@ class Client
     protected $soapClient;
 
     /**
+     * @var \Psr\Log\LoggerInterface
+     */
+    protected $logger;
+
+    /**
      * Client constructor.
      *
      * @param string                                                    $username
@@ -56,15 +62,24 @@ class Client
      * @param \SoapClient                                               $soapClient
      * @param \Symfony\Component\Validator\Validator\ValidatorInterface $validator
      * @param \EC\Poetry\Services\Renderer                              $renderer
+     * @param \Psr\Log\LoggerInterface                                  $logger
      */
-    public function __construct($username, $password, $method, \SoapClient $soapClient, ValidatorInterface $validator, Renderer $renderer)
-    {
+    public function __construct(
+        $username,
+        $password,
+        $method,
+        \SoapClient $soapClient,
+        ValidatorInterface $validator,
+        Renderer $renderer,
+        LoggerInterface $logger
+    ) {
         $this->username = $username;
         $this->password = $password;
         $this->method = $method;
         $this->renderer = $renderer;
         $this->validator = $validator;
         $this->soapClient = $soapClient;
+        $this->logger = $logger;
     }
 
     /**

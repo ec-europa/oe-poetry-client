@@ -2,20 +2,19 @@
 
 namespace EC\Poetry;
 
-use EC\Poetry\Messages\Request;
-use EC\Poetry\Services\PoetryServiceProvider;
 use EC\Poetry\Services\Providers\MessagesProvider;
 use EC\Poetry\Services\Providers\ParametersProvider;
 use EC\Poetry\Services\Providers\ParsersProvider;
 use EC\Poetry\Services\Providers\ServicesProvider;
 use Pimple\Container;
+use Psr\Container\ContainerInterface;
 
 /**
  * Class Poetry
  *
  * @package Poetry
  */
-class Poetry extends Container
+class Poetry extends Container implements ContainerInterface
 {
     /**
      * @var \EC\Poetry\Poetry
@@ -45,15 +44,19 @@ class Poetry extends Container
     }
 
     /**
-     * Return service object or parameter value.
-     *
-     * @param string $name
-     *
-     * @return mixed
+     * {@inheritdoc}
      */
     public function get($name)
     {
         return $this[$name];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function has($name)
+    {
+        return $this->offsetExists($name);
     }
 
     /**

@@ -11,6 +11,7 @@ use EC\Poetry\Services\Renderer;
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 use EC\Poetry\Services\Crawler;
+use Psr\Log\NullLogger;
 use Symfony\Component\Validator\ValidatorBuilder;
 
 /**
@@ -47,7 +48,15 @@ class ServicesProvider implements ServiceProviderInterface
         });
 
         $container['client'] = function (Container $container) {
-            return new Client($container['authentication.username'], $container['authentication.password'], $container['client.method'], $container['soap.client'], $container['validator'], $container['renderer']);
+            return new Client(
+                $container['authentication.username'],
+                $container['authentication.password'],
+                $container['client.method'],
+                $container['soap.client'],
+                $container['validator'],
+                $container['renderer'],
+                $container['logger']
+            );
         };
 
         $container['soap.client'] = function (Container $container) {
@@ -67,7 +76,10 @@ class ServicesProvider implements ServiceProviderInterface
             return $server;
         };
         $container['server'] = function (Container $container) {
-            return new Server($container['soap.server'], []);
+            return new Server($container['soap.server'], [], $container['logger']);
+        };
+        $container['logger'] = function (Container $container) {
+            return new NullLogger();
         };
     }
 }
