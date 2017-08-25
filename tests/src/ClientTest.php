@@ -5,6 +5,8 @@ namespace EC\Poetry\Tests;
 use EC\Poetry\Messages\Request;
 use EC\Poetry\Messages\Status;
 use EC\Poetry\Poetry;
+use EC\Poetry\Tests\Logger\TestLogger;
+use Psr\Log\LogLevel;
 
 /**
  * Class ClientTest
@@ -34,10 +36,12 @@ class ClientTest extends AbstractTest
           ->withArgs([$username, $password, $rendererRequest])
           ->andReturn($rendererStatus);
 
+        $logger = new TestLogger();
         $parameters = [
           'authentication.username' => $username,
           'authentication.password' => $password,
           'soap.client' => $mock,
+          'logger' => $logger,
         ];
         if ($method) {
             $parameters['client.method'] = $method;
@@ -46,6 +50,11 @@ class ClientTest extends AbstractTest
 
         $response = $poetry->getClient()->send($request);
         expect($response)->equal($rendererStatus);
+
+        $logs = $logger->getLogs();
+
+        expect($logs[LogLevel::CRITICAL])->to->be->empty();
+        expect($logs[LogLevel::INFO])->to->be->not->empty();
     }
 
     /**

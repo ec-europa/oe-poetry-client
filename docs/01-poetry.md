@@ -96,3 +96,28 @@ For an overview of all available services and their machine names please refer t
   specified in the `ParametersProvider`.
 - [`EC\Poetry\Services\Providers\ParsersProvider`](../src/Services/Providers/ParsersProvider.php):
   Exposes message and component parsers as services.
+
+## Use external logger
+
+Poetry supports any logging service implementing the [PSR3 Logger Interface](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-3-logger-interface.md).
+
+In order to add an external logger object run:
+
+```php
+// Returns a PSR3-compatible logger.
+$logger = MyLoggerFactory::getInstance();
+
+$poetry = new Poetry([
+    ...
+    'logger' => $logger,
+]);
+```
+
+Or, for already instantiated Poetry objects, run:  
+
+```php
+// Returns a PSR3-compatible logger.
+$logger = MyLoggerFactory::getInstance();
+
+$poetry['logger'] = $logger;
+```
