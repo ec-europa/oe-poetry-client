@@ -94,13 +94,13 @@ class Client
         $this->validate($message);
         $renderedMessage = $this->renderer->render($message);
 
-        $this->logger->info("[Poetry] Client request: {user} {password} {message} ", [
+        $this->logger->info("Client request: {user} {password} {message} ", [
             'user' => $this->username,
             'password' => $this->password,
             'message' => $renderedMessage,
         ]);
         $response = $this->soapClient->{$this->method}($this->username, $this->password, $renderedMessage);
-        $this->logger->info("[Poetry] Client response: {message} ", [
+        $this->logger->info("Client response: {message} ", [
             'message' => $response,
         ]);
 

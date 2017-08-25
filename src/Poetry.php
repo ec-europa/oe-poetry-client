@@ -111,14 +111,14 @@ function callback($user, $password, $msg)
 {
     $container = Poetry::getInstance();
 
-    $container->getLogger()->info("[Poetry] Callback arguments: {user} {password} {message} ", [
+    $container->getLogger()->info("Callback arguments: {user} {password} {message} ", [
       'user' => $user,
       'password' => $password,
       'message' => $msg,
     ]);
     $callback = $container->raw('server.callback');
     $response = $callback($user, $password, $msg);
-    $container->getLogger()->info("[Poetry] Callback response: {message} ", [
+    $container->getLogger()->info("Callback response: {message} ", [
       'message' => $response,
     ]);
     $container->getServer()->setResponse($response);
