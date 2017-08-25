@@ -21,9 +21,16 @@
         "peridot-php/leo": "^1.6",
         "mockery/mockery": "^0.9.9"
     },
+    "suggest": {
+        "monolog/monolog": "Log Poetry requests and responses via Monolog"
+    },
     "autoload": {
         "psr-4": {
-            "EC\\Poetry\\": "./src",
+            "EC\\Poetry\\": "./src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
             "EC\\Poetry\\Tests\\": "./tests/src"
         }
     }
