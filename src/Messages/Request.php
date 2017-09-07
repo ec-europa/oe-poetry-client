@@ -42,33 +42,26 @@ class Request extends AbstractMessage implements GroupSequenceProviderInterface
      */
     public static function getConstraints(ClassMetadata $metadata)
     {
+        parent::getConstraints($metadata);
         $metadata->setGroupSequenceProvider(true);
-        $metadata->addPropertyConstraints('type', [
-            new Assert\Choice([
-                Request::REQUEST_NEW,
-                Request::REQUEST_POST,
-                Request::REQUEST_NEW_POST,
-                Request::REQUEST_MODIFICATION,
-                Request::REQUEST_MODIFICATION_POST,
-                Request::REQUEST_DELETE,
-                Request::REQUEST_STATUS,
-                Request::REQUEST_TRANSLATION,
-                Request::REQUEST_CONTACTS,
-            ]),
-        ]);
-        $metadata->addGetterConstraints('identifier', [
-            new Assert\NotBlank(),
-            new Assert\Valid(),
-        ]);
+        $metadata->addPropertyConstraint('type', new Assert\Choice([
+            self::REQUEST_NEW,
+            self::REQUEST_POST,
+            self::REQUEST_NEW_POST,
+            self::REQUEST_MODIFICATION,
+            self::REQUEST_MODIFICATION_POST,
+            self::REQUEST_DELETE,
+            self::REQUEST_STATUS,
+            self::REQUEST_TRANSLATION,
+            self::REQUEST_CONTACTS,
+        ]));
         $metadata->addGetterConstraints('details', [
             new Assert\Blank(['groups' => 'simple']),
             new Assert\Valid(),
         ]);
         $metadata->addGetterConstraints('contacts', [
             new Assert\Blank(['groups' => 'simple']),
-            new Assert\Valid([
-                'traverse' => true,
-            ]),
+            new Assert\Valid(['traverse' => true]),
         ]);
         $metadata->addGetterConstraints('returnAddress', [
             new Assert\Blank(['groups' => 'simple']),
@@ -80,16 +73,35 @@ class Request extends AbstractMessage implements GroupSequenceProviderInterface
         ]);
         $metadata->addGetterConstraints('targets', [
             new Assert\Blank(['groups' => 'simple']),
-            new Assert\Valid([
-                'traverse' => true,
-            ]),
+            new Assert\Valid(['traverse' => true]),
         ]);
         $metadata->addGetterConstraints('referenceDocuments', [
             new Assert\Blank(['groups' => 'simple']),
-            new Assert\Valid([
-                'traverse' => true,
-            ]),
+            new Assert\Valid(['traverse' => true]),
         ]);
+    }
+
+    /**
+     * Returns which validation groups should be used for a certain state
+     * of the object.
+     *
+     * @return array An array of validation groups
+     */
+    public function getGroupSequence()
+    {
+        $simpleRequests = [
+          self::REQUEST_POST,
+          self::REQUEST_DELETE,
+          self::REQUEST_STATUS,
+          self::REQUEST_TRANSLATION,
+          self::REQUEST_CONTACTS,
+        ];
+        $sequence = ['Request'];
+        if (in_array($this->getType(), $simpleRequests)) {
+            $sequence[] = 'simple';
+        }
+
+        return $sequence;
     }
 
     /**
@@ -273,28 +285,5 @@ class Request extends AbstractMessage implements GroupSequenceProviderInterface
         $this->referenceDocuments[] = $referenceDocument;
 
         return $this;
-    }
-
-    /**
-     * Returns which validation groups should be used for a certain state
-     * of the object.
-     *
-     * @return array An array of validation groups
-     */
-    public function getGroupSequence()
-    {
-        $simpleRequests = [
-            $this::REQUEST_POST,
-            $this::REQUEST_DELETE,
-            $this::REQUEST_STATUS,
-            $this::REQUEST_TRANSLATION,
-            $this::REQUEST_CONTACTS,
-        ];
-        $sequence = ['Request'];
-        if (in_array($this->getType(), $simpleRequests)) {
-            $sequence[] = 'simple';
-        }
-
-        return $sequence;
     }
 }

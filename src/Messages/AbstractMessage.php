@@ -34,6 +34,7 @@ abstract class AbstractMessage implements MessageInterface
     public static function getConstraints(ClassMetadata $metadata)
     {
         $metadata->addGetterConstraints('identifier', [
+            new Assert\NotBlank(),
             new Assert\Valid(),
         ]);
     }
