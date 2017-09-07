@@ -28,14 +28,6 @@ class CreateRequest extends AbstractRequest
     /**
      * {@inheritdoc}
      */
-    public function getTemplate()
-    {
-        return 'messages::request';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getType()
     {
         return self::REQUEST_NEW_POST;

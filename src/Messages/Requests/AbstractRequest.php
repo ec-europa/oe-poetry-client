@@ -22,6 +22,14 @@ abstract class AbstractRequest extends AbstractMessage
     const REQUEST_CONTACTS = 'getContacts';
 
     /**
+     * {@inheritdoc}
+     */
+    public function getTemplate()
+    {
+        return 'messages::request';
+    }
+
+    /**
      * Get request type.
      *
      * @return string
