@@ -2,7 +2,7 @@
 
 namespace EC\Poetry\Services\Plates;
 
-use EC\Poetry\Messages\Components\ComponentInterface;
+use EC\Poetry\Messages\ComponentInterface;
 use League\Plates\Engine;
 use League\Plates\Extension\ExtensionInterface;
 
@@ -30,7 +30,7 @@ class ComponentExtension implements ExtensionInterface
     /**
      * Render given component.
      *
-     * @param \EC\Poetry\Messages\Components\ComponentInterface $component
+     * @param \EC\Poetry\Messages\ComponentInterface $component
      *
      * @return string
      */

@@ -7,7 +7,7 @@ namespace EC\Poetry\Messages;
  *
  * @package EC\Poetry\Messages
  */
-interface MessageInterface extends RenderableInterface, ValidatableInterface
+interface MessageInterface extends ComponentInterface
 {
     /**
      * Get Identifier property.

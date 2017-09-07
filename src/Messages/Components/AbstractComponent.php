@@ -2,6 +2,8 @@
 
 namespace EC\Poetry\Messages\Components;
 
+use EC\Poetry\Messages\ComponentInterface;
+
 /**
  * Class AbstractComponent
  *

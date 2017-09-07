@@ -8,7 +8,7 @@
 namespace EC\Poetry\Services\Plates;
 
 use League\Plates\Template\Template as OriginalTemplate;
-use EC\Poetry\Messages\Components\ComponentInterface;
+use EC\Poetry\Messages\ComponentInterface;
 
 /**
  * Class Template.
