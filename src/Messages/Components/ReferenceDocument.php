@@ -38,8 +38,7 @@ class ReferenceDocument extends AbstractComponent
     {
         $metadata->addPropertyConstraints('format', [
             new Assert\NotBlank(),
-            new Assert\Choice(
-                [
+            new Assert\Choice([
                 'DOC',
                 'DOCX',
                 'FAX',
@@ -60,35 +59,24 @@ class ReferenceDocument extends AbstractComponent
                 'XML',
                 'XMW',
                 'ZIP',
-                ]
-            ),
+            ]),
         ]);
-        $metadata->addPropertyConstraints('language', [
-            new Assert\NotBlank(),
-        ]);
+        $metadata->addPropertyConstraint('language', new Assert\NotBlank());
         $metadata->addPropertyConstraints('type', [
             new Assert\NotBlank(),
-            new Assert\Choice(
-                [
+            new Assert\Choice([
                 'CMP',
                 'PRT',
                 'RAU',
                 'REF',
-                ]
-            ),
+            ]),
         ]);
-        $metadata->addPropertyConstraints('action', [
-            new Assert\Choice(
-                [
-                'INSERT',
-                'UPDATE',
-                'DELETE',
-                ]
-            ),
-        ]);
-        $metadata->addPropertyConstraints('name', [
-            new Assert\NotBlank(),
-        ]);
+        $metadata->addPropertyConstraint('action', new Assert\Choice([
+            'INSERT',
+            'UPDATE',
+            'DELETE',
+        ]));
+        $metadata->addPropertyConstraint('name', new Assert\NotBlank());
     }
 
     /**

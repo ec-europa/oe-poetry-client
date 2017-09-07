@@ -35,20 +35,14 @@ class Identifier extends AbstractComponent implements GroupSequenceProviderInter
     public static function getConstraints(ClassMetadata $metadata)
     {
         $metadata->setGroupSequenceProvider(true);
-        $metadata->addConstraint(new Assert\Expression(
-            [
+        $metadata->addConstraint(new Assert\Expression([
             'expression' => 'this.getSequence() || this.getNumber() ',
             'message' => 'An identifier must have a number or a sequence.',
-            ]
-        ));
-
-        $metadata->addConstraint(new Assert\Expression(
-            [
+        ]));
+        $metadata->addConstraint(new Assert\Expression([
             'expression' => '(this.getSequence() && this.getNumber()) == false ',
             'message' => 'An identifier can\'t have both a number and a sequence.',
-            ]
-        ));
-
+        ]));
         $metadata->addPropertyConstraints('code', [
             new Assert\NotBlank(),
             new Assert\Type('alpha'),
@@ -58,22 +52,14 @@ class Identifier extends AbstractComponent implements GroupSequenceProviderInter
             new Assert\Type('scalar'),
             new Assert\GreaterThan(2000),
         ]);
-        $metadata->addPropertyConstraints('number', [
-            new Assert\Type(
-                [
-                'type' => 'scalar',
-                'groups' => 'number',
-                ]
-            ),
-        ]);
-        $metadata->addPropertyConstraints('sequence', [
-            new Assert\Type(
-                [
-                'type' => 'string',
-                'groups' => 'sequence',
-                ]
-            ),
-        ]);
+        $metadata->addPropertyConstraint('number', new Assert\Type([
+            'type' => 'scalar',
+            'groups' => 'number',
+        ]));
+        $metadata->addPropertyConstraint('sequence', new Assert\Type([
+            'type' => 'string',
+            'groups' => 'sequence',
+        ]));
         $metadata->addPropertyConstraints('version', [
             new Assert\NotBlank(),
             new Assert\Type('scalar'),
@@ -94,12 +80,12 @@ class Identifier extends AbstractComponent implements GroupSequenceProviderInter
     public function getFormattedIdentifier()
     {
         $parts = [
-            $this->code,
-            $this->year,
-            $this->number,
-            $this->version,
-            $this->part,
-            $this->product,
+          $this->code,
+          $this->year,
+          $this->number,
+          $this->version,
+          $this->part,
+          $this->product,
         ];
 
         return implode('/', $parts);
@@ -289,10 +275,10 @@ class Identifier extends AbstractComponent implements GroupSequenceProviderInter
     public function getGroupSequence()
     {
         return [
-            [
-                'Identifier',
-                empty($this->getNumber()) ? 'sequence' : 'number',
-            ],
+          [
+            'Identifier',
+            empty($this->getNumber()) ? 'sequence' : 'number',
+          ],
         ];
     }
 }

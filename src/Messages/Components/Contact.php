@@ -32,31 +32,20 @@ class Contact extends AbstractComponent
     {
         $metadata->addPropertyConstraints('type', [
             new Assert\NotBlank(),
-            new Assert\Choice(
-                [
+            new Assert\Choice([
                 'Contact',
                 'Secretaire',
                 'Responsible',
                 'planningUnit',
                 'translationUnit',
-                ]
-            ),
+            ]),
         ]);
-        $metadata->addPropertyConstraints('action', [
-            new Assert\Choice(
-                [
-                'INSERT',
-                'UPDATE',
-                ]
-            ),
-        ]);
+        $metadata->addPropertyConstraint('action', new Assert\Choice(['INSERT', 'UPDATE']));
         $metadata->addPropertyConstraints('nickname', [
             new Assert\NotBlank(),
             new Assert\Type('string'),
         ]);
-        $metadata->addPropertyConstraints('email', [
-            new Assert\Email(),
-        ]);
+        $metadata->addPropertyConstraint('email', new Assert\Email());
     }
 
     /**
@@ -65,8 +54,8 @@ class Contact extends AbstractComponent
     public function getAttributes()
     {
         $attributes = [
-            'type' => $this->getType(),
-            'action' => $this->getAction(),
+          'type' => $this->getType(),
+          'action' => $this->getAction(),
         ];
 
         return array_filter($attributes);

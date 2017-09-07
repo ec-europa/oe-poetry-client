@@ -41,8 +41,7 @@ class Source extends AbstractComponent
     {
         $metadata->addPropertyConstraints('format', [
             new Assert\NotBlank(),
-            new Assert\Choice(
-                [
+            new Assert\Choice([
                 'DOC',
                 'DOCX',
                 'HTM',
@@ -59,70 +58,32 @@ class Source extends AbstractComponent
                 'XML',
                 'XMW',
                 'ZIP',
-                ]
-            ),
+            ]),
         ]);
         $metadata->addPropertyConstraints('legiswriteFormat', [
             new Assert\NotBlank(),
-            new Assert\Choice(
-                [
-                'Yes',
-                'No',
-                ]
-            ),
+            new Assert\Choice(['Yes', 'No']),
         ]);
-        $metadata->addPropertyConstraints('trackChanges', [
-            new Assert\Choice(
-                [
-                'Yes',
-                'No',
-                ]
-            ),
-        ]);
-        $metadata->addPropertyConstraints('channel', [
-            new Assert\Choice(
-                [
-                'POETRY',
-                'RUE',
-                'USB',
-                'PAPER',
-                ]
-            ),
-        ]);
-        $metadata->addPropertyConstraints('confidential', [
-            new Assert\Choice(
-                [
-                'Yes',
-                'No',
-                ]
-            ),
-        ]);
-        $metadata->addPropertyConstraints('deadline', [
-            new Assert\Datetime(),
-        ]);
-        $metadata->addPropertyConstraints('deadlineStatus', [
-            new Assert\Choice(
-                [
-                'PUBLIC',
-                'DELETED',
-                ]
-            ),
-        ]);
-        $metadata->addPropertyConstraints('name', [
-            new Assert\NotBlank(),
-        ]);
-        $metadata->addPropertyConstraints('file', [
-            new Assert\NotBlank(),
-        ]);
-        $metadata->addPropertyConstraints('languages', [
-            new Assert\Count(
-                [
-                'min' => 0,
-                'max' => 5,
-                'maxMessage' => 'Only 5 source languages are allowed.',
-                ]
-            ),
-        ]);
+        $metadata->addPropertyConstraint('trackChanges', new Assert\Choice(['Yes', 'No']));
+        $metadata->addPropertyConstraint('channel', new Assert\Choice([
+            'POETRY',
+            'RUE',
+            'USB',
+            'PAPER',
+        ]));
+        $metadata->addPropertyConstraint('confidential', new Assert\Choice(['Yes', 'No']));
+        $metadata->addPropertyConstraint('deadline', new Assert\Datetime());
+        $metadata->addPropertyConstraint('deadlineStatus', new Assert\Choice([
+            'PUBLIC',
+            'DELETED',
+        ]));
+        $metadata->addPropertyConstraint('name', new Assert\NotBlank());
+        $metadata->addPropertyConstraint('file', new Assert\NotBlank());
+        $metadata->addPropertyConstraint('languages', new Assert\Count([
+            'min' => 0,
+            'max' => 5,
+            'maxMessage' => 'Only 5 source languages are allowed.',
+        ]));
     }
 
     /**

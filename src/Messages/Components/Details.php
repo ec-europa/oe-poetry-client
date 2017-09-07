@@ -41,75 +41,47 @@ class Details extends AbstractComponent
      */
     public static function getConstraints(ClassMetadata $metadata)
     {
-        $metadata->addPropertyConstraints('author', [
-            new Assert\Type('string'),
-        ]);
-        $metadata->addPropertyConstraints('requester', [
-            new Assert\Type('string'),
-        ]);
-        $metadata->addPropertyConstraints('title', [
-            new Assert\Type('string'),
-        ]);
-        $metadata->addPropertyConstraints('remark', [
-            new Assert\Type('string'),
-        ]);
-        $metadata->addPropertyConstraints('type', [
-            new Assert\Choice(
-                [
-                'AUTRE',
-                'COMP',
-                'IMG',
-                'INF',
-                'INTER',
-                'INTRA',
-                'LEGTF',
-                'PUB',
-                ]
-            ),
-        ]);
-        $metadata->addPropertyConstraints('destination', [
-            new Assert\Choice(
-                [
-                'AUTRE',
-                'COMMISR',
-                'EM',
-                'EXT',
-                'IE',
-                'INTERNE',
-                'JO',
-                'PRESSE',
-                'PUBLIC',
-                'RST',
-                ]
-            ),
-        ]);
-        $metadata->addPropertyConstraints('procedure', [
-            new Assert\Choice(
-                [
-                'DEGHP',
-                'NEANT',
-                'PROAC',
-                'PROCEP',
-                'PROCO',
-                'REUNCS',
-                'REUNAU',
-                'PROCH',
-                'PROCD',
-                ]
-            ),
-        ]);
-        $metadata->addPropertyConstraints('delay', [
-            new Assert\DateTime(),
-        ]);
-        $metadata->addPropertyConstraints('requestDate', [
-            new Assert\DateTime(),
-        ]);
-        $metadata->addPropertyConstraints('status', [
-            new Assert\Type('string'),
-        ]);
-        $metadata->addPropertyConstraints('referenceFilesRemark', [
-            new Assert\Type('string'),
-        ]);
+        $metadata->addPropertyConstraint('author', new Assert\Type('string'));
+        $metadata->addPropertyConstraint('requester', new Assert\Type('string'));
+        $metadata->addPropertyConstraint('title', new Assert\Type('string'));
+        $metadata->addPropertyConstraint('remark', new Assert\Type('string'));
+        $metadata->addPropertyConstraint('type', new Assert\Choice([
+            'AUTRE',
+            'COMP',
+            'IMG',
+            'INF',
+            'INTER',
+            'INTRA',
+            'LEGTF',
+            'PUB',
+        ]));
+        $metadata->addPropertyConstraint('destination', new Assert\Choice([
+            'AUTRE',
+            'COMMISR',
+            'EM',
+            'EXT',
+            'IE',
+            'INTERNE',
+            'JO',
+            'PRESSE',
+            'PUBLIC',
+            'RST',
+        ]));
+        $metadata->addPropertyConstraint('procedure', new Assert\Choice([
+            'DEGHP',
+            'NEANT',
+            'PROAC',
+            'PROCEP',
+            'PROCO',
+            'REUNCS',
+            'REUNAU',
+            'PROCH',
+            'PROCD',
+        ]));
+        $metadata->addPropertyConstraint('delay', new Assert\DateTime());
+        $metadata->addPropertyConstraint('requestDate', new Assert\DateTime());
+        $metadata->addPropertyConstraint('status', new Assert\Type('string'));
+        $metadata->addPropertyConstraint('referenceFilesRemark', new Assert\Type('string'));
     }
 
     /**

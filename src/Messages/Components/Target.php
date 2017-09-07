@@ -40,8 +40,7 @@ class Target extends AbstractComponent
     {
         $metadata->addPropertyConstraints('format', [
             new Assert\NotBlank(),
-            new Assert\Choice(
-                [
+            new Assert\Choice([
                 'DOC',
                 'DOCX',
                 'HTM',
@@ -58,49 +57,21 @@ class Target extends AbstractComponent
                 'XML',
                 'XMW',
                 'ZIP',
-                ]
-            ),
+            ]),
         ]);
         $metadata->addPropertyConstraints('language', [
             new Assert\NotBlank(),
         ]);
-        $metadata->addPropertyConstraints('trackChanges', [
-            new Assert\Choice(
-                [
-                'Yes',
-                'No',
-                ]
-            ),
-        ]);
-        $metadata->addPropertyConstraints('action', [
-            new Assert\Choice(
-                [
-                'INSERT',
-                'UPDATE',
-                'DELETE',
-                ]
-            ),
-        ]);
-        $metadata->addPropertyConstraints('delay', [
-            new Assert\DateTime(),
-        ]);
-        $metadata->addPropertyConstraints('acceptedDelay', [
-            new Assert\DateTime(),
-        ]);
-        $metadata->addPropertyConstraints('returnAddresses', [
-            new Assert\Valid(
-                [
-                'traverse' => true,
-                ]
-            ),
-        ]);
-        $metadata->addPropertyConstraints('contacts', [
-            new Assert\Valid(
-                [
-                'traverse' => true,
-                ]
-            ),
-        ]);
+        $metadata->addPropertyConstraint('trackChanges', new Assert\Choice(['Yes', 'No']));
+        $metadata->addPropertyConstraint('action', new Assert\Choice([
+            'INSERT',
+            'UPDATE',
+            'DELETE',
+        ]));
+        $metadata->addPropertyConstraint('delay', new Assert\DateTime());
+        $metadata->addPropertyConstraint('acceptedDelay', new Assert\DateTime());
+        $metadata->addPropertyConstraint('returnAddresses', new Assert\Valid(['traverse' => true]));
+        $metadata->addPropertyConstraint('contacts', new Assert\Valid(['traverse' => true]));
     }
 
     /**
@@ -163,7 +134,6 @@ class Target extends AbstractComponent
      */
     public function getTrackChanges()
     {
-
         return $this->trackChanges;
     }
 

@@ -36,13 +36,11 @@ class StatusComponent extends AbstractComponent implements GroupSequenceProvider
         $metadata->setGroupSequenceProvider(true);
         $metadata->addPropertyConstraints('type', [
             new Assert\NotBlank(),
-            new Assert\Choice(
-                [
+            new Assert\Choice([
                 'demande',
                 'attribution',
                 'request',
-                ]
-            ),
+            ]),
         ]);
         $metadata->addPropertyConstraints('code', [
             new Assert\Choice([
@@ -62,15 +60,9 @@ class StatusComponent extends AbstractComponent implements GroupSequenceProvider
                 'groups' => 'request',
             ]),
         ]);
-        $metadata->addPropertyConstraints('date', [
-            new Assert\DateTime(),
-        ]);
-        $metadata->addPropertyConstraints('time', [
-            new Assert\DateTime(),
-        ]);
-        $metadata->addPropertyConstraints('message', [
-            new Assert\Type('string'),
-        ]);
+        $metadata->addPropertyConstraint('date', new Assert\DateTime());
+        $metadata->addPropertyConstraint('time', new Assert\DateTime());
+        $metadata->addPropertyConstraint('message', new Assert\Type('string'));
     }
 
     /**
@@ -79,9 +71,9 @@ class StatusComponent extends AbstractComponent implements GroupSequenceProvider
     public function getAttributes()
     {
         $attributes = [
-            'lgCode' => $this->getLanguage(),
-            'type' => $this->getType(),
-            'code' => $this->getCode(),
+          'lgCode' => $this->getLanguage(),
+          'type' => $this->getType(),
+          'code' => $this->getCode(),
         ];
 
         return array_filter($attributes);
@@ -215,12 +207,11 @@ class StatusComponent extends AbstractComponent implements GroupSequenceProvider
      */
     public function getGroupSequence()
     {
-
         return [
-            [
-                'StatusComponent',
-                $this->getType() == 'request' ? 'request' : 'component',
-            ],
+          [
+            'StatusComponent',
+            $this->getType() == 'request' ? 'request' : 'component',
+          ],
         ];
     }
 }
