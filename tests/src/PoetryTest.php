@@ -2,7 +2,8 @@
 
 namespace EC\Poetry\Tests;
 
-use EC\Poetry\Messages\Request;
+use EC\Poetry\Messages\Requests\AbstractRequest;
+use EC\Poetry\Messages\Requests\CreateRequest;
 use EC\Poetry\Poetry;
 use EC\Poetry\Tests\AbstractTest as TestCase;
 use EC\Poetry\Services\Renderer;
@@ -22,16 +23,15 @@ class PoetryTest extends TestCase
     public function testMessageContainer()
     {
         $poetry = new Poetry();
-        /** @var \EC\Poetry\Messages\Request $message */
-        $message = $poetry->get('message.request');
-        expect($message)->to->be->instanceof(Request::class);
+        $message = $poetry->get('request.create_request');
+        expect($message)->to->be->instanceof(CreateRequest::class);
 
         /** @var \Symfony\Component\Validator\ConstraintViolationListInterface $violations */
         $violations = $poetry->get('validator')->validate($message);
         expect($violations->count())->not->to->be->empty();
 
         $poetry = new Poetry([
-            'type' => Request::REQUEST_STATUS,
+            'type' => AbstractRequest::REQUEST_STATUS,
             'identifier.code' => 'DGT',
             'identifier.year' => '2017',
             'identifier.number' => '0001',
@@ -39,7 +39,7 @@ class PoetryTest extends TestCase
             'identifier.part' => '00',
             'identifier.product' => 'ABC',
         ]);
-        $message = $poetry->get('message.request');
+        $message = $poetry->get('request.create_request');
         $violations = $poetry->get('validator')->validate($message);
         expect($violations->count())->to->be->empty();
     }
