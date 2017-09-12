@@ -11,7 +11,7 @@ use Symfony\Component\Validator\GroupSequenceProviderInterface;
  *
  * @package EC\Poetry\Messages\Components
  */
-class StatusComponent extends AbstractComponent implements GroupSequenceProviderInterface
+class Status extends AbstractComponent implements GroupSequenceProviderInterface
 {
     private $type;
     private $code;
@@ -90,7 +90,7 @@ class StatusComponent extends AbstractComponent implements GroupSequenceProvider
     /**
      * @param mixed $type
      *
-     * @return StatusComponent
+     * @return Status
      */
     public function setType($type)
     {
@@ -110,7 +110,7 @@ class StatusComponent extends AbstractComponent implements GroupSequenceProvider
     /**
      * @param mixed $code
      *
-     * @return StatusComponent
+     * @return Status
      */
     public function setCode($code)
     {
@@ -130,7 +130,7 @@ class StatusComponent extends AbstractComponent implements GroupSequenceProvider
     /**
      * @param mixed $language
      *
-     * @return StatusComponent
+     * @return Status
      */
     public function setLanguage($language)
     {
@@ -150,7 +150,7 @@ class StatusComponent extends AbstractComponent implements GroupSequenceProvider
     /**
      * @param mixed $date
      *
-     * @return StatusComponent
+     * @return Status
      */
     public function setDate($date)
     {
@@ -170,7 +170,7 @@ class StatusComponent extends AbstractComponent implements GroupSequenceProvider
     /**
      * @param mixed $time
      *
-     * @return StatusComponent
+     * @return Status
      */
     public function setTime($time)
     {
@@ -190,7 +190,7 @@ class StatusComponent extends AbstractComponent implements GroupSequenceProvider
     /**
      * @param mixed $message
      *
-     * @return StatusComponent
+     * @return Status
      */
     public function setMessage($message)
     {

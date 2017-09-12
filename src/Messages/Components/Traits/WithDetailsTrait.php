@@ -1,13 +1,13 @@
 <?php
 
-namespace EC\Poetry\Messages\Requests\Traits;
+namespace EC\Poetry\Messages\Components\Traits;
 
 use EC\Poetry\Messages\Components\Details;
 
 /**
  * Contains setter, getter and factory methods for "Details" component.
  *
- * @package EC\Poetry\Messages\Requests\Traits
+ * @package EC\Poetry\Messages\Components\Traits
  */
 trait WithDetailsTrait
 {

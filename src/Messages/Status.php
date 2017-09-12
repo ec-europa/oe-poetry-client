@@ -2,7 +2,7 @@
 
 namespace EC\Poetry\Messages;
 
-use EC\Poetry\Messages\Components\StatusComponent;
+use EC\Poetry\Messages\Components\Status as StatusComponent;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Symfony\Component\Validator\Constraints as Assert;
 

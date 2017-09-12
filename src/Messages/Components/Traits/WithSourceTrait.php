@@ -1,13 +1,13 @@
 <?php
 
-namespace EC\Poetry\Messages\Requests\Traits;
+namespace EC\Poetry\Messages\Components\Traits;
 
 use EC\Poetry\Messages\Components\Source;
 
 /**
  * Contains setter, getter and factory methods for "Source" component.
  *
- * @package EC\Poetry\Messages\Requests\Traits
+ * @package EC\Poetry\Messages\Components\Traits
  */
 trait WithSourceTrait
 {

@@ -19,7 +19,7 @@ class StatusTest extends TestCase
     {
         /** @var \Symfony\Component\Validator\Validator\RecursiveValidator $validator */
         $validator = (new Poetry())->get('validator');
-        $status = (new StatusComponent())->setType('demande');
+        $status = (new Status())->setType('demande');
         $status->setCode(1);
 
         $violations = $validator->validate($status);

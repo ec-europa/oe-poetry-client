@@ -28,7 +28,7 @@ class StatusParserTest extends AbstractTest
     {
         /** @var \EC\Poetry\Parsers\StatusParser $service */
         /** @var \EC\Poetry\Messages\Status $message */
-        /** @var \EC\Poetry\Messages\Components\StatusComponent[] $statuses */
+        /** @var \EC\Poetry\Messages\Components\Status[] $statuses */
         $service = $this->getContainer()->get('parser.message.status');
         expect($service)->is->an->instanceof(StatusParser::class);
         $message = $service->parse($xml);

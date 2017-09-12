@@ -27,7 +27,7 @@ class StatusParserTest extends AbstractTest
     public function testParsing($xml, $date, $time, $message, $code, $type)
     {
         /** @var \EC\Poetry\Parsers\Components\StatusComponentParser $parser */
-        /** @var \EC\Poetry\Messages\Components\StatusComponent[] $components */
+        /** @var \EC\Poetry\Messages\Components\Status[] $components */
         $parser = $this->getContainer()->get('parser.component.status');
         $components = $parser->parse($xml);
         expect(count($components))->to->be->equal(1);
@@ -59,7 +59,7 @@ class StatusParserTest extends AbstractTest
     public function testMultipleParsing($xml, $firstType, $secondType)
     {
         /** @var \EC\Poetry\Parsers\Components\StatusComponentParser $parser */
-        /** @var \EC\Poetry\Messages\Components\StatusComponent[] $components */
+        /** @var \EC\Poetry\Messages\Components\Status[] $components */
         $parser = $this->getContainer()->get('parser.component.status');
         $components = $parser->parse($xml);
         expect(count($components))->to->be->equal(2);

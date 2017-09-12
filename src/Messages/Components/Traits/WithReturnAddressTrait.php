@@ -1,13 +1,13 @@
 <?php
 
-namespace EC\Poetry\Messages\Requests\Traits;
+namespace EC\Poetry\Messages\Components\Traits;
 
 use EC\Poetry\Messages\Components\ReturnAddress;
 
 /**
  * Contains setter, getter and factory methods for "ReturnAddress" component.
  *
- * @package EC\Poetry\Messages\Requests\Traits
+ * @package EC\Poetry\Messages\Components\Traits
  */
 trait WithReturnAddressTrait
 {
