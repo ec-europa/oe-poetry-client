@@ -14,7 +14,7 @@ trait WithTargetsTrait
     /**
      * @var \EC\Poetry\Messages\Components\Target[]
      */
-    private $targets;
+    private $targets = [];
 
     /**
      * Getter.

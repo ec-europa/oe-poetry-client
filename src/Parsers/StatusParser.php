@@ -2,7 +2,7 @@
 
 namespace EC\Poetry\Parsers;
 
-use EC\Poetry\Messages\Status;
+use EC\Poetry\Messages\Responses\Status;
 
 /**
  * Class StatusComponentParser

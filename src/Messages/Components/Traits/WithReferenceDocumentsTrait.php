@@ -12,14 +12,14 @@ use EC\Poetry\Messages\Components\ReferenceDocument;
 trait WithReferenceDocumentsTrait
 {
     /**
-     * @var \EC\Poetry\Messages\Components\Target[]
+     * @var \EC\Poetry\Messages\Components\ReferenceDocument[]
      */
-    private $referenceDocuments;
+    private $referenceDocuments = [];
 
     /**
      * Getter.
      *
-     * @return \EC\Poetry\Messages\Components\Target[]
+     * @return \EC\Poetry\Messages\Components\ReferenceDocument[]
      *   Property value.
      */
     public function getReferenceDocuments()

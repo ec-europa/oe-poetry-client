@@ -14,7 +14,7 @@ trait WithContactsTrait
     /**
      * @var \EC\Poetry\Messages\Components\Contact[]
      */
-    private $contacts;
+    private $contacts = [];
 
     /**
      * Getter.
@@ -50,10 +50,8 @@ trait WithContactsTrait
      */
     public function withContact()
     {
-        static $index = 0;
-        $contact = $this->contacts[$index] = new Contact();
-        $index++;
+        $this->contacts[] = new Contact();
 
-        return $contact;
+        return end($this->contacts);
     }
 }

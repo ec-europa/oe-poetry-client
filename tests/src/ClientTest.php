@@ -3,7 +3,7 @@
 namespace EC\Poetry\Tests;
 
 use EC\Poetry\Messages\Requests\CreateRequest;
-use EC\Poetry\Messages\Status;
+use EC\Poetry\Messages\Responses\Status;
 use EC\Poetry\Poetry;
 use EC\Poetry\Tests\Logger\TestLogger;
 use Psr\Log\LogLevel;
