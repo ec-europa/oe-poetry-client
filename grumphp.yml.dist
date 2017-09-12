@@ -3,4 +3,5 @@ imports:
 parameters:
   tasks.phpcs.ignore_patterns:
     - vendor/
+    - spec/
     - callback.php

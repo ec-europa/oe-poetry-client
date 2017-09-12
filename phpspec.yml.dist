@@ -1,0 +1,6 @@
+suites:
+  tagattributes:
+    namespace: EC\Poetry
+    psr4_prefix: EC\Poetry
+
+formatter.name: dot

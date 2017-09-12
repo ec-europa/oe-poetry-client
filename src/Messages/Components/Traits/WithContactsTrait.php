@@ -17,6 +17,21 @@ trait WithContactsTrait
     private $contacts = [];
 
     /**
+     * Add component.
+     *
+     * @param Contact $contact
+     *      Contact instance.
+     *
+     * @return $this
+     */
+    public function addContact(Contact $contact)
+    {
+        $this->contacts[] = $contact;
+
+        return $this;
+    }
+
+    /**
      * Getter.
      *
      * @return \EC\Poetry\Messages\Components\Contact[]
@@ -30,12 +45,12 @@ trait WithContactsTrait
     /**
      * Setter.
      *
-     * @param \EC\Poetry\Messages\Components\Contact $contacts
+     * @param \EC\Poetry\Messages\Components\Contact[] $contacts
      *   Property value.
      *
      * @return $this
      */
-    public function setContacts(Contact $contacts)
+    public function setContacts(array $contacts)
     {
         $this->contacts = $contacts;
 

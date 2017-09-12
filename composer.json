@@ -19,7 +19,8 @@
         "ec-europa/oe-code-review": "^0.0.2",
         "phpunit/phpunit": "^5",
         "peridot-php/leo": "^1.6",
-        "mockery/mockery": "^0.9.9"
+        "mockery/mockery": "^0.9.9",
+        "phpspec/phpspec": "^4.0"
     },
     "suggest": {
         "monolog/monolog": "Log Poetry requests and responses via Monolog"

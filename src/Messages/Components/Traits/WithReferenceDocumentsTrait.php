@@ -17,6 +17,21 @@ trait WithReferenceDocumentsTrait
     private $referenceDocuments = [];
 
     /**
+     * Add component.
+     *
+     * @param ReferenceDocument $referenceDocument
+     *      Contact instance.
+     *
+     * @return $this
+     */
+    public function addReferenceDocument(ReferenceDocument $referenceDocument)
+    {
+        $this->referenceDocuments[] = $referenceDocument;
+
+        return $this;
+    }
+
+    /**
      * Getter.
      *
      * @return \EC\Poetry\Messages\Components\ReferenceDocument[]
@@ -30,12 +45,12 @@ trait WithReferenceDocumentsTrait
     /**
      * Setter.
      *
-     * @param \EC\Poetry\Messages\Components\ReferenceDocument $referenceDocuments
+     * @param \EC\Poetry\Messages\Components\ReferenceDocument[] $referenceDocuments
      *   Property value.
      *
      * @return $this
      */
-    public function setReferenceDocuments(ReferenceDocument $referenceDocuments)
+    public function setReferenceDocuments(array $referenceDocuments)
     {
         $this->referenceDocuments = $referenceDocuments;
 
@@ -48,12 +63,10 @@ trait WithReferenceDocumentsTrait
      * @return \EC\Poetry\Messages\Components\ReferenceDocument
      *      Target instance.
      */
-    public function withReferenceDocuments()
+    public function withReferenceDocument()
     {
-        static $index = 0;
-        $referenceDocument = $this->referenceDocuments[$index] = new ReferenceDocument();
-        $index++;
+        $this->referenceDocuments[] = new ReferenceDocument();
 
-        return $referenceDocument;
+        return end($this->referenceDocuments);
     }
 }

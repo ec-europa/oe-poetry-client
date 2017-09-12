@@ -17,6 +17,20 @@ trait WithTargetsTrait
     private $targets = [];
 
     /**
+     * Add component.
+     *
+     * @param Target $target
+     *      Component object.
+     *
+     * @return $this
+     */
+    public function addTarget(Target $target)
+    {
+        $this->targets[] = $target;
+
+        return $this;
+    }
+    /**
      * Getter.
      *
      * @return \EC\Poetry\Messages\Components\Target[]
@@ -30,12 +44,12 @@ trait WithTargetsTrait
     /**
      * Setter.
      *
-     * @param \EC\Poetry\Messages\Components\Target $targets
+     * @param \EC\Poetry\Messages\Components\Target[] $targets
      *   Property value.
      *
      * @return $this
      */
-    public function setTargets(Target $targets)
+    public function setTargets(array $targets)
     {
         $this->targets = $targets;
 
@@ -50,10 +64,8 @@ trait WithTargetsTrait
      */
     public function withTarget()
     {
-        static $index = 0;
-        $target = $this->targets[$index] = new Target();
-        $index++;
+        $this->targets[] = new Target();
 
-        return $target;
+        return end($this->targets);
     }
 }
