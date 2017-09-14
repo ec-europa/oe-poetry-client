@@ -2,6 +2,7 @@
 
 namespace EC\Poetry\Messages\Responses;
 
+use EC\Poetry\Messages\Components\Traits\ParserAwareTrait;
 use EC\Poetry\Messages\Components\Traits\WithStatusTrait;
 
 /**
@@ -11,6 +12,7 @@ use EC\Poetry\Messages\Components\Traits\WithStatusTrait;
  */
 class Status extends AbstractResponse
 {
+    use ParserAwareTrait;
     use WithStatusTrait;
 
     /**
@@ -19,5 +21,16 @@ class Status extends AbstractResponse
     public function getTemplate()
     {
         return 'messages::status';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function fromXml($xml)
+    {
+        $parser = $this->getParser();
+        $parser->addXmlContent($xml);
+
+        return $this;
     }
 }

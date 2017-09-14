@@ -139,4 +139,14 @@ class Attribution extends AbstractComponent
 
         return $this;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function fromXml($xml)
+    {
+        // TODO: Implement fromXml() method.
+
+        return $this;
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace EC\Poetry\Messages\Components;
 
+use EC\Poetry\Services\Parser;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -72,7 +73,7 @@ class Source extends AbstractComponent
             'PAPER',
         ]));
         $metadata->addPropertyConstraint('confidential', new Assert\Choice(['Yes', 'No']));
-        $metadata->addPropertyConstraint('deadline', new Assert\Datetime());
+        $metadata->addPropertyConstraint('deadline', new Assert\DateTime());
         $metadata->addPropertyConstraint('deadlineStatus', new Assert\Choice([
             'PUBLIC',
             'DELETED',
@@ -340,6 +341,35 @@ class Source extends AbstractComponent
     public function setFile($file)
     {
         $this->file = $file;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function fromXml($xml)
+    {
+        $parser = $this->getParser();
+        $parser->addXmlContent($xml);
+
+        $this->setChannel($parser->getAttribute('documentSource', 'channel'))
+            ->setDeadline($parser->getAttribute('documentSource', 'deadline'))
+            ->setDeadlineStatus($parser->getAttribute('documentSource', 'statusDeadline'))
+            ->setConfidential($parser->getAttribute('documentSource', 'marked'))
+            ->setFormat($parser->getAttribute('documentSource', 'format'))
+            ->setLegiswriteFormat($parser->getAttribute('documentSource', 'legiswrite'))
+            ->setTrackChanges($parser->getAttribute('documentSource', 'trackChanges'))
+            ->setName($parser->getContent('documentSource/documentSourceName'))
+            ->setPath($parser->getContent('documentSource/documentSourcePath'))
+            ->setSize($parser->getContent('documentSource/documentSourceSize'))
+            ->setFile($parser->getContent('documentSource/documentSourceFile'));
+
+        $languages = [];
+        $parser->filterXPath("documentSource/documentSourceLang")->each(function (Parser $language) use (&$languages) {
+            $languages[$language->getAttribute('documentSourceLang', 'lgCode')] = $language->getContent('documentSourceLang/documentSourceLangPages');
+        });
+        $this->setLanguages($languages);
 
         return $this;
     }

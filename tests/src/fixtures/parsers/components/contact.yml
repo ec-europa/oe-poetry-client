@@ -1,26 +1,18 @@
 -
   -
-    <POETRY xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="">
-        <request communication="asynchrone" id="DGT/2017/0001/01/00/ABC" type="status">
-            <contacts type="Secretaire">
-                <contactNickname>Username</contactNickname>
-                <contactEmail>user@mail.com</contactEmail>
-            </contacts>
-        </request>
-    </POETRY>
+    <contacts type="Secretaire">
+        <contactNickname>Username</contactNickname>
+        <contactEmail>user@mail.com</contactEmail>
+    </contacts>
   - "Secretaire"
   - "Username"
   - "user@mail.com"
 
 -
   -
-    <POETRY xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="">
-        <request communication="asynchrone" id="DGT/2017/0001/01/00/ABC" type="status">
-            <contacts type="Secretaire">
-                <contactNickname>Username</contactNickname>
-            </contacts>
-        </request>
-    </POETRY>
+    <contacts type="Secretaire">
+        <contactNickname>Username</contactNickname>
+    </contacts>
   - "Secretaire"
   - "Username"
   - null

@@ -1,26 +1,22 @@
 -
   -
-    <POETRY xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="">
-        <request communication="asynchrone" id="DGT/2017/0001/01/00/ABC" type="status">
-            <attributions format="HTML" lgCode="en" trackChanges="No">
-                <attributionsRemark>Remark</attributionsRemark>
-                <attributionsDelai format="dd/mm/YYYY">10/07/2007</attributionsDelai>
-                <attributionsDelaiAccepted format="dd/mm/YYYY">10/07/2007</attributionsDelaiAccepted>
-                <attributionsSend type="webService">
-                    <retourUser>Username</retourUser>
-                    <retourPassword>Password</retourPassword>
-                    <retourAddress>Url</retourAddress>
-                    <retourPath>Path</retourPath>
-                    <retourRemark>Remark</retourRemark>
-                </attributionsSend>
-                <attributionsFile>File</attributionsFile>
-                <attributionContact type="Secretaire">
-                    <contactNickname>Username</contactNickname>
-                    <contactEmail>user@mail.com</contactEmail>
-                </attributionContact>
-            </attributions>
-        </request>
-    </POETRY>
+    <attributions format="HTML" lgCode="en" trackChanges="No">
+        <attributionsRemark>Remark</attributionsRemark>
+        <attributionsDelai format="dd/mm/YYYY">10/07/2007</attributionsDelai>
+        <attributionsDelaiAccepted format="dd/mm/YYYY">10/07/2007</attributionsDelaiAccepted>
+        <attributionsSend type="webService">
+            <retourUser>Username</retourUser>
+            <retourPassword>Password</retourPassword>
+            <retourAddress>Url</retourAddress>
+            <retourPath>Path</retourPath>
+            <retourRemark>Remark</retourRemark>
+        </attributionsSend>
+        <attributionsFile>File</attributionsFile>
+        <attributionContact type="Secretaire">
+            <contactNickname>Username</contactNickname>
+            <contactEmail>user@mail.com</contactEmail>
+        </attributionContact>
+    </attributions>
   - getFormat : "HTML"
     getLanguage : "en"
     getTrackChanges : "No"

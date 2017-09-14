@@ -4,6 +4,7 @@ namespace EC\Poetry\Messages\Components;
 
 use EC\Poetry\Poetry;
 use EC\Poetry\Tests\AbstractTest as TestCase;
+use Symfony\Component\Yaml\Yaml;
 
 /**
  * Class TargetTest
@@ -48,5 +49,43 @@ class TargetTest extends TestCase
         foreach ($this->getViolations($violations) as $name => $violation) {
             expect($violation)->to->be->equal($expected[$name]);
         }
+    }
+
+    /**
+     * Test parsing.
+     *
+     * @param string $xml
+     * @param array  $targetProperties
+     * @param array  $addressProperties
+     * @param array  $contactProperties
+     *
+     * @dataProvider parserProvider
+     */
+    public function testParsing($xml, $targetProperties, $addressProperties, $contactProperties)
+    {
+        /** @var \EC\Poetry\Messages\Components\Target $target */
+        $target = $this->getContainer()->get('component.target')->fromXml($xml);
+
+        foreach ($targetProperties as $method => $value) {
+            expect($target->$method())->to->equal($value);
+        }
+        expect(count($target->getReturnAddresses()))->to->equal(1);
+        $returnAddress = $target->getReturnAddresses()[0];
+        foreach ($addressProperties as $method => $value) {
+            expect($returnAddress->$method())->to->equal($value);
+        }
+        expect(count($target->getContacts()))->to->equal(1);
+        $contact = $target->getContacts()[0];
+        foreach ($contactProperties as $method => $value) {
+            expect($contact->$method())->to->equal($value);
+        }
+    }
+
+    /**
+     * @return mixed
+     */
+    public function parserProvider()
+    {
+        return Yaml::parse($this->getFixture('parsers/components/target.yml'));
     }
 }

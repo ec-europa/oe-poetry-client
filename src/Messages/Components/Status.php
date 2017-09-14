@@ -214,4 +214,21 @@ class Status extends AbstractComponent implements GroupSequenceProviderInterface
           ],
         ];
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function fromXml($xml)
+    {
+        $parser = $this->getParser();
+        $parser->addXmlContent($xml);
+
+        $this->setDate($parser->getContent('status/statusDate'))
+            ->setTime($parser->getContent('status/statusTime'))
+            ->setMessage($parser->getContent('status/statusMessage'))
+            ->setType($parser->attr('type'))
+            ->setCode($parser->attr('code'));
+
+        return $this;
+    }
 }

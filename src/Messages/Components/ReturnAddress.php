@@ -198,4 +198,23 @@ class ReturnAddress extends AbstractComponent
 
         return $this;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function fromXml($xml)
+    {
+        $parser = $this->getParser();
+        $parser->addXmlContent($xml);
+
+        $this->setType($parser->getAttribute('retour', 'type'))
+            ->setAction($parser->getAttribute('retour', 'action'))
+            ->setUser($parser->getContent('retour/retourUser'))
+            ->setPassword($parser->getContent('retour/retourPassword'))
+            ->setAddress($parser->getContent('retour/retourAddress'))
+            ->setPath($parser->getContent('retour/retourPath'))
+            ->setRemark($parser->getContent('retour/retourRemark'));
+
+        return $this;
+    }
 }

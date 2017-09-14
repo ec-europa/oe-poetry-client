@@ -4,6 +4,7 @@ namespace EC\Poetry\Messages\Components;
 
 use EC\Poetry\Poetry;
 use EC\Poetry\Tests\AbstractTest as TestCase;
+use Symfony\Component\Yaml\Yaml;
 
 /**
  * Class ReferenceDocumentTest
@@ -36,5 +37,30 @@ class ReferenceDocumentTest extends TestCase
         foreach ($this->getViolations($violations) as $name => $violation) {
             expect($violation)->to->be->equal($expected[$name]);
         }
+    }
+
+    /**
+     * Test parsing.
+     *
+     * @param string $xml
+     * @param array  $fixtures
+     *
+     * @dataProvider parserProvider
+     */
+    public function testParsing($xml, $fixtures)
+    {
+        /** @var \EC\Poetry\Messages\Components\ReferenceDocument $component */
+        $component = $this->getContainer()->get('component.reference_document')->fromXml($xml);
+        foreach ($fixtures as $method => $value) {
+            expect($component->$method())->to->equal($value);
+        }
+    }
+
+    /**
+     * @return mixed
+     */
+    public function parserProvider()
+    {
+        return Yaml::parse($this->getFixture('parsers/components/referenceDocument.yml'));
     }
 }

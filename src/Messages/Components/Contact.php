@@ -2,6 +2,7 @@
 
 namespace EC\Poetry\Messages\Components;
 
+use EC\Poetry\Services\Parser;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -133,6 +134,22 @@ class Contact extends AbstractComponent
     public function setEmail($email)
     {
         $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function fromXml($xml)
+    {
+        $parser = $this->getParser();
+        $parser->addXmlContent($xml);
+
+        $this->setNickname($parser->getContent('contacts/contactNickname'))
+          ->setEmail($parser->getContent('contacts/contactEmail'))
+          ->setType($parser->attr('type'))
+          ->setAction($parser->attr('action'));
 
         return $this;
     }

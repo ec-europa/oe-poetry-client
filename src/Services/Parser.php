@@ -9,7 +9,7 @@ use Symfony\Component\DomCrawler;
  *
  * @package EC\Poetry\Services
  */
-class Crawler extends DomCrawler\Crawler
+class Parser extends DomCrawler\Crawler
 {
     /**
      * Get node content given its xPath expression or null if none found.

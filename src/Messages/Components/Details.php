@@ -388,4 +388,31 @@ class Details extends AbstractComponent
 
         return $this;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function fromXml($xml)
+    {
+        $parser = $this->getParser();
+        $parser->addXmlContent($xml);
+
+        $this->setClientId($parser->getContent('demande/userReference'))
+            ->setApplicationId($parser->getContent('demande/applicationReference'))
+            ->setAuthor($parser->getContent('demande/organisationAuteur'))
+            ->setRequester($parser->getContent('demande/serviceDemandeur'))
+            ->setTitle($parser->getContent('demande/titre'))
+            ->setRemark($parser->getContent('demande/remarque'))
+            ->setType($parser->getContent('demande/type'))
+            ->setDestination($parser->getContent('demande/destination'))
+            ->setProcedure($parser->getContent('demande/procedure'))
+            ->setDelay($parser->getContent('demande/delai'))
+            ->setRequestDate($parser->getContent('demande/dateDemande'))
+            ->setStatus($parser->getContent('demande/statusDemande'))
+            ->setInterServices($parser->getContent('demande/consultationInterServices'))
+            ->setInterInstitution($parser->getContent('demande/procedureInterInstitution'))
+            ->setReferenceFilesRemark($parser->getContent('demande/reference_files_note'));
+
+        return $this;
+    }
 }

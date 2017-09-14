@@ -4,6 +4,7 @@ namespace EC\Poetry\Messages\Components;
 
 use EC\Poetry\Poetry;
 use EC\Poetry\Tests\AbstractTest as TestCase;
+use Symfony\Component\Yaml\Yaml;
 
 /**
  * Class ContactTest
@@ -35,5 +36,33 @@ class ContactTest extends TestCase
         foreach ($this->getViolations($violations) as $name => $violation) {
             expect($violation)->to->be->equal($expected[$name]);
         }
+    }
+
+    /**
+     * Test parsing.
+     *
+     * @param string $xml
+     * @param string $type
+     * @param string $nickname
+     * @param string $email
+     *
+     * @dataProvider parserProvider
+     */
+    public function testParsing($xml, $type, $nickname, $email)
+    {
+        /** @var \EC\Poetry\Messages\Components\Contact $component */
+        $component = $this->getContainer()->get('component.contact')->fromXml($xml);
+
+        expect($component->getType())->to->equal($type);
+        expect($component->getNickname())->to->equal($nickname);
+        expect($component->getEmail())->to->equal($email);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function parserProvider()
+    {
+        return Yaml::parse($this->getFixture('parsers/components/contact.yml'));
     }
 }

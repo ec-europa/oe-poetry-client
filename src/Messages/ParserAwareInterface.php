@@ -2,6 +2,8 @@
 
 namespace EC\Poetry\Messages;
 
+use EC\Poetry\Services\Parser;
+
 /**
  * Class ParserAwareInterface.
  *
@@ -12,7 +14,7 @@ interface ParserAwareInterface
     /**
      * Get Parser property.
      *
-     * @return \EC\Poetry\Services\Crawler
+     * @return \EC\Poetry\Services\Parser
      *   Property value.
      */
     public function getParser();
@@ -20,20 +22,20 @@ interface ParserAwareInterface
     /**
      * Set Parser property.
      *
-     * @param \EC\Poetry\Services\Crawler $parser
+     * @param \EC\Poetry\Services\Parser $parser
      *   Property value.
      *
      * @return $this
      */
-    public function setParser($parser);
+    public function setParser(Parser $parser);
 
     /**
-     * Create a message given its XML representation.
+     * Set a message or a component internal properties given its XML representation.
      *
      * @param string $xml
      *      XML string.
      *
-     * @return \EC\Poetry\Messages\MessageInterface
+     * @return \EC\Poetry\Messages\MessageInterface|\EC\Poetry\Messages\ComponentInterface
      */
-    public function withXml($xml);
+    public function fromXml($xml);
 }

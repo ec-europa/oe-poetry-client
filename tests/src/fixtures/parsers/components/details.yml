@@ -1,26 +1,22 @@
 -
   -
-    <POETRY xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="">
-        <request communication="asynchrone" id="DGT/2017/0001/01/00/ABC" type="status">
-            <demande>
-                <userReference>clientId</userReference>
-                <applicationReference>applicationId</applicationReference>
-                <organisationAuteur>DIGIT</organisationAuteur>
-                <serviceDemandeur>DGCOMM</serviceDemandeur>
-                <titre>Title</titre>
-                <remarque>Remark</remarque>
-                <type>INTER</type>
-                <destination>AUTRE</destination>
-                <procedure>NEANT</procedure>
-                <delai>11/12/2007</delai>
-                <dateDemande>11/12/2007</dateDemande>
-                <statusDemande>Ready</statusDemande>
-                <consultationInterServices>Yes</consultationInterServices>
-                <procedureInterInstitution>Yes</procedureInterInstitution>
-                <reference_files_note>Note</reference_files_note>
-            </demande>
-        </request>
-    </POETRY>
+    <demande>
+        <userReference>clientId</userReference>
+        <applicationReference>applicationId</applicationReference>
+        <organisationAuteur>DIGIT</organisationAuteur>
+        <serviceDemandeur>DGCOMM</serviceDemandeur>
+        <titre>Title</titre>
+        <remarque>Remark</remarque>
+        <type>INTER</type>
+        <destination>AUTRE</destination>
+        <procedure>NEANT</procedure>
+        <delai>11/12/2007</delai>
+        <dateDemande>11/12/2007</dateDemande>
+        <statusDemande>Ready</statusDemande>
+        <consultationInterServices>Yes</consultationInterServices>
+        <procedureInterInstitution>Yes</procedureInterInstitution>
+        <reference_files_note>Note</reference_files_note>
+    </demande>
   - getClientId : "clientId"
     getApplicationId : "applicationId"
     getAuthor : "DIGIT"

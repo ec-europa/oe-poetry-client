@@ -281,4 +281,22 @@ class Identifier extends AbstractComponent implements GroupSequenceProviderInter
           ],
         ];
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function fromXml($xml)
+    {
+        $parser = $this->getParser();
+        $parser->addXmlContent($xml);
+
+        $this->setCode($parser->getContent('demandeId/codeDemandeur'))
+            ->setYear($parser->getContent('demandeId/annee'))
+            ->setNumber($parser->getContent('demandeId/numero'))
+            ->setVersion($parser->getContent('demandeId/version'))
+            ->setPart($parser->getContent('demandeId/partie'))
+            ->setProduct($parser->getContent('demandeId/produit'));
+
+        return $this;
+    }
 }

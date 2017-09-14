@@ -10,7 +10,7 @@ use EC\Poetry\Services\Plates\ComponentExtension;
 use EC\Poetry\Services\Renderer;
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
-use EC\Poetry\Services\Crawler;
+use EC\Poetry\Services\Parser;
 use Psr\Log\NullLogger;
 use Symfony\Component\Validator\ValidatorBuilder;
 
@@ -63,8 +63,8 @@ class ServicesProvider implements ServiceProviderInterface
             return new \SoapClient($container['client.wsdl'], $container['client.options']);
         };
 
-        $container['crawler'] = $container->factory(function (Container $container) {
-            return new Crawler();
+        $container['parser'] = $container->factory(function (Container $container) {
+            return new Parser();
         });
 
         $container['soap.server'] = function (Container $container) {

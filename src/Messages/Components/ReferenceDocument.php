@@ -264,4 +264,25 @@ class ReferenceDocument extends AbstractComponent
 
         return $this;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function fromXml($xml)
+    {
+        $parser = $this->getParser();
+        $parser->addXmlContent($xml);
+
+        $this->setLanguage($parser->attr('lgCode'))
+            ->setFormat($parser->attr('format'))
+            ->setType($parser->attr('type'))
+            ->setAction($parser->attr('action'))
+            ->setName($parser->getContent('documentReference/documentReferenceName'))
+            ->setPath($parser->getContent('documentReference/documentReferencePath'))
+            ->setSize($parser->getContent('documentReference/documentReferenceSize'))
+            ->setRemark($parser->getContent('documentReference/documentReferenceRemark'))
+            ->setFile($parser->getContent('documentReference/documentReferenceFile'));
+
+        return $this;
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace EC\Poetry\Messages\Components;
 
+use EC\Poetry\Services\Parser;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -337,6 +338,50 @@ class Target extends AbstractComponent
     public function addContact($contact)
     {
         $this->contacts[] = $contact;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function fromXml($xml)
+    {
+        $parser = $this->getParser();
+        $parser->addXmlContent($xml);
+
+        $contacts = [];
+        $parser->filterXPath("attributions/attributionContact")->each(function (Parser $contact) use (&$contacts) {
+            $contacts[] = (new Contact())
+                ->setNickname($contact->getContent('attributionContact/contactNickname'))
+                ->setEmail($contact->getContent('attributionContact/contactEmail'))
+                ->setType($contact->attr('type'))
+                ->setAction($contact->attr('action'));
+        });
+        $returnAddresses = [];
+        $parser->filterXPath("attributions/attributionsSend")->each(function (Parser $returnAddress) use (&$returnAddresses) {
+            $returnAddresses[] = (new ReturnAddress())
+                ->setType($returnAddress->attr('type'))
+                ->setAction($returnAddress->attr('action'))
+                ->setUser($returnAddress->getContent('attributionsSend/retourUser'))
+                ->setPassword($returnAddress->getContent('attributionsSend/retourPassword'))
+                ->setAddress($returnAddress->getContent('attributionsSend/retourAddress'))
+                ->setPath($returnAddress->getContent('attributionsSend/retourPath'))
+                ->setRemark($returnAddress->getContent('attributionsSend/retourRemark'));
+        });
+
+        $this->setFormat($parser->getAttribute('attributions', 'format'))
+            ->setLanguage($parser->getAttribute('attributions', 'lgCode'))
+            ->setTrackChanges($parser->getAttribute('attributions', 'trackChanges'))
+            ->setRemark($parser->getContent('attributions/attributionsRemark'))
+            ->setDelay($parser->getContent('attributions/attributionsDelai'))
+            ->setDelayFormat($parser->getAttribute('attributions/attributionsDelai', 'format'))
+            ->setAcceptedDelay($parser->getContent('attributions/attributionsDelaiAccepted'))
+            ->setAcceptedDelayFormat($parser->getAttribute('attributions/attributionsDelaiAccepted', 'format'))
+            ->setTranslatedFile($parser->getContent('attributions/attributionsFile'));
+
+        $this->setContacts($contacts);
+        $this->setReturnAddresses($returnAddresses);
 
         return $this;
     }

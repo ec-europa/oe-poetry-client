@@ -4,11 +4,9 @@ namespace EC\Poetry;
 
 use EC\Poetry\Services\Providers\MessagesProvider;
 use EC\Poetry\Services\Providers\ParametersProvider;
-use EC\Poetry\Services\Providers\ParsersProvider;
 use EC\Poetry\Services\Providers\ServicesProvider;
 use Pimple\Container;
 use Psr\Container\ContainerInterface;
-use Symfony\Component\Validator\Validator\RecursiveValidator;
 
 /**
  * Class Poetry
@@ -33,7 +31,6 @@ class Poetry extends Container implements ContainerInterface
         $this->register(new ParametersProvider());
         $this->register(new ServicesProvider());
         $this->register(new MessagesProvider());
-        $this->register(new ParsersProvider());
 
         // Override container values.
         foreach ($values as $name => $value) {
