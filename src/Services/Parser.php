@@ -41,4 +41,40 @@ class Parser extends DomCrawler\Crawler
 
         return $attributes[0] === '' ? null : $attributes[0];
     }
+
+    /**
+     * Get content, including outer element.
+     *
+     * @param string $xpath
+     *
+     * @return null|string
+     */
+    public function getOuterContent($xpath)
+    {
+        try {
+            $node = $this->filterXPath($xpath)->getNode(0);
+            $content = $node->ownerDocument->saveHTML($node);
+
+            return $content;
+        } catch (\InvalidArgumentException $e) {
+            return null;
+        }
+    }
+
+    /**
+     * Get outer HTML of current node.
+     *
+     * @return string
+     */
+    public function outerHtml()
+    {
+        if (!count($this)) {
+            throw new \InvalidArgumentException('The current node list is empty.');
+        }
+
+        $node = $this->getNode(0);
+        $html = $node->ownerDocument->saveHTML($node);
+
+        return $html;
+    }
 }

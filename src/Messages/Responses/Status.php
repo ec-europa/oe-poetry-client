@@ -4,6 +4,7 @@ namespace EC\Poetry\Messages\Responses;
 
 use EC\Poetry\Messages\Components\Traits\ParserAwareTrait;
 use EC\Poetry\Messages\Components\Traits\WithStatusTrait;
+use EC\Poetry\Services\Parser;
 
 /**
  * Status response, sent back to poetry server after a notification has come in.
@@ -30,6 +31,14 @@ class Status extends AbstractResponse
     {
         $parser = $this->getParser();
         $parser->addXmlContent($xml);
+
+        $xml = $parser->getOuterContent('POETRY/request/demandeId');
+        $this->getIdentifier()->fromXml($xml);
+
+        $parser->filterXPath("POETRY/request/status")->each(\Closure::bind(function (Parser $parser) use (&$components) {
+            $xml = $parser->outerHtml();
+            $this->withStatus()->fromXml($xml);
+        }, $this, $this));
 
         return $this;
     }

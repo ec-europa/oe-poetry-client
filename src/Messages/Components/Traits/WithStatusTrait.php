@@ -3,6 +3,7 @@
 namespace EC\Poetry\Messages\Components\Traits;
 
 use EC\Poetry\Messages\Components\Status;
+use EC\Poetry\Poetry;
 
 /**
  * Contains setter, getter and factory methods for "Status" component.
@@ -65,7 +66,7 @@ trait WithStatusTrait
      */
     public function withStatus()
     {
-        $this->statuses[] = new Status();
+        $this->statuses[] = Poetry::getInstance()->get('component.status');
 
         return end($this->statuses);
     }

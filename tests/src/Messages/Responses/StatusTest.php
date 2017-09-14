@@ -21,24 +21,24 @@ class StatusTest extends AbstractTest
      * Test parsing.
      *
      * @param string $xml
-     * @param string $idCode
-     * @param string $code
-     * @param string $type
-     * @param string $date
+     * @param array  $identifier
+     * @param array  $statuses
      *
      * @dataProvider parserProvider
      */
-    public function testParsing($xml, $idCode, $code, $type, $date)
+    public function testParsing($xml, $identifier, $statuses)
     {
         /** @var \EC\Poetry\Messages\Responses\Status $message */
         $message = $this->getContainer()->get('response.status')->fromXml($xml);
 
-        $statuses = $message->getStatuses();
-
-//        expect($message->getIdentifier()->getFormattedIdentifier())->to->equal($idCode);
-//        expect($statuses[0]->getCode())->to->equal($code);
-//        expect($statuses[0]->getType())->to->equal($type);
-//        expect($statuses[0]->getDate())->to->equal($date);
+        foreach ($identifier as $method => $expected) {
+            expect($message->getIdentifier()->{$method}())->to->equal($expected);
+        }
+        foreach ($statuses as $index => $status) {
+            foreach ($status as $method => $expected) {
+                expect($message->getStatuses()[$index]->{$method}())->to->equal($expected);
+            }
+        }
     }
 
     /**
