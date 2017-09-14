@@ -30,7 +30,6 @@ Alternatively, you can pass the following (optional) configuration parameters to
 | `identifier.number`       | The **number** part in an identifier string, i.e. `0001` in `DGT/2017/0001/01/00/ABC` |
 | `identifier.version`      | The **version** part in an identifier string, i.e. `01` in `DGT/2017/0001/01/00/ABC` |
 | `identifier.part`         | The **part** part in an identifier string, i.e. `00` in `DGT/2017/0001/01/00/ABC` |
-| `identifier.product`      | The **product** part in an identifier string, i.e. `ABC` in `DGT/2017/0001/01/00/ABC` |
 | `authentication.username` | The Poetry client **username**, as provided by the Poetry service |
 | `authentication.password` | The Poetry client **password**, as provided by the Poetry service |
 | `client.wsdl`             | WSDL URL |
@@ -46,13 +45,9 @@ $poetry = new Poetry([
     'identifier.number' => '0001',
     'identifier.version' => '01',
     'identifier.part' => '00',
-    'identifier.product' => 'ABC',
     'authentication.username' => 'foo',
     'authentication.password' => 'bar',
-    'server.uri' => 'http://my-site.com/poetry-callback',
-    'server.callback' => function ($user, $password, $message) {
-        // Do something with message and return response.
-    },
+    'notification.endpoint' => 'http://my-site.com/my/poetry/notification/endpoint',
 ]);
 ```
 
@@ -60,7 +55,6 @@ The parameters above will be injected into Poetry services allowing the host app
 
 - `identifier.*` will be passed to the [`Identifier` component](02-messages.md).
 - `authentication.*` will be passed to the [Client](03-client.md).
-- `server.*` will be passed to the [Server](04-server.md).
 
 Once instantiated the `Poetry` factory object can be accessed anywhere by calling:
 
@@ -75,31 +69,29 @@ Services can be accessed by using their machine name, for example:
 ```php
 $renderer = $poetry->get('renderer');
 $output = $renderer->render($message);
+$client = $poetry->get('client');
 ```
 
-Client and server can be accessed using the following convenience methods:
+Some services have a convenient methods for an easier access:
 
 ```php
 $response = $poetry->getClient()->send($message);
-$response = $poetry->getServer()->handle($request);
 ``` 
 
-For an overview of all available services and their machine names please refer to the service providers below:
+For an overview of all available services and their machine names refer to the service providers below:
 
 - [`EC\Poetry\Services\Providers\ParametersProvider`](../src/Services/Providers/ParametersProvider.php): 
   Defines the list of valid configuration parameters that can be passed in the `Poetry` factory object constructor. 
 - [`EC\Poetry\Services\Providers\ServicesProvider`](../src/Services/Providers/ServicesProvider.php):
-  Exposes generic services such as the template system, the client, the server, etc. Services are configured by the
-  parameters specified in the `ParametersProvider`.
+  Exposes generic services such as the template system, the client, etc. Services are configured by parameters specified
+  in the `ParametersProvider`.
 - [`EC\Poetry\Services\Providers\MessagesProvider`](../src/Services/Providers/MessagesProvider.php): 
   Exposes message and component objects as services. Components, such as `Identifier` are configured by the parameters
   specified in the `ParametersProvider`.
-- [`EC\Poetry\Services\Providers\ParsersProvider`](../src/Services/Providers/ParsersProvider.php):
-  Exposes message and component parsers as services.
 
 ## Use external logger
 
-Poetry supports any logging service implementing the [PSR3 Logger Interface](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-3-logger-interface.md).
+Poetry client supports any logging service implementing the [PSR3 Logger Interface](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-3-logger-interface.md).
 
 In order to add an external logger object run:
 

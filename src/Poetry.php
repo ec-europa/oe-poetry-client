@@ -8,6 +8,7 @@ use EC\Poetry\Services\Providers\ParsersProvider;
 use EC\Poetry\Services\Providers\ServicesProvider;
 use Pimple\Container;
 use Psr\Container\ContainerInterface;
+use Symfony\Component\Validator\Validator\RecursiveValidator;
 
 /**
  * Class Poetry
@@ -73,6 +74,14 @@ class Poetry extends Container implements ContainerInterface
     public function getServer()
     {
         return $this['server'];
+    }
+
+    /**
+     * @return \Symfony\Component\Validator\Validator\RecursiveValidator
+     */
+    public function getValidator()
+    {
+        return $this['validator'];
     }
 
     /**

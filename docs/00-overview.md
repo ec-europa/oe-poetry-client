@@ -5,19 +5,19 @@ don't have to worry about building their own request messages nor about implemen
 
 The library is build around the following main components:
 
-- **The Poetry factory object**: it's responsible for initializing and orchestrating all services and dependencies. The
+- **Poetry factory object**: it's responsible for initializing and orchestrating all services and dependencies. The
   factory object also allows services to be easily configured by the host application. This is the main
   entry point library users. [Read more](01-poetry.md).
 - **Messages**: they are responsible for building and validating request and status messages. [Read more](02-messages.md).  
-- **The Client**: it's responsible for sending a request message to the Poetry service. [Read more](03-client.md).
-- **The Server**: it's responsible for handling any remote Poetry service callbacks and returning a valid status message.
-  [Read more](04-server.md).
+- **Client**: it's responsible for sending a request message to the Poetry service. [Read more](03-client.md).
+- **Server notifications**: notifications coming from the Poetry Server will be turned into events that library users
+  will be able to subscribe to.
 
-After having properly configured the Poetry factory object the library users will be able to perform the following
+After having properly configured the Poetry factory object library users will be able to perform the following
 operations:
  
-- **Build request message objects** and send them to the Poetry service via the client component.
-- **Handle Poetry asynchronous requests** via the server component, requests will be modelled using message objects.
+- Build and send message objects.
+- Subscribe and handle Poetry service notifications.
 
 ## Dependencies
 

@@ -1,31 +1,47 @@
 # Messages
 
+Messages are objects that wrap a Poetry XML message, be it a request, a response or a remote server notification.
+
 The library is built around message objects, each message represents an interaction with the remote Poetry service.
 The library provides the following message types:
 
-- **Request message:** represents a request sent by the client to the Poetry service, such as creating a new translation
-  request, add a target language, etc. 
-- **Status message:** represents messages returned by the Poetry service describing the status of a request, the
-  acknowledgement of received date, an error, etc.
-
-_**Note:** Message types might be extended and refactored in future._
-
-## Message components
-
-Messages are built using message components which, in turn, abstract XML details at a component level.
-
-Both messages and message components provide:
+Message objects provide:
 
 - **Fluent setters and getters** to access and manipulate their properties.
+- **Factory methods** to easily create and re-use message components like `<demandeId/>`, `<status/>`, etc.
 - **Validation rules** to make sure that their data is valid and can be safely sent to the Poetry service.
 - **Renderable information** such as which template has to be used by the renderer service in order to produce an actual
   SOAP XML message.
 
-For example, let's look at the following status message:
+## Usage
+
+The following code:
+
+```php
+<?php
+use EC\Poetry\Messages\Components as Component;
+use EC\Poetry\Messages\Responses\Status;
+
+$identifier = new Component\Identifier();
+$identifier->setCode('DGT')
+  ->setYear(2017)
+  ->setNumber('00001')
+  ->setVersion('01')
+  ->setPart('00');
+
+$message = new Status($identifier);
+$message->withStatus()
+    ->setCode(0)
+    ->setDate('15/01/2017')
+    ->setTime('12:30:00')
+    ->setMessage('OK');
+```
+
+Will result in the following message:
 
 ```xml
     <POETRY xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="">
-        <request communication="asynchrone" id="DGT/2017/0001/01/00/ABC" type="status">
+        <request communication="synchrone" id="DGT/2017/0001/01/00/ABC" type="status">
             <demandeId>
                 <codeDemandeur>DGT</codeDemandeur>
                 <annee>2017</annee>
@@ -43,60 +59,42 @@ For example, let's look at the following status message:
     </POETRY>
 ```
 
-The message above contains two components:
-
-- The message identifier: `<demandeId>...</demandeId>`
-- The status information: `<status>...</status>`
-
-The Poetry Client library models the XML message above by using the following objects:
-
-- `EC\Poetry\Messages\Status`: The status message object itself
-- `EC\Poetry\Messages\Components\Identifier`: The identifier object
-- `EC\Poetry\Messages\Components\StatusComponent`: The status object
-
-## Interact with messages
-
-Library users can interact with a message as follows:
-
-```php
-use EC\Poetry\Messages\Components as Component;
-use EC\Poetry\Messages\Status;
-
-$id = new Component\Identifier();
-$id->setCode('DGT')
-  ->setYear(2017)
-  ->setNumber('00001')
-  ->setVersion('01')
-  ->setPart('00')
-  ->setProduct('TRA');
-
-$component = new Component\StatusComponent();
-$component->setCode('OK');
-
-$message = new Status($id);
-$message->addStatus($component);
-```
-
 ## Get messages from the service container
 
 Alternatively Poetry can also create messages taking care of settings all necessary dependencies:
 
 ```php
-$component = new Component\StatusComponent();
-$component->setCode('OK');
+<?php
+use EC\Poetry\Poetry;
 
-$poetry = new Poetry();
-$message = $poetry->get('message.status');
-$message->addStatus($component);
+$poetry = new Poetry([
+    'identifier.code' => 'DGT',
+    'identifier.year' => '2017',
+    'identifier.number' => '0001',
+    'identifier.version' => '01',
+    'identifier.part' => '00',    
+    'identifier.product' => 'ABC',    
+]);
+
+$message = $poetry->get('response.status');
+$message->withStatus()
+    ->setCode(0)
+    ->setDate('15/01/2017')
+    ->setTime('12:30:00')
+    ->setMessage('OK');
 ```
 
-In this case the `Identifier` object is created by the service container (eventually using configuration parameters)
-and it is used to instantiate a status message object.
+In this case the `Identifier` object is created by the service container and it is used to instantiate a status 
+response object.
 
 ## Validate messages
 
 Messages can be validated by using the validator service as shown below:
 
 ```php
-$violations = $poetry->get('validator')->validate($message); // No violations.
+<?php
+use EC\Poetry\Poetry;
+
+$poetry = new Poetry();
+$violations = $poetry->getValidator()->validate($message); // No violations.
 ```
