@@ -51,7 +51,7 @@ class Client
     protected $soapClient;
 
     /**
-     * @var \EC\Poetry\Services\Parser
+     * @var \EC\Poetry\Messages\Responses\Status
      */
     protected $response;
 
@@ -69,7 +69,7 @@ class Client
      * @param \SoapClient                                               $soapClient
      * @param \Symfony\Component\Validator\Validator\ValidatorInterface $validator
      * @param \EC\Poetry\Services\Renderer                              $renderer
-     * @param Status                                                    $response
+     * @param \EC\Poetry\Messages\Responses\Status                      $response
      * @param \Psr\Log\LoggerInterface                                  $logger
      */
     public function __construct(

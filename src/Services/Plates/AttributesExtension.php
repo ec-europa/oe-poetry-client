@@ -2,7 +2,6 @@
 
 namespace EC\Poetry\Services\Plates;
 
-use EC\Poetry\Messages\Components\ComponentInterface;
 use League\Plates\Engine;
 use League\Plates\Extension\ExtensionInterface;
 

@@ -9,7 +9,6 @@ use EC\Poetry\Messages\Components\Traits\WithReferenceDocumentsTrait;
 use EC\Poetry\Messages\Components\Traits\WithReturnAddressTrait;
 use EC\Poetry\Messages\Components\Traits\WithSourceTrait;
 use EC\Poetry\Messages\Components\Traits\WithTargetsTrait;
-use EC\Poetry\Messages\Components\Traits\WithAttributionsTrait;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Symfony\Component\Validator\Constraints as Assert;
 

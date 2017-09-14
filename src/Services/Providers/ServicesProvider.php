@@ -43,7 +43,7 @@ class ServicesProvider implements ServiceProviderInterface
             return new Renderer($container['renderer.engine']);
         };
 
-        $container['validator'] = $container->factory(function (Container $container) {
+        $container['validator'] = $container->factory(function () {
             return (new ValidatorBuilder())->addMethodMapping('getConstraints')->getValidator();
         });
 
@@ -64,7 +64,7 @@ class ServicesProvider implements ServiceProviderInterface
             return new \SoapClient($container['client.wsdl'], $container['client.options']);
         };
 
-        $container['parser'] = $container->factory(function (Container $container) {
+        $container['parser'] = $container->factory(function () {
             return new Parser();
         });
 
@@ -79,7 +79,7 @@ class ServicesProvider implements ServiceProviderInterface
         $container['server'] = function (Container $container) {
             return new Server($container['soap.server'], $container['logger']);
         };
-        $container['logger'] = function (Container $container) {
+        $container['logger'] = function () {
             return new NullLogger();
         };
     }

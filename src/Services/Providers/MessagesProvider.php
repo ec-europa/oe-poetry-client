@@ -49,7 +49,6 @@ class MessagesProvider implements ServiceProviderInterface
         });
 
         $components = [
-            'component.attribution'         => Component\Attribution::class,
             'component.contact'             => Component\Contact::class,
             'component.details'             => Component\Details::class,
             'component.reference_document'  => Component\ReferenceDocument::class,
