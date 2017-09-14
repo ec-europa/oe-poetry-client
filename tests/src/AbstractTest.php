@@ -4,6 +4,7 @@ namespace EC\Poetry\Tests;
 
 use EC\Poetry\Messages\Components\Identifier;
 use EC\Poetry\Poetry;
+use Peridot\Leo\Leo;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 
@@ -15,9 +16,34 @@ use Symfony\Component\Validator\ConstraintViolationListInterface;
 abstract class AbstractTest extends TestCase
 {
     /**
+     * {@inheritdoc}
+     */
+    protected function setUp()
+    {
+        $assertion = Leo::assertion();
+        $unit = $this;
+        $assertion->addMethod('xml', function ($fixture) use ($unit) {
+            $actual = $this->getActual();
+            $expected = $unit->getFixture($fixture);
+
+            $doc1 = new \DOMDocument();
+            $doc1->loadXML($actual);
+
+            $doc2 = new \DOMDocument();
+            $doc2->loadXML($expected);
+
+            $element1 = $doc1->getElementsByTagName('POETRY')->item(0);
+            $element2 = $doc2->getElementsByTagName('POETRY')->item(0);
+
+            $unit->assertEqualXMLStructure($element1, $element2);
+            $unit->assertXmlStringEqualsXmlString($expected, $actual);
+        });
+    }
+
+    /**
      * @return \EC\Poetry\Poetry
      */
-    protected function getContainer()
+    public function getContainer()
     {
         return new Poetry();
     }
@@ -25,7 +51,7 @@ abstract class AbstractTest extends TestCase
     /**
      * @return \EC\Poetry\Messages\Components\Identifier
      */
-    protected function getValidIdentifier()
+    public function getValidIdentifier()
     {
         $identifier = new Identifier();
         $identifier->setCode('DGT')
@@ -43,7 +69,7 @@ abstract class AbstractTest extends TestCase
      *
      * @return array
      */
-    protected function getViolations(ConstraintViolationListInterface $violations)
+    public function getViolations(ConstraintViolationListInterface $violations)
     {
         $collection = [];
         foreach ($violations as $violation) {
@@ -56,17 +82,17 @@ abstract class AbstractTest extends TestCase
     /**
      * @return \Mockery\MockInterface
      */
-    protected function getSoapClientMock()
+    public function getSoapClientMock()
     {
         return \Mockery::mock(\SoapClient::class);
     }
 
     /**
-     * @param $name
+     * @param string $name
      *
      * @return bool|string
      */
-    protected function getFixture($name)
+    public function getFixture($name)
     {
         return file_get_contents(__DIR__.'/fixtures/'.$name);
     }

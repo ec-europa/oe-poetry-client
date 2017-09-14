@@ -78,14 +78,6 @@ class CreateRequestTest extends AbstractTest
             ->setDelay(date('d/m/Y', time('+1 day')));
 
         $output = $renderer->render($message);
-        expect($output)
-          ->to->not->be->empty()
-          ->and->to->contain('DGT/2017/00001/01/00/TRA')
-          ->and->to->contain('<codeDemandeur>DGT</codeDemandeur>')
-          ->and->to->contain('<annee>2017</annee>')
-          ->and->to->contain('<numero>00001</numero>')
-          ->and->to->contain('<version>01</version>')
-          ->and->to->contain('<partie>00</partie>')
-          ->and->to->contain('<produit>TRA</produit>');
+        expect($output)->to->have->same->xml('messages/create-request-1.xml');
     }
 }
