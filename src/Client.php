@@ -5,6 +5,8 @@ namespace EC\Poetry;
 use EC\Poetry\Exceptions\ValidationException;
 use EC\Poetry\Messages\AbstractMessage;
 use EC\Poetry\Messages\MessageInterface;
+use EC\Poetry\Messages\Responses\Status;
+use EC\Poetry\Services\Parser;
 use EC\Poetry\Services\Renderer;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
@@ -49,6 +51,11 @@ class Client
     protected $soapClient;
 
     /**
+     * @var \EC\Poetry\Services\Parser
+     */
+    protected $response;
+
+    /**
      * @var \Psr\Log\LoggerInterface
      */
     protected $logger;
@@ -62,6 +69,7 @@ class Client
      * @param \SoapClient                                               $soapClient
      * @param \Symfony\Component\Validator\Validator\ValidatorInterface $validator
      * @param \EC\Poetry\Services\Renderer                              $renderer
+     * @param Status                                                    $response
      * @param \Psr\Log\LoggerInterface                                  $logger
      */
     public function __construct(
@@ -71,6 +79,7 @@ class Client
         \SoapClient $soapClient,
         ValidatorInterface $validator,
         Renderer $renderer,
+        Status $response,
         LoggerInterface $logger
     ) {
         $this->username = $username;
@@ -79,6 +88,7 @@ class Client
         $this->renderer = $renderer;
         $this->validator = $validator;
         $this->soapClient = $soapClient;
+        $this->response = $response;
         $this->logger = $logger;
     }
 
@@ -99,12 +109,12 @@ class Client
             'password' => $this->password,
             'message' => $renderedMessage,
         ]);
-        $response = $this->soapClient->{$this->method}($this->username, $this->password, $renderedMessage);
+        $responseXml = $this->soapClient->{$this->method}($this->username, $this->password, $renderedMessage);
         $this->logger->info("Client response: {message} ", [
-            'message' => $response,
+            'message' => $responseXml,
         ]);
 
-        return $response;
+        return $this->response->fromXml($responseXml);
     }
 
     /**

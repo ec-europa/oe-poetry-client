@@ -28,13 +28,12 @@ class ClientTest extends AbstractTest
         $status = new Status($this->getValidIdentifier());
 
         $rendererRequest = $this->getContainer()->get('renderer')->render($request);
-        $rendererStatus = $this->getContainer()->get('renderer')->render($status);
 
         $mock = $this->getSoapClientMock();
         $receive = $method ? $method : 'requestService';
         $mock->shouldReceive($receive)
           ->withArgs([$username, $password, $rendererRequest])
-          ->andReturn($rendererStatus);
+          ->andReturn($this->getFixture('messages/response-status-1.xml'));
 
         $logger = new TestLogger();
         $parameters = [
@@ -49,7 +48,8 @@ class ClientTest extends AbstractTest
         $poetry = new Poetry($parameters);
 
         $response = $poetry->getClient()->send($request);
-        expect($response)->equal($rendererStatus);
+        $rendererResponse = $this->getContainer()->get('renderer')->render($response);
+        expect($rendererResponse)->has->same->xml('messages/response-status-1.xml');
 
         $logs = $logger->getLogs();
 

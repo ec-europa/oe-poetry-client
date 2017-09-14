@@ -39,7 +39,7 @@ class Status extends AbstractResponse
             $this->withStatus()
                 ->setParser($this->getParser())
                 ->fromXml($component->outerHtml());
-        }, $this, $this));
+        }, $this));
 
         return $this;
     }
