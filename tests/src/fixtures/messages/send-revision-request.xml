@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<POETRY xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="http://intragate.ec.europa.eu/DGT/poetry_services/poetry.xsd">
+    <request communication="asynchrone" id="STSI/2017/40017/0/11/REV" type="newPost">
+        <demandeId>
+            <codeDemandeur>STSI</codeDemandeur><annee>2017</annee><numero>40017</numero><version>0</version><partie>11</partie><produit>REV</produit>
+        </demandeId>
+        <demande>
+            <userReference>Job ID 3999</userReference>
+            <titre>NE-CMS: Erasmus+ - Erasmus Mundus Joint Master Degrees</titre>
+            <organisationResponsable>EAC</organisationResponsable>
+            <organisationAuteur>IE/CE/EAC</organisationAuteur>
+            <serviceDemandeur>IE/CE/EAC/C/4</serviceDemandeur>
+            <applicationReference>FPFIS</applicationReference>
+            <delai>12/09/2017</delai>
+            <referenceFilesNote>https://ec.europa.eu/programmes/erasmus-plus/opportunities-for-individuals/staff-teaching/erasmus-mundus_en</referenceFilesNote>
+            <procedure id="NEANT"/>
+            <destination id="PUBLIC"/>
+            <type id="INTER"/>
+        </demande>
+        <contacts type="auteur"><contactNickname>john</contactNickname></contacts>
+        <contacts type="secretaire"><contactNickname>john</contactNickname></contacts>
+        <contacts type="contact"><contactNickname>john</contactNickname></contacts>
+        <contacts type="responsable"><contactNickname>mark</contactNickname></contacts>
+        <retour action="UPDATE" type="webService">
+            <retourUser>MY-TEST-USER</retourUser>
+            <retourPassword>MY-TEST-PASSWORD</retourPassword>
+            <retourAddress>https://example.com/callback/wsdl/PoetryIntegration.wsdl</retourAddress>
+            <retourPath>TestReturnPath</retourPath>
+        </retour>
+        <documentSource format="HTML">
+            <documentSourceName>content.html</documentSourceName>
+            <documentSourceFile>BASE64ENCODEDFILECONTENT</documentSourceFile>
+            <documentSourceLang lgCode="EN">
+                <documentSourceLangPages>1</documentSourceLangPages>
+            </documentSourceLang>
+        </documentSource>
+        <attributions action="INSERT" format="HTML" lgCode="EN"><attributionsDelai format="DD/MM/YYYY">12/09/2017</attributionsDelai></attributions>
+    </request>
+</POETRY>

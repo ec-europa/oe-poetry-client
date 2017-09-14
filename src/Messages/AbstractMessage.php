@@ -13,6 +13,9 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 abstract class AbstractMessage implements MessageInterface
 {
+    const COMMUNICATION_SYNCHRONOUS = 'synchrone';
+    const COMMUNICATION_ASYNCHRONOUS = 'asynchrone';
+
     /**
      * @var \EC\Poetry\Messages\Components\Identifier
      */
@@ -48,6 +51,16 @@ abstract class AbstractMessage implements MessageInterface
     public function getAttributes()
     {
         return [];
+    }
+
+    /**
+     * Get communication type for current message object.
+     *
+     * @return string
+     */
+    public function getCommunication()
+    {
+        return self::COMMUNICATION_SYNCHRONOUS;
     }
 
     /**

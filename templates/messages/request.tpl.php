@@ -4,11 +4,11 @@
  * Template file.
  *
  * @var \EC\Poetry\Services\Plates\Template $this
- * @var \EC\Poetry\Messages\Requests\AbstractRequest $message
+ * @var \EC\Poetry\Messages\Requests\CreateRequest $message
  * @var string $identifier
  */
 ?>
-<?php $this->layout('layout', ['identifier' => $identifier, 'type' => $message->getType()]) ?>
+<?php $this->layout('layout', ['identifier' => $identifier, 'type' => $message->getType(), 'communication' => $message->getCommunication()]) ?>
 <?= $this->component($message->getIdentifier()); ?>
 <?php if ($message->getDetails()) : ?>
 <?= $this->component($message->getDetails()); ?>
@@ -32,5 +32,10 @@
 <?php if ($message->getReferenceDocuments()) : ?>
     <?php foreach ($message->getReferenceDocuments() as $referenceDocument) : ?>
         <?= $this->component($referenceDocument); ?>
+    <?php endforeach; ?>
+<?php endif; ?>
+<?php if ($message->getAttributions()) : ?>
+    <?php foreach ($message->getAttributions() as $attribution) : ?>
+        <?= $this->component($attribution); ?>
     <?php endforeach; ?>
 <?php endif;

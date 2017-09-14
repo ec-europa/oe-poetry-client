@@ -15,6 +15,7 @@ class Details extends AbstractComponent
     private $clientId;
     private $applicationId;
     private $author;
+    private $responsible;
     private $requester;
     private $title;
     private $remark;
@@ -137,6 +138,25 @@ class Details extends AbstractComponent
     public function setAuthor($author)
     {
         $this->author = $author;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getResponsible()
+    {
+        return $this->responsible;
+    }
+
+    /**
+     * @param mixed $responsible
+     * @return Details
+     */
+    public function setResponsible($responsible)
+    {
+        $this->responsible = $responsible;
 
         return $this;
     }

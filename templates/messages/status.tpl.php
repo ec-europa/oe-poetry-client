@@ -8,7 +8,7 @@
  * @var string $identifier
  */
 ?>
-<?php $this->layout('layout', ['identifier' => $identifier, 'type' => 'status']) ?>
+<?php $this->layout('layout', ['identifier' => $identifier, 'type' => 'status', 'communication' => $message->getCommunication()]) ?>
 <?= $this->component($message->getIdentifier()); ?>
 <?php foreach ($message->getStatuses() as $status) : ?>
     <?= $this->component($status); ?>

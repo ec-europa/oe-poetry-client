@@ -5,3 +5,6 @@ parameters:
     - vendor/
     - spec/
     - callback.php
+  tasks.phpmd.exclude:
+    - vendor/
+    - src/Messages/Components/

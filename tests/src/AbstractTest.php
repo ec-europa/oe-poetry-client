@@ -35,8 +35,8 @@ abstract class AbstractTest extends TestCase
             $element1 = $doc1->getElementsByTagName('POETRY')->item(0);
             $element2 = $doc2->getElementsByTagName('POETRY')->item(0);
 
-            $unit->assertEqualXMLStructure($element1, $element2);
             $unit->assertXmlStringEqualsXmlString($expected, $actual);
+            $unit->assertEqualXMLStructure($element1, $element2);
         });
     }
 

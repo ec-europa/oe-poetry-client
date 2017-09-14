@@ -11,16 +11,16 @@
 
         <demande>
             <userReference>clientID</userReference>
-            <applicationReference>applicationId</applicationReference>
+            <titre>Title</titre>
             <organisationAuteur>DIGIT</organisationAuteur>
             <serviceDemandeur>DGT</serviceDemandeur>
-            <titre>Title</titre>
+            <applicationReference>applicationId</applicationReference>
             <remarque>This is a remark</remarque>
-            <type>PUB</type>
-            <destination>PUBLIC</destination>
-            <procedure>NEANT</procedure>
             <delai>14/09/2017</delai>
             <dateDemande>14/09/2017</dateDemande>
+            <procedure id="NEANT"/>
+            <destination id="PUBLIC"/>
+            <type id="PUB"/>
         </demande>
     </request>
 </POETRY>

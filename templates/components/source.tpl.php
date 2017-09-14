@@ -9,6 +9,7 @@
 ?>
 <documentSource <?= $this->attributes($component->getAttributes()) ?>>
     <documentSourceName><?= $component->getName() ?></documentSourceName>
+    <documentSourceFile><?= $component->getFile() ?></documentSourceFile>
     <?php if ($component->getPath()) : ?>
         <documentSourcePath><?= $component->getPath() ?></documentSourcePath>
     <?php endif ?>
@@ -18,5 +19,4 @@
     <?php if ($component->getSize()) : ?>
         <documentSourceSize><?= $component->getSize() ?></documentSourceSize>
     <?php endif ?>
-    <documentSourceName><?= $component->getName() ?></documentSourceName>
 </documentSource>
