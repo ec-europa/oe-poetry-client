@@ -33,9 +33,5 @@
     <?php foreach ($message->getReferenceDocuments() as $referenceDocument) : ?>
         <?= $this->component($referenceDocument); ?>
     <?php endforeach; ?>
-<?php endif; ?>
-<?php if ($message->getAttributions()) : ?>
-    <?php foreach ($message->getAttributions() as $attribution) : ?>
-        <?= $this->component($attribution); ?>
-    <?php endforeach; ?>
 <?php endif;
+

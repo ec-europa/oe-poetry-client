@@ -64,11 +64,11 @@ class SendReviewRequestTest extends AbstractTest
             ->setFile('BASE64ENCODEDFILECONTENT')
             ->addLanguage('EN', 1);
 
-        $message->withAttribution()
+        $message->withTarget()
             ->setAction('INSERT')
             ->setFormat('HTML')
             ->setLanguage('EN')
-            ->setDelay(2017, 9, 12);
+            ->setDelay('12/09/2017');
 
         $output = $renderer->render($message);
         expect($output)->to->have->same->xml('messages/send-revision-request.xml');

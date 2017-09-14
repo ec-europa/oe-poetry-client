@@ -26,7 +26,6 @@ class CreateRequest extends AbstractRequest
     use WithReturnAddressTrait;
     use WithTargetsTrait;
     use WithReferenceDocumentsTrait;
-    use WithAttributionsTrait;
 
     /**
      * {@inheritdoc}

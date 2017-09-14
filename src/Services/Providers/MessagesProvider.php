@@ -34,7 +34,7 @@ class MessagesProvider implements ServiceProviderInterface
         ];
 
         // Identifier component.
-        $container['component.identifier'] = function (Container $container) {
+        $container['component.identifier'] = $container->factory(function (Container $container) {
             $component = (new Component\Identifier())
                 ->setCode($container['identifier.code'])
                 ->setYear($container['identifier.year'])
@@ -46,7 +46,7 @@ class MessagesProvider implements ServiceProviderInterface
             $component->setParser($container['parser']);
 
             return $component;
-        };
+        });
 
         $components = [
             'component.attribution'         => Component\Attribution::class,
@@ -58,7 +58,7 @@ class MessagesProvider implements ServiceProviderInterface
             'component.status'              => Component\Status::class,
             'component.target'              => Component\Target::class,
         ];
-        $this->registerServices($components, $container);
+        $this->serviceFactory($components, $container);
 
         // Messages.
         $messages = [
@@ -70,7 +70,7 @@ class MessagesProvider implements ServiceProviderInterface
             // Response objects.
             'response.status'               => Status::class,
         ];
-        $this->registerServices($messages, $container);
+        $this->serviceFactory($messages, $container);
     }
 
     /**
@@ -78,20 +78,20 @@ class MessagesProvider implements ServiceProviderInterface
      *
      * @param array $services
      *      List of services.
-     * @param $container
+     * @param \Pimple\Container $container
      *      Container object.
      */
-    protected function registerServices(array $services, &$container)
+    protected function serviceFactory(array $services, Container $container)
     {
         foreach ($services as $name => $class) {
-            $container[$name] = function (Container $container) use ($class) {
+            $container[$name] = $container->factory(function (Container $container) use ($class) {
                 $service = new $class($container['component.identifier']);
                 if ((new \ReflectionClass($service))->implementsInterface(ParserAwareInterface::class)) {
                     $service->setParser($container['parser']);
                 }
 
                 return $service;
-            };
+            });
         }
     }
 }
