@@ -2,7 +2,6 @@
 
 namespace EC\Poetry;
 
-use EC\Poetry\Parsers\ParserInterface;
 use Psr\Log\LoggerInterface;
 
 /**
@@ -12,13 +11,6 @@ use Psr\Log\LoggerInterface;
  */
 class Server
 {
-    /**
-     * Parser services.
-     *
-     * @var \EC\Poetry\Parsers\ParserInterface[]
-     */
-    protected $parsers;
-
     /**
      * @var \SoapServer
      */
@@ -37,14 +29,12 @@ class Server
     /**
      * Server constructor.
      *
-     * @param \SoapServer                          $soapServer
-     * @param \EC\Poetry\Parsers\ParserInterface[] $parsers
-     * @param \Psr\Log\LoggerInterface             $logger
+     * @param \SoapServer              $soapServer
+     * @param \Psr\Log\LoggerInterface $logger
      */
-    public function __construct(\SoapServer $soapServer, array $parsers, LoggerInterface $logger)
+    public function __construct(\SoapServer $soapServer, LoggerInterface $logger)
     {
         $this->soapServer = $soapServer;
-        $this->parsers = $parsers;
         $this->logger = $logger;
     }
 

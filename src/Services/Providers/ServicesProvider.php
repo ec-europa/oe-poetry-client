@@ -76,7 +76,7 @@ class ServicesProvider implements ServiceProviderInterface
             return $server;
         };
         $container['server'] = function (Container $container) {
-            return new Server($container['soap.server'], [], $container['logger']);
+            return new Server($container['soap.server'], $container['logger']);
         };
         $container['logger'] = function (Container $container) {
             return new NullLogger();
