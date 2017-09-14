@@ -21,13 +21,13 @@ trait ParserAwareTrait
      */
     public function getParser()
     {
-        return $this->parser;
+        return clone $this->parser;
     }
 
     /**
      * @param \EC\Poetry\Services\Parser $parser
      *
-     * @return ParserAwareTrait
+     * @return $this
      */
     public function setParser(Parser $parser)
     {

@@ -66,7 +66,7 @@ trait WithStatusTrait
      */
     public function withStatus()
     {
-        $this->statuses[] = Poetry::getInstance()->get('component.status');
+        $this->statuses[] = new Status();
 
         return end($this->statuses);
     }

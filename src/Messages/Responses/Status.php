@@ -35,9 +35,10 @@ class Status extends AbstractResponse
         $xml = $parser->getOuterContent('POETRY/request/demandeId');
         $this->getIdentifier()->fromXml($xml);
 
-        $parser->filterXPath("POETRY/request/status")->each(\Closure::bind(function (Parser $parser) use (&$components) {
-            $xml = $parser->outerHtml();
-            $this->withStatus()->fromXml($xml);
+        $parser->filterXPath("POETRY/request/status")->each(\Closure::bind(function (Parser $component) {
+            $this->withStatus()
+                ->setParser($this->getParser())
+                ->fromXml($component->outerHtml());
         }, $this, $this));
 
         return $this;
