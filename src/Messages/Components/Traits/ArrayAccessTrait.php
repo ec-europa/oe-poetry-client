@@ -12,13 +12,6 @@ use EC\Poetry\Messages\ComponentInterface;
 trait ArrayAccessTrait
 {
     /**
-     * Collect properties that do not have either a factory or a setter method.
-     *
-     * @var array
-     */
-    private $extra;
-
-    /**
      * {@inheritdoc}
      */
     public function offsetExists($offset)
@@ -47,8 +40,6 @@ trait ArrayAccessTrait
             $this->{$this->getWithMethod($offset)}()->withArray($value);
         } elseif ($this->isProperty($offset, $value)) {
             $this->{$this->getSetMethod($offset)}($value);
-        } else {
-            $this->extra[$offset] = $value;
         }
     }
 
