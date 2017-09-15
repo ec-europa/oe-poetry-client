@@ -51,18 +51,10 @@ class Source extends AbstractComponent
             new Constraint\YesNo(),
         ]);
         $metadata->addPropertyConstraint('trackChanges', new Constraint\YesNo());
-        $metadata->addPropertyConstraint('channel', new Assert\Choice([
-            'POETRY',
-            'RUE',
-            'USB',
-            'PAPER',
-        ]));
+        $metadata->addPropertyConstraint('channel', new Constraint\SourceChannel());
         $metadata->addPropertyConstraint('confidential', new Constraint\YesNo());
         $metadata->addPropertyConstraint('deadline', new Assert\DateTime());
-        $metadata->addPropertyConstraint('deadlineStatus', new Assert\Choice([
-            'PUBLIC',
-            'DELETED',
-        ]));
+        $metadata->addPropertyConstraint('deadlineStatus', new Constraint\SourceDeadlineStatus());
         $metadata->addPropertyConstraint('name', new Assert\NotBlank());
         $metadata->addPropertyConstraint('file', new Assert\NotBlank());
         $metadata->addPropertyConstraints('sourceLanguages', [

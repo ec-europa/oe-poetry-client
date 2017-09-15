@@ -5,13 +5,14 @@ namespace EC\Poetry\Messages\Components;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\GroupSequenceProviderInterface;
+use EC\Poetry\Messages\Components\Constraints as Constraint;
 
 /**
  * Class StatusComponent
  *
  * @package EC\Poetry\Messages\Components
  */
-class Status extends AbstractComponent implements GroupSequenceProviderInterface
+class Status extends AbstractComponent
 {
     private $type;
     private $code;
@@ -33,33 +34,11 @@ class Status extends AbstractComponent implements GroupSequenceProviderInterface
      */
     public static function getConstraints(ClassMetadata $metadata)
     {
-        $metadata->setGroupSequenceProvider(true);
         $metadata->addPropertyConstraints('type', [
             new Assert\NotBlank(),
-            new Assert\Choice([
-                'demande',
-                'attribution',
-                'request',
-            ]),
+            new Constraints\StatusType(),
         ]);
-        $metadata->addPropertyConstraints('code', [
-            new Assert\Choice([
-                'choices' => [
-                    'EXE',
-                    'ONG',
-                    'PRE',
-                    'ENV',
-                    'REF',
-                    'CNL',
-                    'SUS',
-                ],
-                'groups' => 'component',
-            ]),
-            new Assert\Type([
-                'type' => 'scalar',
-                'groups' => 'request',
-            ]),
-        ]);
+        $metadata->addPropertyConstraint('code', new Constraints\StatusCode());
         $metadata->addPropertyConstraint('date', new Assert\DateTime());
         $metadata->addPropertyConstraint('time', new Assert\DateTime());
         $metadata->addPropertyConstraint('message', new Assert\Type('string'));
@@ -197,22 +176,6 @@ class Status extends AbstractComponent implements GroupSequenceProviderInterface
         $this->message = $message;
 
         return $this;
-    }
-
-    /**
-     * Returns which validation groups should be used for a certain state
-     * of the object.
-     *
-     * @return array An array of validation groups
-     */
-    public function getGroupSequence()
-    {
-        return [
-          [
-            'StatusComponent',
-            $this->getType() == 'request' ? 'request' : 'component',
-          ],
-        ];
     }
 
     /**

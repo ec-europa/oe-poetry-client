@@ -4,6 +4,7 @@ namespace EC\Poetry\Messages\Components;
 
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Symfony\Component\Validator\Constraints as Assert;
+use EC\Poetry\Messages\Components\Constraints as Constraint;
 
 /**
  * Class Details
@@ -46,39 +47,9 @@ class Details extends AbstractComponent
         $metadata->addPropertyConstraint('requester', new Assert\Type('string'));
         $metadata->addPropertyConstraint('title', new Assert\Type('string'));
         $metadata->addPropertyConstraint('remark', new Assert\Type('string'));
-        $metadata->addPropertyConstraint('type', new Assert\Choice([
-            'AUTRE',
-            'COMP',
-            'IMG',
-            'INF',
-            'INTER',
-            'INTRA',
-            'LEGTF',
-            'PUB',
-        ]));
-        $metadata->addPropertyConstraint('destination', new Assert\Choice([
-            'AUTRE',
-            'COMMISR',
-            'EM',
-            'EXT',
-            'IE',
-            'INTERNE',
-            'JO',
-            'PRESSE',
-            'PUBLIC',
-            'RST',
-        ]));
-        $metadata->addPropertyConstraint('procedure', new Assert\Choice([
-            'DEGHP',
-            'NEANT',
-            'PROAC',
-            'PROCEP',
-            'PROCO',
-            'REUNCS',
-            'REUNAU',
-            'PROCH',
-            'PROCD',
-        ]));
+        $metadata->addPropertyConstraint('type', new Constraint\DetailsType());
+        $metadata->addPropertyConstraint('destination', new Constraint\DetailsDestination());
+        $metadata->addPropertyConstraint('procedure', new Constraint\DetailsProcedure());
         $metadata->addPropertyConstraint('delay', new Assert\DateTime());
         $metadata->addPropertyConstraint('requestDate', new Assert\DateTime());
         $metadata->addPropertyConstraint('status', new Assert\Type('string'));
