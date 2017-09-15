@@ -4,6 +4,7 @@ namespace EC\Poetry\Messages\Components;
 
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Symfony\Component\Validator\Constraints as Assert;
+use EC\Poetry\Messages\Components\Constraints as Constraint;
 
 /**
  * Class ReferenceDocument
@@ -38,28 +39,7 @@ class ReferenceDocument extends AbstractComponent
     {
         $metadata->addPropertyConstraints('format', [
             new Assert\NotBlank(),
-            new Assert\Choice([
-                'DOC',
-                'DOCX',
-                'FAX',
-                'HTM',
-                'HTML',
-                'PAP',
-                'PDF',
-                'PPT',
-                'RTF',
-                'RUE',
-                'SECEM',
-                'TIF',
-                'TIFF',
-                'TXT',
-                'USB',
-                'VSB',
-                'XLS',
-                'XML',
-                'XMW',
-                'ZIP',
-            ]),
+            new Constraint\DocumentFormat(),
         ]);
         $metadata->addPropertyConstraint('language', new Assert\NotBlank());
         $metadata->addPropertyConstraints('type', [

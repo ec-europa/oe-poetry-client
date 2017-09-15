@@ -5,6 +5,7 @@ namespace EC\Poetry\Messages\Components;
 use EC\Poetry\Services\Parser;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Symfony\Component\Validator\Constraints as Assert;
+use EC\Poetry\Messages\Components\Constraints as Constraint;
 
 /**
  * Class Source
@@ -42,37 +43,20 @@ class Source extends AbstractComponent
     {
         $metadata->addPropertyConstraints('format', [
             new Assert\NotBlank(),
-            new Assert\Choice([
-                'DOC',
-                'DOCX',
-                'HTM',
-                'HTML',
-                'PDF',
-                'PPT',
-                'RTF',
-                'TIF',
-                'TIFF',
-                'TXT',
-                'USB',
-                'VSD',
-                'XLS',
-                'XML',
-                'XMW',
-                'ZIP',
-            ]),
+            new Constraint\DocumentFormat(),
         ]);
         $metadata->addPropertyConstraints('legiswriteFormat', [
             new Assert\NotBlank(),
-            new Assert\Choice(['Yes', 'No']),
+            new Constraint\YesNo(),
         ]);
-        $metadata->addPropertyConstraint('trackChanges', new Assert\Choice(['Yes', 'No']));
+        $metadata->addPropertyConstraint('trackChanges', new Constraint\YesNo());
         $metadata->addPropertyConstraint('channel', new Assert\Choice([
             'POETRY',
             'RUE',
             'USB',
             'PAPER',
         ]));
-        $metadata->addPropertyConstraint('confidential', new Assert\Choice(['Yes', 'No']));
+        $metadata->addPropertyConstraint('confidential', new Constraint\YesNo());
         $metadata->addPropertyConstraint('deadline', new Assert\DateTime());
         $metadata->addPropertyConstraint('deadlineStatus', new Assert\Choice([
             'PUBLIC',
@@ -365,11 +349,11 @@ class Source extends AbstractComponent
             ->setSize($parser->getContent('documentSource/documentSourceSize'))
             ->setFile($parser->getContent('documentSource/documentSourceFile'));
 
-        $languages = [];
-        $parser->filterXPath("documentSource/documentSourceLang")->each(function (Parser $language) use (&$languages) {
-            $languages[$language->getAttribute('documentSourceLang', 'lgCode')] = $language->getContent('documentSourceLang/documentSourceLangPages');
-        });
-        $this->setLanguages($languages);
+        $parser->eachComponent("documentSource/documentSourceLang", function (Parser $language) {
+            $code = $language->getAttribute('documentSourceLang', 'lgCode');
+            $pages = $language->getContent('documentSourceLang/documentSourceLangPages');
+            $this->addLanguage($code, $pages);
+        }, $this);
 
         return $this;
     }

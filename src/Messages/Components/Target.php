@@ -6,6 +6,7 @@ use EC\Poetry\Messages\Components\Traits\WithContactsTrait;
 use EC\Poetry\Messages\Components\Traits\WithReturnAddressTrait;
 use EC\Poetry\Services\Parser;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
+use EC\Poetry\Messages\Components\Constraints as Constraint;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -44,29 +45,12 @@ class Target extends AbstractComponent
     {
         $metadata->addPropertyConstraints('format', [
             new Assert\NotBlank(),
-            new Assert\Choice([
-                'DOC',
-                'DOCX',
-                'HTM',
-                'HTML',
-                'PDF',
-                'PPT',
-                'RTF',
-                'TIF',
-                'TIFF',
-                'TXT',
-                'USB',
-                'VSD',
-                'XLS',
-                'XML',
-                'XMW',
-                'ZIP',
-            ]),
+            new Constraint\DocumentFormat(),
         ]);
         $metadata->addPropertyConstraints('language', [
             new Assert\NotBlank(),
         ]);
-        $metadata->addPropertyConstraint('trackChanges', new Assert\Choice(['Yes', 'No']));
+        $metadata->addPropertyConstraint('trackChanges', new Constraint\YesNo());
         $metadata->addPropertyConstraint('action', new Assert\Choice([
             'INSERT',
             'UPDATE',

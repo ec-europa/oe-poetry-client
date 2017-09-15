@@ -83,10 +83,10 @@ class Parser extends DomCrawler\Crawler
      *
      * @param string   $xpath
      * @param \Closure $closure
-     * @param object   $context
+     * @param object   $callee
      */
-    public function eachComponent($xpath, \Closure $closure, $context)
+    public function eachComponent($xpath, \Closure $closure, $callee)
     {
-        $this->filterXPath($xpath)->each(\Closure::bind($closure, $context));
+        $this->filterXPath($xpath)->each(\Closure::bind($closure, $callee, $callee));
     }
 }
