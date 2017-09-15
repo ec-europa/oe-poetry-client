@@ -6,9 +6,9 @@
     "prefer-stable": true,
     "license": "EUPL-1.1",
     "require": {
-        "symfony/validator": "^3.3",
-        "symfony/expression-language": "^3.3",
-        "symfony/dom-crawler": "^3.3",
+        "symfony/validator": "~2.8",
+        "symfony/expression-language": "~2.8",
+        "symfony/dom-crawler": "~2.8",
         "league/plates": "^3.3",
         "pimple/pimple": "^3.1",
         "psr/log": "^1.0",

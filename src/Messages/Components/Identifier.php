@@ -11,7 +11,7 @@ use Symfony\Component\Validator\GroupSequenceProviderInterface;
  *
  * @package EC\Poetry\Messages\Components
  */
-class Identifier extends AbstractComponent implements GroupSequenceProviderInterface
+class Identifier extends AbstractComponent
 {
     private $code;
     private $year;
@@ -34,7 +34,6 @@ class Identifier extends AbstractComponent implements GroupSequenceProviderInter
      */
     public static function getConstraints(ClassMetadata $metadata)
     {
-        $metadata->setGroupSequenceProvider(true);
         $metadata->addConstraint(new Assert\Expression([
             'expression' => 'this.getSequence() || this.getNumber() ',
             'message' => 'An identifier must have a number or a sequence.',
@@ -52,14 +51,8 @@ class Identifier extends AbstractComponent implements GroupSequenceProviderInter
             new Assert\Type('scalar'),
             new Assert\GreaterThan(2000),
         ]);
-        $metadata->addPropertyConstraint('number', new Assert\Type([
-            'type' => 'scalar',
-            'groups' => 'number',
-        ]));
-        $metadata->addPropertyConstraint('sequence', new Assert\Type([
-            'type' => 'string',
-            'groups' => 'sequence',
-        ]));
+        $metadata->addPropertyConstraint('number', new Assert\Type('scalar'));
+        $metadata->addPropertyConstraint('sequence', new Assert\Type('string'));
         $metadata->addPropertyConstraints('version', [
             new Assert\NotBlank(),
             new Assert\Type('scalar'),
@@ -79,16 +72,14 @@ class Identifier extends AbstractComponent implements GroupSequenceProviderInter
      */
     public function getFormattedIdentifier()
     {
-        $parts = [
-          $this->code,
-          $this->year,
-          $this->number,
-          $this->version,
-          $this->part,
-          $this->product,
-        ];
-
-        return implode('/', $parts);
+        return implode('/', [
+            $this->code,
+            $this->year,
+            $this->number,
+            $this->version,
+            $this->part,
+            $this->product,
+        ]);
     }
 
     /**
