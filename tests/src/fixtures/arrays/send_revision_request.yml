@@ -29,26 +29,27 @@
       format: 'HTML'
       name: 'content.html'
       file: 'BASE64ENCODEDFILECONTENT'
-#      language: EN', 1);
-#    contacts:
-#      -
-#        type: 'auteur'
-#        nickname: 'john'
-#      -
-#        type: 'secretaire'
-#        nickname: 'john'
-#      -
-#        type: 'contact'
-#        nickname: 'john'
-#      -
-#        type: 'responsable'
-#        nickname: 'mark'
-#    targets:
-#      -
-#        action: 'INSERT'
-#        format: 'HTML'
-#        language: 'EN'
-#        delay: '12/09/2017'
+      # @todo: Fix languages.
+      # language: ['EN', '1']
+    contact:
+      -
+        type: 'auteur'
+        nickname: 'john'
+      -
+        type: 'secretaire'
+        nickname: 'john'
+      -
+        type: 'contact'
+        nickname: 'john'
+      -
+        type: 'responsable'
+        nickname: 'mark'
+    target:
+      -
+        action: 'INSERT'
+        format: 'HTML'
+        language: 'EN'
+        delay: '12/09/2017'
   expected:
     getIdentifier:
       getCode: 'STSI'
@@ -79,3 +80,16 @@
       getFormat: 'HTML'
       getName: 'content.html'
       getFile: 'BASE64ENCODEDFILECONTENT'
+    getContacts:
+      -
+        getType: 'auteur'
+        getNickname: 'john'
+      -
+        getType: 'secretaire'
+        getNickname: 'john'
+      -
+        getType: 'contact'
+        getNickname: 'john'
+      -
+        getType: 'responsable'
+        getNickname: 'mark'

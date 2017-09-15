@@ -96,4 +96,26 @@ abstract class AbstractTest extends TestCase
     {
         return file_get_contents(__DIR__.'/fixtures/'.$name);
     }
+
+    /**
+     * @param $properties
+     * @return bool
+     */
+    protected function isComponentCollection($properties)
+    {
+        return is_int(key($properties));
+    }
+
+    /**
+     * Assert property hash.
+     *
+     * @param $component
+     * @param $properties
+     */
+    protected function assertProperties($component, $properties)
+    {
+        foreach ($properties as $getProperty => $value) {
+            expect($component->$getProperty())->to->equal($value);
+        }
+    }
 }

@@ -39,12 +39,13 @@ trait ArrayAccessTrait
      */
     public function offsetSet($offset, $value)
     {
-        // If value is an array and we do have a with factory method then run it.
-        if (is_array($value) && $this->hasWithMethod($offset)) {
-            /** @var \EC\Poetry\Messages\ComponentInterface $component */
-            $component = $this->{$this->getWithMethod($offset)}();
-            $component->withArray($value);
-        } elseif ($this->hasSetMethod($offset)) {
+        if ($this->isComponentCollection($offset, $value)) {
+            foreach ($value as $component) {
+                $this->{$this->getWithMethod($offset)}()->withArray($component);
+            }
+        } elseif ($this->isComponent($offset, $value)) {
+            $this->{$this->getWithMethod($offset)}()->withArray($value);
+        } elseif ($this->isProperty($offset, $value)) {
             $this->{$this->getSetMethod($offset)}($value);
         } else {
             $this->extra[$offset] = $value;
@@ -149,5 +150,41 @@ trait ArrayAccessTrait
     protected function getWithMethod($method)
     {
         return 'with'.$this->toCamelCase($method);
+    }
+
+    /**
+     * Check whereas given name / value pair is a simple component property.
+     *
+     * @param string $name
+     * @param mixed  $value
+     * @return bool
+     */
+    protected function isProperty($name, $value)
+    {
+        return is_scalar($value) && $this->hasSetMethod($name);
+    }
+
+    /**
+     * Check whereas given name / value pair is a component.
+     *
+     * @param string $name
+     * @param mixed  $value
+     * @return bool
+     */
+    protected function isComponent($name, $value)
+    {
+        return is_array($value) && !is_int(key($value)) && $this->hasWithMethod($name);
+    }
+
+    /**
+     * Check whereas given name / value pair is a collection of components.
+     *
+     * @param string $name
+     * @param mixed  $value
+     * @return bool
+     */
+    protected function isComponentCollection($name, $value)
+    {
+        return is_array($value) && is_int(key($value)) && $this->hasWithMethod($name);
     }
 }

@@ -87,8 +87,12 @@ class SendReviewRequestTest extends AbstractTest
         $component->withArray($array);
 
         foreach ($expected as $getComponent => $properties) {
-            foreach ($properties as $getProperty => $value) {
-                expect($component->$getComponent()->$getProperty())->to->equal($value);
+            if ($this->isComponentCollection($properties)) {
+                foreach ($properties as $i => $property) {
+                    $this->assertProperties($component->$getComponent()[$i], $property);
+                }
+            } else {
+                $this->assertProperties($component->$getComponent(), $properties);
             }
         }
     }
