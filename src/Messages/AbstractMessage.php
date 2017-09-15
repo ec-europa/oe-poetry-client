@@ -88,4 +88,16 @@ abstract class AbstractMessage implements MessageInterface
 
         return $this;
     }
+
+    /**
+     * Set Identifier property.
+     *
+     * @return \EC\Poetry\Messages\Components\Identifier
+     */
+    public function withIdentifier()
+    {
+        $this->identifier = new Identifier();
+
+        return $this->identifier;
+    }
 }

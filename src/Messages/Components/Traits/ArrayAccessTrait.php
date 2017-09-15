@@ -2,6 +2,8 @@
 
 namespace EC\Poetry\Messages\Components\Traits;
 
+use EC\Poetry\Messages\ComponentInterface;
+
 /**
  * Trait ArrayAccessTrait.
  *
@@ -39,9 +41,10 @@ trait ArrayAccessTrait
     {
         // If value is an array and we do have a with factory method then run it.
         if (is_array($value) && $this->hasWithMethod($offset)) {
+            /** @var \EC\Poetry\Messages\ComponentInterface $component */
             $component = $this->{$this->getWithMethod($offset)}();
-            array_merge($component, $value);
-        } elseif (is_scalar($value) && $this->hasSetMethod($offset)) {
+            $component->withArray($value);
+        } elseif ($this->hasSetMethod($offset)) {
             $this->{$this->getSetMethod($offset)}($value);
         } else {
             $this->extra[$offset] = $value;

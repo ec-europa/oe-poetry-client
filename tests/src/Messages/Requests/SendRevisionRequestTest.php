@@ -7,6 +7,7 @@ use EC\Poetry\Messages\Components\Identifier;
 use EC\Poetry\Messages\Requests\CreateRequest;
 use EC\Poetry\Messages\Requests\SendReviewRequest;
 use EC\Poetry\Tests\AbstractTest;
+use Symfony\Component\Yaml\Yaml;
 
 /**
  * Class SendReviewRequestTest
@@ -72,5 +73,31 @@ class SendReviewRequestTest extends AbstractTest
 
         $output = $renderer->render($message);
         expect($output)->to->have->same->xml('messages/send-revision-request.xml');
+    }
+
+    /**
+     * @param array $array
+     * @param array $expected
+     *
+     * @dataProvider withArrayProvider
+     */
+    public function testWithArray(array $array, array $expected)
+    {
+        $component = new SendReviewRequest(new Identifier());
+        $component->withArray($array);
+
+        foreach ($expected as $getComponent => $properties) {
+            foreach ($properties as $getProperty => $value) {
+                expect($component->$getComponent()->$getProperty())->to->equal($value);
+            }
+        }
+    }
+
+    /**
+     * @return mixed
+     */
+    public function withArrayProvider()
+    {
+        return Yaml::parse($this->getFixture('arrays/send_revision_request.yml'));
     }
 }

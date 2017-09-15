@@ -20,7 +20,7 @@ class IdentifierTest extends TestCase
     {
         /** @var \Symfony\Component\Validator\Validator\RecursiveValidator $validator */
         $validator = (new Poetry())->get('validator');
-        $identifier = (new Identifier())->setYear(1234);
+        $identifier = (new Identifier())->setYear(1017);
 
         $violations = $validator->validate($identifier);
         expect($violations->count())->to->be->above(0);
@@ -33,8 +33,9 @@ class IdentifierTest extends TestCase
           'version' => "This value should not be blank.",
           'year' => "This value should be greater than 2000.",
         ];
-        foreach ($this->getViolations($violations) as $name => $violation) {
-            expect($violation)->to->be->equal($expected[$name]);
+        $violations = $this->getViolations($violations);
+        foreach ($expected as $name => $violation) {
+            expect($violations[$name])->to->be->equal($violation);
         }
     }
 
