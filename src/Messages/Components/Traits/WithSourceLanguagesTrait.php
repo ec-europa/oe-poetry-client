@@ -36,7 +36,7 @@ trait WithSourceLanguagesTrait
      *
      * @return SourceLanguage[]
      */
-    public function getSourceLanguages(): array
+    public function getSourceLanguages()
     {
         return $this->sourceLanguages;
     }
@@ -48,7 +48,7 @@ trait WithSourceLanguagesTrait
      *
      * @return WithSourceLanguagesTrait
      */
-    public function setSourceLanguages(array $sourceLanguages): WithSourceLanguagesTrait
+    public function setSourceLanguages(array $sourceLanguages)
     {
         $this->sourceLanguages = $sourceLanguages;
 
