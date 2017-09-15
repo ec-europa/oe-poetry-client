@@ -103,7 +103,7 @@ abstract class AbstractTest extends TestCase
      */
     protected function isComponentCollection($properties)
     {
-        return is_int(key($properties));
+        return is_array($properties) && is_int(key($properties));
     }
 
     /**

@@ -63,7 +63,9 @@ class SendReviewRequestTest extends AbstractTest
             ->setFormat('HTML')
             ->setName('content.html')
             ->setFile('BASE64ENCODEDFILECONTENT')
-            ->addLanguage('EN', 1);
+            ->withSourceLanguage()
+                ->setCode('EN')
+                ->setPages(1);
 
         $message->withTarget()
             ->setAction('INSERT')

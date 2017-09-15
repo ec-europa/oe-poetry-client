@@ -2,6 +2,7 @@
 
 namespace EC\Poetry\Messages\Components;
 
+use EC\Poetry\Messages\Components\Traits\WithSourceLanguagesTrait;
 use EC\Poetry\Services\Parser;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -14,6 +15,8 @@ use EC\Poetry\Messages\Components\Constraints as Constraint;
  */
 class Source extends AbstractComponent
 {
+    use WithSourceLanguagesTrait;
+
     private $format;
     private $legiswriteFormat;
     private $trackChanges;
@@ -23,10 +26,8 @@ class Source extends AbstractComponent
     private $deadlineStatus;
     private $name;
     private $path;
-    private $languages;
     private $size;
     private $file;
-
 
     /**
      * {@inheritdoc}
@@ -64,11 +65,14 @@ class Source extends AbstractComponent
         ]));
         $metadata->addPropertyConstraint('name', new Assert\NotBlank());
         $metadata->addPropertyConstraint('file', new Assert\NotBlank());
-        $metadata->addPropertyConstraint('languages', new Assert\Count([
-            'min' => 0,
-            'max' => 5,
-            'maxMessage' => 'Only 5 source languages are allowed.',
-        ]));
+        $metadata->addPropertyConstraints('sourceLanguages', [
+            new Assert\Count([
+                'min' => 0,
+                'max' => 5,
+                'maxMessage' => 'Only 5 source languages are allowed.',
+            ]),
+            new Assert\Valid(),
+        ]);
     }
 
     /**
@@ -263,37 +267,6 @@ class Source extends AbstractComponent
     /**
      * @return mixed
      */
-    public function getLanguages()
-    {
-        return $this->languages;
-    }
-
-    /**
-     * @param array $languages
-     * @return Source
-     */
-    public function setLanguages($languages)
-    {
-        $this->languages = $languages;
-
-        return $this;
-    }
-
-    /**
-     * @param mixed $code
-     * @param mixed $pageCount
-     * @return Source
-     */
-    public function addLanguage($code, $pageCount)
-    {
-        $this->languages[$code] = $pageCount;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getSize()
     {
         return $this->size;
@@ -350,9 +323,9 @@ class Source extends AbstractComponent
             ->setFile($parser->getContent('documentSource/documentSourceFile'));
 
         $parser->eachComponent("documentSource/documentSourceLang", function (Parser $language) {
-            $code = $language->getAttribute('documentSourceLang', 'lgCode');
-            $pages = $language->getContent('documentSourceLang/documentSourceLangPages');
-            $this->addLanguage($code, $pages);
+            $this->withSourceLanguage()
+                ->setParser($this->getParser())
+                ->fromXml($language->outerHtml());
         }, $this);
 
         return $this;

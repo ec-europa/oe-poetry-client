@@ -20,12 +20,13 @@ class SourceTest extends TestCase
     {
         /** @var \Symfony\Component\Validator\Validator\RecursiveValidator $validator */
         $validator = (new Poetry())->get('validator');
-        $source = (new Source())->addLanguage('en', 1);
-        $source->addLanguage('fr', 1);
-        $source->addLanguage('de', 1);
-        $source->addLanguage('es', 1);
-        $source->addLanguage('pt', 1);
-        $source->addLanguage('it', 1);
+        $source = (new Source());
+        $source->withSourceLanguage()->setCode('en')->setPages(1);
+        $source->withSourceLanguage()->setCode('fr')->setPages(1);
+        $source->withSourceLanguage()->setCode('de')->setPages(1);
+        $source->withSourceLanguage()->setCode('es')->setPages(1);
+        $source->withSourceLanguage()->setCode('pt')->setPages(1);
+        $source->withSourceLanguage()->setCode('it')->setPages(1);
 
         $violations = $validator->validate($source);
         expect($violations->count())->to->be->above(0);
@@ -34,10 +35,10 @@ class SourceTest extends TestCase
             'legiswriteFormat' => "This value should not be blank.",
             'name' => "This value should not be blank.",
             'file' => "This value should not be blank.",
-            'languages' => "Only 5 source languages are allowed.",
         ];
-        foreach ($this->getViolations($violations) as $name => $violation) {
-            expect($violation)->to->be->equal($expected[$name]);
+        $violations = $this->getViolations($violations);
+        foreach ($expected as $name => $violation) {
+            expect($violations[$name])->to->be->equal($violation);
         }
     }
 
@@ -45,20 +46,22 @@ class SourceTest extends TestCase
      * Test parsing.
      *
      * @param string $xml
-     * @param array  $fixtures
+     * @param array  $expected
      *
      * @dataProvider parserProvider
      */
-    public function testParsing($xml, $fixtures)
+    public function testParsing($xml, $expected)
     {
         /** @var \EC\Poetry\Messages\Components\Source $component */
         $component = $this->getContainer()->get('component.source')->fromXml($xml);
 
-        foreach ($fixtures as $method => $value) {
-            if (is_array($value)) {
-                expect($component->$method())->to->keys($value);
+        foreach ($expected as $getComponent => $properties) {
+            if ($this->isComponentCollection($properties)) {
+                foreach ($properties as $i => $property) {
+                    $this->assertProperties($component->$getComponent()[$i], $property);
+                }
             } else {
-                expect($component->$method())->to->equal($value);
+                expect($component->$getComponent())->to->equal($properties);
             }
         }
     }
