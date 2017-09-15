@@ -3,6 +3,7 @@
 namespace EC\Poetry\Messages;
 
 use EC\Poetry\Messages\Components\Identifier;
+use EC\Poetry\Messages\Components\Traits\ArrayAccessTrait;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -13,6 +14,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 abstract class AbstractMessage implements MessageInterface
 {
+    use ArrayAccessTrait;
+
     const COMMUNICATION_SYNCHRONOUS = 'synchrone';
     const COMMUNICATION_ASYNCHRONOUS = 'asynchrone';
 
