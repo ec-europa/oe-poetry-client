@@ -74,8 +74,8 @@ class CreateRequestTest extends AbstractTest
             ->setType("PUB")
             ->setDestination("PUBLIC")
             ->setProcedure("NEANT")
-            ->setRequestDate(date('d/m/Y'))
-            ->setDelay(date('d/m/Y', time('+1 day')));
+            ->setRequestDate('14/09/2017')
+            ->setDelay('14/09/2017');
 
         $output = $renderer->render($message);
         expect($output)->to->have->same->xml('messages/create-request-1.xml');

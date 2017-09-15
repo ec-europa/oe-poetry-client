@@ -77,4 +77,16 @@ class Parser extends DomCrawler\Crawler
 
         return $html;
     }
+
+    /**
+     * Run closure on all components in callee $this context.
+     *
+     * @param string   $xpath
+     * @param \Closure $closure
+     * @param object   $context
+     */
+    public function eachComponent($xpath, \Closure $closure, $context)
+    {
+        $this->filterXPath($xpath)->each(\Closure::bind($closure, $context));
+    }
 }

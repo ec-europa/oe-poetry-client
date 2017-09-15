@@ -2,6 +2,8 @@
 
 namespace EC\Poetry\Messages\Components;
 
+use EC\Poetry\Messages\Components\Traits\WithContactsTrait;
+use EC\Poetry\Messages\Components\Traits\WithReturnAddressTrait;
 use EC\Poetry\Services\Parser;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -13,6 +15,9 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Target extends AbstractComponent
 {
+    use WithContactsTrait;
+    use WithReturnAddressTrait;
+
     private $format;
     private $language;
     private $trackChanges;
@@ -22,9 +27,7 @@ class Target extends AbstractComponent
     private $delayFormat;
     private $acceptedDelay;
     private $acceptedDelayFormat;
-    private $returnAddresses;
     private $translatedFile;
-    private $contacts;
 
     /**
      * {@inheritdoc}
@@ -71,7 +74,7 @@ class Target extends AbstractComponent
         ]));
         $metadata->addPropertyConstraint('delay', new Assert\DateTime());
         $metadata->addPropertyConstraint('acceptedDelay', new Assert\DateTime());
-        $metadata->addPropertyConstraint('returnAddresses', new Assert\Valid(['traverse' => true]));
+        $metadata->addPropertyConstraint('returnAddress', new Assert\Valid(['traverse' => true]));
         $metadata->addPropertyConstraint('contacts', new Assert\Valid(['traverse' => true]));
     }
 
@@ -266,36 +269,6 @@ class Target extends AbstractComponent
     /**
      * @return mixed
      */
-    public function getReturnAddresses()
-    {
-        return $this->returnAddresses;
-    }
-
-    /**
-     * @param mixed $returnAddresses
-     * @return Target
-     */
-    public function setReturnAddresses($returnAddresses)
-    {
-        $this->returnAddresses = $returnAddresses;
-
-        return $this;
-    }
-
-    /**
-     * @param ReturnAddress $address
-     * @return Target
-     */
-    public function addReturnAddress($address)
-    {
-        $this->returnAddresses[] = $address;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getTranslatedFile()
     {
         return $this->translatedFile;
@@ -313,36 +286,6 @@ class Target extends AbstractComponent
     }
 
     /**
-     * @return mixed
-     */
-    public function getContacts()
-    {
-        return $this->contacts;
-    }
-
-    /**
-     * @param mixed $contacts
-     * @return Target
-     */
-    public function setContacts($contacts)
-    {
-        $this->contacts = $contacts;
-
-        return $this;
-    }
-
-    /**
-     * @param Contact $contact
-     * @return Target
-     */
-    public function addContact($contact)
-    {
-        $this->contacts[] = $contact;
-
-        return $this;
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function fromXml($xml)
@@ -350,25 +293,26 @@ class Target extends AbstractComponent
         $parser = $this->getParser();
         $parser->addXmlContent($xml);
 
-        $contacts = [];
-        $parser->filterXPath("attributions/attributionContact")->each(function (Parser $contact) use (&$contacts) {
-            $contacts[] = (new Contact())
-                ->setNickname($contact->getContent('attributionContact/contactNickname'))
-                ->setEmail($contact->getContent('attributionContact/contactEmail'))
-                ->setType($contact->attr('type'))
-                ->setAction($contact->attr('action'));
-        });
-        $returnAddresses = [];
-        $parser->filterXPath("attributions/attributionsSend")->each(function (Parser $returnAddress) use (&$returnAddresses) {
-            $returnAddresses[] = (new ReturnAddress())
-                ->setType($returnAddress->attr('type'))
-                ->setAction($returnAddress->attr('action'))
-                ->setUser($returnAddress->getContent('attributionsSend/retourUser'))
-                ->setPassword($returnAddress->getContent('attributionsSend/retourPassword'))
-                ->setAddress($returnAddress->getContent('attributionsSend/retourAddress'))
-                ->setPath($returnAddress->getContent('attributionsSend/retourPath'))
-                ->setRemark($returnAddress->getContent('attributionsSend/retourRemark'));
-        });
+        $parser->eachComponent("attributions/attributionContact", function (Parser $component) {
+            $this->withContact()
+                ->setParser($this->getParser())
+                ->setNickname($component->getContent('attributionContact/contactNickname'))
+                ->setEmail($component->getContent('attributionContact/contactEmail'))
+                ->setType($component->attr('type'))
+                ->setAction($component->attr('action'));
+        }, $this);
+
+        $parser->eachComponent("attributions/attributionsSend", function (Parser $component) {
+            $this->withReturnAddress()
+                ->setParser($this->getParser())
+                ->setType($component->attr('type'))
+                ->setAction($component->attr('action'))
+                ->setUser($component->getContent('attributionsSend/retourUser'))
+                ->setPassword($component->getContent('attributionsSend/retourPassword'))
+                ->setAddress($component->getContent('attributionsSend/retourAddress'))
+                ->setPath($component->getContent('attributionsSend/retourPath'))
+                ->setRemark($component->getContent('attributionsSend/retourRemark'));
+        }, $this);
 
         $this->setFormat($parser->getAttribute('attributions', 'format'))
             ->setLanguage($parser->getAttribute('attributions', 'lgCode'))
@@ -379,9 +323,6 @@ class Target extends AbstractComponent
             ->setAcceptedDelay($parser->getContent('attributions/attributionsDelaiAccepted'))
             ->setAcceptedDelayFormat($parser->getAttribute('attributions/attributionsDelaiAccepted', 'format'))
             ->setTranslatedFile($parser->getContent('attributions/attributionsFile'));
-
-        $this->setContacts($contacts);
-        $this->setReturnAddresses($returnAddresses);
 
         return $this;
     }
