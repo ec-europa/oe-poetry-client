@@ -37,6 +37,7 @@ class ParametersProvider implements ServiceProviderInterface
         ];
 
         $container['client.wsdl'] = '';
+        $container['notification.endpoint'] = '';
 
         // Server parameters.
         $container['server.uri'] = '';

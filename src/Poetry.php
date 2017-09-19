@@ -65,7 +65,7 @@ class Poetry extends Container implements ContainerInterface
     public function getWsdl()
     {
         return $this->getRenderEngine()->render('wsdl', [
-            'callback' => $this->get('client.wsdl'),
+            'callback' => $this->get('notification.endpoint'),
         ]);
     }
 

@@ -67,10 +67,10 @@ class ClientTest extends AbstractTest
         expect($actual)->to->contain('<soap:address location="" />');
 
         $poetry = new Poetry([
-            'client.wsdl' => 'http://example.com/callback',
+            'notification.endpoint' => 'http://example.com/notification/endpoint',
         ]);
         $actual = $poetry->getWsdl();
-        expect($actual)->to->contain('<soap:address location="http://example.com/callback" />');
+        expect($actual)->to->contain('<soap:address location="http://example.com/notification/endpoint" />');
 
         $actual = $poetry->getWsdlHeaders();
         expect($actual)->to->equal([
