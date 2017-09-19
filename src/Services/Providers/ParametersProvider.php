@@ -30,11 +30,13 @@ class ParametersProvider implements ServiceProviderInterface
         $container['authentication.password'] = '';
 
         // Client service parameters.
-        $container['client.wsdl'] = 'http://intragate.ec.europa.eu/DGT/poetry_services/components/poetry.cfc?wsdl';
+        $container['service.wsdl'] = '';
         $container['client.method'] = 'requestService';
         $container['client.options'] = [
           'cache_wsdl' => WSDL_CACHE_NONE,
         ];
+
+        $container['client.wsdl'] = '';
 
         // Server parameters.
         $container['server.uri'] = '';

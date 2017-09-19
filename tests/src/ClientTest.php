@@ -58,6 +58,27 @@ class ClientTest extends AbstractTest
     }
 
     /**
+     * Test WSDL generation.
+     */
+    public function testWsdl()
+    {
+        $poetry = new Poetry();
+        $actual = $poetry->getWsdl();
+        expect($actual)->to->contain('<soap:address location="" />');
+
+        $poetry = new Poetry([
+            'client.wsdl' => 'http://example.com/callback',
+        ]);
+        $actual = $poetry->getWsdl();
+        expect($actual)->to->contain('<soap:address location="http://example.com/callback" />');
+
+        $actual = $poetry->getWsdlHeaders();
+        expect($actual)->to->equal([
+            'Content-Type' => 'application/xml; utf-8',
+        ]);
+    }
+
+    /**
      * @return array
      */
     public function clientParametersProvider()

@@ -58,6 +58,30 @@ class Poetry extends Container implements ContainerInterface
     }
 
     /**
+     * Get client WSDL.
+     *
+     * @return string
+     */
+    public function getWsdl()
+    {
+        return $this->getRenderEngine()->render('wsdl', [
+            'callback' => $this->get('client.wsdl'),
+        ]);
+    }
+
+    /**
+     * Get headers to be set by library users when sending WSDL.
+     *
+     * @return array
+     */
+    public function getWsdlHeaders()
+    {
+        return [
+          'Content-Type' => 'application/xml; utf-8',
+        ];
+    }
+
+    /**
      * @return \EC\Poetry\Client
      */
     public function getClient()
@@ -71,6 +95,22 @@ class Poetry extends Container implements ContainerInterface
     public function getServer()
     {
         return $this['server'];
+    }
+
+    /**
+     * @return \EC\Poetry\Services\Renderer
+     */
+    public function getRenderer()
+    {
+        return $this['renderer'];
+    }
+
+    /**
+     * @return \League\Plates\Engine
+     */
+    public function getRenderEngine()
+    {
+        return $this['renderer.engine'];
     }
 
     /**
