@@ -61,30 +61,6 @@ class Poetry extends Container implements ContainerInterface
     }
 
     /**
-     * Get client WSDL.
-     *
-     * @return string
-     */
-    public function getWsdl()
-    {
-        return $this->getRenderEngine()->render('wsdl', [
-            'callback' => $this->get('notification.endpoint'),
-        ]);
-    }
-
-    /**
-     * Get headers to be set by library users when sending WSDL.
-     *
-     * @return array
-     */
-    public function getWsdlHeaders()
-    {
-        return [
-          'Content-Type' => 'application/xml; utf-8',
-        ];
-    }
-
-    /**
      * @return \EC\Poetry\Client
      */
     public function getClient()
@@ -130,6 +106,38 @@ class Poetry extends Container implements ContainerInterface
     public function getLogger()
     {
         return $this['logger'];
+    }
+
+    /**
+     * @return \Symfony\Component\EventDispatcher\EventDispatcher
+     */
+    public function getEventDispatcher()
+    {
+        return $this['event_dispatcher'];
+    }
+
+    /**
+     * Get client WSDL.
+     *
+     * @return string
+     */
+    public function renderClientWsdl()
+    {
+        return $this->getRenderEngine()->render('wsdl', [
+            'callback' => $this->get('notification.endpoint'),
+        ]);
+    }
+
+    /**
+     * Get headers to be set by library users when sending WSDL.
+     *
+     * @return array
+     */
+    public function getWsdlHeaders()
+    {
+        return [
+          'Content-Type' => 'application/xml; utf-8',
+        ];
     }
 
     /**

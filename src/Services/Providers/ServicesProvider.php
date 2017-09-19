@@ -12,6 +12,7 @@ use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 use EC\Poetry\Services\Parser;
 use Psr\Log\NullLogger;
+use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\Validator\ValidatorBuilder;
 
 /**
@@ -69,7 +70,7 @@ class ServicesProvider implements ServiceProviderInterface
         });
 
         $container['soap.server'] = function (Container $container) {
-            $wsdl = 'data://text/plain;base64,'.base64_encode($container->getWsdl());
+            $wsdl = 'data://text/plain;base64,'.base64_encode($container->renderClientWsdl());
             $server = new \SoapServer($wsdl, [
                 'stream_context' => stream_context_create(),
                 'cache_wsdl' => WSDL_CACHE_NONE,
@@ -78,6 +79,11 @@ class ServicesProvider implements ServiceProviderInterface
 
             return $server;
         };
+
+        $container['event_dispatcher'] = function () {
+            return new EventDispatcher();
+        };
+
         $container['logger'] = function () {
             return new NullLogger();
         };
