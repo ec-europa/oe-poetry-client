@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?><POETRY xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://intragate.ec.europa.eu/DGT/poetry_services/poetry.xsd">
+<?xml version="1.0" encoding="utf-8"?>
+<POETRY xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://intragate.ec.europa.eu/DGT/poetry_services/poetry.xsd">
     <request communication="synchrone" id="DGT/2017/00001/3/0/TRA" type="status">
         <demandeId>
             <codeDemandeur>DGT</codeDemandeur>

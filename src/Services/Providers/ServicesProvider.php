@@ -69,15 +69,14 @@ class ServicesProvider implements ServiceProviderInterface
         });
 
         $container['soap.server'] = function (Container $container) {
-            $wsdl = $container['renderer.engine']->render('server::callback', ['uri' => $container['server.uri']]);
-            $file = 'data://text/plain;base64,'.base64_encode($wsdl);
-            $server = new \SoapServer($file, $container['server.options']);
-            $server->AddFunction("EC\Poetry\callback");
+            $wsdl = 'data://text/plain;base64,'.base64_encode($container->getWsdl());
+            $server = new \SoapServer($wsdl, [
+                'stream_context' => stream_context_create(),
+                'cache_wsdl' => WSDL_CACHE_NONE,
+            ]);
+            $server->addFunction("OEPoetryCallback");
 
             return $server;
-        };
-        $container['server'] = function (Container $container) {
-            return new Server($container['soap.server'], $container['logger']);
         };
         $container['logger'] = function () {
             return new NullLogger();

@@ -109,12 +109,25 @@ class Client
             'password' => $this->password,
             'message' => $renderedMessage,
         ]);
-        $responseXml = $this->soapClient->{$this->method}($this->username, $this->password, $renderedMessage);
+        $responseXml = $this->sendRaw($renderedMessage);
         $this->logger->info("Client response: {message} ", [
             'message' => $responseXml,
         ]);
 
         return $this->response->fromXml($responseXml);
+    }
+
+    /**
+     * Send a raw message.
+     *
+     * @param string $message
+     *      Message string.
+     *
+     * @return mixed
+     */
+    public function sendRaw($message)
+    {
+        return $this->soapClient->{$this->method}($this->username, $this->password, $message);
     }
 
     /**

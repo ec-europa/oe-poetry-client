@@ -41,12 +41,6 @@ class ParametersProvider implements ServiceProviderInterface
 
         // Server parameters.
         $container['server.uri'] = '';
-        $container['server.callback'] = function () {
-        };
-        $container['server.options'] = [
-          'stream_context' => stream_context_create(),
-          'cache_wsdl' => WSDL_CACHE_NONE,
-        ];
 
         // Render engine parameters.
         $container['renderer.engine.template_folder'] = __DIR__.'/../../../templates';

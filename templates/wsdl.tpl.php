@@ -24,15 +24,15 @@
         <part name="return" type="xsd:string" />
     </message>
     <portType name="OEPoetryClientPort">
-        <operation name="EC\Poetry\callback">
+        <operation name="OEPoetryCallback">
             <input message="tns:OEPoetryClientMessage" />
             <output message="tns:OEPoetryClientResponse" />
         </operation>
     </portType>
     <binding name="OEPoetryClientBinding" type="tns:OEPoetryClientPort">
         <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http" />
-        <operation name="EC\Poetry\callback">
-            <soap:operation soapAction="urn:OEPoetryClient#EC\Poetry\callback" />
+        <operation name="OEPoetryCallback">
+            <soap:operation soapAction="urn:OEPoetryClient#OEPoetryCallback" />
             <input>
                 <soap:body use="encoded" namespace="urn:OEPoetryClient" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
             </input>

@@ -20,7 +20,8 @@
         "phpunit/phpunit": "^5",
         "peridot-php/leo": "^1.6",
         "mockery/mockery": "^0.9.9",
-        "phpspec/phpspec": "^4.0"
+        "phpspec/phpspec": "^4.0",
+        "internations/http-mock": "^0.10.0"
     },
     "suggest": {
         "monolog/monolog": "Log Poetry requests and responses via Monolog"

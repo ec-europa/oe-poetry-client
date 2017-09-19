@@ -39,6 +39,9 @@ class Poetry extends Container implements ContainerInterface
 
         // Set static cache.
         self::$container = $this;
+
+        // Include namespace-less callback function.
+        require_once __DIR__.'/../callback.php';
     }
 
     /**
@@ -90,11 +93,11 @@ class Poetry extends Container implements ContainerInterface
     }
 
     /**
-     * @return \EC\Poetry\Server
+     * @return \SoapServer
      */
     public function getServer()
     {
-        return $this['server'];
+        return $this['soap.server'];
     }
 
     /**
@@ -141,34 +144,3 @@ class Poetry extends Container implements ContainerInterface
         return self::$container;
     }
 }
-
-// @codingStandardsIgnoreStart
-/**
- * Callback defined in Poetry WSDL.
- *
- * @param string $user
- * @param string $password
- * @param string $msg
- *
- * @return string
- *    Response in plain XML.
- */
-function callback($user, $password, $msg)
-{
-    $container = Poetry::getInstance();
-
-    $container->getLogger()->info("Callback arguments: {user} {password} {message} ", [
-      'user' => $user,
-      'password' => $password,
-      'message' => $msg,
-    ]);
-    $callback = $container->raw('server.callback');
-    $response = $callback($user, $password, $msg);
-    $container->getLogger()->info("Callback response: {message} ", [
-      'message' => $response,
-    ]);
-    $container->getServer()->setResponse($response);
-
-    return $response;
-}
-// @codingStandardsIgnoreEnd
