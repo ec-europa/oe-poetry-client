@@ -62,7 +62,7 @@ class ServicesProvider implements ServiceProviderInterface
         };
 
         $container['soap.client'] = function (Container $container) {
-            return new \SoapClient($container['client.wsdl'], $container['client.options']);
+            return new \SoapClient($container['service.wsdl'], $container['client.options']);
         };
 
         $container['parser'] = $container->factory(function () {
