@@ -37,8 +37,8 @@ class ClientTest extends AbstractTest
 
         $logger = new TestLogger();
         $parameters = [
-          'authentication.username' => $username,
-          'authentication.password' => $password,
+          'service.username' => $username,
+          'service.password' => $password,
           'soap.client' => $mock,
           'logger' => $logger,
         ];

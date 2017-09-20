@@ -50,8 +50,8 @@ class ServicesProvider implements ServiceProviderInterface
 
         $container['client'] = function (Container $container) {
             return new Client(
-                $container['authentication.username'],
-                $container['authentication.password'],
+                $container['service.username'],
+                $container['service.password'],
                 $container['client.method'],
                 $container['soap.client'],
                 $container['validator'],

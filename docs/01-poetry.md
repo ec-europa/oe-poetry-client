@@ -25,17 +25,18 @@ Alternatively, you can pass the following (optional) configuration parameters to
 
 | Parameter                 | Description |
 |---------------------------|-------------|
-| `identifier.code`         | **(Required)** The **code** part in an identifier string, i.e. `DGT` in `DGT/2017/0001/01/00/ABC` |
-| `identifier.year`         | **(Required)** The **year** part in an identifier string, i.e. `2017` in `DGT/2017/0001/01/00/ABC` |
+| `identifier.code`         | The **code** part in an identifier string, i.e. `DGT` in `DGT/2017/0001/01/00/ABC` |
+| `identifier.year`         | The **year** part in an identifier string, i.e. `2017` in `DGT/2017/0001/01/00/ABC` |
 | `identifier.number`       | The **number** part in an identifier string, i.e. `0001` in `DGT/2017/0001/01/00/ABC` |
 | `identifier.version`      | The **version** part in an identifier string, i.e. `01` in `DGT/2017/0001/01/00/ABC` |
 | `identifier.part`         | The **part** part in an identifier string, i.e. `00` in `DGT/2017/0001/01/00/ABC` |
-| `authentication.username` | **(Required)** The Poetry client **username**, as provided by the Poetry service |
-| `authentication.password` | **(Required)** The Poetry client **password**, as provided by the Poetry service |
-| `client.wsdl`             | **(Required)** Local WSDL, contains callback information and other notification details |
+| `client.wsdl`             | Local WSDL, contains callback information and other notification details |
 | `service.wsdl`            | Poetry service WSDL URL |
-| `server.uri`              | Your application **callback URI**, the library's server should be handling its incoming requests |
-| `server.callback`         | Your application **callback function**, it will be called by the Poetry service receiving an XML message |
+| `service.username`        | The Poetry client **username**, as provided by the Poetry service |
+| `service.password`        | The Poetry client **password**, as provided by the Poetry service |
+| `notification.endpoint`   | Your application's **notification callback URL**, Poetry remote service will send here its notifications |
+| `notification.username`   | Your application's **notification callback username**, Poetry remote service will use it to authenticate on your `notification.endpoint` URL. |
+| `notification.password`   | Your application's **notification callback password**, Poetry remote service will use it to authenticate on your `notification.endpoint` URL. |
 
 Set the following values for `service.wsdl` according to your environment: 
 
@@ -52,8 +53,8 @@ $poetry = new Poetry([
     'identifier.version' => '01',
     'identifier.part' => '00',
     'service.wsdl' => 'http://intragate.test.ec.europa.eu/DGT/poetry_services/components/poetry.cfc?wsdl',
-    'authentication.username' => 'foo',
-    'authentication.password' => 'bar',
+    'service.username' => 'foo',
+    'service.password' => 'bar',
     'client.wsdl' => 'http://my-site.com/my/poetry.wsdl',
     'notification.endpoint' => 'http://my-site.com/my/poetry/notifications',
 ]);

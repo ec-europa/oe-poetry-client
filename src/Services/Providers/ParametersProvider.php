@@ -25,22 +25,22 @@ class ParametersProvider implements ServiceProviderInterface
         $container['identifier.part'] = '';
         $container['identifier.product'] = '';
 
-        // Authentication credentials.
-        $container['authentication.username'] = '';
-        $container['authentication.password'] = '';
+        // Service credentials.
+        $container['service.wsdl'] = '';
+        $container['service.username'] = '';
+        $container['service.password'] = '';
 
         // Client service parameters.
-        $container['service.wsdl'] = '';
+        $container['client.wsdl'] = '';
         $container['client.method'] = 'requestService';
         $container['client.options'] = [
           'cache_wsdl' => WSDL_CACHE_NONE,
         ];
 
-        $container['client.wsdl'] = '';
+        // Notification parameters.
         $container['notification.endpoint'] = '';
-
-        // Server parameters.
-        $container['server.uri'] = '';
+        $container['notification.username'] = '';
+        $container['notification.password'] = '';
 
         // Render engine parameters.
         $container['renderer.engine.template_folder'] = __DIR__.'/../../../templates';
