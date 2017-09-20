@@ -51,6 +51,7 @@ class ServicesProvider implements ServiceProviderInterface
                 $container['notification.username'],
                 $container['notification.password'],
                 $container['event_dispatcher'],
+                $container['parser'],
                 $container['response.status']
             );
         };

@@ -6,6 +6,7 @@ use EC\Poetry\Messages\Components\Contact;
 use EC\Poetry\Messages\Components\Identifier;
 use EC\Poetry\Messages\Requests\CreateRequest;
 use EC\Poetry\Messages\Requests\SendReviewRequest;
+use EC\Poetry\Poetry;
 use EC\Poetry\Tests\AbstractTest;
 use Symfony\Component\Yaml\Yaml;
 
@@ -63,6 +64,7 @@ class SendReviewRequestTest extends AbstractTest
             ->setFormat('HTML')
             ->setName('content.html')
             ->setFile('BASE64ENCODEDFILECONTENT')
+            ->setLegiswriteFormat('Yes')
             ->withSourceLanguage()
                 ->setCode('EN')
                 ->setPages(1);
@@ -74,6 +76,8 @@ class SendReviewRequestTest extends AbstractTest
             ->setDelay('12/09/2017');
 
         $output = $renderer->render($message);
+        $violations = $this->getContainer()->getValidator()->validate($message);
+        expect($this->getViolations($violations))->to->be->empty();
         expect($output)->to->have->same->xml('messages/send-revision-request.xml');
     }
 
@@ -85,7 +89,14 @@ class SendReviewRequestTest extends AbstractTest
      */
     public function testWithArray(array $array, array $expected)
     {
-        $component = new SendReviewRequest(new Identifier());
+        $poetry = new Poetry([
+            'identifier.code' => 'STSI',
+            'identifier.year' => '2017',
+            'identifier.number' => '40017',
+            'identifier.version' => '0',
+            'identifier.part' => '11',
+        ]);
+        $component = $poetry->get('request.send_review_request');
         $component->withArray($array);
 
         foreach ($expected as $getComponent => $properties) {
@@ -97,6 +108,9 @@ class SendReviewRequestTest extends AbstractTest
                 $this->assertProperties($component->$getComponent(), $properties);
             }
         }
+
+        $violations = $this->getContainer()->getValidator()->validate($component);
+        expect($this->getViolations($violations))->to->be->empty();
     }
 
     /**

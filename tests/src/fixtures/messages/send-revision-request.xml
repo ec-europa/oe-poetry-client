@@ -28,7 +28,7 @@
             <retourAddress>https://example.com/callback/wsdl/PoetryIntegration.wsdl</retourAddress>
             <retourPath>TestReturnPath</retourPath>
         </retour>
-        <documentSource format="HTML">
+        <documentSource format="HTML" legiswrite="Yes">
             <documentSourceName>content.html</documentSourceName>
             <documentSourceFile>BASE64ENCODEDFILECONTENT</documentSourceFile>
             <documentSourceLang lgCode="EN">

@@ -1,11 +1,5 @@
 -
   array:
-    identifier:
-      code: 'STSI'
-      year: '2017'
-      number: '40017'
-      version: '0'
-      part: '11'
     details:
       client_id: 'Job ID 3999'
       title: 'NE-CMS: Erasmus+ - Erasmus Mundus Joint Master Degrees'
@@ -29,8 +23,11 @@
       format: 'HTML'
       name: 'content.html'
       file: 'BASE64ENCODEDFILECONTENT'
-      # @todo: Fix languages.
-      # language: ['EN', '1']
+      legiswrite_format: 'No'
+      source_language:
+        -
+          code: 'EN'
+          pages: 1
     contact:
       -
         type: 'auteur'
@@ -80,6 +77,10 @@
       getFormat: 'HTML'
       getName: 'content.html'
       getFile: 'BASE64ENCODEDFILECONTENT'
+      getSourceLanguages:
+        -
+          getCode: 'EN'
+          getPages: 1
     getContacts:
       -
         getType: 'auteur'

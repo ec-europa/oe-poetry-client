@@ -115,7 +115,13 @@ abstract class AbstractTest extends TestCase
     protected function assertProperties($component, $properties)
     {
         foreach ($properties as $getProperty => $value) {
-            expect($component->$getProperty())->to->equal($value);
+            if ($this->isComponentCollection($value)) {
+                foreach ($value as $i => $property) {
+                    $this->assertProperties($component->$getProperty()[$i], $property);
+                }
+            } else {
+                expect($component->$getProperty())->to->equal($value);
+            }
         }
     }
 }

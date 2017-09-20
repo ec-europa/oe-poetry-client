@@ -44,11 +44,11 @@ class ReturnAddress extends AbstractComponent
             new Assert\NotBlank(),
         ]);
         $metadata->addPropertyConstraint('password', new Assert\Expression([
-            'expression' => 'this.getType() == "WebService"',
+            'expression' => 'this.getType() == "webService"',
             'message' => 'The return type you selected can\'t have a password.',
         ]));
         $metadata->addPropertyConstraint('path', new Assert\Expression([
-            'expression' => 'this.getType() == "WebService"',
+            'expression' => 'this.getType() == "webService"',
             'message' => 'The return type you selected can\'t have a path.',
         ]));
     }

@@ -31,16 +31,7 @@ class Contact extends AbstractComponent
      */
     public static function getConstraints(ClassMetadata $metadata)
     {
-        $metadata->addPropertyConstraints('type', [
-            new Assert\NotBlank(),
-            new Assert\Choice([
-                'Contact',
-                'Secretaire',
-                'Responsible',
-                'planningUnit',
-                'translationUnit',
-            ]),
-        ]);
+        $metadata->addPropertyConstraint('type', new Assert\NotBlank());
         $metadata->addPropertyConstraint('action', new Assert\Choice(['INSERT', 'UPDATE']));
         $metadata->addPropertyConstraints('nickname', [
             new Assert\NotBlank(),

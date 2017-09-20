@@ -56,8 +56,6 @@ class Target extends AbstractComponent
             'UPDATE',
             'DELETE',
         ]));
-        $metadata->addPropertyConstraint('delay', new Assert\DateTime());
-        $metadata->addPropertyConstraint('acceptedDelay', new Assert\DateTime());
         $metadata->addPropertyConstraint('returnAddress', new Assert\Valid(['traverse' => true]));
         $metadata->addPropertyConstraint('contacts', new Assert\Valid(['traverse' => true]));
     }

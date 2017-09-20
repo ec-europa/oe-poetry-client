@@ -50,8 +50,6 @@ class Details extends AbstractComponent
         $metadata->addPropertyConstraint('type', new Constraint\DetailsType());
         $metadata->addPropertyConstraint('destination', new Constraint\DetailsDestination());
         $metadata->addPropertyConstraint('procedure', new Constraint\DetailsProcedure());
-        $metadata->addPropertyConstraint('delay', new Assert\DateTime());
-        $metadata->addPropertyConstraint('requestDate', new Assert\DateTime());
         $metadata->addPropertyConstraint('status', new Assert\Type('string'));
         $metadata->addPropertyConstraint('referenceFilesRemark', new Assert\Type('string'));
     }
