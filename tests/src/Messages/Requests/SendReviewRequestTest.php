@@ -118,6 +118,6 @@ class SendReviewRequestTest extends AbstractTest
      */
     public function withArrayProvider()
     {
-        return Yaml::parse($this->getFixture('arrays/send_revision_request.yml'));
+        return Yaml::parse($this->getFixture('arrays/send_review_request.yml'));
     }
 }
