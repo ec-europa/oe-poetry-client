@@ -39,7 +39,7 @@ class ClientTest extends AbstractTest
         $parameters = [
           'service.username' => $username,
           'service.password' => $password,
-          'soap.client' => $mock,
+          'soap_client' => $mock,
           'logger' => $logger,
         ];
         if ($method) {

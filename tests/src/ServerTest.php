@@ -3,7 +3,6 @@
 namespace EC\Poetry\Tests;
 
 use EC\Poetry\Poetry;
-use EC\Poetry\Server;
 use InterNations\Component\HttpMock\PHPUnit\HttpMockTrait;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -53,11 +52,6 @@ class ServerTest extends AbstractTest
      */
     public function testServer()
     {
-        /** @var \SoapServer $soapServer */
-        $soapServer = $this->getContainer()->get('soap.server');
-        $functions = $soapServer->getFunctions();
-        expect($functions)->to->equal(['OEPoetryCallback']);
-
         /** @var \EC\Poetry\Server $server */
         $server = $this->getContainer()->getServer();
         expect($server)->is->an->instanceof(\SoapServer::class);
@@ -68,15 +62,16 @@ class ServerTest extends AbstractTest
      */
     public function testFunctionCallback()
     {
-        $this->setupNotificationServer('/notification');
+        $this->setupServer('/notification', 'username', 'password');
+
         $message = $this->getFixture('messages/response-status-1.xml');
-        $this->notify('/notification', $message);
+        $this->notifyServer('/notification', 'username', 'password', $message);
     }
 
     /**
      * Setup notification endpoint.
      */
-    protected function setupNotificationServer($endpoint)
+    protected function setupServer($endpoint, $username, $password)
     {
         // @codingStandardsIgnoreStart
         $this->http->mock
@@ -85,8 +80,12 @@ class ServerTest extends AbstractTest
               ->pathIs($endpoint)
           ->then()
           ->callback(
-            function (Response $response) {
-                (new Poetry())->getServer()->handle();
+            function (Response $response) use ($username, $password) {
+                $poetry = new Poetry([
+                  'notification.username' => $username,
+                  'notification.password' => $password,
+                ]);
+                $poetry->getServer()->handle();
             }
           )
           ->end();
@@ -97,23 +96,21 @@ class ServerTest extends AbstractTest
     /**
      * Notify SOAP endpoint.
      *
-     * @param string $endpoint
-     *    Endpoint URL.
+     * @param $endpoint
+     * @param $username
+     * @param $password
      * @param $message
-     *    XML message
      *
      * @return mixed
-     *    SOAP call response.
      */
-    protected function notify($endpoint, $message)
+    protected function notifyServer($endpoint, $username, $password, $message)
     {
-        $poetry = new Poetry();
-        $rendered = $poetry->getRenderEngine()->render('wsdl', [
+        $rendered = $this->getContainer()->getRenderEngine()->render('wsdl', [
             'callback' => 'http://localhost:8082'.$endpoint,
         ]);
         $wsdl = 'data://text/plain;base64,'.base64_encode($rendered);
         $client = new \SoapClient($wsdl, ['cache_wsdl' => WSDL_CACHE_NONE]);
 
-        return $client->__soapCall('OEPoetryCallback', ['username', 'password', $message]);
+        return $client->__soapCall('handle', [$username, $password, $message]);
     }
 }

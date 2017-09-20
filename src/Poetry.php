@@ -2,6 +2,7 @@
 
 namespace EC\Poetry;
 
+use EC\Poetry\Events\TranslationReceived;
 use EC\Poetry\Services\Providers\MessagesProvider;
 use EC\Poetry\Services\Providers\ParametersProvider;
 use EC\Poetry\Services\Providers\ServicesProvider;
@@ -39,9 +40,6 @@ class Poetry extends Container implements ContainerInterface
 
         // Set static cache.
         self::$container = $this;
-
-        // Include namespace-less callback function.
-        require_once __DIR__.'/../callback.php';
     }
 
     /**
@@ -73,7 +71,7 @@ class Poetry extends Container implements ContainerInterface
      */
     public function getServer()
     {
-        return $this['soap.server'];
+        return $this['soap_server'];
     }
 
     /**

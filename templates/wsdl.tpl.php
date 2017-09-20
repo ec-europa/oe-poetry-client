@@ -24,15 +24,15 @@
         <part name="return" type="xsd:string" />
     </message>
     <portType name="OEPoetryClientPort">
-        <operation name="OEPoetryCallback">
+        <operation name="handle">
             <input message="tns:OEPoetryClientMessage" />
             <output message="tns:OEPoetryClientResponse" />
         </operation>
     </portType>
     <binding name="OEPoetryClientBinding" type="tns:OEPoetryClientPort">
         <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http" />
-        <operation name="OEPoetryCallback">
-            <soap:operation soapAction="urn:OEPoetryClient#OEPoetryCallback" />
+        <operation name="handle">
+            <soap:operation soapAction="urn:OEPoetryClient#handle" />
             <input>
                 <soap:body use="encoded" namespace="urn:OEPoetryClient" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
             </input>

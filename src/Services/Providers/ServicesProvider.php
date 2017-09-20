@@ -2,6 +2,8 @@
 
 namespace EC\Poetry\Services\Providers;
 
+use EC\Poetry\NotificationHandler;
+use EC\Poetry\Poetry;
 use EC\Poetry\Server;
 use EC\Poetry\Client;
 use EC\Poetry\Services\Plates\AttributesExtension;
@@ -27,33 +29,12 @@ class ServicesProvider implements ServiceProviderInterface
      */
     public function register(Container $container)
     {
-        $container['renderer.engine'] = function (Container $container) {
-            $root = $container['renderer.engine.template_folder'];
-            $engine = (new Engine($root))
-                ->setFileExtension('tpl.php')
-                ->loadExtension(new ComponentExtension())
-                ->loadExtension(new AttributesExtension())
-                ->addFolder('messages', $root.'/messages')
-                ->addFolder('components', $root.'/components')
-                ->addFolder('server', $root.'/server');
-
-            return $engine;
-        };
-
-        $container['renderer'] = function (Container $container) {
-            return new Renderer($container['renderer.engine']);
-        };
-
-        $container['validator'] = $container->factory(function () {
-            return (new ValidatorBuilder())->addMethodMapping('getConstraints')->getValidator();
-        });
-
         $container['client'] = function (Container $container) {
             return new Client(
                 $container['service.username'],
                 $container['service.password'],
                 $container['client.method'],
-                $container['soap.client'],
+                $container['soap_client'],
                 $container['validator'],
                 $container['renderer'],
                 $container['response.status'],
@@ -61,21 +42,26 @@ class ServicesProvider implements ServiceProviderInterface
             );
         };
 
-        $container['soap.client'] = function (Container $container) {
+        $container['soap_client'] = function (Container $container) {
             return new \SoapClient($container['service.wsdl'], $container['client.options']);
         };
 
-        $container['parser'] = $container->factory(function () {
-            return new Parser();
-        });
+        $container['notification_handler'] = function (Container $container) {
+            return new NotificationHandler(
+                $container['notification.username'],
+                $container['notification.password'],
+                $container['event_dispatcher'],
+                $container['response.status']
+            );
+        };
 
-        $container['soap.server'] = function (Container $container) {
+        $container['soap_server'] = function (Container $container) {
             $wsdl = 'data://text/plain;base64,'.base64_encode($container->renderClientWsdl());
             $server = new \SoapServer($wsdl, [
                 'stream_context' => stream_context_create(),
                 'cache_wsdl' => WSDL_CACHE_NONE,
             ]);
-            $server->addFunction("OEPoetryCallback");
+            $server->setObject($container['notification_handler']);
 
             return $server;
         };
@@ -83,6 +69,31 @@ class ServicesProvider implements ServiceProviderInterface
         $container['event_dispatcher'] = function () {
             return new EventDispatcher();
         };
+
+        $container['parser'] = $container->factory(function () {
+            return new Parser();
+        });
+
+        $container['renderer'] = function (Container $container) {
+            return new Renderer($container['renderer.engine']);
+        };
+
+        $container['renderer.engine'] = function (Container $container) {
+            $root = $container['renderer.engine.template_folder'];
+            $engine = (new Engine($root))
+              ->setFileExtension('tpl.php')
+              ->loadExtension(new ComponentExtension())
+              ->loadExtension(new AttributesExtension())
+              ->addFolder('messages', $root.'/messages')
+              ->addFolder('components', $root.'/components')
+              ->addFolder('server', $root.'/server');
+
+            return $engine;
+        };
+
+        $container['validator'] = $container->factory(function () {
+            return (new ValidatorBuilder())->addMethodMapping('getConstraints')->getValidator();
+        });
 
         $container['logger'] = function () {
             return new NullLogger();
