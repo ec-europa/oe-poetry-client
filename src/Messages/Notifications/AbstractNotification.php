@@ -3,6 +3,7 @@
 namespace EC\Poetry\Messages\Notifications;
 
 use EC\Poetry\Messages\AbstractMessage;
+use EC\Poetry\Messages\Components\Traits\ParserAwareTrait;
 use EC\Poetry\Messages\ParserAwareInterface;
 
 /**
@@ -12,5 +13,5 @@ use EC\Poetry\Messages\ParserAwareInterface;
  */
 abstract class AbstractNotification extends AbstractMessage implements ParserAwareInterface
 {
-
+    use ParserAwareTrait;
 }
