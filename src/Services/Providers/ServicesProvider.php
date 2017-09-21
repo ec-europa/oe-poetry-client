@@ -7,6 +7,7 @@ use EC\Poetry\Poetry;
 use EC\Poetry\Server;
 use EC\Poetry\Client;
 use EC\Poetry\Services\Plates\AttributesExtension;
+use EC\Poetry\Services\Wsdl;
 use League\Plates\Engine;
 use EC\Poetry\Services\Plates\ComponentExtension;
 use EC\Poetry\Services\Renderer;
@@ -42,6 +43,10 @@ class ServicesProvider implements ServiceProviderInterface
             );
         };
 
+        $container['wsdl'] = function (Container $container) {
+            return new Wsdl($container['notification.endpoint'], $container['renderer.engine']);
+        };
+
         $container['soap_client'] = function (Container $container) {
             return new \SoapClient($container['service.wsdl'], $container['client.options']);
         };
@@ -57,7 +62,7 @@ class ServicesProvider implements ServiceProviderInterface
         };
 
         $container['soap_server'] = function (Container $container) {
-            $wsdl = 'data://text/plain;base64,'.base64_encode($container->renderClientWsdl());
+            $wsdl = 'data://text/plain;base64,'.base64_encode($container['wsdl']->getXml());
             $server = new \SoapServer($wsdl, [
                 'stream_context' => stream_context_create(),
                 'cache_wsdl' => WSDL_CACHE_NONE,

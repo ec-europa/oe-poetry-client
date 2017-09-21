@@ -115,27 +115,13 @@ class Poetry extends Container implements ContainerInterface
     }
 
     /**
-     * Get client WSDL.
+     * Get WSDL service.
      *
-     * @return string
+     * @return \EC\Poetry\Services\Wsdl
      */
-    public function renderClientWsdl()
+    public function getWsdl()
     {
-        return $this->getRenderEngine()->render('wsdl', [
-            'callback' => $this->get('notification.endpoint'),
-        ]);
-    }
-
-    /**
-     * Get headers to be set by library users when sending WSDL.
-     *
-     * @return array
-     */
-    public function getWsdlHeaders()
-    {
-        return [
-          'Content-Type' => 'application/xml; utf-8',
-        ];
+        return $this['wsdl'];
     }
 
     /**
