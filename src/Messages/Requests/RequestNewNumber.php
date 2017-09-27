@@ -17,6 +17,14 @@ class RequestNewNumber extends AbstractRequest
     /**
      * {@inheritdoc}
      */
+    public function getTemplate()
+    {
+        return 'messages::request-new-number';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getType()
     {
         return self::REQUEST_NEW;
