@@ -66,12 +66,12 @@ class Identifier extends AbstractComponent
     public function getFormattedIdentifier()
     {
         return implode('/', [
-            $this->code,
-            $this->year,
-            $this->number,
-            $this->version,
-            $this->part,
-            $this->product,
+            $this->getCode(),
+            $this->getYear(),
+            $this->getNumber() ? $this->getNumber() : $this->getSequence(),
+            $this->getVersion(),
+            $this->getPart(),
+            $this->getProduct(),
         ]);
     }
 

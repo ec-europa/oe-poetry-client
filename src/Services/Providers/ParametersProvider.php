@@ -22,6 +22,7 @@ class ParametersProvider implements ServiceProviderInterface
         $container['identifier.year'] = '';
         $container['identifier.number'] = '';
         $container['identifier.version'] = '';
+        $container['identifier.sequence'] = '';
         $container['identifier.part'] = '';
         $container['identifier.product'] = '';
 

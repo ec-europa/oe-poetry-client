@@ -42,6 +42,7 @@ class MessagesProvider implements ServiceProviderInterface
                 ->setNumber($container['identifier.number'])
                 ->setVersion($container['identifier.version'])
                 ->setPart($container['identifier.part'])
+                ->setSequence($container['identifier.sequence'])
                 ->setProduct($container['identifier.product']);
 
             $component->setParser($container['parser']);
