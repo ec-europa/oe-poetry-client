@@ -35,14 +35,6 @@ class Identifier extends AbstractComponent
      */
     public static function getConstraints(ClassMetadata $metadata)
     {
-        $metadata->addConstraint(new Assert\Expression([
-            'expression' => 'this.getSequence() || this.getNumber() ',
-            'message' => 'An identifier must have a number or a sequence.',
-        ]));
-        $metadata->addConstraint(new Assert\Expression([
-            'expression' => '(this.getSequence() && this.getNumber()) == false ',
-            'message' => 'An identifier can\'t have both a number and a sequence.',
-        ]));
         $metadata->addPropertyConstraints('code', [
             new Assert\NotBlank(),
             new Assert\Type('alpha'),

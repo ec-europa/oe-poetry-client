@@ -27,7 +27,6 @@ class IdentifierTest extends TestCase
 
         $expected = [
           'code' => "This value should not be blank.",
-          'object' => "An identifier must have a number or a sequence.",
           'part' => "This value should not be blank.",
           'product' => "This value should not be blank.",
           'version' => "This value should not be blank.",
