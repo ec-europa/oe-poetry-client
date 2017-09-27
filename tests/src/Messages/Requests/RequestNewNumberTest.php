@@ -28,8 +28,7 @@ class RequestNewNumberTest extends AbstractTest
           ->setYear('2017')
           ->setSequence('MY_SEQUENCE')
           ->setVersion('01')
-          ->setPart('00')
-          ->setProduct('TRA');
+          ->setPart('00');
 
         $message = new RequestNewNumber($identifier);
 
