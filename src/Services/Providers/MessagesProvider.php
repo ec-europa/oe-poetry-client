@@ -7,6 +7,7 @@ use EC\Poetry\Messages\Notifications\TranslationReceived;
 use EC\Poetry\Messages\ParserAwareInterface;
 use EC\Poetry\Messages\Requests\CreateRequest;
 use EC\Poetry\Messages\Requests\GetRequestStatus;
+use EC\Poetry\Messages\Requests\RequestNewNumber;
 use EC\Poetry\Messages\Requests\SendReviewRequest;
 use EC\Poetry\Messages\Responses\Status;
 use Pimple\Container;
@@ -42,6 +43,7 @@ class MessagesProvider implements ServiceProviderInterface
                 ->setNumber($container['identifier.number'])
                 ->setVersion($container['identifier.version'])
                 ->setPart($container['identifier.part'])
+                ->setSequence($container['identifier.sequence'])
                 ->setProduct($container['identifier.product']);
 
             $component->setParser($container['parser']);
@@ -66,6 +68,7 @@ class MessagesProvider implements ServiceProviderInterface
             'request.create_request'            => CreateRequest::class,
             'request.get_request_status'        => GetRequestStatus::class,
             'request.send_review_request'       => SendReviewRequest::class,
+            'request.request_new_number'        => RequestNewNumber::class,
 
             // Response objects.
             'response.status'                   => Status::class,

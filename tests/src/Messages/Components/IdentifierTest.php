@@ -2,6 +2,7 @@
 
 namespace EC\Poetry\Messages\Components;
 
+use EC\Poetry\Messages\Requests\SendReviewRequest;
 use EC\Poetry\Poetry;
 use EC\Poetry\Tests\AbstractTest as TestCase;
 use Symfony\Component\Yaml\Yaml;
@@ -27,7 +28,6 @@ class IdentifierTest extends TestCase
 
         $expected = [
           'code' => "This value should not be blank.",
-          'object' => "An identifier must have a number or a sequence.",
           'part' => "This value should not be blank.",
           'product' => "This value should not be blank.",
           'version' => "This value should not be blank.",
@@ -63,6 +63,30 @@ class IdentifierTest extends TestCase
         expect($component->getVersion())->to->equal($version);
         expect($component->getPart())->to->equal($part);
         expect($component->getProduct())->to->equal($product);
+    }
+
+    /**
+     * Test identifier validation.
+     */
+    public function testSequence()
+    {
+        $poetry = new Poetry([
+            'identifier.code' => 'STS',
+            'identifier.year' => '2017',
+            'identifier.sequence' => 'NEXT_EUROPA_COUNTER',
+            'identifier.version' => 0,
+            'identifier.part' => 0,
+            'identifier.product' => 'TRA',
+        ]);
+
+        $actual = $poetry->getIdentifier()->getFormattedIdentifier();
+        expect($actual)->to->equal('STS/2017/NEXT_EUROPA_COUNTER/0/0/TRA');
+
+        $message = $poetry->get('request.create_request');
+        $rendered = $poetry->getRenderer()->render($message);
+        expect($rendered)
+          ->to->contain('<sequence>NEXT_EUROPA_COUNTER</sequence>')
+          ->and->not->to->contain('<numero>');
     }
 
     /**

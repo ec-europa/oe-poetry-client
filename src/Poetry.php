@@ -59,6 +59,14 @@ class Poetry extends Container implements ContainerInterface
     }
 
     /**
+     * @return \EC\Poetry\Messages\Components\Identifier
+     */
+    public function getIdentifier()
+    {
+        return $this['component.identifier'];
+    }
+
+    /**
      * @return \EC\Poetry\Client
      */
     public function getClient()
