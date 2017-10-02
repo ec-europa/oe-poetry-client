@@ -70,4 +70,57 @@ trait WithStatusTrait
 
         return end($this->statuses);
     }
+
+    /**
+     *  Check if codes are valid for all statuses.
+     *
+     * @return boolean
+     *    Whether all statuses codes are valid.
+     */
+    public function areStatusesValid()
+    {
+        foreach ($this->getStatuses() as $status) {
+            if ($status->getCode() !== '0') {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     *  Get statuses with errors.
+     *
+     * @return array
+     *    Statuses with errors.
+     */
+    public function getStatusesWithErrors()
+    {
+        $errors = [];
+        foreach ($this->getStatuses() as $status) {
+            if (intval($status->getCode()) < 0) {
+                $errors[] = $status;
+            }
+        }
+
+        return $errors;
+    }
+
+    /**
+     *  Get statuses with warnings.
+     *
+     * @return array
+     *    Statuses with warnings.
+     */
+    public function getStatusesWithWarnings()
+    {
+        $warnings = [];
+        foreach ($this->getStatuses() as $status) {
+            if (intval($status->getCode()) > 0) {
+                $warnings[] = $status;
+            }
+        }
+
+        return $warnings;
+    }
 }
