@@ -64,7 +64,7 @@ class ServerTest extends AbstractTest
     {
         $this->setupServer('/notification', 'username', 'password');
 
-        $message = $this->getFixture('messages/responses/response-status.xml');
+        $message = $this->getFixture('messages/notifications/request-accepted.xml');
         $this->notifyServer('/notification', 'username', 'password', $message);
     }
 

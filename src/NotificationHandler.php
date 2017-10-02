@@ -105,7 +105,7 @@ class NotificationHandler
     {
         $event = new ParseNotificationEvent($xml);
         $this->eventDispatcher->dispatch(ParseNotificationEvent::NAME, $event);
-        if (!$event->hasMessage()) {
+        if (!$event->hasEvent()) {
             throw new ParsingException($xml);
         }
 

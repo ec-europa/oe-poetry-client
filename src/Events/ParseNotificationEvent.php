@@ -2,8 +2,6 @@
 
 namespace EC\Poetry\Events;
 
-use EC\Poetry\Messages\MessageAwareInterface;
-use EC\Poetry\Messages\Traits\MessageAwareTrait;
 use Symfony\Component\EventDispatcher\Event;
 
 /**
@@ -11,10 +9,8 @@ use Symfony\Component\EventDispatcher\Event;
  *
  * @package EC\Poetry\Events
  */
-class ParseNotificationEvent extends Event implements MessageAwareInterface
+class ParseNotificationEvent extends Event
 {
-    use MessageAwareTrait;
-
     const NAME = 'poetry.notification.parse';
 
     /**
@@ -70,5 +66,13 @@ class ParseNotificationEvent extends Event implements MessageAwareInterface
     public function setEvent(NotificationEventInterface $event)
     {
         $this->event = $event;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasEvent()
+    {
+        return $this->event !== null;
     }
 }
