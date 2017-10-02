@@ -3,7 +3,7 @@
 namespace EC\Poetry\Messages;
 
 use EC\Poetry\Messages\Components\Identifier;
-use EC\Poetry\Messages\Components\Traits\ArrayAccessTrait;
+use EC\Poetry\Messages\Traits\ArrayAccessTrait;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Symfony\Component\Validator\Constraints as Assert;
 

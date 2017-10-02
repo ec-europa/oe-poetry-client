@@ -51,7 +51,7 @@ class MessagesProvider implements ServiceProviderInterface
             return $component;
         });
 
-        $components = [
+        $messages = [
             'component.contact'             => Component\Contact::class,
             'component.details'             => Component\Details::class,
             'component.reference_document'  => Component\ReferenceDocument::class,
@@ -60,10 +60,9 @@ class MessagesProvider implements ServiceProviderInterface
             'component.status'              => Component\Status::class,
             'component.target'              => Component\Target::class,
         ];
-        $this->serviceFactory($components, $container);
+        $this->serviceFactory($messages, $container);
 
-        // Messages.
-        $messages = [
+        $requests = [
             // Request objects.
             'request.create_request'            => CreateRequest::class,
             'request.get_request_status'        => GetRequestStatus::class,
@@ -76,7 +75,19 @@ class MessagesProvider implements ServiceProviderInterface
             // Notification objects.
             'notification.translation_received' => TranslationReceived::class,
         ];
-        $this->serviceFactory($messages, $container);
+        $this->serviceFactory($requests, $container);
+
+        $responses = [
+            'response.status'                   => Status::class,
+        ];
+        $this->serviceFactory($responses, $container);
+        $this->registerSubscribers($responses, $container);
+
+        $notifications = [
+          'notification.translation_received' => TranslationReceived::class,
+        ];
+        $this->serviceFactory($notifications, $container);
+//        $this->registerSubscribers($notifications, $container);
     }
 
     /**
@@ -98,6 +109,17 @@ class MessagesProvider implements ServiceProviderInterface
 
                 return $service;
             });
+        }
+    }
+
+    /**
+     * @param array $services
+     * @param \Pimple\Container $container
+     */
+    protected function registerSubscribers(array $services, Container $container)
+    {
+        foreach ($services as $name => $class) {
+            $container['event_dispatcher']->addSubscriber($container[$name]);
         }
     }
 }

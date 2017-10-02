@@ -3,7 +3,7 @@
 namespace EC\Poetry\Messages\Notifications;
 
 use EC\Poetry\Messages\AbstractMessage;
-use EC\Poetry\Messages\Components\Traits\ParserAwareTrait;
+use EC\Poetry\Messages\Traits\ParserAwareTrait;
 use EC\Poetry\Messages\ParserAwareInterface;
 
 /**

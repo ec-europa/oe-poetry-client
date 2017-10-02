@@ -38,8 +38,7 @@ class ServicesProvider implements ServiceProviderInterface
                 $container['soap_client'],
                 $container['validator'],
                 $container['renderer'],
-                $container['response.status'],
-                $container['logger']
+                $container['event_dispatcher']
             );
         };
 

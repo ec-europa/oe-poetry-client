@@ -2,6 +2,8 @@
 
 namespace EC\Poetry;
 
+use EC\Poetry\Events\ParseResponseEvent;
+use EC\Poetry\Exceptions\PoetryException;
 use EC\Poetry\Exceptions\ValidationException;
 use EC\Poetry\Messages\AbstractMessage;
 use EC\Poetry\Messages\MessageInterface;
@@ -10,6 +12,7 @@ use EC\Poetry\Services\Parser;
 use EC\Poetry\Services\Renderer;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Symfony\Component\EventDispatcher\EventDispatcher;
 
 /**
  * Class Client
@@ -51,14 +54,9 @@ class Client
     protected $soapClient;
 
     /**
-     * @var \EC\Poetry\Messages\Responses\Status
+     * @var \Symfony\Component\EventDispatcher\EventDispatcher
      */
-    protected $response;
-
-    /**
-     * @var \Psr\Log\LoggerInterface
-     */
-    protected $logger;
+    protected $eventDispatcher;
 
     /**
      * Client constructor.
@@ -69,8 +67,7 @@ class Client
      * @param \SoapClient                                               $soapClient
      * @param \Symfony\Component\Validator\Validator\ValidatorInterface $validator
      * @param \EC\Poetry\Services\Renderer                              $renderer
-     * @param \EC\Poetry\Messages\Responses\Status                      $response
-     * @param \Psr\Log\LoggerInterface                                  $logger
+     * @param \Symfony\Component\EventDispatcher\EventDispatcher        $eventDispatcher
      */
     public function __construct(
         $username,
@@ -79,8 +76,7 @@ class Client
         \SoapClient $soapClient,
         ValidatorInterface $validator,
         Renderer $renderer,
-        Status $response,
-        LoggerInterface $logger
+        EventDispatcher $eventDispatcher
     ) {
         $this->username = $username;
         $this->password = $password;
@@ -88,8 +84,7 @@ class Client
         $this->renderer = $renderer;
         $this->validator = $validator;
         $this->soapClient = $soapClient;
-        $this->response = $response;
-        $this->logger = $logger;
+        $this->eventDispatcher = $eventDispatcher;
     }
 
     /**
@@ -97,24 +92,15 @@ class Client
      *
      * @throws \EC\Poetry\Exceptions\ValidationException
      *
-     * @return \EC\Poetry\Messages\Responses\Status
+     * @return MessageInterface
      */
     public function send(AbstractMessage $message)
     {
         $this->validate($message);
         $renderedMessage = $this->renderer->render($message);
+        $xml = $this->doSend($renderedMessage);
 
-        $this->logger->info("Client request: {user} {password} {message} ", [
-            'user' => $this->username,
-            'password' => $this->password,
-            'message' => $renderedMessage,
-        ]);
-        $responseXml = $this->sendRaw($renderedMessage);
-        $this->logger->info("Client response: {message} ", [
-            'message' => $responseXml,
-        ]);
-
-        return $this->response->fromXml($responseXml);
+        return $this->parse($xml);
     }
 
     /**
@@ -125,7 +111,7 @@ class Client
      *
      * @return mixed
      */
-    public function sendRaw($message)
+    protected function doSend($message)
     {
         return $this->soapClient->{$this->method}($this->username, $this->password, $message);
     }
@@ -141,5 +127,24 @@ class Client
         if ($violations->count() > 0) {
             throw new ValidationException($violations);
         }
+    }
+
+    /**
+     * Parse XML message into a response object.
+     *
+     * @param string $xml
+     *
+     * @return \EC\Poetry\Messages\MessageInterface
+     * @throws \EC\Poetry\Exceptions\PoetryException
+     */
+    protected function parse($xml)
+    {
+        $event = new ParseResponseEvent($xml);
+        $this->eventDispatcher->dispatch(ParseResponseEvent::NAME, $event);
+        if (!$event->hasMessage()) {
+            throw new PoetryException("Message could not be parsed.");
+        }
+
+        return $event->getMessage();
     }
 }

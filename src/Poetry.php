@@ -2,7 +2,7 @@
 
 namespace EC\Poetry;
 
-use EC\Poetry\Events\TranslationReceived;
+use EC\Poetry\Events\TranslationReceivedEvent;
 use EC\Poetry\Services\Providers\MessagesProvider;
 use EC\Poetry\Services\Providers\ParametersProvider;
 use EC\Poetry\Services\Providers\ServicesProvider;

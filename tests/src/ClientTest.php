@@ -33,7 +33,7 @@ class ClientTest extends AbstractTest
         $receive = $method ? $method : 'requestService';
         $mock->shouldReceive($receive)
           ->withArgs([$username, $password, $rendererRequest])
-          ->andReturn($this->getFixture('messages/response-status-1.xml'));
+          ->andReturn($this->getFixture('messages/responses/response-status.xml'));
 
         $logger = new TestLogger();
         $parameters = [
@@ -49,12 +49,7 @@ class ClientTest extends AbstractTest
 
         $response = $poetry->getClient()->send($request);
         $rendererResponse = $this->getContainer()->get('renderer')->render($response);
-        expect($rendererResponse)->has->same->xml('messages/response-status-1.xml');
-
-        $logs = $logger->getLogs();
-
-        expect($logs[LogLevel::CRITICAL])->to->be->empty();
-        expect($logs[LogLevel::INFO])->to->be->not->empty();
+        expect($rendererResponse)->has->same->xml('messages/responses/response-status.xml');
     }
 
     /**

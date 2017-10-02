@@ -3,12 +3,12 @@
 namespace EC\Poetry\Messages\Requests;
 
 use EC\Poetry\Messages\Components\Identifier;
-use EC\Poetry\Messages\Components\Traits\WithContactsTrait;
-use EC\Poetry\Messages\Components\Traits\WithDetailsTrait;
-use EC\Poetry\Messages\Components\Traits\WithReferenceDocumentsTrait;
-use EC\Poetry\Messages\Components\Traits\WithReturnAddressTrait;
-use EC\Poetry\Messages\Components\Traits\WithSourceTrait;
-use EC\Poetry\Messages\Components\Traits\WithTargetsTrait;
+use EC\Poetry\Messages\Traits\WithContactsTrait;
+use EC\Poetry\Messages\Traits\WithDetailsTrait;
+use EC\Poetry\Messages\Traits\WithReferenceDocumentsTrait;
+use EC\Poetry\Messages\Traits\WithReturnAddressTrait;
+use EC\Poetry\Messages\Traits\WithSourceTrait;
+use EC\Poetry\Messages\Traits\WithTargetsTrait;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Symfony\Component\Validator\Constraints as Assert;
 

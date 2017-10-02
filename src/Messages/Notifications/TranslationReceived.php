@@ -3,7 +3,7 @@
 namespace EC\Poetry\Messages\Notifications;
 
 /**
- * Class TranslationReceived
+ * Class TranslationReceivedEvent
  *
  * @package EC\Poetry\Messages\Notifications
  */

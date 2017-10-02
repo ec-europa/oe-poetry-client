@@ -33,6 +33,6 @@ class RequestNewNumberTest extends AbstractTest
         $message = new RequestNewNumber($identifier);
 
         $output = $renderer->render($message);
-        expect($output)->to->have->same->xml('messages/request-new-number-1.xml');
+        expect($output)->to->have->same->xml('messages/requests/request-new-number.xml');
     }
 }

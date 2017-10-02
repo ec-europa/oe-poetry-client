@@ -55,7 +55,9 @@ class Status extends AbstractComponent
           'code' => $this->getCode(),
         ];
 
-        return array_filter($attributes);
+        return array_filter($attributes, function ($value) {
+            return ((string) $value) !== '';
+        });
     }
 
     /**

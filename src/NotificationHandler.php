@@ -2,9 +2,9 @@
 
 namespace EC\Poetry;
 
-use EC\Poetry\Events\TranslationReceived;
+use EC\Poetry\Events\TranslationReceivedEvent;
 use EC\Poetry\Exceptions\Notifications\CannotAuthenticateException;
-use EC\Poetry\Messages\Components\Traits\ParserAwareTrait;
+use EC\Poetry\Messages\Traits\ParserAwareTrait;
 use EC\Poetry\Messages\Responses\Status;
 use EC\Poetry\Services\Parser;
 use Symfony\Component\EventDispatcher\EventDispatcher;
@@ -78,11 +78,9 @@ class NotificationHandler
             throw new CannotAuthenticateException();
         }
 
-        $type = $this->getType($xml);
-
         $message = $this->statusResponse->fromXml($xml);
-        $event = new TranslationReceived($message);
-        $this->eventDispatcher->dispatch(TranslationReceived::NAME, $event);
+        $event = new TranslationReceivedEvent($message);
+        $this->eventDispatcher->dispatch(TranslationReceivedEvent::NAME, $event);
     }
 
     /**
@@ -93,22 +91,6 @@ class NotificationHandler
      */
     protected function doesAuthenticate($username, $password)
     {
-        return $this->username == $username && $this->password == $password;
-    }
-
-    /**
-     * Get notification message type.
-     *
-     * @param string $xml
-     *
-     * @return null|string
-     */
-    protected function getType($xml)
-    {
-        $parser = $this->getParser();
-        $parser->addXmlContent($xml);
-        $type = $parser->getAttribute('POETRY/request', 'type');
-
-        return $type;
+        return ($this->username == $username) && ($this->password == $password);
     }
 }

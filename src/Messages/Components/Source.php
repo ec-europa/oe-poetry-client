@@ -2,7 +2,7 @@
 
 namespace EC\Poetry\Messages\Components;
 
-use EC\Poetry\Messages\Components\Traits\WithSourceLanguagesTrait;
+use EC\Poetry\Messages\Traits\WithSourceLanguagesTrait;
 use EC\Poetry\Services\Parser;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Symfony\Component\Validator\Constraints as Assert;

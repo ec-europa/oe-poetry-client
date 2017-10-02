@@ -78,7 +78,7 @@ class SendReviewRequestTest extends AbstractTest
         $output = $renderer->render($message);
         $violations = $this->getContainer()->getValidator()->validate($message);
         expect($this->getViolations($violations))->to->be->empty();
-        expect($output)->to->have->same->xml('messages/send-review-request.xml');
+        expect($output)->to->have->same->xml('messages/requests/send-review-request.xml');
     }
 
     /**

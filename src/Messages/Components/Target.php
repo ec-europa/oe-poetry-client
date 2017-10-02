@@ -2,8 +2,8 @@
 
 namespace EC\Poetry\Messages\Components;
 
-use EC\Poetry\Messages\Components\Traits\WithContactsTrait;
-use EC\Poetry\Messages\Components\Traits\WithReturnAddressTrait;
+use EC\Poetry\Messages\Traits\WithContactsTrait;
+use EC\Poetry\Messages\Traits\WithReturnAddressTrait;
 use EC\Poetry\Services\Parser;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 use EC\Poetry\Messages\Components\Constraints as Constraint;

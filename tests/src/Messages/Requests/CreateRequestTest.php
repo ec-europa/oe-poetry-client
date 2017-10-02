@@ -78,6 +78,6 @@ class CreateRequestTest extends AbstractTest
             ->setDelay('14/09/2017');
 
         $output = $renderer->render($message);
-        expect($output)->to->have->same->xml('messages/create-request-1.xml');
+        expect($output)->to->have->same->xml('messages/requests/create-request.xml');
     }
 }

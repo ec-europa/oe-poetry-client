@@ -1,8 +1,6 @@
 <?php
 
-namespace EC\Poetry\Messages\Components\Traits;
-
-use EC\Poetry\Messages\ComponentInterface;
+namespace EC\Poetry\Messages\Traits;
 
 /**
  * Trait ArrayAccessTrait.

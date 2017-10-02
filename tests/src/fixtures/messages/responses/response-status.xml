@@ -9,5 +9,10 @@
             <partie>0</partie>
             <produit>TRA</produit>
         </demandeId>
+        <status code="0" type="request">
+            <statusDate>31/07/2017</statusDate>
+            <statusTime>17:06:15</statusTime>
+            <statusMessage>OK</statusMessage>
+        </status>
     </request>
 </POETRY>

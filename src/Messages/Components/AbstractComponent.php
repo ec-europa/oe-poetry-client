@@ -3,8 +3,8 @@
 namespace EC\Poetry\Messages\Components;
 
 use EC\Poetry\Messages\ComponentInterface;
-use EC\Poetry\Messages\Components\Traits\ArrayAccessTrait;
-use EC\Poetry\Messages\Components\Traits\ParserAwareTrait;
+use EC\Poetry\Messages\Traits\ArrayAccessTrait;
+use EC\Poetry\Messages\Traits\ParserAwareTrait;
 use EC\Poetry\Messages\ParserAwareInterface;
 
 /**

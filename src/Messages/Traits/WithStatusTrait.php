@@ -1,6 +1,6 @@
 <?php
 
-namespace EC\Poetry\Messages\Components\Traits;
+namespace EC\Poetry\Messages\Traits;
 
 use EC\Poetry\Messages\Components\Status;
 use EC\Poetry\Poetry;
@@ -8,7 +8,7 @@ use EC\Poetry\Poetry;
 /**
  * Contains setter, getter and factory methods for "Status" component.
  *
- * @package EC\Poetry\Messages\Components\Traits
+ * @package EC\Poetry\Messages\Traits
  */
 trait WithStatusTrait
 {
