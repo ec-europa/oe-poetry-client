@@ -1,22 +1,20 @@
 <?php
 
-namespace EC\Poetry\Events;
+namespace EC\Poetry\Events\Notifications;
 
+use EC\Poetry\Events\NotificationEventInterface;
 use Symfony\Component\EventDispatcher\Event;
-use EC\Poetry\Messages\MessageAwareInterface;
 use EC\Poetry\Messages\MessageInterface;
 use EC\Poetry\Messages\Traits\MessageAwareTrait;
 
 /**
- * Class TranslationChangedEvent
+ * Class AbstractNotificationEvent
  *
- * @package EC\Poetry\Events
+ * @package EC\Poetry\Events\Notifications
  */
-class TranslationChangedEvent extends Event implements MessageAwareInterface
+abstract class AbstractNotificationEvent extends Event implements NotificationEventInterface
 {
     use MessageAwareTrait;
-
-    const NAME = 'poetry.translation.changed';
 
     /**
      * TranslationChangedEvent constructor.

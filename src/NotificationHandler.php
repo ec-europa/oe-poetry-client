@@ -2,8 +2,10 @@
 
 namespace EC\Poetry;
 
+use EC\Poetry\Events\ParseNotificationEvent;
 use EC\Poetry\Events\TranslationReceivedEvent;
 use EC\Poetry\Exceptions\Notifications\CannotAuthenticateException;
+use EC\Poetry\Exceptions\ParsingException;
 use EC\Poetry\Messages\Traits\ParserAwareTrait;
 use EC\Poetry\Messages\Responses\Status;
 use EC\Poetry\Services\Parser;
@@ -78,9 +80,8 @@ class NotificationHandler
             throw new CannotAuthenticateException();
         }
 
-        $message = $this->statusResponse->fromXml($xml);
-        $event = new TranslationReceivedEvent($message);
-        $this->eventDispatcher->dispatch(TranslationReceivedEvent::NAME, $event);
+        $event = $this->parse($xml);
+        $this->eventDispatcher->dispatch($event->getName(), $event);
     }
 
     /**
@@ -92,5 +93,22 @@ class NotificationHandler
     protected function doesAuthenticate($username, $password)
     {
         return ($this->username == $username) && ($this->password == $password);
+    }
+
+    /**
+     * @param $xml
+     *
+     * @return \EC\Poetry\Events\NotificationEventInterface
+     * @throws \EC\Poetry\Exceptions\ParsingException
+     */
+    protected function parse($xml)
+    {
+        $event = new ParseNotificationEvent($xml);
+        $this->eventDispatcher->dispatch(ParseNotificationEvent::NAME, $event);
+        if (!$event->hasMessage()) {
+            throw new ParsingException($xml);
+        }
+
+        return $event->getEvent();
     }
 }

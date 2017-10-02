@@ -2,6 +2,8 @@
 
 namespace EC\Poetry\Messages\Notifications;
 
+use EC\Poetry\Events\ParseNotificationEvent;
+
 /**
  * Class TranslationReceivedEvent
  *
@@ -15,6 +17,14 @@ class TranslationReceived extends AbstractNotification
     public function getTemplate()
     {
         // TODO: Implement getTemplate() method.
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function onParseNotification(ParseNotificationEvent $event)
+    {
+        // TODO: Implement onParseNotification() method.
     }
 
     /**

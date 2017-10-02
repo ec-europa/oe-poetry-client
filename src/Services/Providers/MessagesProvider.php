@@ -87,7 +87,7 @@ class MessagesProvider implements ServiceProviderInterface
           'notification.translation_received' => TranslationReceived::class,
         ];
         $this->serviceFactory($notifications, $container);
-//        $this->registerSubscribers($notifications, $container);
+        $this->registerSubscribers($notifications, $container);
     }
 
     /**

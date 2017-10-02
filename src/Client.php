@@ -3,6 +3,7 @@
 namespace EC\Poetry;
 
 use EC\Poetry\Events\ParseResponseEvent;
+use EC\Poetry\Exceptions\ParsingException;
 use EC\Poetry\Exceptions\PoetryException;
 use EC\Poetry\Exceptions\ValidationException;
 use EC\Poetry\Messages\AbstractMessage;
@@ -142,7 +143,7 @@ class Client
         $event = new ParseResponseEvent($xml);
         $this->eventDispatcher->dispatch(ParseResponseEvent::NAME, $event);
         if (!$event->hasMessage()) {
-            throw new PoetryException("Message could not be parsed.");
+            throw new ParsingException($xml);
         }
 
         return $event->getMessage();
