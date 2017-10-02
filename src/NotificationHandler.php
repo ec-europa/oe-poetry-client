@@ -3,7 +3,6 @@
 namespace EC\Poetry;
 
 use EC\Poetry\Events\ParseNotificationEvent;
-use EC\Poetry\Events\TranslationReceivedEvent;
 use EC\Poetry\Exceptions\Notifications\CannotAuthenticateException;
 use EC\Poetry\Exceptions\ParsingException;
 use EC\Poetry\Messages\Traits\ParserAwareTrait;
