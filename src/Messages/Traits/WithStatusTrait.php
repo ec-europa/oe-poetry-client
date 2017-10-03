@@ -72,12 +72,12 @@ trait WithStatusTrait
     }
 
     /**
-     *  Check if codes are valid for all statuses.
+     *  Check if all statuses are successful.
      *
      * @return boolean
-     *    Whether all statuses codes are valid.
+     *    True if all statuses codes are 0, false otherwise.
      */
-    public function areStatusesValid()
+    public function isSuccess()
     {
         foreach ($this->getStatuses() as $status) {
             if ($status->getCode() !== '0') {
