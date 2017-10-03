@@ -22,7 +22,7 @@ class TranslationReceived extends AbstractNotification
      */
     public function getTemplate()
     {
-        return '';
+        return 'messages::translation';
     }
 
     /**
