@@ -9,11 +9,5 @@ namespace EC\Poetry\Events\Notifications;
  */
 class TranslationChangedEvent extends AbstractNotificationEvent
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'poetry.notification.translation_changed';
-    }
+    const NAME = 'poetry.notification.translation_changed';
 }

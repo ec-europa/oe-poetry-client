@@ -16,22 +16,18 @@ use Psr\Log\LogLevel;
 class ClientTest extends AbstractTest
 {
     /**
-     * @param string $username
-     * @param string $password
-     * @param string $method
-     *
-     * @dataProvider clientParametersProvider
+     * Test send method.
      */
-    public function testSend($username, $password, $method)
+    public function testSend()
     {
         $request = new CreateRequest($this->getValidIdentifier());
-        $status = new Status($this->getValidIdentifier());
+        $username = 'foo';
+        $password = 'bar';
 
         $rendererRequest = $this->getContainer()->get('renderer')->render($request);
 
         $mock = $this->getSoapClientMock();
-        $receive = $method ? $method : 'requestService';
-        $mock->shouldReceive($receive)
+        $mock->shouldReceive('requestService')
           ->withArgs([$username, $password, $rendererRequest])
           ->andReturn($this->getFixture('messages/responses/response-status.xml'));
 
@@ -42,9 +38,6 @@ class ClientTest extends AbstractTest
           'soap_client' => $mock,
           'logger' => $logger,
         ];
-        if ($method) {
-            $parameters['client.method'] = $method;
-        }
         $poetry = new Poetry($parameters);
 
         $response = $poetry->getClient()->send($request);
@@ -71,16 +64,5 @@ class ClientTest extends AbstractTest
         expect($actual)->to->equal([
             'content-type' => 'application/xml; utf-8',
         ]);
-    }
-
-    /**
-     * @return array
-     */
-    public function clientParametersProvider()
-    {
-        return [
-          ['john', 'smith', null],
-          ['john', 'smith', 'overriddenRequestService'],
-        ];
     }
 }

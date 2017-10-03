@@ -3,8 +3,6 @@
 namespace EC\Poetry\Services\Providers;
 
 use EC\Poetry\NotificationHandler;
-use EC\Poetry\Poetry;
-use EC\Poetry\Server;
 use EC\Poetry\Client;
 use EC\Poetry\Services\Plates\AttributesExtension;
 use EC\Poetry\Services\Wsdl;
@@ -34,7 +32,6 @@ class ServicesProvider implements ServiceProviderInterface
             return new Client(
                 $container['service.username'],
                 $container['service.password'],
-                $container['client.method'],
                 $container['soap_client'],
                 $container['validator'],
                 $container['renderer'],

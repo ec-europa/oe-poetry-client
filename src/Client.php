@@ -4,14 +4,11 @@ namespace EC\Poetry;
 
 use EC\Poetry\Events\ParseResponseEvent;
 use EC\Poetry\Exceptions\ParsingException;
-use EC\Poetry\Exceptions\PoetryException;
 use EC\Poetry\Exceptions\ValidationException;
 use EC\Poetry\Messages\AbstractMessage;
 use EC\Poetry\Messages\MessageInterface;
-use EC\Poetry\Messages\Responses\Status;
-use EC\Poetry\Services\Parser;
 use EC\Poetry\Services\Renderer;
-use Psr\Log\LoggerInterface;
+use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
@@ -31,13 +28,6 @@ class Client
      * @var string
      */
     protected $password;
-
-    /**
-     * SOAP server method callback.
-     *
-     * @var string
-     */
-    protected $method;
 
     /**
      * @var \EC\Poetry\Services\Renderer
@@ -64,7 +54,6 @@ class Client
      *
      * @param string                                                    $username
      * @param string                                                    $password
-     * @param string                                                    $method
      * @param \SoapClient                                               $soapClient
      * @param \Symfony\Component\Validator\Validator\ValidatorInterface $validator
      * @param \EC\Poetry\Services\Renderer                              $renderer
@@ -73,7 +62,6 @@ class Client
     public function __construct(
         $username,
         $password,
-        $method,
         \SoapClient $soapClient,
         ValidatorInterface $validator,
         Renderer $renderer,
@@ -81,7 +69,6 @@ class Client
     ) {
         $this->username = $username;
         $this->password = $password;
-        $this->method = $method;
         $this->renderer = $renderer;
         $this->validator = $validator;
         $this->soapClient = $soapClient;
@@ -114,7 +101,7 @@ class Client
      */
     protected function doSend($message)
     {
-        return $this->soapClient->{$this->method}($this->username, $this->password, $message);
+        return $this->soapClient->requestService($this->username, $this->password, $message);
     }
 
     /**
