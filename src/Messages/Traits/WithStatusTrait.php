@@ -75,17 +75,33 @@ trait WithStatusTrait
      *  Check if all statuses are successful.
      *
      * @return boolean
-     *    True if all statuses codes are 0, false otherwise.
+     *    True if there are no errors neither warnings, false otherwise.
      */
     public function isSuccess()
     {
-        foreach ($this->getStatuses() as $status) {
-            if ($status->getCode() !== '0') {
-                return false;
-            }
-        }
+        return !$this->hasWarnings() && !$this->hasErrors();
+    }
 
-        return true;
+    /**
+     *  Check some statuses have errors.
+     *
+     * @return boolean
+     *    True if some status has errors, false otherwise.
+     */
+    public function hasErrors()
+    {
+        return $this->getStatusesWithErrors() !== [];
+    }
+
+    /**
+     *  Check some statuses have warnings.
+     *
+     * @return boolean
+     *    True if some status has warnings, false otherwise.
+     */
+    public function hasWarnings()
+    {
+        return $this->getStatusesWithWarnings() !== [];
     }
 
     /**
