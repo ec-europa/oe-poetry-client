@@ -3,6 +3,7 @@
 namespace EC\Poetry\Messages\Requests;
 
 use EC\Poetry\Messages\Components\Identifier;
+use EC\Poetry\Services\Settings;
 
 /**
  * Send a review request to Poetry service.
@@ -14,9 +15,9 @@ class SendReviewRequest extends CreateRequest
     /**
      * {@inheritdoc}
      */
-    public function __construct(Identifier $identifier)
+    public function __construct(Identifier $identifier, Settings $settings)
     {
-        parent::__construct($identifier);
+        parent::__construct($identifier, $settings);
         $identifier->setProduct('REV');
     }
 

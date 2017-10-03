@@ -73,7 +73,7 @@ $poetry = new Poetry([
     'identifier.number' => '0001',
     'identifier.version' => '01',
     'identifier.part' => '00',    
-    'identifier.product' => 'ABC',    
+    'identifier.product' => 'ABC',  
 ]);
 
 $message = $poetry->get('response.status');

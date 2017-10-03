@@ -1,0 +1,186 @@
+-
+  array:
+    details:
+      client_id: 'Job ID 3999'
+      title: 'NE-CMS: Erasmus+ - Erasmus Mundus Joint Master Degrees'
+      author: 'IE/CE/EAC'
+      responsible: 'EAC'
+      requester: 'IE/CE/EAC/C/4'
+      applicationId: 'FPFIS'
+      delay: '12/09/2017'
+      reference_files_remark: 'https://ec.europa.eu/programmes/erasmus-plus/opportunities-for-individuals/staff-teaching/erasmus-mundus_en'
+      procedure: 'NEANT'
+      destination: 'PUBLIC'
+      type: 'INTER'
+    source:
+      format: 'HTML'
+      name: 'content.html'
+      file: 'BASE64ENCODEDFILECONTENT'
+      legiswrite_format: 'No'
+      source_language:
+        -
+          code: 'EN'
+          pages: 1
+    contact:
+      -
+        type: 'auteur'
+        nickname: 'john'
+      -
+        type: 'secretaire'
+        nickname: 'john'
+      -
+        type: 'contact'
+        nickname: 'john'
+      -
+        type: 'responsable'
+        nickname: 'mark'
+    target:
+      -
+        action: 'INSERT'
+        format: 'HTML'
+        language: 'EN'
+        delay: '12/09/2017'
+  expected:
+    getIdentifier:
+      getCode: 'STSI'
+      getYear: '2017'
+      getNumber: '40017'
+      getVersion: '0'
+      getPart: '11'
+    getDetails:
+      getClientId: 'Job ID 3999'
+      getTitle: 'NE-CMS: Erasmus+ - Erasmus Mundus Joint Master Degrees'
+      getAuthor: 'IE/CE/EAC'
+      getResponsible: 'EAC'
+      getRequester: 'IE/CE/EAC/C/4'
+      getApplicationId: 'FPFIS'
+      getDelay: '12/09/2017'
+      getReferenceFilesRemark: 'https://ec.europa.eu/programmes/erasmus-plus/opportunities-for-individuals/staff-teaching/erasmus-mundus_en'
+      getProcedure: 'NEANT'
+      getDestination: 'PUBLIC'
+      getType: 'INTER'
+    getReturnAddress:
+      getAction: 'UPDATE'
+      getType: 'webService'
+      getUser: 'MY-TEST-USER'
+      getPassword: 'MY-TEST-PASSWORD'
+      getAddress: 'https://example.com/callback/wsdl/PoetryIntegration.wsdl'
+      getPath: 'handle'
+    getSource:
+      getFormat: 'HTML'
+      getName: 'content.html'
+      getFile: 'BASE64ENCODEDFILECONTENT'
+      getSourceLanguages:
+        -
+          getCode: 'EN'
+          getPages: 1
+    getContacts:
+      -
+        getType: 'auteur'
+        getNickname: 'john'
+      -
+        getType: 'secretaire'
+        getNickname: 'john'
+      -
+        getType: 'contact'
+        getNickname: 'john'
+      -
+        getType: 'responsable'
+        getNickname: 'mark'
+
+-
+  array:
+    details:
+      client_id: 'Job ID 3999'
+      title: 'NE-CMS: Erasmus+ - Erasmus Mundus Joint Master Degrees'
+      author: 'IE/CE/EAC'
+      responsible: 'EAC'
+      requester: 'IE/CE/EAC/C/4'
+      applicationId: 'FPFIS'
+      delay: '12/09/2017'
+      reference_files_remark: 'https://ec.europa.eu/programmes/erasmus-plus/opportunities-for-individuals/staff-teaching/erasmus-mundus_en'
+      procedure: 'NEANT'
+      destination: 'PUBLIC'
+      type: 'INTER'
+    source:
+      format: 'HTML'
+      name: 'content.html'
+      file: 'BASE64ENCODEDFILECONTENT'
+      legiswrite_format: 'No'
+      source_language:
+        -
+          code: 'EN'
+          pages: 1
+    contact:
+      -
+        type: 'auteur'
+        nickname: 'john'
+      -
+        type: 'secretaire'
+        nickname: 'john'
+      -
+        type: 'contact'
+        nickname: 'john'
+      -
+        type: 'responsable'
+        nickname: 'mark'
+    target:
+      -
+        action: 'INSERT'
+        format: 'HTML'
+        language: 'EN'
+        delay: '12/09/2017'
+    return_address:
+      action: 'UPDATE'
+      type: 'webService'
+      user: 'MY-TEST-USER-2'
+      password: 'MY-TEST-PASSWORD-2'
+      address: 'https://example.com/callback/wsdl/PoetryIntegration-2.wsdl'
+      path: 'TestReturnPath'
+  expected:
+    getIdentifier:
+      getCode: 'STSI'
+      getYear: '2017'
+      getNumber: '40017'
+      getVersion: '0'
+      getPart: '11'
+    getDetails:
+      getClientId: 'Job ID 3999'
+      getTitle: 'NE-CMS: Erasmus+ - Erasmus Mundus Joint Master Degrees'
+      getAuthor: 'IE/CE/EAC'
+      getResponsible: 'EAC'
+      getRequester: 'IE/CE/EAC/C/4'
+      getApplicationId: 'FPFIS'
+      getDelay: '12/09/2017'
+      getReferenceFilesRemark: 'https://ec.europa.eu/programmes/erasmus-plus/opportunities-for-individuals/staff-teaching/erasmus-mundus_en'
+      getProcedure: 'NEANT'
+      getDestination: 'PUBLIC'
+      getType: 'INTER'
+    getReturnAddress:
+      getAction: 'UPDATE'
+      getType: 'webService'
+      getUser: 'MY-TEST-USER-2'
+      getPassword: 'MY-TEST-PASSWORD-2'
+      getAddress: 'https://example.com/callback/wsdl/PoetryIntegration-2.wsdl'
+      getPath: 'TestReturnPath'
+    getSource:
+      getFormat: 'HTML'
+      getName: 'content.html'
+      getFile: 'BASE64ENCODEDFILECONTENT'
+      getSourceLanguages:
+        -
+          getCode: 'EN'
+          getPages: 1
+    getContacts:
+      -
+        getType: 'auteur'
+        getNickname: 'john'
+      -
+        getType: 'secretaire'
+        getNickname: 'john'
+      -
+        getType: 'contact'
+        getNickname: 'john'
+      -
+        getType: 'responsable'
+        getNickname: 'mark'

@@ -5,6 +5,7 @@ namespace EC\Poetry\Tests;
 use EC\Poetry\Messages\Requests\CreateRequest;
 use EC\Poetry\Messages\Responses\Status;
 use EC\Poetry\Poetry;
+use EC\Poetry\Services\Settings;
 use EC\Poetry\Tests\Logger\TestLogger;
 use Psr\Log\LogLevel;
 
@@ -20,7 +21,7 @@ class ClientTest extends AbstractTest
      */
     public function testSend()
     {
-        $request = new CreateRequest($this->getValidIdentifier());
+        $request = new CreateRequest($this->getValidIdentifier(), new Settings());
         $username = 'foo';
         $password = 'bar';
 

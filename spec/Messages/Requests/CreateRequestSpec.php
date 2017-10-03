@@ -10,6 +10,7 @@ use EC\Poetry\Messages\Components\ReturnAddress;
 use EC\Poetry\Messages\Components\Source;
 use EC\Poetry\Messages\Components\Target;
 use EC\Poetry\Messages\Requests\CreateRequest;
+use EC\Poetry\Services\Settings;
 use PhpSpec\ObjectBehavior;
 use spec\EC\Poetry\Messages\Traits\AssertContactsTrait;
 use spec\EC\Poetry\Messages\Traits\AssertDetailsTrait;
@@ -27,9 +28,9 @@ class CreateRequestSpec extends ObjectBehavior
     use AssertReferenceDocumentsTrait;
     use AssertTargetsTrait;
 
-    function let(Identifier $identifier)
+    function let(Identifier $identifier, Settings $settings)
     {
-        $this->beConstructedWith($identifier);
+        $this->beConstructedWith($identifier, $settings);
     }
 
     function it_is_initializable()

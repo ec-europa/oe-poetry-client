@@ -6,6 +6,7 @@ use EC\Poetry\Messages\Components\Contact;
 use EC\Poetry\Messages\Components\Identifier;
 use EC\Poetry\Messages\Requests\CreateRequest;
 use EC\Poetry\Messages\Requests\RequestNewNumber;
+use EC\Poetry\Services\Settings;
 use EC\Poetry\Tests\AbstractTest;
 
 /**
@@ -30,7 +31,7 @@ class RequestNewNumberTest extends AbstractTest
           ->setVersion('01')
           ->setPart('00');
 
-        $message = new RequestNewNumber($identifier);
+        $message = new RequestNewNumber($identifier, new Settings());
 
         $output = $renderer->render($message);
         expect($output)->to->have->same->xml('messages/requests/request-new-number.xml');

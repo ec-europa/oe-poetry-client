@@ -31,7 +31,6 @@ class PoetryTest extends TestCase
         expect($violations->count())->not->to->be->empty();
 
         $poetry = new Poetry([
-            'type' => AbstractRequest::REQUEST_STATUS,
             'identifier.code' => 'DGT',
             'identifier.year' => '2017',
             'identifier.number' => '0001',

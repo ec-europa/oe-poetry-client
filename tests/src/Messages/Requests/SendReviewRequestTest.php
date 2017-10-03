@@ -7,6 +7,7 @@ use EC\Poetry\Messages\Components\Identifier;
 use EC\Poetry\Messages\Requests\CreateRequest;
 use EC\Poetry\Messages\Requests\SendReviewRequest;
 use EC\Poetry\Poetry;
+use EC\Poetry\Services\Settings;
 use EC\Poetry\Tests\AbstractTest;
 use Symfony\Component\Yaml\Yaml;
 
@@ -32,7 +33,7 @@ class SendReviewRequestTest extends AbstractTest
           ->setVersion('0')
           ->setPart('11');
 
-        $message = new SendReviewRequest($identifier);
+        $message = new SendReviewRequest($identifier, new Settings());
 
         $message->withDetails()
             ->setClientId("Job ID 3999")
@@ -95,6 +96,9 @@ class SendReviewRequestTest extends AbstractTest
             'identifier.number' => '40017',
             'identifier.version' => '0',
             'identifier.part' => '11',
+            'notification.username' => 'MY-TEST-USER',
+            'notification.password' => 'MY-TEST-PASSWORD',
+            'client.wsdl' => 'https://example.com/callback/wsdl/PoetryIntegration.wsdl',
         ]);
         $component = $poetry->get('request.send_review_request');
         $component->withArray($array);
@@ -118,6 +122,6 @@ class SendReviewRequestTest extends AbstractTest
      */
     public function withArrayProvider()
     {
-        return Yaml::parse($this->getFixture('arrays/send_review_request.yml'));
+        return Yaml::parse($this->getFixture('arrays/send-review-request.yml'));
     }
 }

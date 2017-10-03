@@ -68,7 +68,7 @@ class NotificationHandlerTest extends AbstractTest
             'notification.username' => 'username',
             'notification.password' => 'password',
             'test.event' => 'poetry.notification.translation_received',
-            'test.listener' => [NotificationHandlerTest::class, 'onTranslationReceived'],
+            'test.listener' => [self::class, 'onTranslationReceived'],
         ]);
 
         $message = $this->getFixture('messages/notifications/request-accepted.xml');

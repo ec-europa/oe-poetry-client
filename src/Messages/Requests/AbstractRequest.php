@@ -3,6 +3,8 @@
 namespace EC\Poetry\Messages\Requests;
 
 use EC\Poetry\Messages\AbstractMessage;
+use EC\Poetry\Messages\Components\Identifier;
+use EC\Poetry\Services\Settings;
 
 /**
  * Class AbstractRequest.
@@ -20,6 +22,20 @@ abstract class AbstractRequest extends AbstractMessage
     const REQUEST_STATUS = 'getStatus';
     const REQUEST_TRANSLATION = 'getTranslationFile';
     const REQUEST_CONTACTS = 'getContacts';
+
+    /**
+     * @var \EC\Poetry\Services\Settings
+     */
+    protected $settings;
+
+    /**
+     * {@inheritdoc}
+     */
+    public function __construct(Identifier $identifier, Settings $settings)
+    {
+        parent::__construct($identifier);
+        $this->settings = $settings;
+    }
 
     /**
      * {@inheritdoc}

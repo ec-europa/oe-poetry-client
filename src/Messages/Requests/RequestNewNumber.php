@@ -8,6 +8,7 @@
 namespace EC\Poetry\Messages\Requests;
 
 use EC\Poetry\Messages\Components\Identifier;
+use EC\Poetry\Services\Settings;
 
 /**
  * Get status of a translation request.
@@ -19,9 +20,9 @@ class RequestNewNumber extends AbstractRequest
     /**
      * {@inheritdoc}
      */
-    public function __construct(Identifier $identifier)
+    public function __construct(Identifier $identifier, Settings $settings)
     {
-        parent::__construct($identifier);
+        parent::__construct($identifier, $settings);
         $identifier->setProduct('TRA');
     }
 

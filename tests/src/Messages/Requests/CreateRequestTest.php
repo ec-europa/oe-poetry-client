@@ -5,6 +5,7 @@ namespace EC\Poetry\Tests\Messages\Requests;
 use EC\Poetry\Messages\Components\Contact;
 use EC\Poetry\Messages\Components\Identifier;
 use EC\Poetry\Messages\Requests\CreateRequest;
+use EC\Poetry\Services\Settings;
 use EC\Poetry\Tests\AbstractTest;
 
 /**
@@ -21,7 +22,7 @@ class CreateRequestTest extends AbstractTest
     {
         $identifier = $this->getValidIdentifier();
 
-        $request = new CreateRequest($identifier);
+        $request = new CreateRequest($identifier, new Settings());
 
         $request->withContact()
             ->setType('Contact')
@@ -62,7 +63,7 @@ class CreateRequestTest extends AbstractTest
           ->setPart('00')
           ->setProduct('TRA');
 
-        $message = new CreateRequest($identifier);
+        $message = new CreateRequest($identifier, new Settings());
 
         $message->withDetails()
             ->setClientId("clientID")

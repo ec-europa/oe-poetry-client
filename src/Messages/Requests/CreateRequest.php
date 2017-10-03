@@ -9,6 +9,7 @@ use EC\Poetry\Messages\Traits\WithReferenceDocumentsTrait;
 use EC\Poetry\Messages\Traits\WithReturnAddressTrait;
 use EC\Poetry\Messages\Traits\WithSourceTrait;
 use EC\Poetry\Messages\Traits\WithTargetsTrait;
+use EC\Poetry\Services\Settings;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -29,10 +30,20 @@ class CreateRequest extends AbstractRequest
     /**
      * {@inheritdoc}
      */
-    public function __construct(Identifier $identifier)
+    public function __construct(Identifier $identifier, Settings $settings)
     {
-        parent::__construct($identifier);
-        $identifier->setProduct('TRA');
+        parent::__construct($identifier, $settings);
+        $this->getIdentifier()->setProduct('TRA');
+
+        if ($settings->get('client.wsdl') && $settings->get('notification.username') && $settings->get('notification.password')) {
+            $this->withReturnAddress()
+              ->setAction('UPDATE')
+              ->setType('webService')
+              ->setUser($settings->get('notification.username'))
+              ->setPassword($settings->get('notification.password'))
+              ->setAddress($settings->get('client.wsdl'))
+              ->setPath('handle');
+        }
     }
 
     /**
