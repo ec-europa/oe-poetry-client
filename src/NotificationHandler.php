@@ -6,8 +6,6 @@ use EC\Poetry\Events\ParseNotificationEvent;
 use EC\Poetry\Exceptions\Notifications\CannotAuthenticateException;
 use EC\Poetry\Exceptions\ParsingException;
 use EC\Poetry\Messages\Traits\ParserAwareTrait;
-use EC\Poetry\Messages\Responses\Status;
-use EC\Poetry\Services\Parser;
 use EC\Poetry\Services\Settings;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
@@ -31,22 +29,15 @@ class NotificationHandler
     private $eventDispatcher;
 
     /**
-     * @var \EC\Poetry\Services\Parser
-     */
-    private $parser;
-
-    /**
      * NotificationHandler constructor.
      *
      * @param \EC\Poetry\Services\Settings                       $settings
      * @param \Symfony\Component\EventDispatcher\EventDispatcher $eventDispatcher
-     * @param \EC\Poetry\Services\Parser                         $parser
      */
-    public function __construct(Settings $settings, EventDispatcher $eventDispatcher, Parser $parser)
+    public function __construct(Settings $settings, EventDispatcher $eventDispatcher)
     {
         $this->settings = $settings;
         $this->eventDispatcher = $eventDispatcher;
-        $this->parser = $parser;
     }
 
     /**

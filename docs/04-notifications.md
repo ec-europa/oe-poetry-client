@@ -1,7 +1,34 @@
 # Notifications
 
-Notifications coming from the Poetry service will be turned into Symfony events. Host application
-must register its own event listeners onto the Poetry Client library event dispatcher service:
+Notifications coming from the Poetry service will be turned into Symfony events.
+ 
+## Expose a notification endpoint
+
+Host application must expose a notification endpoint and handle incoming requests to such endpoint using the Poetry
+Client server.
+
+Say that you wish to use the following URL in order to receive Poetry notifications:
+
+```
+http://my-site.europa.eu/poetry
+``` 
+
+Make sure that the following code is executed when a request hits the URL above:
+
+```php
+<?php
+use EC\Poetry\Poetry;
+
+$poetry = new Poetry(...);
+$poetry->getServer()->handle();
+```
+
+## Register notification listeners
+
+In order to handle incoming notifications you need to register your event listeners onto the Poetry Client library event
+dispatcher service.
+
+The core above might then become:
 
 ```php
 <?php
@@ -11,6 +38,7 @@ use EC\Poetry\Events\Notifications\TranslationReceivedEvent;
 $poetry = new Poetry(...);
 $poetry->getEventDispatcher()
     ->addListener(TranslationReceivedEvent::NAME, ['MyClass', 'onTranslationReceived']);
+$poetry->getServer()->handle();
 ``` 
 
 Event listeners will receive the incoming notification as an actual notification message object:
@@ -42,6 +70,7 @@ $poetry->getEventDispatcher()
     ->addListener(TranslationReceivedEvent::NAME, function (TranslationReceived $message) {
         // ...
     });
+$poetry->getServer()->handle();
 ```
 
 Or having a class subscribe to multiple events:
@@ -51,9 +80,9 @@ Or having a class subscribe to multiple events:
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use EC\Poetry\Events\Notifications\TranslationReceivedEvent;
-use EC\Poetry\Events\Notifications\TranslationChangedEvent;
+use EC\Poetry\Events\Notifications\StatusUpdatedEvent;
 use EC\Poetry\Messages\Notifications\TranslationReceived;
-use EC\Poetry\Messages\Notifications\TranslationChanged;
+use EC\Poetry\Messages\Notifications\StatusUpdated;
 
 class MySubscriber implements EventSubscriberInterface
 {
@@ -64,7 +93,7 @@ class MySubscriber implements EventSubscriberInterface
     {
         return [
            TranslationReceivedEvent::NAME => 'onTranslationReceivedEvent',
-           TranslationChangedEvent::NAME  => 'onTranslationChangedEvent',
+           StatusUpdatedEvent::NAME  => 'onStatusUpdatedEvent',
         ];
     }
 
@@ -73,7 +102,7 @@ class MySubscriber implements EventSubscriberInterface
         // ...
     }
 
-    public function onTranslationChangedEvent(TranslationChanged $message)
+    public function onStatusUpdatedEvent(StatusUpdated $message)
     {
         // ...
     }
@@ -89,6 +118,7 @@ use EC\Poetry\Poetry;
 $poetry = new Poetry(...);
 $poetry->getEventDispatcher()
     ->addSubscriber(new MySubscriber());
+$poetry->getServer()->handle();
 ```
 
 
