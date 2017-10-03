@@ -19,7 +19,7 @@ abstract class AbstractNotificationEvent extends Event implements NotificationEv
     const NAME = '';
 
     /**
-     * TranslationChangedEvent constructor.
+     * AbstractNotificationEvent constructor.
      *
      * @param \EC\Poetry\Messages\MessageInterface $message
      */

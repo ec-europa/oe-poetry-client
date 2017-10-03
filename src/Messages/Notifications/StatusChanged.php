@@ -2,21 +2,20 @@
 
 namespace EC\Poetry\Messages\Notifications;
 
-use EC\Poetry\Events\Notifications\TranslationReceivedEvent;
+use EC\Poetry\Events\Notifications\StatusUpdatedEvent;
 use EC\Poetry\Events\ParseNotificationEvent;
 use EC\Poetry\Messages\Traits\WithStatusTrait;
-use EC\Poetry\Messages\Traits\WithTargetsTrait;
 use EC\Poetry\Services\Parser;
 
 /**
- * Class TranslationReceived
+ * Class StatusChanged
  *
  * @package EC\Poetry\Messages\Notifications
  */
-class TranslationReceived extends AbstractNotification
+class StatusChanged extends AbstractNotification
 {
     use WithStatusTrait;
-    use WithTargetsTrait;
+
     /**
      * {@inheritdoc}
      */
@@ -32,9 +31,9 @@ class TranslationReceived extends AbstractNotification
     {
         $parser = $this->getParser();
         $parser->addXmlContent($event->getXml());
-        if ('translation' === $parser->getAttribute('POETRY/request', 'type')) {
+        if ('status' === $parser->getAttribute('POETRY/request', 'type')) {
             $this->fromXml($event->getXml());
-            $event->setEvent(new TranslationReceivedEvent($this));
+            $event->setEvent(new StatusUpdatedEvent($this));
             $event->stopPropagation();
         }
     }
@@ -52,12 +51,6 @@ class TranslationReceived extends AbstractNotification
 
         $parser->eachComponent("POETRY/request/status", function (Parser $component) {
             $this->withStatus()
-              ->setParser($this->getParser())
-              ->fromXml($component->outerHtml());
-        }, $this);
-
-        $parser->eachComponent("POETRY/request/attributions", function (Parser $component) {
-            $this->withTarget()
               ->setParser($this->getParser())
               ->fromXml($component->outerHtml());
         }, $this);
