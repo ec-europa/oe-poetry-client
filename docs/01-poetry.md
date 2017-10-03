@@ -16,6 +16,9 @@ Finally, dependency injection allows the code to be fully decoupled and easily t
 To start using the Poetry Client library it's enough to create a new instance of the `Poetry` factory as follow:
 
 ```php
+<?php
+use EC\Poetry\Poetry;
+
 $poetry = new Poetry();
 ``` 
 
@@ -53,17 +56,19 @@ $poetry = new Poetry([
     'identifier.version' => '01',
     'identifier.part' => '00',
     'service.wsdl' => 'http://intragate.test.ec.europa.eu/DGT/poetry_services/components/poetry.cfc?wsdl',
-    'service.username' => 'foo',
-    'service.password' => 'bar',
+    'service.username' => 'my-remote-username',
+    'service.password' => 'my-remote-password',
     'client.wsdl' => 'http://my-site.com/my/poetry.wsdl',
     'notification.endpoint' => 'http://my-site.com/my/poetry/notifications',
+    'notification.username' => 'my-local-username',
+    'notification.password' => 'my-local-password',
 ]);
 ```
 
 The parameters above will be injected into Poetry services allowing the host application to control their behavior, namely:
 
-- `identifier.*` will be passed to the [`Identifier` component](02-messages.md).
-- `authentication.*` will be passed to the [Client](03-client.md).
+- `identifier.*` will be used when building the [`Identifier` component](02-messages.md).
+- Other settings are used in [`Client`](03-client.md) and [`NotificationHandler`](03-client.md) services.
 
 Once instantiated the `Poetry` factory object can be accessed anywhere by calling:
 
@@ -89,14 +94,12 @@ $response = $poetry->getClient()->send($message);
 
 For an overview of all available services and their machine names refer to the service providers below:
 
-- [`EC\Poetry\Services\Providers\ParametersProvider`](../src/Services/Providers/ParametersProvider.php): 
-  Defines the list of valid configuration parameters that can be passed in the `Poetry` factory object constructor. 
-- [`EC\Poetry\Services\Providers\ServicesProvider`](../src/Services/Providers/ServicesProvider.php):
+- [`ServicesProvider`](../src/Services/Providers/ServicesProvider.php):
   Exposes generic services such as the template system, the client, etc. Services are configured by parameters specified
-  in the `ParametersProvider`.
-- [`EC\Poetry\Services\Providers\MessagesProvider`](../src/Services/Providers/MessagesProvider.php): 
+  in the [`settings`](../src/Services/Settings.php) service.
+- [`MessagesProvider`](../src/Services/Providers/MessagesProvider.php): 
   Exposes message and component objects as services. Components, such as `Identifier` are configured by the parameters
-  specified in the `ParametersProvider`.
+  specified in the [`settings`](../src/Services/Settings.php) service.
 
 ## Use external logger
 
@@ -105,11 +108,14 @@ Poetry client supports any logging service implementing the [PSR3 Logger Interfa
 In order to add an external logger object run:
 
 ```php
+<?php
+use EC\Poetry\Poetry;
+
 // Returns a PSR3-compatible logger.
 $logger = MyLoggerFactory::getInstance();
 
 $poetry = new Poetry([
-    ...
+    // ...
     'logger' => $logger,
 ]);
 ```
@@ -117,6 +123,7 @@ $poetry = new Poetry([
 Or, for already instantiated Poetry objects, run:  
 
 ```php
+<?php
 // Returns a PSR3-compatible logger.
 $logger = MyLoggerFactory::getInstance();
 
