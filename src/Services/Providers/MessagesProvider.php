@@ -3,6 +3,7 @@
 namespace EC\Poetry\Services\Providers;
 
 use EC\Poetry\Messages\Components as Component;
+use EC\Poetry\Messages\SettingsAwareInterface;
 use EC\Poetry\Messages\Notifications\TranslationReceived;
 use EC\Poetry\Messages\ParserAwareInterface;
 use EC\Poetry\Messages\Requests\CreateRequest;
@@ -28,13 +29,13 @@ class MessagesProvider implements ServiceProviderInterface
         // Identifier component.
         $container['component.identifier'] = $container->factory(function (Container $container) {
             $component = (new Component\Identifier())
-              ->setCode($container['identifier.code'])
-              ->setYear($container['identifier.year'])
-              ->setNumber($container['identifier.number'])
-              ->setVersion($container['identifier.version'])
-              ->setPart($container['identifier.part'])
-              ->setSequence($container['identifier.sequence'])
-              ->setProduct($container['identifier.product']);
+              ->setCode($container['settings']['identifier.code'])
+              ->setYear($container['settings']['identifier.year'])
+              ->setNumber($container['settings']['identifier.number'])
+              ->setVersion($container['settings']['identifier.version'])
+              ->setPart($container['settings']['identifier.part'])
+              ->setSequence($container['settings']['identifier.sequence'])
+              ->setProduct($container['settings']['identifier.product']);
 
             $component->setParser($container['parser']);
 
@@ -58,34 +59,33 @@ class MessagesProvider implements ServiceProviderInterface
           'request.send_review_request' => SendReviewRequest::class,
           'request.request_new_number'  => RequestNewNumber::class,
         ];
-        $this->serviceFactory($requests, $container);
+        $this->serviceFactory($requests, $container, $container['component.identifier'], $container['settings']);
 
         $responses = [
           'response.status' => Status::class,
         ];
-        $this->serviceFactory($responses, $container);
+        $this->serviceFactory($responses, $container, $container['component.identifier']);
         $this->registerSubscribers($responses, $container);
 
         $notifications = [
           'notification.translation_received' => TranslationReceived::class,
         ];
-        $this->serviceFactory($notifications, $container);
+        $this->serviceFactory($notifications, $container, $container['component.identifier']);
         $this->registerSubscribers($notifications, $container);
     }
 
     /**
      * Helper: Register services.
      *
-     * @param array $services
-     *      List of services.
+     * @param array             $services
      * @param \Pimple\Container $container
-     *      Container object.
+     * @param array             ...$args
      */
-    protected function serviceFactory(array $services, Container $container)
+    protected function serviceFactory(array $services, Container $container, ...$args)
     {
         foreach ($services as $name => $class) {
-            $container[$name] = $container->factory(function (Container $container) use ($class) {
-                $service = new $class($container['component.identifier']);
+            $container[$name] = $container->factory(function (Container $container) use ($class, $args) {
+                $service = (new \ReflectionClass($class))->newInstanceArgs($args);
                 if ((new \ReflectionClass($service))->implementsInterface(ParserAwareInterface::class)) {
                     $service->setParser($container['parser']);
                 }

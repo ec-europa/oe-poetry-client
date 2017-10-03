@@ -8,6 +8,7 @@ use EC\Poetry\Exceptions\ParsingException;
 use EC\Poetry\Messages\Traits\ParserAwareTrait;
 use EC\Poetry\Messages\Responses\Status;
 use EC\Poetry\Services\Parser;
+use EC\Poetry\Services\Settings;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
 /**
@@ -20,14 +21,9 @@ class NotificationHandler
     use ParserAwareTrait;
 
     /**
-     * @var string
+     * @var \EC\Poetry\Services\Settings
      */
-    private $username;
-
-    /**
-     * @var string
-     */
-    private $password;
+    protected $settings;
 
     /**
      * @var \Symfony\Component\EventDispatcher\EventDispatcher
@@ -40,26 +36,17 @@ class NotificationHandler
     private $parser;
 
     /**
-     * @var \EC\Poetry\Messages\Responses\Status
-     */
-    private $statusResponse;
-
-    /**
      * NotificationHandler constructor.
      *
-     * @param string                                             $username
-     * @param string                                             $password
+     * @param \EC\Poetry\Services\Settings                       $settings
      * @param \Symfony\Component\EventDispatcher\EventDispatcher $eventDispatcher
      * @param \EC\Poetry\Services\Parser                         $parser
-     * @param \EC\Poetry\Messages\Responses\Status               $statusResponse
      */
-    public function __construct($username, $password, EventDispatcher $eventDispatcher, Parser $parser, Status $statusResponse)
+    public function __construct(Settings $settings, EventDispatcher $eventDispatcher, Parser $parser)
     {
-        $this->username = $username;
-        $this->password = $password;
-        $this->parser = $parser;
+        $this->settings = $settings;
         $this->eventDispatcher = $eventDispatcher;
-        $this->statusResponse = $statusResponse;
+        $this->parser = $parser;
     }
 
     /**
@@ -89,7 +76,7 @@ class NotificationHandler
      */
     protected function doesAuthenticate($username, $password)
     {
-        return ($this->username == $username) && ($this->password == $password);
+        return ($this->settings->get('notification.username') == $username) && ($this->settings->get('notification.password') == $password);
     }
 
     /**

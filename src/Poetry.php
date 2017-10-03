@@ -27,12 +27,12 @@ class Poetry extends Container implements ContainerInterface
     {
         parent::__construct($values);
 
-        // Register services.
-        $this->register(new ParametersProvider());
         $this->register(new ServicesProvider());
-        $this->register(new MessagesProvider());
+        foreach ($values as $name => $value) {
+            $this->getSettings()->set($name, $value);
+        }
 
-        // Override container values.
+        $this->register(new MessagesProvider());
         foreach ($values as $name => $value) {
             $this->offsetSet($name, $value);
         }
@@ -79,6 +79,14 @@ class Poetry extends Container implements ContainerInterface
     public function getServer()
     {
         return $this['soap_server'];
+    }
+
+    /**
+     * @return \EC\Poetry\Services\Settings
+     */
+    public function getSettings()
+    {
+        return $this['settings'];
     }
 
     /**

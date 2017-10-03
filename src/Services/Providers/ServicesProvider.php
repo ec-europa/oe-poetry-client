@@ -5,6 +5,7 @@ namespace EC\Poetry\Services\Providers;
 use EC\Poetry\NotificationHandler;
 use EC\Poetry\Client;
 use EC\Poetry\Services\Plates\AttributesExtension;
+use EC\Poetry\Services\Settings;
 use EC\Poetry\Services\Wsdl;
 use League\Plates\Engine;
 use EC\Poetry\Services\Plates\ComponentExtension;
@@ -30,8 +31,7 @@ class ServicesProvider implements ServiceProviderInterface
     {
         $container['client'] = function (Container $container) {
             return new Client(
-                $container['service.username'],
-                $container['service.password'],
+                $container['settings'],
                 $container['soap_client'],
                 $container['validator'],
                 $container['renderer'],
@@ -40,20 +40,24 @@ class ServicesProvider implements ServiceProviderInterface
         };
 
         $container['wsdl'] = function (Container $container) {
-            return new Wsdl($container['notification.endpoint'], $container['renderer.engine']);
+            return new Wsdl(
+                $container['settings']['notification.endpoint'],
+                $container['renderer.engine']
+            );
         };
 
         $container['soap_client'] = function (Container $container) {
-            return new \SoapClient($container['service.wsdl'], $container['client.options']);
+            return new \SoapClient(
+                $container['settings']['service.wsdl'],
+                $container['settings']['client.options']
+            );
         };
 
         $container['notification_handler'] = function (Container $container) {
             return new NotificationHandler(
-                $container['notification.username'],
-                $container['notification.password'],
+                $container['settings'],
                 $container['event_dispatcher'],
-                $container['parser'],
-                $container['response.status']
+                $container['parser']
             );
         };
 
@@ -92,9 +96,16 @@ class ServicesProvider implements ServiceProviderInterface
             return $engine;
         };
 
+        // Render engine parameters.
+        $container['renderer.engine.template_folder'] = __DIR__.'/../../../templates';
+
         $container['validator'] = $container->factory(function () {
             return (new ValidatorBuilder())->addMethodMapping('getConstraints')->getValidator();
         });
+
+        $container['settings'] = function () {
+            return new Settings();
+        };
 
         $container['logger'] = function () {
             return new NullLogger();

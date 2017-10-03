@@ -12,13 +12,6 @@
       procedure: 'NEANT'
       destination: 'PUBLIC'
       type: 'INTER'
-    return_address:
-      action: 'UPDATE'
-      type: 'webService'
-      user: 'MY-TEST-USER'
-      password: 'MY-TEST-PASSWORD'
-      address: 'https://example.com/callback/wsdl/PoetryIntegration.wsdl'
-      path: 'TestReturnPath'
     source:
       format: 'HTML'
       name: 'content.html'
@@ -72,7 +65,7 @@
       getUser: 'MY-TEST-USER'
       getPassword: 'MY-TEST-PASSWORD'
       getAddress: 'https://example.com/callback/wsdl/PoetryIntegration.wsdl'
-      getPath: 'TestReturnPath'
+      getPath: 'handle'
     getSource:
       getFormat: 'HTML'
       getName: 'content.html'
