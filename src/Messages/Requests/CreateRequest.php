@@ -35,7 +35,7 @@ class CreateRequest extends AbstractRequest
         parent::__construct($identifier, $settings);
         $this->getIdentifier()->setProduct('TRA');
 
-        if ($settings->get('client.wsdl')) {
+        if ($settings->get('client.wsdl') && $settings->get('notification.username') && $settings->get('notification.password')) {
             $this->withReturnAddress()
               ->setAction('UPDATE')
               ->setType('webService')
