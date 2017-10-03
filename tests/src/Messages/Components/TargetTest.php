@@ -38,10 +38,10 @@ class TargetTest extends TestCase
             'action' => "The value you selected is not a valid choice.",
             'delay' => "This value is not a valid datetime.",
             'acceptedDelay' => "This value is not a valid datetime.",
-            'returnAddress.type' => "The value you selected is not a valid choice.",
-            'returnAddress.address' => "This value should not be blank.",
-            'returnAddress.password' => "The return type you selected can't have a password.",
-            'returnAddress.path' => "The return type you selected can't have a path.",
+            'returnAddresses[0].type' => "The value you selected is not a valid choice.",
+            'returnAddresses[0].address' => "This value should not be blank.",
+            'returnAddresses[0].password' => "The return type you selected can't have a password.",
+            'returnAddresses[0].path' => "The return type you selected can't have a path.",
             'contacts[0].type' => "The value you selected is not a valid choice.",
             'contacts[0].nickname' => "This value should not be blank.",
 
@@ -69,7 +69,7 @@ class TargetTest extends TestCase
         foreach ($targetProperties as $method => $value) {
             expect($target->$method())->to->equal($value);
         }
-        $returnAddress = $target->getReturnAddress();
+        $returnAddress = $target->getReturnAddresses()[0];
         foreach ($addressProperties as $method => $value) {
             expect($returnAddress->$method())->to->equal($value);
         }

@@ -209,7 +209,8 @@ class Status extends AbstractComponent
             ->setTime($parser->getContent('status/statusTime'))
             ->setMessage($parser->getContent('status/statusMessage'))
             ->setType($parser->attr('type'))
-            ->setCode($parser->attr('code'));
+            ->setCode($parser->attr('code'))
+            ->setLanguage($parser->attr('lgCode'));
 
         return $this;
     }

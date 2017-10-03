@@ -3,6 +3,7 @@
 namespace EC\Poetry\Services\Providers;
 
 use EC\Poetry\Messages\Components as Component;
+use EC\Poetry\Messages\Notifications\StatusUpdated;
 use EC\Poetry\Messages\Notifications\TranslationReceived;
 use EC\Poetry\Messages\ParserAwareInterface;
 use EC\Poetry\Messages\Requests\CreateRequest;
@@ -68,6 +69,7 @@ class MessagesProvider implements ServiceProviderInterface
 
         $notifications = [
           'notification.translation_received' => TranslationReceived::class,
+          'notification.status_updated' => StatusUpdated::class,
         ];
         $this->serviceFactory($notifications, $container, $container['component.identifier']);
         $this->registerSubscribers($notifications, $container);

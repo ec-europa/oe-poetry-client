@@ -3,7 +3,6 @@
 namespace EC\Poetry\Messages\Components;
 
 use EC\Poetry\Messages\Traits\WithContactsTrait;
-use EC\Poetry\Messages\Traits\WithReturnAddressTrait;
 use EC\Poetry\Services\Parser;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 use EC\Poetry\Messages\Components\Constraints as Constraint;
@@ -17,7 +16,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Target extends AbstractComponent
 {
     use WithContactsTrait;
-    use WithReturnAddressTrait;
 
     private $format;
     private $language;
@@ -29,6 +27,7 @@ class Target extends AbstractComponent
     private $acceptedDelay;
     private $acceptedDelayFormat;
     private $translatedFile;
+    private $returnAddresses;
 
     /**
      * {@inheritdoc}
@@ -56,7 +55,7 @@ class Target extends AbstractComponent
             'UPDATE',
             'DELETE',
         ]));
-        $metadata->addPropertyConstraint('returnAddress', new Assert\Valid(['traverse' => true]));
+        $metadata->addPropertyConstraint('returnAddresses', new Assert\Valid(['traverse' => true]));
         $metadata->addPropertyConstraint('contacts', new Assert\Valid(['traverse' => true]));
     }
 
@@ -265,6 +264,43 @@ class Target extends AbstractComponent
         $this->translatedFile = $translatedFile;
 
         return $this;
+    }
+
+    /**
+     * @return \EC\Poetry\Messages\Components\TargetReturnAddress[]
+     */
+    public function getReturnAddresses()
+    {
+        return $this->returnAddresses;
+    }
+
+    /**
+     * @param \EC\Poetry\Messages\Components\TargetReturnAddress[] $returnAddresses
+     */
+    public function setReturnAddresses($returnAddresses)
+    {
+        $this->returnAddresses = $returnAddresses;
+    }
+
+    /**
+     * @param \EC\Poetry\Messages\Components\TargetReturnAddress $returnAddress
+     */
+    public function addReturnAddress($returnAddress)
+    {
+        $this->returnAddresses[] = $returnAddress;
+    }
+
+    /**
+     * Factory method: create a new contact and return its instance.
+     *
+     * @return \EC\Poetry\Messages\Components\TargetReturnAddress
+     *      Contact instance.
+     */
+    public function withReturnAddress()
+    {
+        $this->returnAddresses[] = new TargetReturnAddress();
+
+        return end($this->returnAddresses);
     }
 
     /**

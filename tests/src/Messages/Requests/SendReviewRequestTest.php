@@ -74,7 +74,8 @@ class SendReviewRequestTest extends AbstractTest
             ->setAction('INSERT')
             ->setFormat('HTML')
             ->setLanguage('EN')
-            ->setDelay('12/09/2017');
+            ->setDelay('12/09/2017')
+            ->setDelayFormat('DD/MM/YYYY');
 
         $output = $renderer->render($message);
         $violations = $this->getContainer()->getValidator()->validate($message);

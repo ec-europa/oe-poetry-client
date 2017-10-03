@@ -38,8 +38,11 @@ class Parser extends DomCrawler\Crawler
     public function getAttribute($xpath, $attribute)
     {
         $attributes = $this->filterXPath($xpath)->extract([$attribute]);
-
-        return $attributes[0] === '' ? null : $attributes[0];
+        if (!empty($attributes)) {
+            return $attributes[0] === '' ? null : $attributes[0];
+        } else {
+            return null;
+        }
     }
 
     /**
