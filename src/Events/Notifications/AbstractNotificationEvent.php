@@ -16,6 +16,8 @@ abstract class AbstractNotificationEvent extends Event implements NotificationEv
 {
     use MessageAwareTrait;
 
+    const NAME = '';
+
     /**
      * TranslationChangedEvent constructor.
      *
@@ -24,5 +26,13 @@ abstract class AbstractNotificationEvent extends Event implements NotificationEv
     public function __construct(MessageInterface $message)
     {
         $this->message = $message;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getName()
+    {
+        return self::NAME;
     }
 }

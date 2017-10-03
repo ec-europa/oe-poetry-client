@@ -67,8 +67,8 @@ class NotificationHandlerTest extends AbstractTest
         $this->setupServer('/notification', [
             'notification.username' => 'username',
             'notification.password' => 'password',
-              'test.event' => 'poetry.notification.translation_received',
-              'test.listener' => [NotificationHandlerTest::class, 'listener'],
+            'test.event' => 'poetry.notification.translation_received',
+            'test.listener' => [NotificationHandlerTest::class, 'onTranslationReceived'],
         ]);
 
         $message = $this->getFixture('messages/notifications/request-accepted.xml');
@@ -78,7 +78,7 @@ class NotificationHandlerTest extends AbstractTest
     /**
      * @param \EC\Poetry\Events\NotificationEventInterface $event
      */
-    public static function listener(NotificationEventInterface $event)
+    public static function onTranslationReceived(NotificationEventInterface $event)
     {
         expect($event->hasMessage())->be->true();
         expect($event->getMessage())->to->be->instanceof(TranslationReceived::class);
