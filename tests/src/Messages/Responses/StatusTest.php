@@ -65,7 +65,6 @@ class StatusTest extends AbstractTest
             if (isset($test['results']['warningMsgExcerpt'])) {
                 expect((string) $warnings[0])->to->match('/'.$test['results']['warningMsgExcerpt'].'/');
             }
-
         }
     }
 
