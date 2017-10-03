@@ -70,4 +70,73 @@ trait WithStatusTrait
 
         return end($this->statuses);
     }
+
+    /**
+     *  Check if all statuses are successful.
+     *
+     * @return boolean
+     *    True if there are no errors neither warnings, false otherwise.
+     */
+    public function isSuccess()
+    {
+        return !$this->hasWarnings() && !$this->hasErrors();
+    }
+
+    /**
+     *  Check some statuses have errors.
+     *
+     * @return boolean
+     *    True if some status has errors, false otherwise.
+     */
+    public function hasErrors()
+    {
+        return $this->getStatusesWithErrors() !== [];
+    }
+
+    /**
+     *  Check some statuses have warnings.
+     *
+     * @return boolean
+     *    True if some status has warnings, false otherwise.
+     */
+    public function hasWarnings()
+    {
+        return $this->getStatusesWithWarnings() !== [];
+    }
+
+    /**
+     *  Get statuses with errors.
+     *
+     * @return array
+     *    Statuses with errors.
+     */
+    public function getStatusesWithErrors()
+    {
+        $errors = [];
+        foreach ($this->getStatuses() as $status) {
+            if (intval($status->getCode()) < 0) {
+                $errors[] = $status;
+            }
+        }
+
+        return $errors;
+    }
+
+    /**
+     *  Get statuses with warnings.
+     *
+     * @return array
+     *    Statuses with warnings.
+     */
+    public function getStatusesWithWarnings()
+    {
+        $warnings = [];
+        foreach ($this->getStatuses() as $status) {
+            if (intval($status->getCode()) > 0) {
+                $warnings[] = $status;
+            }
+        }
+
+        return $warnings;
+    }
 }
