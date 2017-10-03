@@ -17,5 +17,4 @@ class TargetReturnAddress extends ReturnAddress
     {
         return 'components::target-return-address';
     }
-
 }

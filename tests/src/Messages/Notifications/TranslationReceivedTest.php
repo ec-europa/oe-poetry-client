@@ -42,36 +42,35 @@ class TranslationReceivedTest extends AbstractTest
         expect($output)->to->have->same->xml('messages/notifications/translation-received.xml');
     }
 
-  /**
-   * Test parsing.
-   *
-   * @param string $xml
-   * @param array  $identifier
-   * @param array  $targets
-   *
-   * @dataProvider parserProvider
-   */
-  public function testParsing($xml, $identifier, $targets)
-  {
-      /** @var \EC\Poetry\Messages\Notifications\TranslationReceived $message */
-      $message = $this->getContainer()->get('notification.translation_received')->fromXml($xml);
+    /**
+     * Test parsing.
+     *
+     * @param string $xml
+     * @param array  $identifier
+     * @param array  $targets
+     *
+     * @dataProvider parserProvider
+     */
+    public function testParsing($xml, $identifier, $targets)
+    {
+        /** @var \EC\Poetry\Messages\Notifications\TranslationReceived $message */
+        $message = $this->getContainer()->get('notification.translation_received')->fromXml($xml);
 
-      foreach ($identifier as $method => $expected) {
-          expect($message->getIdentifier()->{$method}())->to->equal($expected);
-      }
-      foreach ($targets as $index => $target) {
-          foreach ($target as $method => $expected) {
-              expect($message->getTargets()[$index]->{$method}())->to->equal($expected);
-          }
-      }
-  }
+        foreach ($identifier as $method => $expected) {
+            expect($message->getIdentifier()->{$method}())->to->equal($expected);
+        }
+        foreach ($targets as $index => $target) {
+            foreach ($target as $method => $expected) {
+                expect($message->getTargets()[$index]->{$method}())->to->equal($expected);
+            }
+        }
+    }
 
-  /**
-   * @return array
-   */
-  public function parserProvider()
-  {
-      return Yaml::parse($this->getFixture('parsers/notifications/translationReceived.yml'));
-  }
-
+    /**
+     * @return array
+     */
+    public function parserProvider()
+    {
+        return Yaml::parse($this->getFixture('parsers/notifications/translationReceived.yml'));
+    }
 }

@@ -7,7 +7,11 @@
  * @var \EC\Poetry\Messages\Components\Target $component
  */
 ?>
-<attributions <?php if ($component->getAction()) : ?>action="<?= $component->getAction() ?>"<?php endif ?>format="<?= $component->getFormat() ?>" lgCode="<?= $component->getLanguage() ?>">
+<attributions
+    <?php if ($component->getAction()) : ?>
+        action="<?= $component->getAction() ?>"
+    <?php endif ?>
+    format="<?= $component->getFormat() ?>" lgCode="<?= $component->getLanguage() ?>">
     <?php if ($component->getRemark()) : ?>
         <attributionsRemark><?= $component->getRemark() ?></attributionsRemark>
     <?php endif ?>

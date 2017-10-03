@@ -19,7 +19,8 @@ class NotificationIdentifier extends Identifier
     /**
      * @return mixed
      */
-    public function getIdentifier() {
+    public function getIdentifier()
+    {
         return $this->identifier;
     }
 
@@ -28,10 +29,11 @@ class NotificationIdentifier extends Identifier
      *
      * @return $this
      */
-    public function setIdentifier($identifier) {
+    public function setIdentifier($identifier)
+    {
         $this->identifier = $identifier;
 
-      return $this;
+        return $this;
     }
 
     /**
@@ -41,5 +43,4 @@ class NotificationIdentifier extends Identifier
     {
         return $this->getIdentifier();
     }
-
 }

@@ -269,21 +269,24 @@ class Target extends AbstractComponent
     /**
      * @return \EC\Poetry\Messages\Components\TargetReturnAddress[]
      */
-    public function getReturnAddresses() {
+    public function getReturnAddresses()
+    {
         return $this->returnAddresses;
     }
 
     /**
      * @param \EC\Poetry\Messages\Components\TargetReturnAddress[] $returnAddresses
      */
-    public function setReturnAddresses($returnAddresses) {
+    public function setReturnAddresses($returnAddresses)
+    {
         $this->returnAddresses = $returnAddresses;
     }
 
     /**
      * @param \EC\Poetry\Messages\Components\TargetReturnAddress $returnAddress
      */
-    public function addReturnAddress($returnAddress) {
+    public function addReturnAddress($returnAddress)
+    {
         $this->returnAddresses[] = $returnAddress;
     }
 
@@ -295,9 +298,9 @@ class Target extends AbstractComponent
      */
     public function withReturnAddress()
     {
-      $this->returnAddresses[] = new TargetReturnAddress();
+        $this->returnAddresses[] = new TargetReturnAddress();
 
-      return end($this->returnAddresses);
+        return end($this->returnAddresses);
     }
 
     /**
