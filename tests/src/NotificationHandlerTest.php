@@ -2,16 +2,19 @@
 
 namespace EC\Poetry\Tests;
 
+use EC\Poetry\Events\NotificationEventInterface;
+use EC\Poetry\Events\Notifications\TranslationReceivedEvent;
+use EC\Poetry\Messages\Notifications\TranslationReceived;
 use EC\Poetry\Poetry;
 use InterNations\Component\HttpMock\PHPUnit\HttpMockTrait;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Class ServerTest
+ * Class NotificationHandlerTest
  *
  * @package EC\Poetry
  */
-class ServerTest extends AbstractTest
+class NotificationHandlerTest extends AbstractTest
 {
     use HttpMockTrait;
 
@@ -52,7 +55,6 @@ class ServerTest extends AbstractTest
      */
     public function testServer()
     {
-        /** @var \EC\Poetry\Server $server */
         $server = $this->getContainer()->getServer();
         expect($server)->is->an->instanceof(\SoapServer::class);
     }
@@ -62,16 +64,30 @@ class ServerTest extends AbstractTest
      */
     public function testFunctionCallback()
     {
-        $this->setupServer('/notification', 'username', 'password');
+        $this->setupServer('/notification', [
+            'notification.username' => 'username',
+            'notification.password' => 'password',
+              'test.event' => 'poetry.notification.translation_received',
+              'test.listener' => [NotificationHandlerTest::class, 'listener'],
+        ]);
 
         $message = $this->getFixture('messages/notifications/request-accepted.xml');
         $this->notifyServer('/notification', 'username', 'password', $message);
     }
 
     /**
+     * @param \EC\Poetry\Events\NotificationEventInterface $event
+     */
+    public static function listener(NotificationEventInterface $event)
+    {
+        expect($event->hasMessage())->be->true();
+        expect($event->getMessage())->to->be->instanceof(TranslationReceived::class);
+    }
+
+    /**
      * Setup notification endpoint.
      */
-    protected function setupServer($endpoint, $username, $password)
+    protected function setupServer($endpoint, $parameters)
     {
         // @codingStandardsIgnoreStart
         $this->http->mock
@@ -80,11 +96,9 @@ class ServerTest extends AbstractTest
               ->pathIs($endpoint)
           ->then()
           ->callback(
-            function (Response $response) use ($username, $password) {
-                $poetry = new Poetry([
-                  'notification.username' => $username,
-                  'notification.password' => $password,
-                ]);
+            function (Response $response) use ($parameters) {
+                $poetry = new Poetry($parameters);
+                $poetry->getEventDispatcher()->addListener($parameters['test.event'], $parameters['test.listener']);
                 $poetry->getServer()->handle();
             }
           )

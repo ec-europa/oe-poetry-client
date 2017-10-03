@@ -33,7 +33,6 @@ class ParametersProvider implements ServiceProviderInterface
 
         // Client service parameters.
         $container['client.wsdl'] = '';
-        $container['client.method'] = 'requestService';
         $container['client.options'] = [
           'cache_wsdl' => WSDL_CACHE_NONE,
         ];
