@@ -19,8 +19,6 @@ class NotificationHandler
 {
     use ParserAwareTrait;
 
-    const TYPE_TRANSLATION_RECEIVED = 'notification.translation_received';
-
     /**
      * @var string
      */

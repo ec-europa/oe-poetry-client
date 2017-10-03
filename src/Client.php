@@ -8,6 +8,7 @@ use EC\Poetry\Exceptions\ValidationException;
 use EC\Poetry\Messages\AbstractMessage;
 use EC\Poetry\Messages\MessageInterface;
 use EC\Poetry\Services\Renderer;
+use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
