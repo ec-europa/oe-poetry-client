@@ -22,6 +22,23 @@ class Status extends AbstractComponent
     private $message;
 
     /**
+     * Convert information in array to string.
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        $msg = 'Type: %s, Code: %s, Message: %s.';
+
+        return sprintf(
+            $msg,
+            $this->getType(),
+            $this->getCode(),
+            $this->getMessage()
+        );
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function getTemplate()
