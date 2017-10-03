@@ -15,14 +15,13 @@ use EC\Poetry\Services\Parser;
  */
 class TranslationReceived extends AbstractNotification
 {
-    use WithStatusTrait;
     use WithTargetsTrait;
     /**
      * {@inheritdoc}
      */
     public function getTemplate()
     {
-        return 'messages::translation';
+        return 'notifications::translation';
     }
 
     /**
@@ -49,12 +48,6 @@ class TranslationReceived extends AbstractNotification
 
         $xml = $parser->getOuterContent('POETRY/request/demandeId');
         $this->getIdentifier()->fromXml($xml);
-
-        $parser->eachComponent("POETRY/request/status", function (Parser $component) {
-            $this->withStatus()
-              ->setParser($this->getParser())
-              ->fromXml($component->outerHtml());
-        }, $this);
 
         $parser->eachComponent("POETRY/request/attributions", function (Parser $component) {
             $this->withTarget()

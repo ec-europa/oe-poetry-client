@@ -16,10 +16,18 @@
         <attributionsRemark><?= $component->getRemark() ?></attributionsRemark>
     <?php endif ?>
     <?php if ($component->getDelay()) : ?>
-        <attributionsDelai format="<?= $component->getDelayFormat() ?>"><?= $component->getDelay() ?></attributionsDelai>
+        <attributionsDelai
+            <?php if ($component->getDelayFormat()) : ?>
+                format="<?= $component->getDelayFormat() ?>"
+            <?php endif ?>
+        ><?= $component->getDelay() ?></attributionsDelai>
     <?php endif ?>
     <?php if ($component->getAcceptedDelay()) : ?>
-        <attributionsDelaiAccepted format="<?= $component->getAcceptedDelayFormat() ?>"><?= $component->getAcceptedDelay() ?></attributionsDelaiAccepted>
+        <attributionsDelaiAccepted
+            <?php if ($component->getAcceptedDelayFormat()) : ?>
+                format="<?= $component->getAcceptedDelayFormat() ?>"
+            <?php endif ?>
+        ><?= $component->getAcceptedDelay() ?></attributionsDelaiAccepted>
     <?php endif ?>
     <?php if ($component->getReturnAddresses()) : ?>
         <?php foreach ($component->getReturnAddresses() as $address) : ?>

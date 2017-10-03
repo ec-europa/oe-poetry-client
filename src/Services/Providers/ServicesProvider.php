@@ -75,7 +75,8 @@ class ServicesProvider implements ServiceProviderInterface
               ->loadExtension(new ComponentExtension())
               ->loadExtension(new AttributesExtension())
               ->addFolder('messages', $root.'/messages')
-              ->addFolder('components', $root.'/components');
+              ->addFolder('components', $root.'/components')
+              ->addFolder('notifications', $root.'/notifications');
 
             return $engine;
         };
