@@ -28,11 +28,6 @@ class CreateRequest extends AbstractRequest
     use WithReferenceDocumentsTrait;
 
     /**
-     * @var \EC\Poetry\Services\Settings
-     */
-    protected $settings;
-
-    /**
      * {@inheritdoc}
      */
     public function __construct(Identifier $identifier, Settings $settings)

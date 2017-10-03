@@ -3,7 +3,6 @@
 namespace EC\Poetry\Services\Providers;
 
 use EC\Poetry\Messages\Components as Component;
-use EC\Poetry\Messages\SettingsAwareInterface;
 use EC\Poetry\Messages\Notifications\TranslationReceived;
 use EC\Poetry\Messages\ParserAwareInterface;
 use EC\Poetry\Messages\Requests\CreateRequest;

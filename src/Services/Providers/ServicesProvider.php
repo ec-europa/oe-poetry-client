@@ -30,35 +30,19 @@ class ServicesProvider implements ServiceProviderInterface
     public function register(Container $container)
     {
         $container['client'] = function (Container $container) {
-            return new Client(
-                $container['settings'],
-                $container['soap_client'],
-                $container['validator'],
-                $container['renderer'],
-                $container['event_dispatcher']
-            );
+            return new Client($container['settings'], $container['soap_client'], $container['validator'], $container['renderer'], $container['event_dispatcher']);
         };
 
         $container['wsdl'] = function (Container $container) {
-            return new Wsdl(
-                $container['settings']['notification.endpoint'],
-                $container['renderer.engine']
-            );
+            return new Wsdl($container['settings']['notification.endpoint'], $container['renderer.engine']);
         };
 
         $container['soap_client'] = function (Container $container) {
-            return new \SoapClient(
-                $container['settings']['service.wsdl'],
-                $container['settings']['client.options']
-            );
+            return new \SoapClient($container['settings']['service.wsdl'], $container['settings']['client.options']);
         };
 
         $container['notification_handler'] = function (Container $container) {
-            return new NotificationHandler(
-                $container['settings'],
-                $container['event_dispatcher'],
-                $container['parser']
-            );
+            return new NotificationHandler($container['settings'], $container['event_dispatcher'], $container['parser']);
         };
 
         $container['soap_server'] = function (Container $container) {

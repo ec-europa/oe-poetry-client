@@ -3,7 +3,6 @@
 namespace EC\Poetry;
 
 use EC\Poetry\Services\Providers\MessagesProvider;
-use EC\Poetry\Services\Providers\ParametersProvider;
 use EC\Poetry\Services\Providers\ServicesProvider;
 use Pimple\Container;
 use Psr\Container\ContainerInterface;
