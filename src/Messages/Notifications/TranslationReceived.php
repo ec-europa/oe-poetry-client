@@ -49,6 +49,8 @@ class TranslationReceived extends AbstractNotification
         $xml = $parser->getOuterContent('POETRY/request/demandeId');
         $this->getIdentifier()->fromXml($xml);
 
+        $this->setMessageId($parser->getAttribute('POETRY/request', 'id'));
+
         $parser->eachComponent("POETRY/request/attributions", function (Parser $component) {
             $this->withTarget()
               ->setParser($this->getParser())

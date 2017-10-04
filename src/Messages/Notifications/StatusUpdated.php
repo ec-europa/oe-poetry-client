@@ -51,6 +51,8 @@ class StatusUpdated extends AbstractNotification
         $xml = $parser->getOuterContent('POETRY/request/demandeId');
         $this->getIdentifier()->fromXml($xml);
 
+        $this->setMessageId($parser->getAttribute('POETRY/request', 'id'));
+
         $parser->eachComponent("POETRY/request/status", function (Parser $component) {
             $this->withStatus()
               ->setParser($this->getParser())

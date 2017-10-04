@@ -2,9 +2,8 @@
 
 namespace EC\Poetry\Tests\Messages\Requests;
 
-use EC\Poetry\Messages\Components\NotificationIdentifier;
+use EC\Poetry\Messages\Components\Identifier;
 use EC\Poetry\Messages\Notifications\StatusUpdated;
-use EC\Poetry\Messages\Notifications\TranslationReceived;
 use EC\Poetry\Tests\AbstractTest;
 use Symfony\Component\Yaml\Yaml;
 
@@ -24,9 +23,8 @@ class StatusUpdatedTest extends AbstractTest
         /** @var \EC\Poetry\Services\Renderer $renderer */
         $renderer = $this->getContainer()->get('renderer');
 
-        $identifier = new NotificationIdentifier();
-        $identifier->setIdentifier('1069698')
-          ->setCode('WEB')
+        $identifier = new Identifier();
+        $identifier->setCode('WEB')
           ->setYear(2017)
           ->setNumber('40029')
           ->setVersion('0')
@@ -34,6 +32,7 @@ class StatusUpdatedTest extends AbstractTest
           ->setProduct('TRA');
 
         $message = new StatusUpdated($identifier);
+        $message->setMessageId('1069698');
         $message->withStatus()
           ->setCode('0')
           ->setType('request')
