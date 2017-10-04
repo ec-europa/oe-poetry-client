@@ -25,6 +25,11 @@ abstract class AbstractMessage implements MessageInterface
     private $identifier;
 
     /**
+     * @var string
+     */
+    private $messageId;
+
+    /**
      * AbstractMessage constructor.
      *
      * @param \EC\Poetry\Messages\Components\Identifier $identifier
@@ -99,5 +104,25 @@ abstract class AbstractMessage implements MessageInterface
         $this->identifier = new Identifier();
 
         return $this->identifier;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMessageId()
+    {
+        if (empty($this->messageId)) {
+            return $this->getIdentifier()->getFormattedIdentifier();
+        }
+
+        return $this->messageId;
+    }
+
+    /**
+     * @param string $messageId
+     */
+    public function setMessageId(string $messageId)
+    {
+        $this->messageId = $messageId;
     }
 }

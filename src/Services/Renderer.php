@@ -35,7 +35,7 @@ class Renderer
     public function render(AbstractMessage $message)
     {
         return $this->engine->render($message->getTemplate(), [
-            'identifier' => $message->getIdentifier()->getFormattedIdentifier(),
+            'identifier' => $message->getMessageId(),
             'message' => $message,
         ]);
     }
