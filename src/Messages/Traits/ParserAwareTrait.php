@@ -17,6 +17,27 @@ trait ParserAwareTrait
     private $parser;
 
     /**
+     * @var string
+     */
+    private $raw;
+
+    /**
+     * @return string
+     */
+    public function getRaw()
+    {
+        return $this->raw;
+    }
+
+    /**
+     * @param string $raw
+     */
+    public function setRaw(string $raw)
+    {
+        $this->raw = $raw;
+    }
+
+    /**
      * @return \EC\Poetry\Services\Parser
      */
     public function getParser()

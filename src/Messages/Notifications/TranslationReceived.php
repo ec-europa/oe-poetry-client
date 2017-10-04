@@ -41,7 +41,7 @@ class TranslationReceived extends AbstractNotification
     /**
      * {@inheritdoc}
      */
-    public function fromXml($xml)
+    protected function parseXml($xml)
     {
         $parser = $this->getParser();
         $parser->addXmlContent($xml);
