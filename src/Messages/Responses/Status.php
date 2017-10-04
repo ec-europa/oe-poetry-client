@@ -41,7 +41,7 @@ class Status extends AbstractResponse
     /**
      * {@inheritdoc}
      */
-    public function fromXml($xml)
+    protected function parseXml($xml)
     {
         $parser = $this->getParser();
         $parser->addXmlContent($xml);
