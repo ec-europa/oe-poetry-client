@@ -28,14 +28,4 @@ interface ParserAwareInterface
      * @return $this
      */
     public function setParser(Parser $parser);
-
-    /**
-     * Set a message or a component internal properties given its XML representation.
-     *
-     * @param string $xml
-     *      XML string.
-     *
-     * @return \EC\Poetry\Messages\MessageInterface|\EC\Poetry\Messages\ComponentInterface
-     */
-    public function fromXml($xml);
 }
