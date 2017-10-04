@@ -34,7 +34,7 @@
       -
         type: 'responsable'
         nickname: 'mark'
-    target:
+    attribution:
       -
         action: 'INSERT'
         format: 'HTML'
@@ -124,7 +124,7 @@
       -
         type: 'responsable'
         nickname: 'mark'
-    target:
+    attribution:
       -
         action: 'INSERT'
         format: 'HTML'

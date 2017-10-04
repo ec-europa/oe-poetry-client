@@ -7,11 +7,11 @@ use EC\Poetry\Tests\AbstractTest as TestCase;
 use Symfony\Component\Yaml\Yaml;
 
 /**
- * Class TargetTest
+ * Class AttributionTest
  *
  * @package EC\Poetry\Messages\Components
  */
-class TargetTest extends TestCase
+class AttributionTest extends TestCase
 {
     /**
      * Test details validation.
@@ -20,7 +20,7 @@ class TargetTest extends TestCase
     {
         /** @var \Symfony\Component\Validator\Validator\RecursiveValidator $validator */
         $validator = (new Poetry())->get('validator');
-        $source = (new Target())->setFormat('document');
+        $source = (new Attribution())->setFormat('document');
         $source->setTrackChanges('maybe');
         $source->setAction('READ');
         $source->setDelay('date');
@@ -55,26 +55,26 @@ class TargetTest extends TestCase
      * Test parsing.
      *
      * @param string $xml
-     * @param array  $targetProperties
+     * @param array  $attributionProperties
      * @param array  $addressProperties
      * @param array  $contactProperties
      *
      * @dataProvider parserProvider
      */
-    public function testParsing($xml, $targetProperties, $addressProperties, $contactProperties)
+    public function testParsing($xml, $attributionProperties, $addressProperties, $contactProperties)
     {
-        /** @var \EC\Poetry\Messages\Components\Target $target */
-        $target = $this->getContainer()->get('component.target')->fromXml($xml);
+        /** @var \EC\Poetry\Messages\Components\Attribution $attribution */
+        $attribution = $this->getContainer()->get('component.attribution')->fromXml($xml);
 
-        foreach ($targetProperties as $method => $value) {
-            expect($target->$method())->to->equal($value);
+        foreach ($attributionProperties as $method => $value) {
+            expect($attribution->$method())->to->equal($value);
         }
-        $returnAddress = $target->getReturnAddresses()[0];
+        $returnAddress = $attribution->getReturnAddresses()[0];
         foreach ($addressProperties as $method => $value) {
             expect($returnAddress->$method())->to->equal($value);
         }
-        expect(count($target->getContacts()))->to->equal(1);
-        $contact = $target->getContacts()[0];
+        expect(count($attribution->getContacts()))->to->equal(1);
+        $contact = $attribution->getContacts()[0];
         foreach ($contactProperties as $method => $value) {
             expect($contact->$method())->to->equal($value);
         }
@@ -85,6 +85,6 @@ class TargetTest extends TestCase
      */
     public function parserProvider()
     {
-        return Yaml::parse($this->getFixture('parsers/components/target.yml'));
+        return Yaml::parse($this->getFixture('parsers/components/attribution.yml'));
     }
 }

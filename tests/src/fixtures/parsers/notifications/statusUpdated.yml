@@ -61,7 +61,7 @@
       getDate: "29/09/2017"
       getTime: "00:00:00"
 
-  targets:
+  attributions:
     -
       getFormat: "HTML"
       getLanguage: "FR"

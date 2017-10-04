@@ -9,11 +9,11 @@ use EC\Poetry\Messages\Components\Constraints as Constraint;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Class Target
+ * Class Attribution
  *
  * @package EC\Poetry\Messages\Components
  */
-class Target extends AbstractComponent
+class Attribution extends AbstractComponent
 {
     use WithContactsTrait;
 
@@ -34,7 +34,7 @@ class Target extends AbstractComponent
      */
     public function getTemplate()
     {
-        return 'components::target';
+        return 'components::attribution';
     }
 
     /**
@@ -85,7 +85,8 @@ class Target extends AbstractComponent
 
     /**
      * @param mixed $format
-     * @return Target
+     *
+     * @return Attribution
      */
     public function setFormat($format)
     {
@@ -105,7 +106,8 @@ class Target extends AbstractComponent
 
     /**
      * @param mixed $language
-     * @return Target
+     *
+     * @return Attribution
      */
     public function setLanguage($language)
     {
@@ -124,7 +126,8 @@ class Target extends AbstractComponent
 
     /**
      * @param mixed $trackChanges
-     * @return Target
+     *
+     * @return Attribution
      */
     public function setTrackChanges($trackChanges)
     {
@@ -143,7 +146,8 @@ class Target extends AbstractComponent
 
     /**
      * @param mixed $action
-     * @return Target
+     *
+     * @return Attribution
      */
     public function setAction($action)
     {
@@ -162,7 +166,8 @@ class Target extends AbstractComponent
 
     /**
      * @param mixed $remark
-     * @return Target
+     *
+     * @return Attribution
      */
     public function setRemark($remark)
     {
@@ -181,7 +186,8 @@ class Target extends AbstractComponent
 
     /**
      * @param mixed $delay
-     * @return Target
+     *
+     * @return Attribution
      */
     public function setDelay($delay)
     {
@@ -200,7 +206,8 @@ class Target extends AbstractComponent
 
     /**
      * @param mixed $delayFormat
-     * @return Target
+     *
+     * @return Attribution
      */
     public function setDelayFormat($delayFormat)
     {
@@ -219,7 +226,8 @@ class Target extends AbstractComponent
 
     /**
      * @param mixed $acceptedDelay
-     * @return Target
+     *
+     * @return Attribution
      */
     public function setAcceptedDelay($acceptedDelay)
     {
@@ -238,7 +246,8 @@ class Target extends AbstractComponent
 
     /**
      * @param mixed $acceptedDelayFormat
-     * @return Target
+     *
+     * @return Attribution
      */
     public function setAcceptedDelayFormat($acceptedDelayFormat)
     {
@@ -255,9 +264,9 @@ class Target extends AbstractComponent
         return $this->translatedFile;
     }
 
-    /**
+  /**
      * @param mixed $translatedFile
-     * @return Target
+     * @return Attribution
      */
     public function setTranslatedFile($translatedFile)
     {
@@ -267,7 +276,7 @@ class Target extends AbstractComponent
     }
 
     /**
-     * @return \EC\Poetry\Messages\Components\TargetReturnAddress[]
+     * @return \EC\Poetry\Messages\Components\AttributionReturnAddress[]
      */
     public function getReturnAddresses()
     {
@@ -275,7 +284,7 @@ class Target extends AbstractComponent
     }
 
     /**
-     * @param \EC\Poetry\Messages\Components\TargetReturnAddress[] $returnAddresses
+     * @param \EC\Poetry\Messages\Components\AttributionReturnAddress[] $returnAddresses
      */
     public function setReturnAddresses($returnAddresses)
     {
@@ -283,7 +292,7 @@ class Target extends AbstractComponent
     }
 
     /**
-     * @param \EC\Poetry\Messages\Components\TargetReturnAddress $returnAddress
+     * @param \EC\Poetry\Messages\Components\AttributionReturnAddress $returnAddress
      */
     public function addReturnAddress($returnAddress)
     {
@@ -293,12 +302,12 @@ class Target extends AbstractComponent
     /**
      * Factory method: create a new contact and return its instance.
      *
-     * @return \EC\Poetry\Messages\Components\TargetReturnAddress
+     * @return \EC\Poetry\Messages\Components\AttributionReturnAddress
      *      Contact instance.
      */
     public function withReturnAddress()
     {
-        $this->returnAddresses[] = new TargetReturnAddress();
+        $this->returnAddresses[] = new AttributionReturnAddress();
 
         return end($this->returnAddresses);
     }

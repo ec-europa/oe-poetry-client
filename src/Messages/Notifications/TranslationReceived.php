@@ -5,7 +5,7 @@ namespace EC\Poetry\Messages\Notifications;
 use EC\Poetry\Events\Notifications\TranslationReceivedEvent;
 use EC\Poetry\Events\ParseNotificationEvent;
 use EC\Poetry\Messages\Traits\WithStatusTrait;
-use EC\Poetry\Messages\Traits\WithTargetsTrait;
+use EC\Poetry\Messages\Traits\WithAttributionsTrait;
 use EC\Poetry\Services\Parser;
 
 /**
@@ -15,7 +15,7 @@ use EC\Poetry\Services\Parser;
  */
 class TranslationReceived extends AbstractNotification
 {
-    use WithTargetsTrait;
+    use WithAttributionsTrait;
     /**
      * {@inheritdoc}
      */
@@ -50,7 +50,7 @@ class TranslationReceived extends AbstractNotification
         $this->getIdentifier()->fromXml($xml);
 
         $parser->eachComponent("POETRY/request/attributions", function (Parser $component) {
-            $this->withTarget()
+            $this->withAttribution()
               ->setParser($this->getParser())
               ->fromXml($component->outerHtml());
         }, $this);

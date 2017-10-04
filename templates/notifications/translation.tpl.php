@@ -10,6 +10,6 @@
 ?>
 <?php $this->layout('layout', ['identifier' => $identifier, 'type' => 'translation', 'communication' => $message->getCommunication()]) ?>
 <?= $this->component($message->getIdentifier()); ?>
-<?php foreach ($message->getTargets() as $target) : ?>
-    <?= $this->component($target); ?>
+<?php foreach ($message->getAttributions() as $attribution) : ?>
+    <?= $this->component($attribution); ?>
 <?php endforeach;

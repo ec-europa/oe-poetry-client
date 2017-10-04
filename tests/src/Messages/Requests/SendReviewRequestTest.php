@@ -70,7 +70,7 @@ class SendReviewRequestTest extends AbstractTest
                 ->setCode('EN')
                 ->setPages(1);
 
-        $message->withTarget()
+        $message->withAttribution()
             ->setAction('INSERT')
             ->setFormat('HTML')
             ->setLanguage('EN')

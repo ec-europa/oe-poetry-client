@@ -52,7 +52,7 @@ class StatusUpdatedTest extends AbstractTest
           ->setDate('29/09/2017')
           ->setTime('00:00:00')
           ->setLanguage('FR');
-        $message->withTarget()
+        $message->withAttribution()
           ->setFormat('HTML')
           ->setLanguage('FR')
           ->setDelay('04/10/2017 23:59')
@@ -68,11 +68,11 @@ class StatusUpdatedTest extends AbstractTest
      * @param string $xml
      * @param array  $identifier
      * @param array  $statuses
-     * @param array  $targets
+     * @param array  $attributions
      *
      * @dataProvider parserProvider
      */
-    public function testParsing($xml, $identifier, $statuses, $targets)
+    public function testParsing($xml, $identifier, $statuses, $attributions)
     {
         /** @var \EC\Poetry\Messages\Notifications\StatusUpdated $message */
         $message = $this->getContainer()->get('notification.status_updated')->fromXml($xml);
@@ -85,9 +85,9 @@ class StatusUpdatedTest extends AbstractTest
                 expect($message->getStatuses()[$index]->{$method}())->to->equal($expected);
             }
         }
-        foreach ($targets as $index => $target) {
-            foreach ($target as $method => $expected) {
-                expect($message->getTargets()[$index]->{$method}())->to->equal($expected);
+        foreach ($attributions as $index => $attribution) {
+            foreach ($attribution as $method => $expected) {
+                expect($message->getAttributions()[$index]->{$method}())->to->equal($expected);
             }
         }
     }

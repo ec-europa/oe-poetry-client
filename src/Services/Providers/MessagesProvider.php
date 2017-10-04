@@ -49,7 +49,7 @@ class MessagesProvider implements ServiceProviderInterface
           'component.return_address'     => Component\ReturnAddress::class,
           'component.source'             => Component\Source::class,
           'component.status'             => Component\Status::class,
-          'component.target'             => Component\Target::class,
+          'component.attribution'        => Component\Attribution::class,
         ];
         $this->serviceFactory($messages, $container);
 

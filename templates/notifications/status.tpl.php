@@ -10,9 +10,9 @@
 ?>
 <?php $this->layout('layout', ['identifier' => $identifier, 'type' => 'status', 'communication' => $message->getCommunication()]) ?>
 <?= $this->component($message->getIdentifier()); ?>
-<?php foreach ($message->getStatuses() as $target) : ?>
-    <?= $this->component($target); ?>
+<?php foreach ($message->getStatuses() as $status) : ?>
+    <?= $this->component($status); ?>
 <?php endforeach; ?>
-<?php foreach ($message->getTargets() as $target) : ?>
-    <?= $this->component($target); ?>
+<?php foreach ($message->getAttributions() as $attribution) : ?>
+    <?= $this->component($attribution); ?>
 <?php endforeach;

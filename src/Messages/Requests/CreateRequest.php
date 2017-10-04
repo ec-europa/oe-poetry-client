@@ -8,7 +8,7 @@ use EC\Poetry\Messages\Traits\WithDetailsTrait;
 use EC\Poetry\Messages\Traits\WithReferenceDocumentsTrait;
 use EC\Poetry\Messages\Traits\WithReturnAddressTrait;
 use EC\Poetry\Messages\Traits\WithSourceTrait;
-use EC\Poetry\Messages\Traits\WithTargetsTrait;
+use EC\Poetry\Messages\Traits\WithAttributionsTrait;
 use EC\Poetry\Services\Settings;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -24,7 +24,7 @@ class CreateRequest extends AbstractRequest
     use WithDetailsTrait;
     use WithSourceTrait;
     use WithReturnAddressTrait;
-    use WithTargetsTrait;
+    use WithAttributionsTrait;
     use WithReferenceDocumentsTrait;
 
     /**
@@ -64,7 +64,7 @@ class CreateRequest extends AbstractRequest
         $metadata->addPropertyConstraint('source', new Assert\Valid());
         $metadata->addPropertyConstraint('returnAddress', new Assert\Valid());
         $metadata->addPropertyConstraint('contacts', new Assert\Valid(['traverse' => true]));
-        $metadata->addPropertyConstraint('targets', new Assert\Valid(['traverse' => true]));
+        $metadata->addPropertyConstraint('attributions', new Assert\Valid(['traverse' => true]));
         $metadata->addPropertyConstraint('referenceDocuments', new Assert\Valid(['traverse' => true]));
     }
 }

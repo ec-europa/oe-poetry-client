@@ -26,7 +26,7 @@
     getPart: "39"
     getProduct: "TRA"
 
-  targets:
+  attributions:
     -
       getFormat: "HTML"
       getLanguage: "FR"

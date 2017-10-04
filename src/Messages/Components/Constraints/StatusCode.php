@@ -7,7 +7,7 @@ use Symfony\Component\Validator\Constraints\ChoiceValidator;
 
 /**
  * @Annotation
- * @Target({"PROPERTY", "METHOD", "ANNOTATION"})
+ * @Attribution({"PROPERTY", "METHOD", "ANNOTATION"})
  *
  * @package EC\Poetry\Messages\Components\Constraints
  */

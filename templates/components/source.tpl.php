@@ -14,8 +14,8 @@
         <documentSourcePath><?= $component->getPath() ?></documentSourcePath>
     <?php endif ?>
     <?php if ($component->getSourceLanguages()) : ?>
-        <?php foreach ($component->getSourceLanguages() as $target) : ?>
-            <?= $this->component($target); ?>
+        <?php foreach ($component->getSourceLanguages() as $attribution) : ?>
+            <?= $this->component($attribution); ?>
         <?php endforeach; ?>
     <?php endif; ?>
     <?php if ($component->getSize()) : ?>

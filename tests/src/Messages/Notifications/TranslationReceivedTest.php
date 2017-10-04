@@ -33,7 +33,7 @@ class TranslationReceivedTest extends AbstractTest
           ->setProduct('TRA');
 
         $message = new TranslationReceived($identifier);
-        $message->withTarget()
+        $message->withAttribution()
           ->setFormat('HTML')
           ->setLanguage('FR')
           ->setTranslatedFile('File64');
@@ -47,11 +47,11 @@ class TranslationReceivedTest extends AbstractTest
      *
      * @param string $xml
      * @param array  $identifier
-     * @param array  $targets
+     * @param array  $attributions
      *
      * @dataProvider parserProvider
      */
-    public function testParsing($xml, $identifier, $targets)
+    public function testParsing($xml, $identifier, $attributions)
     {
         /** @var \EC\Poetry\Messages\Notifications\TranslationReceived $message */
         $message = $this->getContainer()->get('notification.translation_received')->fromXml($xml);
@@ -59,9 +59,9 @@ class TranslationReceivedTest extends AbstractTest
         foreach ($identifier as $method => $expected) {
             expect($message->getIdentifier()->{$method}())->to->equal($expected);
         }
-        foreach ($targets as $index => $target) {
-            foreach ($target as $method => $expected) {
-                expect($message->getTargets()[$index]->{$method}())->to->equal($expected);
+        foreach ($attributions as $index => $attribution) {
+            foreach ($attribution as $method => $expected) {
+                expect($message->getAttributions()[$index]->{$method}())->to->equal($expected);
             }
         }
     }

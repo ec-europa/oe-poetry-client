@@ -5,7 +5,7 @@ namespace spec\EC\Poetry\Messages\Traits;
 use EC\Poetry\Messages\Components as Component;
 
 /**
- * Trait AssertTargetsTrait
+ * Trait AssertAttributionsTrait
  *
  * @method addStatus(Component\Status $status)
  * @method setStatuses(array $statuses)

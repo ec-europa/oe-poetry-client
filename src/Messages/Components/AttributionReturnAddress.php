@@ -3,11 +3,11 @@
 namespace EC\Poetry\Messages\Components;
 
 /**
- * Class TargetReturnAddress
+ * Class AttributionReturnAddress
  *
  * @package EC\Poetry\Messages\Components
  */
-class TargetReturnAddress extends ReturnAddress
+class AttributionReturnAddress extends ReturnAddress
 {
 
     /**
@@ -15,6 +15,6 @@ class TargetReturnAddress extends ReturnAddress
      */
     public function getTemplate()
     {
-        return 'components::target-return-address';
+        return 'components::attribution-return-address';
     }
 }

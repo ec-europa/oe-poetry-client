@@ -61,7 +61,7 @@ trait WithReferenceDocumentsTrait
      * Factory method: create a new ReferenceDocument and return its instance.
      *
      * @return \EC\Poetry\Messages\Components\ReferenceDocument
-     *      Target instance.
+     *      Attribution instance.
      */
     public function withReferenceDocument()
     {

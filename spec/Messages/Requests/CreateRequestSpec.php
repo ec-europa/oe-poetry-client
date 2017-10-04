@@ -8,7 +8,7 @@ use EC\Poetry\Messages\Components\Identifier;
 use EC\Poetry\Messages\Components\ReferenceDocument;
 use EC\Poetry\Messages\Components\ReturnAddress;
 use EC\Poetry\Messages\Components\Source;
-use EC\Poetry\Messages\Components\Target;
+use EC\Poetry\Messages\Components\Attribution;
 use EC\Poetry\Messages\Requests\CreateRequest;
 use EC\Poetry\Services\Settings;
 use PhpSpec\ObjectBehavior;
@@ -17,7 +17,7 @@ use spec\EC\Poetry\Messages\Traits\AssertDetailsTrait;
 use spec\EC\Poetry\Messages\Traits\AssertReferenceDocumentsTrait;
 use spec\EC\Poetry\Messages\Traits\AssertReturnAddressTrait;
 use spec\EC\Poetry\Messages\Traits\AssertSourceTrait;
-use spec\EC\Poetry\Messages\Traits\AssertTargetsTrait;
+use spec\EC\Poetry\Messages\Traits\AssertAttributionsTrait;
 
 class CreateRequestSpec extends ObjectBehavior
 {
@@ -26,7 +26,7 @@ class CreateRequestSpec extends ObjectBehavior
     use AssertReturnAddressTrait;
     use AssertContactsTrait;
     use AssertReferenceDocumentsTrait;
-    use AssertTargetsTrait;
+    use AssertAttributionsTrait;
 
     function let(Identifier $identifier, Settings $settings)
     {
@@ -63,8 +63,8 @@ class CreateRequestSpec extends ObjectBehavior
         $this->assertReferenceDocuments($document1, $document2, $document3, $document4);
     }
     
-    function it_has_targets(Target $target1, Target $target2, Target $target3, Target $target4)
+    function it_has_attributions(Attribution $attribution1, Attribution $attribution2, Attribution $attribution3, Attribution $attribution4)
     {
-        $this->assertTargets($target1, $target2, $target3, $target4);
+        $this->assertAttributions($attribution1, $attribution2, $attribution3, $attribution4);
     }
 }

@@ -24,9 +24,9 @@
 <?php if ($message->getSource()) : ?>
     <?= $this->component($message->getSource()); ?>
 <?php endif; ?>
-<?php if ($message->getTargets()) : ?>
-    <?php foreach ($message->getTargets() as $target) : ?>
-        <?= $this->component($target); ?>
+<?php if ($message->getAttributions()) : ?>
+    <?php foreach ($message->getAttributions() as $attribution) : ?>
+        <?= $this->component($attribution); ?>
     <?php endforeach; ?>
 <?php endif; ?>
 <?php if ($message->getReferenceDocuments()) : ?>
