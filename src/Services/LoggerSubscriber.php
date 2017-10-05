@@ -4,6 +4,7 @@ namespace EC\Poetry\Services;
 
 use EC\Poetry\Events\Client\ClientResponseEvent;
 use EC\Poetry\Events\Client\ClientRequestEvent;
+use EC\Poetry\Events\ExceptionEvent;
 use EC\Poetry\Events\NotificationEventInterface;
 use EC\Poetry\Events\NotificationHandler\ReceivedNotificationEvent;
 use EC\Poetry\Events\Notifications\StatusUpdatedEvent;
@@ -31,15 +32,22 @@ class LoggerSubscriber implements EventSubscriberInterface
     protected $renderer;
 
     /**
+     * @var \EC\Poetry\Services\Settings
+     */
+    protected $settings;
+
+    /**
      * LoggerSubscriber constructor.
      *
      * @param \Psr\Log\LoggerInterface     $logger
      * @param \EC\Poetry\Services\Renderer $renderer
+     * @param \EC\Poetry\Services\Settings $settings
      */
-    public function __construct(LoggerInterface $logger, Renderer $renderer)
+    public function __construct(LoggerInterface $logger, Renderer $renderer, Settings $settings)
     {
         $this->logger = $logger;
         $this->renderer = $renderer;
+        $this->settings = $settings;
     }
 
     /**
@@ -55,6 +63,7 @@ class LoggerSubscriber implements EventSubscriberInterface
             ClientRequestEvent::NAME        => 'onClientRequestEvent',
             ClientResponseEvent::NAME       => 'onClientResponseEvent',
             ReceivedNotificationEvent::NAME => 'onReceivedNotificationEvent',
+            ExceptionEvent::NAME            => 'onExceptionEvent',
         ];
     }
 
@@ -113,6 +122,26 @@ class LoggerSubscriber implements EventSubscriberInterface
     public function onClientResponseEvent(ClientResponseEvent $event)
     {
         $this->logger->info(ClientResponseEvent::NAME, ['message' => $event->getMessage()]);
+    }
+
+    /**
+     * @param \EC\Poetry\Events\ExceptionEvent $event
+     */
+    public function onExceptionEvent(ExceptionEvent $event)
+    {
+        $exception = $event->getException();
+        $this->logger->error(ExceptionEvent::NAME, [
+            'exception' => (new \ReflectionClass($exception))->getName(),
+            'message' => $exception->getMessage(),
+            'trace' => $exception->getTrace(),
+            'file' => $exception->getFile(),
+            'code' => $exception->getCode(),
+            'line' => $exception->getLine(),
+        ]);
+
+        if ($this->settings->get('exceptions')) {
+            throw $exception;
+        }
     }
 
     /**

@@ -101,7 +101,7 @@ class ServicesProvider implements ServiceProviderInterface
         };
 
         $container['logger_subscriber'] = function (Container $container) {
-            return new LoggerSubscriber($container['logger'], $container['renderer']);
+            return new LoggerSubscriber($container['logger'], $container['renderer'], $container['settings']);
         };
     }
 }

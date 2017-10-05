@@ -13,30 +13,34 @@ class Settings implements \ArrayAccess
      * @var array
      */
     protected $settings = [
+
         // Default Identifier values.
-      'identifier.code' => '',
-      'identifier.year' => '',
-      'identifier.number' => '',
-      'identifier.version' => '',
-      'identifier.sequence' => '',
-      'identifier.part' => '',
-      'identifier.product' => '',
+        'identifier.code' => '',
+        'identifier.year' => '',
+        'identifier.number' => '',
+        'identifier.version' => '',
+        'identifier.sequence' => '',
+        'identifier.part' => '',
+        'identifier.product' => '',
 
         // Service credentials.
-      'service.wsdl' => '',
-      'service.username' => '',
-      'service.password' => '',
+        'service.wsdl' => '',
+        'service.username' => '',
+        'service.password' => '',
 
         // Client service parameters.
-      'client.wsdl' => '',
-      'client.options' => [
-        'cache_wsdl' => WSDL_CACHE_NONE,
-      ],
+        'client.wsdl' => '',
+        'client.options' => [
+            'cache_wsdl' => WSDL_CACHE_NONE,
+        ],
 
         // Notification parameters.
-      'notification.endpoint' => '',
-      'notification.username' => '',
-      'notification.password' => '',
+        'notification.endpoint' => '',
+        'notification.username' => '',
+        'notification.password' => '',
+
+        // Whatever to throw exceptions
+        'exceptions' => true,
     ];
 
     /**

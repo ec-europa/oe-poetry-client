@@ -8,6 +8,7 @@ use EC\Poetry\Exceptions\Notifications\CannotAuthenticateException;
 use EC\Poetry\Exceptions\ParsingException;
 use EC\Poetry\Messages\Traits\ParserAwareTrait;
 use EC\Poetry\Services\Settings;
+use EC\Poetry\Traits\DispatchExceptionEventTrait;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
 /**
@@ -18,6 +19,7 @@ use Symfony\Component\EventDispatcher\EventDispatcher;
 class NotificationHandler
 {
     use ParserAwareTrait;
+    use DispatchExceptionEventTrait;
 
     /**
      * @var \EC\Poetry\Services\Settings
@@ -56,7 +58,7 @@ class NotificationHandler
         $this->eventDispatcher->dispatch(ReceivedNotificationEvent::NAME, $event);
 
         if (!$this->doesAuthenticate($username, $password)) {
-            throw new CannotAuthenticateException();
+            $this->dispatchExceptionEvent(new CannotAuthenticateException());
         }
 
         $event = $this->parse($xml);
@@ -85,7 +87,7 @@ class NotificationHandler
         $event = new ParseNotificationEvent($xml);
         $this->eventDispatcher->dispatch(ParseNotificationEvent::NAME, $event);
         if (!$event->hasEvent()) {
-            throw new ParsingException($xml);
+            $this->dispatchExceptionEvent(new ParsingException($xml));
         }
 
         return $event->getEvent();

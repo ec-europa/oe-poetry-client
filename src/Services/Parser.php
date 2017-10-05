@@ -2,6 +2,8 @@
 
 namespace EC\Poetry\Services;
 
+use EC\Poetry\Exceptions\ParserException;
+use EC\Poetry\Traits\DispatchExceptionEventTrait;
 use Symfony\Component\DomCrawler;
 
 /**
@@ -72,7 +74,7 @@ class Parser extends DomCrawler\Crawler
     public function outerHtml()
     {
         if (!count($this)) {
-            throw new \InvalidArgumentException('The current node list is empty.');
+            new ParserException('The current node list is empty.');
         }
 
         $node = $this->getNode(0);

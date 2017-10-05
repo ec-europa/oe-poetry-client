@@ -23,7 +23,7 @@ class ParseNotificationEvent extends Event
     /**
      * @var \EC\Poetry\Events\NotificationEventInterface
      */
-    protected $event = null;
+    private $event = null;
 
     /**
      * ParseResponseEvent constructor.

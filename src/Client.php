@@ -4,6 +4,7 @@ namespace EC\Poetry;
 
 use EC\Poetry\Events\Client\ClientResponseEvent;
 use EC\Poetry\Events\Client\ClientRequestEvent;
+use EC\Poetry\Events\ExceptionEvent;
 use EC\Poetry\Events\ParseResponseEvent;
 use EC\Poetry\Exceptions\ParsingException;
 use EC\Poetry\Exceptions\ValidationException;
@@ -11,6 +12,7 @@ use EC\Poetry\Messages\AbstractMessage;
 use EC\Poetry\Messages\MessageInterface;
 use EC\Poetry\Services\Renderer;
 use EC\Poetry\Services\Settings;
+use EC\Poetry\Traits\DispatchExceptionEventTrait;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
@@ -21,6 +23,8 @@ use Symfony\Component\EventDispatcher\EventDispatcher;
  */
 class Client
 {
+    use DispatchExceptionEventTrait;
+
     /**
      * @var \EC\Poetry\Services\Settings
      */
@@ -125,7 +129,7 @@ class Client
     {
         $violations = $this->validator->validate($message);
         if ($violations->count() > 0) {
-            throw new ValidationException($violations);
+            $this->dispatchExceptionEvent(new ValidationException($violations));
         }
     }
 
@@ -142,7 +146,7 @@ class Client
         $event = new ParseResponseEvent($xml);
         $this->eventDispatcher->dispatch(ParseResponseEvent::NAME, $event);
         if (!$event->hasMessage()) {
-            throw new ParsingException($xml);
+            $this->dispatchExceptionEvent(new ParsingException($xml));
         }
 
         return $event->getMessage();
