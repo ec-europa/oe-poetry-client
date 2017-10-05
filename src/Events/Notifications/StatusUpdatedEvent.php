@@ -10,4 +10,12 @@ namespace EC\Poetry\Events\Notifications;
 class StatusUpdatedEvent extends AbstractNotificationEvent
 {
     const NAME = 'poetry.notification.status_updated';
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getName()
+    {
+        return self::NAME;
+    }
 }

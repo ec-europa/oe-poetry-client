@@ -2,20 +2,22 @@
 
 namespace EC\Poetry\Tests\Services;
 
+use EC\Poetry\Events\NotificationHandler\ReceivedNotificationEvent;
 use EC\Poetry\Messages\Components\Identifier;
 use EC\Poetry\Messages\Requests\CreateRequest;
 use EC\Poetry\Poetry;
 use EC\Poetry\Services\Settings;
-use EC\Poetry\Tests\AbstractTest;
+use EC\Poetry\Tests\AbstractHttpMockTest;
 use EC\Poetry\Tests\Logger\TestLogger;
 use Psr\Log\LogLevel;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Class LoggerSubscriberTest
  *
  * @package EC\Poetry\Tests\Services
  */
-class LoggerSubscriberTest extends AbstractTest
+class LoggerSubscriberTest extends AbstractHttpMockTest
 {
     /**
      * Test client logging.
@@ -76,5 +78,29 @@ class LoggerSubscriberTest extends AbstractTest
             ->contain('identifier.year: This value should not be blank.')
             ->contain('identifier.version: This value should not be blank.')
             ->contain('identifier.part: This value should not be blank.');
+    }
+
+    /**
+     * Test function callback.
+     */
+    public function testNotificationHandler()
+    {
+        $callback = function (Response $response) {
+            $logger = new TestLogger();
+            $poetry = new Poetry([
+                'notification.username' => 'username',
+                'notification.password' => 'password',
+                'logger' => $logger,
+            ]);
+            $poetry->getServer()->handle();
+
+            $logs = $logger->getLogs()[LogLevel::INFO];
+            expect($logs)->not->empty();
+            expect($logs[ReceivedNotificationEvent::NAME])->not->empty();
+        };
+
+        $this->setupServer('/notification', $callback);
+        $message = $this->getFixture('messages/notifications/status-updated.xml');
+        $this->notifyServer('/notification', 'username', 'password', $message);
     }
 }
