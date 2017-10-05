@@ -2,7 +2,7 @@
 
 namespace EC\Poetry\Tests\Messages\Requests;
 
-use EC\Poetry\Messages\Components\NotificationIdentifier;
+use EC\Poetry\Messages\Components\Identifier;
 use EC\Poetry\Messages\Notifications\TranslationReceived;
 use EC\Poetry\Tests\AbstractTest;
 use Symfony\Component\Yaml\Yaml;
@@ -23,9 +23,8 @@ class TranslationReceivedTest extends AbstractTest
         /** @var \EC\Poetry\Services\Renderer $renderer */
         $renderer = $this->getContainer()->get('renderer');
 
-        $identifier = new NotificationIdentifier();
-        $identifier->setIdentifier('7685067')
-          ->setCode('WEB')
+        $identifier = new Identifier();
+        $identifier->setCode('WEB')
           ->setYear(2017)
           ->setNumber('40012')
           ->setVersion('0')
@@ -33,6 +32,7 @@ class TranslationReceivedTest extends AbstractTest
           ->setProduct('TRA');
 
         $message = new TranslationReceived($identifier);
+        $message->setMessageId('7685067');
         $message->withAttribution()
           ->setFormat('HTML')
           ->setLanguage('FR')

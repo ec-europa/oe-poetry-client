@@ -296,29 +296,43 @@ class Source extends AbstractComponent
     /**
      * {@inheritdoc}
      */
-    public function fromXml($xml)
+    protected function parseXml($xml)
     {
         $parser = $this->getParser();
         $parser->addXmlContent($xml);
-
-        $this->setChannel($parser->getAttribute('documentSource', 'channel'))
-            ->setDeadline($parser->getAttribute('documentSource', 'deadline'))
-            ->setDeadlineStatus($parser->getAttribute('documentSource', 'statusDeadline'))
-            ->setConfidential($parser->getAttribute('documentSource', 'marked'))
-            ->setFormat($parser->getAttribute('documentSource', 'format'))
-            ->setLegiswriteFormat($parser->getAttribute('documentSource', 'legiswrite'))
-            ->setTrackChanges($parser->getAttribute('documentSource', 'trackChanges'))
-            ->setName($parser->getContent('documentSource/documentSourceName'))
-            ->setPath($parser->getContent('documentSource/documentSourcePath'))
-            ->setSize($parser->getContent('documentSource/documentSourceSize'))
-            ->setFile($parser->getContent('documentSource/documentSourceFile'));
-
-        $parser->eachComponent("documentSource/documentSourceLang", function (Parser $language) {
-            $this->withSourceLanguage()
-                ->setParser($this->getParser())
-                ->fromXml($language->outerHtml());
-        }, $this);
+        $this->parseDocumentSource($parser);
+        $this->parseSourceLanguage($parser);
 
         return $this;
+    }
+
+  /**
+   * @param \EC\Poetry\Services\Parser $parser
+   */
+    private function parseSourceLanguage(Parser $parser)
+    {
+        $parser->eachComponent("documentSource/documentSourceLang", function (Parser $language) {
+            $this->withSourceLanguage()
+            ->setParser($this->getParser())
+            ->fromXml($language->outerHtml());
+        }, $this);
+    }
+
+    /**
+     * @param \EC\Poetry\Services\Parser $parser
+     */
+    private function parseDocumentSource(Parser $parser)
+    {
+        $this->setChannel($parser->getAttribute('documentSource', 'channel'))
+        ->setDeadline($parser->getAttribute('documentSource', 'deadline'))
+        ->setDeadlineStatus($parser->getAttribute('documentSource', 'statusDeadline'))
+        ->setConfidential($parser->getAttribute('documentSource', 'marked'))
+        ->setFormat($parser->getAttribute('documentSource', 'format'))
+        ->setLegiswriteFormat($parser->getAttribute('documentSource', 'legiswrite'))
+        ->setTrackChanges($parser->getAttribute('documentSource', 'trackChanges'))
+        ->setName($parser->getContent('documentSource/documentSourceName'))
+        ->setPath($parser->getContent('documentSource/documentSourcePath'))
+        ->setSize($parser->getContent('documentSource/documentSourceSize'))
+        ->setFile($parser->getContent('documentSource/documentSourceFile'));
     }
 }
