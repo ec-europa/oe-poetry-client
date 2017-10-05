@@ -31,9 +31,7 @@ trait ArrayAccessTrait
     public function offsetSet($offset, $value)
     {
         if ($this->isComponentCollection($offset, $value)) {
-            foreach ($value as $component) {
-                $this->{$this->getWithMethod($offset)}()->withArray($component);
-            }
+            $this->setComponentCollection($offset, $value);
         } elseif ($this->isComponent($offset, $value)) {
             $this->{$this->getWithMethod($offset)}()->withArray($value);
         } elseif ($this->isProperty($offset, $value)) {
@@ -175,5 +173,18 @@ trait ArrayAccessTrait
     protected function isComponentCollection($name, $value)
     {
         return is_array($value) && is_int(key($value)) && $this->hasWithMethod($name);
+    }
+
+    /**
+     * Helper method: set child components.
+     *
+     * @param string $parent
+     * @param array $components
+     */
+    protected function setComponentCollection($parent, array $components)
+    {
+        foreach ($components as $component) {
+            $this->{$this->getWithMethod($parent)}()->withArray($component);
+        }
     }
 }
