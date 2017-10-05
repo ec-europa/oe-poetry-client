@@ -7,3 +7,19 @@ The Poetry Client Library aims to hide Poetry service complexity behind and easy
 users don't have to worry about building their own request messages nor implementing SOAP interactions.  
 
 For more information check the documentation [here](docs/00-overview.md).
+
+## Tests
+
+Run test by running:
+
+```
+$ ./vendor/bin/grumphp run 
+$ ./vendor/bin/phpspec run 
+$ ./vendor/bin/phpunit 
+```
+
+To produce test coverage report run:
+
+```
+$ ./vendor/bin/phpunit --coverage-html ./report
+```

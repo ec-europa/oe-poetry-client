@@ -1,4 +1,5 @@
 /vendor/
+/report/
 grumphp.yml
 phpunit.xml
 composer.lock
