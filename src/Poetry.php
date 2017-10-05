@@ -31,10 +31,10 @@ class Poetry extends Container implements ContainerInterface
             $this->getSettings()->set($name, $value);
         }
 
-        $this->register(new MessagesProvider());
         foreach ($values as $name => $value) {
             $this->offsetSet($name, $value);
         }
+        $this->register(new MessagesProvider());
 
         // Set static cache.
         self::$container = $this;

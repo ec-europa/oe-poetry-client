@@ -2,6 +2,8 @@
 
 namespace EC\Poetry;
 
+use EC\Poetry\Events\Client\ClientResponseEvent;
+use EC\Poetry\Events\Client\ClientRequestEvent;
 use EC\Poetry\Events\ParseResponseEvent;
 use EC\Poetry\Exceptions\ParsingException;
 use EC\Poetry\Exceptions\ValidationException;
@@ -9,7 +11,6 @@ use EC\Poetry\Messages\AbstractMessage;
 use EC\Poetry\Messages\MessageInterface;
 use EC\Poetry\Services\Renderer;
 use EC\Poetry\Services\Settings;
-use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
@@ -107,8 +108,12 @@ class Client
     {
         $username = $this->settings->get('service.username');
         $password = $this->settings->get('service.password');
+        $this->eventDispatcher->dispatch(ClientRequestEvent::NAME, new ClientRequestEvent($username, $password, $message));
 
-        return $this->soapClient->{$this->method}($username, $password, $message);
+        $response = $this->soapClient->{$this->method}($username, $password, $message);
+        $this->eventDispatcher->dispatch(ClientResponseEvent::NAME, new ClientResponseEvent($response));
+
+        return $response;
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace EC\Poetry\Services;
 
 use EC\Poetry\Messages\AbstractMessage;
+use EC\Poetry\Messages\MessageInterface;
 use League\Plates\Engine;
 
 /**
@@ -28,11 +29,11 @@ class Renderer
     }
 
     /**
-     * @param \EC\Poetry\Messages\AbstractMessage $message
+     * @param \EC\Poetry\Messages\MessageInterface $message
      *
      * @return string
      */
-    public function render(AbstractMessage $message)
+    public function render(MessageInterface $message)
     {
         return $this->engine->render($message->getTemplate(), [
             'identifier' => $message->getMessageId(),

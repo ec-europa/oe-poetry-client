@@ -2,6 +2,7 @@
 
 namespace EC\Poetry;
 
+use EC\Poetry\Events\NotificationHandler\ReceivedNotificationEvent;
 use EC\Poetry\Events\ParseNotificationEvent;
 use EC\Poetry\Exceptions\Notifications\CannotAuthenticateException;
 use EC\Poetry\Exceptions\ParsingException;
@@ -51,6 +52,9 @@ class NotificationHandler
      */
     public function handle($username, $password, $xml)
     {
+        $event = new ReceivedNotificationEvent($username, $password, $xml);
+        $this->eventDispatcher->dispatch(ReceivedNotificationEvent::NAME, $event);
+
         if (!$this->doesAuthenticate($username, $password)) {
             throw new CannotAuthenticateException();
         }

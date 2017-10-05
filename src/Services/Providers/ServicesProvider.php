@@ -4,6 +4,7 @@ namespace EC\Poetry\Services\Providers;
 
 use EC\Poetry\NotificationHandler;
 use EC\Poetry\Client;
+use EC\Poetry\Services\LoggerSubscriber;
 use EC\Poetry\Services\Plates\AttributesExtension;
 use EC\Poetry\Services\Settings;
 use EC\Poetry\Services\Wsdl;
@@ -56,8 +57,11 @@ class ServicesProvider implements ServiceProviderInterface
             return $server;
         };
 
-        $container['event_dispatcher'] = function () {
-            return new EventDispatcher();
+        $container['event_dispatcher'] = function (Container $container) {
+            $dispatcher = new EventDispatcher();
+            $dispatcher->addSubscriber($container['logger_subscriber']);
+
+            return $dispatcher;
         };
 
         $container['parser'] = $container->factory(function () {
@@ -94,6 +98,10 @@ class ServicesProvider implements ServiceProviderInterface
 
         $container['logger'] = function () {
             return new NullLogger();
+        };
+
+        $container['logger_subscriber'] = function (Container $container) {
+            return new LoggerSubscriber($container['logger'], $container['renderer']);
         };
     }
 }

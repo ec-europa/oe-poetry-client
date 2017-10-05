@@ -16,4 +16,11 @@ interface MessageInterface extends ComponentInterface
      *   Property value.
      */
     public function getIdentifier();
+
+    /**
+     * Get message ID.
+     *
+     * @return string
+     */
+    public function getMessageId();
 }

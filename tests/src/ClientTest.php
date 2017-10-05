@@ -2,6 +2,7 @@
 
 namespace EC\Poetry\Tests;
 
+use EC\Poetry\Events\ParseNotificationEvent;
 use EC\Poetry\Messages\Requests\CreateRequest;
 use EC\Poetry\Messages\Responses\Status;
 use EC\Poetry\Poetry;
@@ -44,6 +45,7 @@ class ClientTest extends AbstractTest
         $response = $poetry->getClient()->send($request);
         $rendererResponse = $this->getContainer()->get('renderer')->render($response);
         expect($rendererResponse)->has->same->xml('messages/responses/response-status.xml');
+        expect($logger->getLogs()['info'])->not->empty();
     }
 
     /**
