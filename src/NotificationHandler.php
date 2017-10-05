@@ -24,7 +24,7 @@ class NotificationHandler
     /**
      * @var \EC\Poetry\Services\Settings
      */
-    protected $settings;
+    private $settings;
 
     /**
      * @var \Symfony\Component\EventDispatcher\EventDispatcher

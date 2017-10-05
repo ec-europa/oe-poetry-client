@@ -28,27 +28,27 @@ class Client
     /**
      * @var \EC\Poetry\Services\Settings
      */
-    protected $settings;
+    private $settings;
 
     /**
      * @var \EC\Poetry\Services\Renderer
      */
-    protected $renderer;
+    private $renderer;
 
     /**
      * @var ValidatorInterface
      */
-    protected $validator;
+    private $validator;
 
     /**
      * @var \SoapClient
      */
-    protected $soapClient;
+    private $soapClient;
 
     /**
      * @var \Symfony\Component\EventDispatcher\EventDispatcher
      */
-    protected $eventDispatcher;
+    private $eventDispatcher;
 
     /**
      * @var string

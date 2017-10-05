@@ -11,7 +11,7 @@ use Symfony\Component\EventDispatcher\Event;
  */
 class ClientRequestEvent extends Event
 {
-    const NAME = 'poetry.client.send_request';
+    const NAME = 'poetry.client.request';
 
     /**
      * @var string

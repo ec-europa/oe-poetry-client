@@ -8,12 +8,15 @@ use EC\Poetry\Exceptions\PoetryException;
 /**
  * Trait DispatchExceptionEventTrait
  *
- * @property \Symfony\Component\EventDispatcher\Event $eventDispatcher
- *
  * @package EC\Poetry\Traits
  */
 trait DispatchExceptionEventTrait
 {
+    /**
+     * @var \Symfony\Component\EventDispatcher\EventDispatcher
+     */
+    private $eventDispatcher;
+
     /**
      * @param \EC\Poetry\Exceptions\PoetryException $exception
      */

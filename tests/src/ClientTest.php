@@ -33,19 +33,16 @@ class ClientTest extends AbstractTest
           ->withArgs([$username, $password, $rendererRequest])
           ->andReturn($this->getFixture('messages/responses/response-status.xml'));
 
-        $logger = new TestLogger();
         $parameters = [
           'service.username' => $username,
           'service.password' => $password,
           'soap_client' => $mock,
-          'logger' => $logger,
         ];
         $poetry = new Poetry($parameters);
 
         $response = $poetry->getClient()->send($request);
         $rendererResponse = $this->getContainer()->get('renderer')->render($response);
         expect($rendererResponse)->has->same->xml('messages/responses/response-status.xml');
-        expect($logger->getLogs()['info'])->not->empty();
     }
 
     /**
