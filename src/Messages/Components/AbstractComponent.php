@@ -51,8 +51,5 @@ abstract class AbstractComponent implements ComponentInterface, ParserAwareInter
      *
      * @return \EC\Poetry\Messages\MessageInterface|\EC\Poetry\Messages\ComponentInterface
      */
-    protected function parseXml($xml)
-    {
-        return $this;
-    }
+    abstract protected function parseXml($xml);
 }
