@@ -20,7 +20,8 @@ Make sure that the following code is executed when a request hits the URL above:
 use EC\Poetry\Poetry;
 
 $poetry = new Poetry(...);
-$poetry->getServer()->handle();
+return $poetry->getServer()->handle();
+exit;
 ```
 
 ## Register notification listeners

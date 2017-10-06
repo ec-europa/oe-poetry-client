@@ -139,7 +139,7 @@ class LoggerSubscriber implements EventSubscriberInterface
             'line' => $exception->getLine(),
         ]);
 
-        if ($this->settings->get('exceptions')) {
+        if ($this->settings->get('exceptions') && !$event->isSilent()) {
             throw $exception;
         }
     }

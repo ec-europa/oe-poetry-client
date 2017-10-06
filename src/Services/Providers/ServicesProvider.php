@@ -43,7 +43,7 @@ class ServicesProvider implements ServiceProviderInterface
         };
 
         $container['notification_handler'] = function (Container $container) {
-            return new NotificationHandler($container['settings'], $container['event_dispatcher']);
+            return new NotificationHandler($container['settings'], $container['event_dispatcher'], $container['renderer'], $container['validator']);
         };
 
         $container['soap_server'] = function (Container $container) {

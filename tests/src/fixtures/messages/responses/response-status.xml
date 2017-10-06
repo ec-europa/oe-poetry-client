@@ -1,17 +1,17 @@
-<?xml version="1.0" encoding="utf-8"?>
-<POETRY xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://intragate.ec.europa.eu/DGT/poetry_services/poetry.xsd">
-    <request communication="synchrone" id="DGT/2017/00001/3/0/TRA" type="status">
+<?xml version="1.0" encoding="utf-8"?><POETRY xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://intragate.ec.europa.eu/DGT/poetry_services/poetry.xsd">
+    <request communication="synchrone" id="1069698" type="status">
         <demandeId>
-            <codeDemandeur>DGT</codeDemandeur>
+            <codeDemandeur>WEB</codeDemandeur>
             <annee>2017</annee>
-            <numero>00001</numero>
-            <version>3</version>
+            <numero>40029</numero>
+            <version>0</version>
             <partie>0</partie>
             <produit>TRA</produit>
         </demandeId>
-        <status code="0" type="request">
-            <statusDate>31/07/2017</statusDate>
-            <statusTime>17:06:15</statusTime>
+
+        <status type="request" code="0">
+            <statusDate>06/10/2017</statusDate>
+            <statusTime>02:41:53</statusTime>
             <statusMessage>OK</statusMessage>
         </status>
     </request>
