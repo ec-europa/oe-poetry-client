@@ -4,6 +4,7 @@ namespace EC\Poetry\Messages;
 
 use EC\Poetry\Messages\Components\Identifier;
 use EC\Poetry\Messages\Traits\ArrayAccessTrait;
+use EC\Poetry\Messages\Responses\Status;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -124,5 +125,18 @@ abstract class AbstractMessage implements MessageInterface
     public function setMessageId($messageId)
     {
         $this->messageId = $messageId;
+    }
+
+    /**
+     * Return a Status response based on the information of the notification.
+     *
+     * @return \EC\Poetry\Messages\Responses\Status
+     */
+    public function generateResponse()
+    {
+        $response = new Status($this->getIdentifier());
+        $response->setMessageId($this->getMessageId());
+
+        return $response;
     }
 }

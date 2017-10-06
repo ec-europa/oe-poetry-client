@@ -60,10 +60,10 @@ class ParseNotificationEvent extends Event
     /**
      * Set Event property.
      *
-     * @param \EC\Poetry\Events\NotificationEventInterface $event
+     * @param \EC\Poetry\Events\NotificationEventInterface| \EC\Poetry\Events\ExceptionEvent $event
      *   Property value.
      */
-    public function setEvent(NotificationEventInterface $event)
+    public function setEvent($event)
     {
         $this->event = $event;
     }

@@ -2,6 +2,7 @@
 
 namespace EC\Poetry;
 
+use EC\Poetry\Events\ExceptionEvent;
 use EC\Poetry\Events\NotificationHandler\ReceivedNotificationEvent;
 use EC\Poetry\Events\ParseNotificationEvent;
 use EC\Poetry\Exceptions\Notifications\CannotAuthenticateException;
@@ -10,6 +11,7 @@ use EC\Poetry\Messages\Traits\ParserAwareTrait;
 use EC\Poetry\Services\Settings;
 use EC\Poetry\Traits\DispatchExceptionEventTrait;
 use Symfony\Component\EventDispatcher\EventDispatcher;
+use EC\Poetry\Messages\Components\Status;
 
 /**
  * Class NotificationHandler
@@ -50,6 +52,8 @@ class NotificationHandler
      * @param string $password
      * @param string $xml
      *
+     * @return string
+     *
      * @throws \EC\Poetry\Exceptions\Notifications\CannotAuthenticateException
      */
     public function handle($username, $password, $xml)
@@ -62,7 +66,26 @@ class NotificationHandler
         }
 
         $event = $this->parse($xml);
+        $message = $event->getMessage();
+        $response = $message->generateResponse();
+        $status = new Status();
+
+        $status->setType('request')
+          ->setTime(date('d/m/Y', time()))
+          ->setDate(date('h:i:s', time()));
+        if ($event->getName() == ExceptionEvent::NAME) {
+            $status->setCode('-1')
+              ->setMessage('NOK');
+        } else {
+            $status->setCode('0')
+              ->setMessage('OK');
+        }
+
         $this->eventDispatcher->dispatch($event->getName(), $event);
+
+        $poetry = new Poetry();
+
+        return $poetry->getRenderer()->render($response);
     }
 
     /**

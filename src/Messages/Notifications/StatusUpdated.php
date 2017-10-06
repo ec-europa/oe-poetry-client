@@ -2,11 +2,16 @@
 
 namespace EC\Poetry\Messages\Notifications;
 
+use EC\Poetry\Events\ExceptionEvent;
 use EC\Poetry\Events\Notifications\StatusUpdatedEvent;
 use EC\Poetry\Events\ParseNotificationEvent;
+use EC\Poetry\Exceptions\ValidationException;
+use EC\Poetry\Messages\Components\Status;
 use EC\Poetry\Messages\Traits\WithStatusTrait;
 use EC\Poetry\Messages\Traits\WithTargetsTrait;
+use EC\Poetry\Poetry;
 use EC\Poetry\Services\Parser;
+use EC\Poetry\Traits\DispatchExceptionEventTrait;
 
 /**
  * Class StatusUpdated
@@ -17,6 +22,7 @@ class StatusUpdated extends AbstractNotification
 {
     use WithStatusTrait;
     use WithTargetsTrait;
+    use DispatchExceptionEventTrait;
 
     /**
      * {@inheritdoc}
@@ -35,7 +41,25 @@ class StatusUpdated extends AbstractNotification
         $parser->addXmlContent($event->getXml());
         if ('status' === $parser->getAttribute('POETRY/request', 'type')) {
             $this->fromXml($event->getXml());
-            $event->setEvent(new StatusUpdatedEvent($this));
+
+            $response = $this->generateResponse();
+            $status = new Status();
+            $status->setType('request')
+              ->setTime('')
+              ->setDate('');
+            $poetry = new Poetry();
+            $violations = $poetry->getValidator()->validate($this);
+            if ($violations->count() > 0) {
+                $event->setEvent(new ExceptionEvent(new ValidationException($violations), $this));
+                $this->dispatchExceptionEvent(new ValidationException($violations));
+                $status->setCode('-1')
+                  ->setMessage('');
+            } else {
+                $event->setEvent(new StatusUpdatedEvent($this));
+                $status->setCode('-1')
+                  ->setMessage('');
+            }
+            $response->addStatus($status);
             $event->stopPropagation();
         }
     }
