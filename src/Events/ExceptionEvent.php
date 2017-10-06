@@ -2,8 +2,10 @@
 
 namespace EC\Poetry\Events;
 
+use EC\Poetry\Messages\Traits\MessageAwareTrait;
 use Symfony\Component\EventDispatcher\Event;
 use EC\Poetry\Exceptions\PoetryException;
+use EC\Poetry\Messages\MessageInterface;
 
 /**
  * Class ExceptionEvent
@@ -12,6 +14,8 @@ use EC\Poetry\Exceptions\PoetryException;
  */
 class ExceptionEvent extends Event
 {
+    use MessageAwareTrait;
+
     const NAME = 'poetry.exception';
 
     /**
@@ -23,10 +27,12 @@ class ExceptionEvent extends Event
      * ExceptionEvent constructor.
      *
      * @param \EC\Poetry\Exceptions\PoetryException $exception
+     * @param \EC\Poetry\Messages\MessageInterface  $message
      */
-    public function __construct(PoetryException $exception)
+    public function __construct(PoetryException $exception, MessageInterface $message = null)
     {
         $this->exception = $exception;
+        $this->message = $message;
     }
 
     /**

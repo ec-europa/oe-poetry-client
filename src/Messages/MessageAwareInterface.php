@@ -2,8 +2,6 @@
 
 namespace EC\Poetry\Messages;
 
-use EC\Poetry\Messages\MessageInterface;
-
 /**
  * Interface MessageAwareInterface
  *
@@ -12,14 +10,14 @@ use EC\Poetry\Messages\MessageInterface;
 interface MessageAwareInterface
 {
     /**
-     * @return \EC\Poetry\Messages\MessageInterface
+     * @return \EC\Poetry\Messages\AbstractMessage
      */
     public function getMessage();
 
     /**
-     * @param \EC\Poetry\Messages\MessageInterface $message
+     * @param \EC\Poetry\Messages\AbstractMessage $message
      */
-    public function setMessage(MessageInterface $message);
+    public function setMessage(AbstractMessage $message);
 
     /**
      * @return bool
