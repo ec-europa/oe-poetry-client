@@ -46,11 +46,6 @@ class Client
     private $soapClient;
 
     /**
-     * @var \Symfony\Component\EventDispatcher\EventDispatcher
-     */
-    private $eventDispatcher;
-
-    /**
      * @var string
      */
     protected $method = 'requestService';
