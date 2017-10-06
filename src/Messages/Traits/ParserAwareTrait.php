@@ -32,7 +32,7 @@ trait ParserAwareTrait
     /**
      * @param string $raw
      */
-    public function setRaw(string $raw)
+    public function setRaw($raw)
     {
         $this->raw = $raw;
     }
