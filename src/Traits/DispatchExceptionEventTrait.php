@@ -19,9 +19,12 @@ trait DispatchExceptionEventTrait
 
     /**
      * @param \EC\Poetry\Exceptions\PoetryException $exception
+     * @param bool $silent
      */
-    protected function dispatchExceptionEvent(PoetryException $exception)
+    protected function dispatchExceptionEvent(PoetryException $exception, $silent = false)
     {
-        $this->eventDispatcher->dispatch(ExceptionEvent::NAME, new ExceptionEvent($exception));
+        $event = new ExceptionEvent($exception);
+        $event->setSilent($silent);
+        $this->eventDispatcher->dispatch(ExceptionEvent::NAME, $event);
     }
 }

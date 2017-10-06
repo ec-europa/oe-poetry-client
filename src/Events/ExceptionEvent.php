@@ -20,6 +20,11 @@ class ExceptionEvent extends Event
     private $exception;
 
     /**
+     * @var bool
+     */
+    private $silent = false;
+
+    /**
      * ExceptionEvent constructor.
      *
      * @param \EC\Poetry\Exceptions\PoetryException $exception
@@ -38,5 +43,27 @@ class ExceptionEvent extends Event
     public function getException()
     {
         return $this->exception;
+    }
+
+    /**
+     * Get Silent property.
+     *
+     * @return bool
+     *   Property value.
+     */
+    public function isSilent()
+    {
+        return $this->silent;
+    }
+
+    /**
+     * Set Silent property.
+     *
+     * @param bool $silent
+     *   Property value.
+     */
+    public function setSilent($silent)
+    {
+        $this->silent = $silent;
     }
 }
