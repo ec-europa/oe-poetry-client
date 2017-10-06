@@ -4,7 +4,6 @@ namespace EC\Poetry;
 
 use EC\Poetry\Events\Client\ClientResponseEvent;
 use EC\Poetry\Events\Client\ClientRequestEvent;
-use EC\Poetry\Events\ExceptionEvent;
 use EC\Poetry\Events\ParseResponseEvent;
 use EC\Poetry\Exceptions\ParsingException;
 use EC\Poetry\Exceptions\ValidationException;

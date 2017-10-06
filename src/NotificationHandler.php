@@ -6,11 +6,13 @@ use EC\Poetry\Events\NotificationHandler\ReceivedNotificationEvent;
 use EC\Poetry\Events\ParseNotificationEvent;
 use EC\Poetry\Exceptions\Notifications\CannotAuthenticateException;
 use EC\Poetry\Exceptions\ParsingException;
+use EC\Poetry\Exceptions\ValidationException;
 use EC\Poetry\Messages\Responses\Status;
 use EC\Poetry\Messages\Traits\ParserAwareTrait;
 use EC\Poetry\Services\Settings;
 use EC\Poetry\Traits\DispatchExceptionEventTrait;
 use Symfony\Component\EventDispatcher\EventDispatcher;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 use EC\Poetry\Services\Renderer;
 
 /**
@@ -39,24 +41,24 @@ class NotificationHandler
     private $renderer;
 
     /**
-     * @var \EC\Poetry\Messages\Responses\Status
+     * @var ValidatorInterface
      */
-    private $status;
+    private $validator;
 
     /**
      * NotificationHandler constructor.
      *
-     * @param \EC\Poetry\Services\Settings                       $settings
-     * @param \Symfony\Component\EventDispatcher\EventDispatcher $eventDispatcher
-     * @param \EC\Poetry\Services\Renderer                       $renderer
-     * @param \EC\Poetry\Messages\Responses\Status               $status
+     * @param \EC\Poetry\Services\Settings                              $settings
+     * @param \Symfony\Component\EventDispatcher\EventDispatcher        $eventDispatcher
+     * @param \EC\Poetry\Services\Renderer                              $renderer
+     * @param \Symfony\Component\Validator\Validator\ValidatorInterface $validator
      */
-    public function __construct(Settings $settings, EventDispatcher $eventDispatcher, Renderer $renderer, Status $status)
+    public function __construct(Settings $settings, EventDispatcher $eventDispatcher, Renderer $renderer, ValidatorInterface $validator)
     {
         $this->settings = $settings;
         $this->eventDispatcher = $eventDispatcher;
         $this->renderer = $renderer;
-        $this->status = $status;
+        $this->validator = $validator;
     }
 
     /**
@@ -75,17 +77,20 @@ class NotificationHandler
         $this->eventDispatcher->dispatch(ReceivedNotificationEvent::NAME, $event);
 
         try {
+            $event = $this->parse($xml);
             if (!$this->doesAuthenticate($username, $password)) {
                 $this->dispatchExceptionEvent(new CannotAuthenticateException());
             }
-
-            $event = $this->parse($xml);
+            $violations = $this->validator->validate($event->getMessage());
+            if ($violations->count() > 0) {
+                $this->dispatchExceptionEvent(new ValidationException($violations));
+            }
             $this->eventDispatcher->dispatch($event->getName(), $event);
         } catch (\Exception $exception) {
-            return $this->getErrorStatus($exception->getMessage());
+            return $this->getErrorStatus($exception->getMessage(), $event->getMessage());
         }
 
-        return $this->getSuccessStatus();
+        return $this->getSuccessStatus($event->getMessage());
     }
 
     /**
@@ -117,15 +122,18 @@ class NotificationHandler
     }
 
     /**
+     * @param \EC\Poetry\Messages\MessageInterface $notification
+     *
      * @return string
      */
-    protected function getSuccessStatus()
+    protected function getSuccessStatus($notification)
     {
-        $status = clone $this->status;
+        $status = new Status($notification->getIdentifier());
+        $status->setMessageId($notification->getMessageId());
         $status->withStatus()
           ->setType('request')
-          ->setTime(date('d/m/Y', time()))
-          ->setDate(date('h:i:s', time()))
+          ->setTime(date('H:i:s'))
+          ->setDate(date('d/m/Y'))
           ->setCode('0')
           ->setMessage('OK');
 
@@ -133,17 +141,19 @@ class NotificationHandler
     }
 
     /**
-     * @param $message
+     * @param string                                    $message
+     * @param \EC\Poetry\Messages\MessageInterface      $notification
      *
      * @return string
      */
-    protected function getErrorStatus($message)
+    protected function getErrorStatus($message, $notification)
     {
-        $status = clone $this->status;
+        $status = new Status($notification->getIdentifier());
+        $status->setMessageId($notification->getMessageId());
         $status->withStatus()
           ->setType('request')
-          ->setTime(date('d/m/Y', time()))
-          ->setDate(date('h:i:s', time()))
+          ->setTime(date('H:i:s'))
+          ->setDate(date('d/m/Y'))
           ->setCode('-1')
           ->setMessage($message);
 
