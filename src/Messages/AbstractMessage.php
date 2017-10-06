@@ -121,7 +121,7 @@ abstract class AbstractMessage implements MessageInterface
     /**
      * @param string $messageId
      */
-    public function setMessageId(string $messageId)
+    public function setMessageId($messageId)
     {
         $this->messageId = $messageId;
     }
