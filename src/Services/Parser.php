@@ -3,7 +3,6 @@
 namespace EC\Poetry\Services;
 
 use EC\Poetry\Exceptions\ParserException;
-use EC\Poetry\Traits\DispatchExceptionEventTrait;
 use Symfony\Component\DomCrawler;
 
 /**

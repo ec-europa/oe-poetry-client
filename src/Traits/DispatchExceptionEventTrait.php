@@ -25,6 +25,17 @@ trait DispatchExceptionEventTrait
     {
         $event = new ExceptionEvent($exception);
         $event->setSilent($silent);
-        $this->eventDispatcher->dispatch(ExceptionEvent::NAME, $event);
+        $this->getEventDispatcher()->dispatch(ExceptionEvent::NAME, $event);
+    }
+
+    /**
+     * Get EventDispatcher property.
+     *
+     * @return \Symfony\Component\EventDispatcher\EventDispatcher
+     *   Property value.
+     */
+    public function getEventDispatcher()
+    {
+        return $this->eventDispatcher;
     }
 }

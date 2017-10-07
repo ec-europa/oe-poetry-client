@@ -31,11 +31,6 @@ class NotificationHandler
     private $settings;
 
     /**
-     * @var \Symfony\Component\EventDispatcher\EventDispatcher
-     */
-    private $eventDispatcher;
-
-    /**
      * @var \EC\Poetry\Services\Renderer
      */
     private $renderer;
