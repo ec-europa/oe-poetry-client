@@ -77,7 +77,7 @@ trait WithStatusTrait
      * @return boolean
      *    True if there are no errors neither warnings, false otherwise.
      */
-    public function isSuccess()
+    public function isSuccessful()
     {
         return !$this->hasWarnings() && !$this->hasErrors();
     }
@@ -90,7 +90,7 @@ trait WithStatusTrait
      */
     public function hasErrors()
     {
-        return $this->getStatusesWithErrors() !== [];
+        return $this->getErrors() !== [];
     }
 
     /**
@@ -101,7 +101,7 @@ trait WithStatusTrait
      */
     public function hasWarnings()
     {
-        return $this->getStatusesWithWarnings() !== [];
+        return $this->getWarnings() !== [];
     }
 
     /**
@@ -110,7 +110,7 @@ trait WithStatusTrait
      * @return array
      *    Statuses with errors.
      */
-    public function getStatusesWithErrors()
+    public function getErrors()
     {
         $errors = [];
         foreach ($this->getStatuses() as $status) {
@@ -123,12 +123,20 @@ trait WithStatusTrait
     }
 
     /**
+     * @return int
+     */
+    public function countErrors()
+    {
+        return count($this->getErrors());
+    }
+
+    /**
      *  Get statuses with warnings.
      *
      * @return array
      *    Statuses with warnings.
      */
-    public function getStatusesWithWarnings()
+    public function getWarnings()
     {
         $warnings = [];
         foreach ($this->getStatuses() as $status) {
@@ -138,5 +146,57 @@ trait WithStatusTrait
         }
 
         return $warnings;
+    }
+
+    /**
+     * @return int
+     */
+    public function countWarnings()
+    {
+        return count($this->getWarnings());
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasRequestStatus()
+    {
+        return $this->getRequestStatus() !== null;
+    }
+
+    /**
+     * @return \EC\Poetry\Messages\Components\Status|null
+     */
+    public function getRequestStatus()
+    {
+        foreach ($this->getStatuses() as $status) {
+            if ($status->getType() == 'request') {
+                return $status;
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasDemandeStatus()
+    {
+        return $this->getDemandeStatus() !== null;
+    }
+
+    /**
+     * @return \EC\Poetry\Messages\Components\Status|null
+     */
+    public function getDemandeStatus()
+    {
+        foreach ($this->getStatuses() as $status) {
+            if ($status->getType() == 'demande') {
+                return $status;
+            }
+        }
+
+        return null;
     }
 }

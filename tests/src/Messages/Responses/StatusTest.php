@@ -40,30 +40,34 @@ class StatusTest extends AbstractTest
             }
         }
     }
+
     /**
      * Test validation.
      *
-     * @param string $tests
+     * @param string $xml
+     * @param array  $expectations
      *
      * @dataProvider statusProvider
      */
-    public function testValidation($tests)
+    public function testValidation($xml, array $expectations)
     {
-        foreach ($tests as $test) {
-            /** @var \EC\Poetry\Messages\Responses\Status $message */
-            $message = $this->getContainer()->get('response.status')->fromXml($test['xml']);
-            expect($message->isSuccess())->to->equal($test['results']['isSuccess']);
-
-            $errors = $message->getStatusesWithErrors();
-            expect(count($errors))->to->equal($test['results']['errorsCount']);
-            if (isset($test['results']['errorMsgExcerpt'])) {
-                expect((string) $errors[0])->to->match('/'.$test['results']['errorMsgExcerpt'].'/');
-            }
-
-            $warnings = $message->getStatusesWithWarnings();
-            expect(count($warnings))->to->equal($test['results']['warningsCount']);
-            if (isset($test['results']['warningMsgExcerpt'])) {
-                expect((string) $warnings[0])->to->match('/'.$test['results']['warningMsgExcerpt'].'/');
+        /** @var \EC\Poetry\Messages\Responses\Status $message */
+        $message = $this->getContainer()->get('response.status')->fromXml($xml);
+        foreach ($expectations as $method => $result) {
+            if (is_array($result) && is_numeric(key($result))) {
+                foreach ($result as $key => $values) {
+                    $object = $message->$method()[$key];
+                    foreach ($values as $method => $result) {
+                        expect($object->$method())->to->equal($result);
+                    }
+                }
+            } elseif (is_array($result) && !is_numeric(key($result))) {
+                $object = $message->$method();
+                foreach ($result as $key => $value) {
+                    expect($object->$key())->to->equal($value);
+                }
+            } else {
+                expect($message->$method())->to->equal($result);
             }
         }
     }
