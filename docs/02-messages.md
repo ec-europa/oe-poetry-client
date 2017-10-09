@@ -115,5 +115,5 @@ Messages of type `EC\Poetry\Messages\Responses\Status` provide the following API
 | `countWarnings()`      | Return the number of warning components | 
 | `hasRequestStatus()`   | Boolean, whereas the status message has any status component of type `request` |
 | `getRequestStatus()`   | Return a status component of type `request`, if any |
-| `getDemandeStatus()`   | Boolean, whereas the status message has any status component of type `demande` |
-| `hasDemandeStatus()`   | Return a status component of type `demande`, if any |
+| `hasDemandeStatus()`   | Boolean, whereas the status message has any status component of type `demande` |
+| `getDemandeStatus()`   | Return a status component of type `demande`, if any |
