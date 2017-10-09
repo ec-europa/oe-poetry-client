@@ -29,12 +29,13 @@
     hasWarnings: false
     countErrors: 0
     countWarnings: 0
-    hasDemandeStatus: true
+    hasDemandStatus: true
     hasRequestStatus: true
+    hasAttributionStatuses: false
     getRequestStatus:
       getCode: '0'
       getMessage: 'OK'
-    getDemandeStatus:
+    getDemandStatus:
       getCode: '0'
       getMessage: 'OK'
 
@@ -75,12 +76,13 @@
     getWarnings:
       -
         getMessage: "Passed with 1 warning"
-    hasDemandeStatus: true
+    hasDemandStatus: true
     hasRequestStatus: true
+    hasAttributionStatuses: false
     getRequestStatus:
       getCode: '1'
       getMessage: 'Passed with 1 warning'
-    getDemandeStatus:
+    getDemandStatus:
       getCode: '-1'
       getMessage: 'ID already exist'
 
@@ -96,9 +98,20 @@
                 <partie>00</partie>
                 <produit>ABC</produit>
             </demandeId>
+            <status code="1" type="attribution">
+                <statusDate format="dd/mm/yyyy">15/01/2017</statusDate>
+                <statusTime format="hh:mm:ss">12:30:00</statusTime>
+                <statusMessage>OK</statusMessage>
+            </status>
         </request>
     </POETRY>
 
   expectations:
-    hasDemandeStatus: false
+    hasDemandStatus: false
     hasRequestStatus: false
+    hasAttributionStatuses: true
+    getAttributionStatuses:
+      -
+        getCode: '1'
+        getType: 'attribution'
+        getMessage: "OK"

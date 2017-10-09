@@ -181,15 +181,15 @@ trait WithStatusTrait
     /**
      * @return bool
      */
-    public function hasDemandeStatus()
+    public function hasDemandStatus()
     {
-        return $this->getDemandeStatus() !== null;
+        return $this->getDemandStatus() !== null;
     }
 
     /**
      * @return \EC\Poetry\Messages\Components\Status|null
      */
-    public function getDemandeStatus()
+    public function getDemandStatus()
     {
         foreach ($this->getStatuses() as $status) {
             if ($status->getType() == 'demande') {
@@ -203,9 +203,9 @@ trait WithStatusTrait
     /**
      * @return bool
      */
-    public function hasAttributionStatus()
+    public function hasAttributionStatuses()
     {
-        return !empty($this->getAttributionStatuses());
+        return count($this->getAttributionStatuses()) > 0;
     }
 
     /**
@@ -213,7 +213,7 @@ trait WithStatusTrait
      */
     public function getAttributionStatuses()
     {
-        $statuses = array();
+        $statuses = [];
         foreach ($this->getStatuses() as $status) {
             if ($status->getType() == 'attribution') {
                 $statuses[] = $status;
