@@ -199,4 +199,27 @@ trait WithStatusTrait
 
         return null;
     }
+
+    /**
+     * @return bool
+     */
+    public function hasAttributionStatus()
+    {
+        return !empty($this->getAttributionStatuses());
+    }
+
+    /**
+     * @return array
+     */
+    public function getAttributionStatuses()
+    {
+        $statuses = array();
+        foreach ($this->getStatuses() as $status) {
+            if ($status->getType() == 'attribution') {
+                $statuses[] = $status;
+            }
+        }
+
+        return $statuses;
+    }
 }
