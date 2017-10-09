@@ -103,17 +103,19 @@ $violations = $poetry->getValidator()->validate($message); // No violations.
 
 Messages of type `EC\Poetry\Messages\Responses\Status` provide the following API:
 
-| Method                 | Description |
-|------------------------|-------------|
-| `getStatuses()`        | Return an array of `\EC\Poetry\Messages\Components\Status` components |
-| `isSuccessful()`       | Boolean, TRUE if the status message does not contain warnings nor errors, FALSE otherwise |
-| `hasErrors()`          | Boolean, whereas the status message has any errors |
-| `getErrors()`          | Return an array of error component, if any |
-| `countErrors()`        | Return the number of error components |
-| `hasWarnings()`        | Boolean, whereas the status message has any warning |
-| `getWarnings()`        | Return an array of warning component, if any |
-| `countWarnings()`      | Return the number of warning components | 
-| `hasRequestStatus()`   | Boolean, whereas the status message has any status component of type `request` |
-| `getRequestStatus()`   | Return a status component of type `request`, if any |
-| `hasDemandeStatus()`   | Boolean, whereas the status message has any status component of type `demande` |
-| `getDemandeStatus()`   | Return a status component of type `demande`, if any |
+| Method                        | Description |
+|-------------------------------|-------------|
+| `getStatuses()`               | Return an array of `\EC\Poetry\Messages\Components\Status` components |
+| `isSuccessful()`              | Boolean, TRUE if the status message does not contain warnings nor errors, FALSE otherwise |
+| `hasErrors()`                 | Boolean, whereas the status message has any errors |
+| `getErrors()`                 | Return an array of error component, if any |
+| `countErrors()`               | Return the number of error components |
+| `hasWarnings()`               | Boolean, whereas the status message has any warning |
+| `getWarnings()`               | Return an array of warning component, if any |
+| `countWarnings()`             | Return the number of warning components | 
+| `hasRequestStatus()`          | Boolean, whereas the status message has any status component of type `request` |
+| `getRequestStatus()`          | Return a status component of type `request`, if any |
+| `hasDemandeStatus()`          | Boolean, whereas the status message has any status component of type `demande` |
+| `getDemandeStatus()`          | Return a status component of type `demande`, if any |
+| `hasAttributionStatus()`      | Boolean, whereas the status message has any status component of type `attribution` |
+| `getAttributionStatuses()`    | Return an array of status components of type `attribution`, if any |
