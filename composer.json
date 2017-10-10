@@ -25,7 +25,8 @@
         "internations/http-mock": "^0.8"
     },
     "suggest": {
-        "monolog/monolog": "Log Poetry requests and responses via Monolog"
+        "monolog/monolog": "Log Poetry requests and responses via Monolog",
+        "ec-europa/oe-poetry-behat": "Test Poetry service integration with Behat"
     },
     "autoload": {
         "psr-4": {
