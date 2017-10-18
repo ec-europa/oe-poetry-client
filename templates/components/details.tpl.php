@@ -56,4 +56,7 @@
     <?php if ($component->getType()) : ?>
         <type id="<?= $component->getType() ?>"/>
     <?php endif ?>
+    <?php if ($component->getWorkflowCode()) : ?>
+        <workflowCode><?= $component->getWorkflowCode() ?></workflowCode>
+    <?php endif ?>
 </demande>
