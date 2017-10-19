@@ -53,8 +53,7 @@ class Server
         if (!isset($_SERVER['HTTP_SOAPACTION'])) {
             $messages[] = "SOAP action header should be defined.";
         }
-        $headers = getallheaders();
-        if (!isset($headers['Content-Type']) || (strstr(strtolower($headers['Content-Type']), 'application/soap+xml') !== false)) {
+        if (!isset($_SERVER['HTTP_CONTENT_TYPE']) || (strstr(strtolower($_SERVER['HTTP_CONTENT_TYPE']), 'application/soap+xml') !== false)) {
             $messages[] = "Content-Type should contain 'application/soap+xml'.";
         }
 
