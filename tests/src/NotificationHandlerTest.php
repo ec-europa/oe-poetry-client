@@ -13,6 +13,7 @@ use EC\Poetry\Server;
 use Monolog\Formatter\JsonFormatter;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
+use Psr\Log\LogLevel;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -40,6 +41,7 @@ class NotificationHandlerTest extends AbstractHttpMockTest
             $poetry = new Poetry([
                 'notification.username' => 'username',
                 'notification.password' => 'password',
+                'log_level' => LogLevel::INFO,
             ]);
             $poetry->getEventDispatcher()->addListener(StatusUpdatedEvent::NAME, function (StatusUpdatedEvent $event) {
                 expect($event->hasMessage())->be->true();
@@ -99,6 +101,7 @@ class NotificationHandlerTest extends AbstractHttpMockTest
                 'notification.password' => 'password',
                 'exceptions' => false,
                 'logger' => $logger,
+                'log_level' => LogLevel::INFO,
             ]);
             $poetry->getServer()->handle();
         };

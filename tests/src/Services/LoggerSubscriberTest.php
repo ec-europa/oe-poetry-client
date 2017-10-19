@@ -35,6 +35,7 @@ class LoggerSubscriberTest extends AbstractHttpMockTest
             'service.password' => 'password',
             'soap_client' => $mock,
             'logger' => $logger,
+            'log_level' => LogLevel::INFO,
         ]);
 
         $poetry->getClient()->send($request);
@@ -69,6 +70,7 @@ class LoggerSubscriberTest extends AbstractHttpMockTest
             'soap_client' => $mock,
             'logger' => $logger,
             'exceptions' => false,
+            'log_level' => LogLevel::INFO,
         ]);
 
         $poetry->getClient()->send($request);
@@ -91,12 +93,37 @@ class LoggerSubscriberTest extends AbstractHttpMockTest
                 'notification.username' => 'username',
                 'notification.password' => 'password',
                 'logger' => $logger,
+                'log_level' => LogLevel::INFO,
             ]);
             $poetry->getServer()->handle();
 
             $logs = $logger->getLogs()[LogLevel::INFO];
             expect($logs)->not->empty();
             expect($logs[ReceivedNotificationEvent::NAME])->not->empty();
+        };
+
+        $this->setupServer('/notification', $callback);
+        $message = $this->getFixture('messages/notifications/status-updated.xml');
+        $this->notifyServer('/notification', 'username', 'password', $message);
+    }
+
+    /**
+     * Test log levels.
+     */
+    public function testLogLevel()
+    {
+        $callback = function (Response $response) {
+            $logger = new TestLogger();
+            $poetry = new Poetry([
+                'notification.username' => 'username',
+                'notification.password' => 'password',
+                'logger' => $logger,
+                'log_level' => LogLevel::ERROR,
+            ]);
+            $poetry->getServer()->handle();
+
+            expect($logger->getLogs()[LogLevel::INFO])->empty();
+            expect($logger->getLogs()[LogLevel::ERROR])->empty();
         };
 
         $this->setupServer('/notification', $callback);

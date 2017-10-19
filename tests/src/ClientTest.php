@@ -37,6 +37,7 @@ class ClientTest extends AbstractTest
           'service.username' => $username,
           'service.password' => $password,
           'soap_client' => $mock,
+          'log_level' => LogLevel::INFO,
         ];
         $poetry = new Poetry($parameters);
 

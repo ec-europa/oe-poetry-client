@@ -11,6 +11,7 @@ use EC\Poetry\Events\Notifications\StatusUpdatedEvent;
 use EC\Poetry\Events\Notifications\TranslationReceivedEvent;
 use EC\Poetry\Events\ParseNotificationEvent;
 use EC\Poetry\Events\ParseResponseEvent;
+use Psr\Log\LogLevel;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Psr\Log\LoggerInterface;
 
@@ -72,7 +73,7 @@ class LoggerSubscriber implements EventSubscriberInterface
      */
     public function onParseResponseEvent(ParseResponseEvent $event)
     {
-        $this->logger->info(ParseResponseEvent::NAME, ['message' => $event->getXml()]);
+        $this->logInfo(ParseResponseEvent::NAME, ['message' => $event->getXml()]);
     }
 
     /**
@@ -80,7 +81,7 @@ class LoggerSubscriber implements EventSubscriberInterface
      */
     public function onParseNotificationEvent(ParseNotificationEvent $event)
     {
-        $this->logger->info(ParseNotificationEvent::NAME, ['message' => $event->getXml()]);
+        $this->logInfo(ParseNotificationEvent::NAME, ['message' => $event->getXml()]);
     }
 
     /**
@@ -89,7 +90,7 @@ class LoggerSubscriber implements EventSubscriberInterface
     public function onNotificationEvent(NotificationEventInterface $event)
     {
         $message = $this->renderer->render($event->getMessage());
-        $this->logger->info($event->getName(), ['message' => $message]);
+        $this->logInfo($event->getName(), ['message' => $message]);
     }
 
     /**
@@ -97,7 +98,7 @@ class LoggerSubscriber implements EventSubscriberInterface
      */
     public function onClientRequestEvent(ClientRequestEvent $event)
     {
-        $this->logger->info(ClientRequestEvent::NAME, [
+        $this->logInfo(ClientRequestEvent::NAME, [
             'username' => $event->getUsername(),
             'password' => $this->hidePassword($event->getPassword()),
             'message' => $event->getMessage(),
@@ -109,7 +110,7 @@ class LoggerSubscriber implements EventSubscriberInterface
      */
     public function onReceivedNotificationEvent(ReceivedNotificationEvent $event)
     {
-        $this->logger->info(ReceivedNotificationEvent::NAME, [
+        $this->logInfo(ReceivedNotificationEvent::NAME, [
             'username' => $event->getUsername(),
             'password' => $this->hidePassword($event->getPassword()),
             'message' => $event->getMessage(),
@@ -121,7 +122,7 @@ class LoggerSubscriber implements EventSubscriberInterface
      */
     public function onClientResponseEvent(ClientResponseEvent $event)
     {
-        $this->logger->info(ClientResponseEvent::NAME, ['message' => $event->getMessage()]);
+        $this->logInfo(ClientResponseEvent::NAME, ['message' => $event->getMessage()]);
     }
 
     /**
@@ -130,7 +131,7 @@ class LoggerSubscriber implements EventSubscriberInterface
     public function onExceptionEvent(ExceptionEvent $event)
     {
         $exception = $event->getException();
-        $this->logger->error(ExceptionEvent::NAME, [
+        $this->logError(ExceptionEvent::NAME, [
             'exception' => (new \ReflectionClass($exception))->getName(),
             'message' => $exception->getMessage(),
             'trace' => $exception->getTrace(),
@@ -152,5 +153,54 @@ class LoggerSubscriber implements EventSubscriberInterface
     private function hidePassword($password)
     {
         return preg_replace("/(?!^).(?!$)/", "*", $password);
+    }
+
+    /**
+     * Log info messages.
+     *
+     * @param string $message
+     * @param array  $context
+     */
+    private function logInfo($message, array $context = [])
+    {
+        if ($this->canLogLevel(LogLevel::INFO)) {
+            $this->logger->info($message, $context);
+        }
+    }
+
+    /**
+     * Log error messages.
+     *
+     * @param string $message
+     * @param array  $context
+     */
+    private function logError($message, array $context = [])
+    {
+        if ($this->canLogLevel(LogLevel::ERROR)) {
+            $this->logger->error($message, $context);
+        }
+    }
+
+    /**
+     * @param $level
+     *
+     * @return bool
+     */
+    private function canLogLevel($level)
+    {
+        $levels = [
+          LogLevel::DEBUG,
+          LogLevel::INFO,
+          LogLevel::NOTICE,
+          LogLevel::WARNING,
+          LogLevel::ERROR,
+          LogLevel::CRITICAL,
+          LogLevel::ALERT,
+          LogLevel::EMERGENCY,
+        ];
+        $key = array_search($this->settings['log_level'], $levels);
+        $levels = array_slice($levels, $key);
+
+        return ($this->settings['log_level'] !== false) && in_array($level, $levels);
     }
 }

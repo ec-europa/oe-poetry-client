@@ -14,6 +14,7 @@ use EC\Poetry\Messages\Traits\ParserAwareTrait;
 abstract class AbstractResponse extends AbstractMessage implements ResponseInterface
 {
     use ParserAwareTrait;
+
     /**
      * {@inheritdoc}
      */

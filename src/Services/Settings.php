@@ -42,8 +42,16 @@ class Settings implements \ArrayAccess
         // Whereas to throw exceptions or just log them.
         'exceptions' => true,
 
-        // Debug mode: true logs everything, false logs nothing.
-        'debug' => false,
+        // Set from which PSR3 log level we wish to log.
+        // @see \Psr\Log\LogLevel
+        // Set to 'false' to not log anything.
+        // Set to a specific level to log from that level up, by severity.
+        //
+        // Possible values:
+        //
+        // - \Psr\Log\LogLevel::INFO : Logs all events.
+        // - \Psr\Log\LogLevel::ERROR  : Logs all events and exceptions.
+        'log_level' => false,
     ];
 
     /**
