@@ -17,6 +17,7 @@
             <procedure id="NEANT"/>
             <destination id="PUBLIC"/>
             <type id="INTER"/>
+            <workflowCode>STS</workflowCode>
         </demande>
         <contacts type="auteur"><contactNickname>john</contactNickname></contacts>
         <contacts type="secretaire"><contactNickname>john</contactNickname></contacts>

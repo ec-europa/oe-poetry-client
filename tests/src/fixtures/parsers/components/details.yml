@@ -16,6 +16,7 @@
         <consultationInterServices>Yes</consultationInterServices>
         <procedureInterInstitution>Yes</procedureInterInstitution>
         <reference_files_note>Note</reference_files_note>
+        <workflowCode>STS</workflowCode>
     </demande>
   - getClientId : "clientId"
     getApplicationId : "applicationId"
@@ -32,4 +33,5 @@
     getInterServices : "Yes"
     getInterInstitution : "Yes"
     getReferenceFilesRemark : "Note"
+    getWorkflowCode : "STS"
 

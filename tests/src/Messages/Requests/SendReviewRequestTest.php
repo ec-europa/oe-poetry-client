@@ -46,7 +46,8 @@ class SendReviewRequestTest extends AbstractTest
             ->setReferenceFilesRemark('https://ec.europa.eu/programmes/erasmus-plus/opportunities-for-individuals/staff-teaching/erasmus-mundus_en')
             ->setProcedure('NEANT')
             ->setDestination('PUBLIC')
-            ->setType('INTER');
+            ->setType('INTER')
+            ->setWorkflowCode('STS');
 
         $message->withContact()->setType('auteur')->setNickname('john');
         $message->withContact()->setType('secretaire')->setNickname('john');

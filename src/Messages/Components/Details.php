@@ -21,6 +21,7 @@ class Details extends AbstractComponent
     private $title;
     private $remark;
     private $type;
+    private $workflowCode;
     private $destination;
     private $procedure;
     private $delay;
@@ -48,6 +49,7 @@ class Details extends AbstractComponent
         $metadata->addPropertyConstraint('title', new Assert\Type('string'));
         $metadata->addPropertyConstraint('remark', new Assert\Type('string'));
         $metadata->addPropertyConstraint('type', new Constraint\DetailsType());
+        $metadata->addPropertyConstraint('workflowCode', new Assert\Type('string'));
         $metadata->addPropertyConstraint('destination', new Constraint\DetailsDestination());
         $metadata->addPropertyConstraint('procedure', new Constraint\DetailsProcedure());
         $metadata->addPropertyConstraint('status', new Assert\Type('string'));
@@ -202,6 +204,25 @@ class Details extends AbstractComponent
     public function setType($type)
     {
         $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getWorkflowCode()
+    {
+        return $this->workflowCode;
+    }
+
+    /**
+     * @param mixed $workflowCode
+     * @return Details
+     */
+    public function setWorkflowCode($workflowCode)
+    {
+        $this->workflowCode = $workflowCode;
 
         return $this;
     }
@@ -373,6 +394,7 @@ class Details extends AbstractComponent
             ->setTitle($parser->getContent('demande/titre'))
             ->setRemark($parser->getContent('demande/remarque'))
             ->setType($parser->getContent('demande/type'))
+            ->setWorkflowCode($parser->getContent('demande/workflowCode'))
             ->setDestination($parser->getContent('demande/destination'))
             ->setProcedure($parser->getContent('demande/procedure'))
             ->setDelay($parser->getContent('demande/delai'))
