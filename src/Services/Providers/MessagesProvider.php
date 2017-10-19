@@ -54,10 +54,10 @@ class MessagesProvider implements ServiceProviderInterface
         $this->serviceFactory($messages, $container);
 
         $requests = [
-          'request.create_translation_request'      => CreateTranslationRequest::class,
-          'request.get_request_status'              => GetRequestStatus::class,
-          'request.create_review_request'           => CreateReviewRequest::class,
-          'request.get_new_number'                  => GetNewNumber::class,
+          'request.create_translation_request' => CreateTranslationRequest::class,
+          'request.get_request_status'         => GetRequestStatus::class,
+          'request.create_review_request'      => CreateReviewRequest::class,
+          'request.get_new_number'             => GetNewNumber::class,
         ];
         $this->serviceFactory($requests, $container, $container['component.identifier'], $container['settings']);
 
