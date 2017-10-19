@@ -9,6 +9,10 @@ use EC\Poetry\Messages\Responses\Status;
 use EC\Poetry\Poetry;
 use EC\Poetry\Events\NotificationEventInterface;
 use EC\Poetry\Messages\Notifications\TranslationReceived;
+use EC\Poetry\Server;
+use Monolog\Formatter\JsonFormatter;
+use Monolog\Handler\StreamHandler;
+use Monolog\Logger;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -24,7 +28,7 @@ class NotificationHandlerTest extends AbstractHttpMockTest
     public function testServer()
     {
         $server = $this->getContainer()->getServer();
-        expect($server)->is->an->instanceof(\SoapServer::class);
+        expect($server)->is->an->instanceof(Server::class);
     }
 
     /**
@@ -74,6 +78,36 @@ class NotificationHandlerTest extends AbstractHttpMockTest
         $status = $this->getContainer()->get('response.status')->fromXml($response);
         expect($status->getStatuses()[0]->getMessage())->to->be->equal('Poetry service cannot authenticate on notification callback: username or password not valid.');
         expect($status->getStatuses()[0]->getCode())->to->be->equal('-1');
+    }
+
+    /**
+     * Test bad request.
+     */
+    public function testBadRequest()
+    {
+        $file = $this->logFile;
+        $callback = function (Response $response) use ($file) {
+            @unlink($file);
+            $formatter = new JsonFormatter();
+            $stream = new StreamHandler($file, Logger::INFO);
+            $stream->setFormatter($formatter);
+            $logger = new Logger('Test Logger');
+            $logger->pushHandler($stream);
+
+            $poetry = new Poetry([
+                'notification.username' => 'username',
+                'notification.password' => 'password',
+                'exceptions' => false,
+                'logger' => $logger,
+            ]);
+            $poetry->getServer()->handle();
+        };
+
+        $this->setupServer('/bad-request', $callback, 'GET');
+        @file_get_contents('http://localhost:8082/bad-request');
+
+        $logs = $this->getLogs();
+        expect($logs[0]->context->message)->equal('Request method should be set to POST. SOAP action header should be defined. Content-Type should contain \'application/soap+xml\'.');
     }
 
     /**

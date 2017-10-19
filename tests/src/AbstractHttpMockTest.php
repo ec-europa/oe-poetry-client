@@ -50,12 +50,12 @@ abstract class AbstractHttpMockTest extends AbstractTest
     /**
      * Setup notification endpoint.
      */
-    protected function setupServer($endpoint, \Closure $callback)
+    protected function setupServer($endpoint, \Closure $callback, $method = 'POST')
     {
         // @codingStandardsIgnoreStart
         $this->http->mock
           ->when()
-          ->methodIs('POST')
+          ->methodIs($method)
           ->pathIs($endpoint)
           ->then()
           ->callback($callback)

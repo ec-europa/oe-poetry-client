@@ -4,6 +4,7 @@ namespace EC\Poetry\Services\Providers;
 
 use EC\Poetry\NotificationHandler;
 use EC\Poetry\Client;
+use EC\Poetry\Server;
 use EC\Poetry\Services\LoggerSubscriber;
 use EC\Poetry\Services\Plates\AttributesExtension;
 use EC\Poetry\Services\Settings;
@@ -55,6 +56,10 @@ class ServicesProvider implements ServiceProviderInterface
             $server->setObject($container['notification_handler']);
 
             return $server;
+        };
+
+        $container['server'] = function (Container $container) {
+            return new Server($container['soap_server'], $container['event_dispatcher']);
         };
 
         $container['event_dispatcher'] = function (Container $container) {

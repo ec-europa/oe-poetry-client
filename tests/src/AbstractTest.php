@@ -4,6 +4,9 @@ namespace EC\Poetry\Tests;
 
 use EC\Poetry\Messages\Components\Identifier;
 use EC\Poetry\Poetry;
+use Monolog\Formatter\JsonFormatter;
+use Monolog\Handler\StreamHandler;
+use Monolog\Logger;
 use Peridot\Leo\Leo;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
@@ -15,6 +18,11 @@ use Symfony\Component\Validator\ConstraintViolationListInterface;
  */
 abstract class AbstractTest extends TestCase
 {
+    /**
+     * @var string
+     */
+    protected $logFile = __DIR__.'/log.txt';
+
     /**
      * {@inheritdoc}
      */
@@ -104,6 +112,31 @@ abstract class AbstractTest extends TestCase
     protected function isComponentCollection($properties)
     {
         return is_array($properties) && is_int(key($properties));
+    }
+
+    /**
+     * @return \Monolog\Logger
+     */
+    protected function getLogger()
+    {
+        $formatter = new JsonFormatter();
+        $stream = new StreamHandler($this->logFile, Logger::INFO);
+        $stream->setFormatter($formatter);
+
+        return new Logger('Test Logger');
+    }
+
+    /**
+     * @return array
+     */
+    protected function getLogs()
+    {
+        $logs = [];
+        foreach (file($this->logFile) as $row) {
+            $logs[] = json_decode($row);
+        }
+
+        return $logs;
     }
 
     /**

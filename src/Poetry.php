@@ -73,11 +73,11 @@ class Poetry extends Container implements ContainerInterface
     }
 
     /**
-     * @return \SoapServer
+     * @return \EC\Poetry\Server
      */
     public function getServer()
     {
-        return $this['soap_server'];
+        return $this['server'];
     }
 
     /**
