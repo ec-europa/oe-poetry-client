@@ -4,17 +4,17 @@ namespace EC\Poetry\Tests\Messages\Requests;
 
 use EC\Poetry\Messages\Components\Contact;
 use EC\Poetry\Messages\Components\Identifier;
-use EC\Poetry\Messages\Requests\CreateRequest;
-use EC\Poetry\Messages\Requests\RequestNewNumber;
+use EC\Poetry\Messages\Requests\CreateTranslationRequest;
+use EC\Poetry\Messages\Requests\GetNewNumber;
 use EC\Poetry\Services\Settings;
 use EC\Poetry\Tests\AbstractTest;
 
 /**
- * Class RequestNewNumberTest
+ * Class GetNewNumberTest
  *
  * @package EC\Poetry\Tests\Messages\Requests
  */
-class RequestNewNumberTest extends AbstractTest
+class GetNewNumberTest extends AbstractTest
 {
     /**
      * Test rendering.
@@ -31,9 +31,9 @@ class RequestNewNumberTest extends AbstractTest
           ->setVersion('01')
           ->setPart('00');
 
-        $message = new RequestNewNumber($identifier, new Settings());
+        $message = new GetNewNumber($identifier, new Settings());
 
         $output = $renderer->render($message);
-        expect($output)->to->have->same->xml('messages/requests/request-new-number.xml');
+        expect($output)->to->have->same->xml('messages/requests/get-new-number.xml');
     }
 }

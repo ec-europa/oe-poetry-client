@@ -10,7 +10,7 @@ use EC\Poetry\Services\Settings;
  *
  * @package EC\Poetry\Messages\Requests
  */
-class SendReviewRequest extends CreateRequest
+class CreateReviewRequest extends CreateTranslationRequest
 {
     /**
      * {@inheritdoc}

@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Contains \EC\Poetry\Messages\Requests\RequestNewNumber
+ * Contains \EC\Poetry\Messages\Requests\GetNewNumber
  */
 
 namespace EC\Poetry\Messages\Requests;
@@ -15,7 +15,7 @@ use EC\Poetry\Services\Settings;
  *
  * @package EC\Poetry\Messages\Requests
  */
-class RequestNewNumber extends AbstractRequest
+class GetNewNumber extends AbstractRequest
 {
     /**
      * {@inheritdoc}

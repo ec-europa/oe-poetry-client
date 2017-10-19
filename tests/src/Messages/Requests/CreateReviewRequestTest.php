@@ -4,19 +4,19 @@ namespace EC\Poetry\Tests\Messages\Requests;
 
 use EC\Poetry\Messages\Components\Contact;
 use EC\Poetry\Messages\Components\Identifier;
-use EC\Poetry\Messages\Requests\CreateRequest;
-use EC\Poetry\Messages\Requests\SendReviewRequest;
+use EC\Poetry\Messages\Requests\CreateTranslationRequest;
+use EC\Poetry\Messages\Requests\CreateReviewRequest;
 use EC\Poetry\Poetry;
 use EC\Poetry\Services\Settings;
 use EC\Poetry\Tests\AbstractTest;
 use Symfony\Component\Yaml\Yaml;
 
 /**
- * Class SendReviewRequestTest
+ * Class CreateReviewRequestTest
  *
  * @package EC\Poetry\Tests\Messages\Requests
  */
-class SendReviewRequestTest extends AbstractTest
+class CreateReviewRequestTest extends AbstractTest
 {
     /**
      * Test rendering.
@@ -33,7 +33,7 @@ class SendReviewRequestTest extends AbstractTest
           ->setVersion('0')
           ->setPart('11');
 
-        $message = new SendReviewRequest($identifier, new Settings());
+        $message = new CreateReviewRequest($identifier, new Settings());
 
         $message->withDetails()
             ->setClientId("Job ID 3999")
@@ -46,7 +46,8 @@ class SendReviewRequestTest extends AbstractTest
             ->setReferenceFilesRemark('https://ec.europa.eu/programmes/erasmus-plus/opportunities-for-individuals/staff-teaching/erasmus-mundus_en')
             ->setProcedure('NEANT')
             ->setDestination('PUBLIC')
-            ->setType('INTER');
+            ->setType('INTER')
+            ->setWorkflowCode('STS');
 
         $message->withContact()->setType('auteur')->setNickname('john');
         $message->withContact()->setType('secretaire')->setNickname('john');
@@ -80,7 +81,7 @@ class SendReviewRequestTest extends AbstractTest
         $output = $renderer->render($message);
         $violations = $this->getContainer()->getValidator()->validate($message);
         expect($this->getViolations($violations))->to->be->empty();
-        expect($output)->to->have->same->xml('messages/requests/send-review-request.xml');
+        expect($output)->to->have->same->xml('messages/requests/create-review-request.xml');
     }
 
     /**
@@ -101,7 +102,7 @@ class SendReviewRequestTest extends AbstractTest
             'notification.password' => 'MY-TEST-PASSWORD',
             'client.wsdl' => 'https://example.com/callback/wsdl/PoetryIntegration.wsdl',
         ]);
-        $component = $poetry->get('request.send_review_request');
+        $component = $poetry->get('request.create_review_request');
         $component->withArray($array);
 
         foreach ($expected as $getComponent => $properties) {
@@ -123,6 +124,6 @@ class SendReviewRequestTest extends AbstractTest
      */
     public function withArrayProvider()
     {
-        return Yaml::parse($this->getFixture('arrays/send-review-request.yml'));
+        return Yaml::parse($this->getFixture('arrays/create-review-request.yml'));
     }
 }

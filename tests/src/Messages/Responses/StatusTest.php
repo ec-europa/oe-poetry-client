@@ -4,7 +4,7 @@ namespace EC\Poetry\Tests\Messages\Requests;
 
 use EC\Poetry\Messages\Components\Contact;
 use EC\Poetry\Messages\Components\Identifier;
-use EC\Poetry\Messages\Requests\CreateRequest;
+use EC\Poetry\Messages\Requests\CreateTranslationRequest;
 use EC\Poetry\Messages\Responses\Status;
 use EC\Poetry\Parsers\StatusParser;
 use EC\Poetry\Tests\AbstractTest;

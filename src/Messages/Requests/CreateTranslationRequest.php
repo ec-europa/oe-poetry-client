@@ -18,7 +18,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @package EC\Poetry\Messages\Requests
  */
-class CreateRequest extends AbstractRequest
+class CreateTranslationRequest extends AbstractRequest
 {
     use WithContactsTrait;
     use WithDetailsTrait;

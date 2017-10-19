@@ -3,7 +3,7 @@
 namespace EC\Poetry\Tests;
 
 use EC\Poetry\Messages\Requests\AbstractRequest;
-use EC\Poetry\Messages\Requests\CreateRequest;
+use EC\Poetry\Messages\Requests\CreateTranslationRequest;
 use EC\Poetry\Poetry;
 use EC\Poetry\Tests\AbstractTest as TestCase;
 use EC\Poetry\Services\Renderer;
@@ -23,8 +23,8 @@ class PoetryTest extends TestCase
     public function testMessageContainer()
     {
         $poetry = new Poetry();
-        $message = $poetry->get('request.create_request');
-        expect($message)->to->be->instanceof(CreateRequest::class);
+        $message = $poetry->get('request.create_translation_request');
+        expect($message)->to->be->instanceof(CreateTranslationRequest::class);
 
         /** @var \Symfony\Component\Validator\ConstraintViolationListInterface $violations */
         $violations = $poetry->get('validator')->validate($message);
@@ -38,7 +38,7 @@ class PoetryTest extends TestCase
             'identifier.part' => '00',
             'identifier.product' => 'ABC',
         ]);
-        $message = $poetry->get('request.create_request');
+        $message = $poetry->get('request.create_translation_request');
         $violations = $poetry->get('validator')->validate($message);
         expect($violations->count())->to->be->empty();
     }

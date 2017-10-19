@@ -4,16 +4,16 @@ namespace EC\Poetry\Tests\Messages\Requests;
 
 use EC\Poetry\Messages\Components\Contact;
 use EC\Poetry\Messages\Components\Identifier;
-use EC\Poetry\Messages\Requests\CreateRequest;
+use EC\Poetry\Messages\Requests\CreateTranslationRequest;
 use EC\Poetry\Services\Settings;
 use EC\Poetry\Tests\AbstractTest;
 
 /**
- * Class CreateRequestTest
+ * Class CreateTranslationRequestTest
  *
  * @package EC\Poetry\Tests\Messages\Requests
  */
-class CreateRequestTest extends AbstractTest
+class CreateTranslationRequestTest extends AbstractTest
 {
     /**
      * Test object factories.
@@ -22,7 +22,7 @@ class CreateRequestTest extends AbstractTest
     {
         $identifier = $this->getValidIdentifier();
 
-        $request = new CreateRequest($identifier, new Settings());
+        $request = new CreateTranslationRequest($identifier, new Settings());
 
         $request->withContact()
             ->setType('Contact')
@@ -63,7 +63,7 @@ class CreateRequestTest extends AbstractTest
           ->setPart('00')
           ->setProduct('TRA');
 
-        $message = new CreateRequest($identifier, new Settings());
+        $message = new CreateTranslationRequest($identifier, new Settings());
 
         $message->withDetails()
             ->setClientId("clientID")
@@ -79,6 +79,6 @@ class CreateRequestTest extends AbstractTest
             ->setDelay('14/09/2017');
 
         $output = $renderer->render($message);
-        expect($output)->to->have->same->xml('messages/requests/create-request.xml');
+        expect($output)->to->have->same->xml('messages/requests/create-translation-request.xml');
     }
 }

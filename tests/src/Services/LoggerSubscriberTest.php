@@ -4,7 +4,7 @@ namespace EC\Poetry\Tests\Services;
 
 use EC\Poetry\Events\NotificationHandler\ReceivedNotificationEvent;
 use EC\Poetry\Messages\Components\Identifier;
-use EC\Poetry\Messages\Requests\CreateRequest;
+use EC\Poetry\Messages\Requests\CreateTranslationRequest;
 use EC\Poetry\Poetry;
 use EC\Poetry\Services\Settings;
 use EC\Poetry\Tests\AbstractHttpMockTest;
@@ -25,7 +25,7 @@ class LoggerSubscriberTest extends AbstractHttpMockTest
     public function testClientLogging()
     {
         $response = $this->getFixture('messages/responses/response-status.xml');
-        $request = new CreateRequest($this->getValidIdentifier(), new Settings());
+        $request = new CreateTranslationRequest($this->getValidIdentifier(), new Settings());
         $mock = $this->getSoapClientMock();
         $mock->shouldReceive('requestService')->andReturn($response);
 
@@ -58,7 +58,7 @@ class LoggerSubscriberTest extends AbstractHttpMockTest
     public function testException()
     {
         $response = $this->getFixture('messages/responses/response-status.xml');
-        $request = new CreateRequest(new Identifier(), new Settings());
+        $request = new CreateTranslationRequest(new Identifier(), new Settings());
         $mock = $this->getSoapClientMock();
         $mock->shouldReceive('requestService')->andReturn($response);
 

@@ -2,7 +2,7 @@
 
 namespace EC\Poetry\Messages\Components;
 
-use EC\Poetry\Messages\Requests\SendReviewRequest;
+use EC\Poetry\Messages\Requests\CreateReviewRequest;
 use EC\Poetry\Poetry;
 use EC\Poetry\Tests\AbstractTest as TestCase;
 use Symfony\Component\Yaml\Yaml;
@@ -82,7 +82,7 @@ class IdentifierTest extends TestCase
         $actual = $poetry->getIdentifier()->getFormattedIdentifier();
         expect($actual)->to->equal('STS/2017/NEXT_EUROPA_COUNTER/0/0/TRA');
 
-        $message = $poetry->get('request.create_request');
+        $message = $poetry->get('request.create_translation_request');
         $rendered = $poetry->getRenderer()->render($message);
         expect($rendered)
           ->to->contain('<sequence>NEXT_EUROPA_COUNTER</sequence>')
