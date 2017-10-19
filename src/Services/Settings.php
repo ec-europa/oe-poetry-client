@@ -39,8 +39,11 @@ class Settings implements \ArrayAccess
         'notification.username' => '',
         'notification.password' => '',
 
-        // Whatever to throw exceptions
+        // Whereas to throw exceptions or just log them.
         'exceptions' => true,
+
+        // Debug mode: true logs everything, false logs nothing.
+        'debug' => false,
     ];
 
     /**
