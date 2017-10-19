@@ -130,3 +130,24 @@ $logger = MyLoggerFactory::getInstance();
 $poetry['logger'] = $logger;
 ```
 
+## Set logging level
+
+By default Poetry client will not log anything, to change that modify the `log_level` property as follow:
+
+```php
+<?php
+use EC\Poetry\Poetry;
+
+$poetry = new Poetry([
+    'log_level' => false, // Does not log anything.
+]);
+
+$poetry = new Poetry([
+    'log_level' => \Psr\Log\LogLevel::INFO, // Log form "info" up, meaning all Poetry events, including exceptions.
+]);
+
+
+$poetry = new Poetry([
+    'log_level' => \Psr\Log\LogLevel::ERROR, // Log only exceptions.
+]);
+```

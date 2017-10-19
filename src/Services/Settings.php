@@ -49,8 +49,8 @@ class Settings implements \ArrayAccess
         //
         // Possible values:
         //
-        // - \Psr\Log\LogLevel::INFO : Logs all events.
-        // - \Psr\Log\LogLevel::ERROR  : Logs all events and exceptions.
+        // - \Psr\Log\LogLevel::INFO: Logs all events.
+        // - \Psr\Log\LogLevel::ERROR: Logs only exceptions.
         'log_level' => false,
     ];
 
