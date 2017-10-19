@@ -6,10 +6,10 @@ use EC\Poetry\Messages\Components as Component;
 use EC\Poetry\Messages\Notifications\StatusUpdated;
 use EC\Poetry\Messages\Notifications\TranslationReceived;
 use EC\Poetry\Messages\ParserAwareInterface;
-use EC\Poetry\Messages\Requests\CreateRequest;
+use EC\Poetry\Messages\Requests\CreateTranslationRequest;
 use EC\Poetry\Messages\Requests\GetRequestStatus;
-use EC\Poetry\Messages\Requests\RequestNewNumber;
-use EC\Poetry\Messages\Requests\SendReviewRequest;
+use EC\Poetry\Messages\Requests\GetNewNumber;
+use EC\Poetry\Messages\Requests\CreateReviewRequest;
 use EC\Poetry\Messages\Responses\Status;
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
@@ -54,10 +54,10 @@ class MessagesProvider implements ServiceProviderInterface
         $this->serviceFactory($messages, $container);
 
         $requests = [
-          'request.create_request'      => CreateRequest::class,
-          'request.get_request_status'  => GetRequestStatus::class,
-          'request.send_review_request' => SendReviewRequest::class,
-          'request.request_new_number'  => RequestNewNumber::class,
+          'request.create_translation_request'      => CreateTranslationRequest::class,
+          'request.get_request_status'              => GetRequestStatus::class,
+          'request.create_review_request'           => CreateReviewRequest::class,
+          'request.get_new_number'                  => GetNewNumber::class,
         ];
         $this->serviceFactory($requests, $container, $container['component.identifier'], $container['settings']);
 

@@ -9,7 +9,7 @@ use EC\Poetry\Messages\Components\ReferenceDocument;
 use EC\Poetry\Messages\Components\ReturnAddress;
 use EC\Poetry\Messages\Components\Source;
 use EC\Poetry\Messages\Components\Target;
-use EC\Poetry\Messages\Requests\CreateRequest;
+use EC\Poetry\Messages\Requests\CreateTranslationRequest;
 use EC\Poetry\Services\Settings;
 use PhpSpec\ObjectBehavior;
 use spec\EC\Poetry\Messages\Traits\AssertContactsTrait;
@@ -19,7 +19,7 @@ use spec\EC\Poetry\Messages\Traits\AssertReturnAddressTrait;
 use spec\EC\Poetry\Messages\Traits\AssertSourceTrait;
 use spec\EC\Poetry\Messages\Traits\AssertTargetsTrait;
 
-class CreateRequestSpec extends ObjectBehavior
+class CreateTranslationRequestSpec extends ObjectBehavior
 {
     use AssertDetailsTrait;
     use AssertSourceTrait;
@@ -35,7 +35,7 @@ class CreateRequestSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType(CreateRequest::class);
+        $this->shouldHaveType(CreateTranslationRequest::class);
     }
 
     function it_has_details(Details $details1, Details $details2)

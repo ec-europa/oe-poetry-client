@@ -3,7 +3,7 @@
 namespace EC\Poetry\Tests;
 
 use EC\Poetry\Events\ParseNotificationEvent;
-use EC\Poetry\Messages\Requests\CreateRequest;
+use EC\Poetry\Messages\Requests\CreateTranslationRequest;
 use EC\Poetry\Messages\Responses\Status;
 use EC\Poetry\Poetry;
 use EC\Poetry\Services\Settings;
@@ -22,7 +22,7 @@ class ClientTest extends AbstractTest
      */
     public function testSend()
     {
-        $request = new CreateRequest($this->getValidIdentifier(), new Settings());
+        $request = new CreateTranslationRequest($this->getValidIdentifier(), new Settings());
         $username = 'foo';
         $password = 'bar';
 
