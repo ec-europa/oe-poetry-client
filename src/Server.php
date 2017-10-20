@@ -48,17 +48,21 @@ class Server
     {
         $messages = [];
         if (!isset($_SERVER['REQUEST_METHOD']) || $_SERVER['REQUEST_METHOD'] !== 'POST') {
-            $messages[] = "Request method should be set to POST.";
+            $messages['messages'][] = "Request method should be set to POST.";
         }
         if (!isset($_SERVER['HTTP_SOAPACTION'])) {
-            $messages[] = "SOAP action header should be defined.";
+            $messages['messages'][] = "SOAP action header should be defined.";
         }
         if (!isset($_SERVER['HTTP_CONTENT_TYPE']) || (strstr(strtolower($_SERVER['HTTP_CONTENT_TYPE']), 'application/soap+xml') !== false)) {
-            $messages[] = "Content-Type should contain 'application/soap+xml'.";
+            $messages['messages'][] = "Content-Type should contain 'application/soap+xml'.";
         }
 
+
         if (!empty($messages)) {
-            $this->dispatchExceptionEvent(new ServerException(implode(' ', $messages)));
+            $messages['server'] = $_SERVER;
+            $messages['raw_post'] = file_get_contents('php://input');
+
+            $this->dispatchExceptionEvent(new ServerException(print_r($messages, true)));
         }
     }
 }

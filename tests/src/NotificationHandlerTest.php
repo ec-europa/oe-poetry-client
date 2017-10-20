@@ -106,11 +106,16 @@ class NotificationHandlerTest extends AbstractHttpMockTest
             $poetry->getServer()->handle();
         };
 
-        $this->setupServer('/bad-request', $callback, 'GET');
-        @file_get_contents('http://localhost:8082/bad-request');
+        $this->setupServer('/bad-request', $callback);
+        $this->http->client->post('http://localhost:8082/bad-request', ['x-test' => 'value'], 'test body')->send();
 
         $logs = $this->getLogs();
-        expect($logs[0]->context->message)->equal('Request method should be set to POST. SOAP action header should be defined. Content-Type should contain \'application/soap+xml\'.');
+        expect($logs[0]->context->message)
+            ->contain('SOAP action header should be defined.')
+            ->and->contain('Content-Type should contain \'application/soap+xml\'.')
+            ->and->contain('[raw_post] => test body')
+            ->and->contain('[HTTP_X_TEST] => value')
+            ->and->contain('[REQUEST_METHOD] => POST');
     }
 
     /**
