@@ -65,7 +65,7 @@ class LoggerSubscriber implements EventSubscriberInterface
             ClientRequestEvent::NAME            => 'onClientRequestEvent',
             ClientResponseEvent::NAME           => 'onClientResponseEvent',
             ReceivedNotificationEvent::NAME     => 'onReceivedNotificationEvent',
-            SentResponseEvent::NAME => 'onSentNotificationResponseEvent',
+            SentResponseEvent::NAME             => 'onSentNotificationResponseEvent',
             ExceptionEvent::NAME                => 'onExceptionEvent',
         ];
     }
