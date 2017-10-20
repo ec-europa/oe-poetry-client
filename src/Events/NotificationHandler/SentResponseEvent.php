@@ -5,13 +5,13 @@ namespace EC\Poetry\Events\NotificationHandler;
 use Symfony\Component\EventDispatcher\Event;
 
 /**
- * Class SentNotificationResponseEvent
+ * Class SentResponseEvent
  *
  * @package EC\Poetry\Events\NotificationHandler
  */
-class SentNotificationResponseEvent extends Event
+class SentResponseEvent extends Event
 {
-    const NAME = 'poetry.notification_handler.sent_notification_response';
+    const NAME = 'poetry.notification_handler.sent_response';
 
     /**
      * @var string
@@ -19,7 +19,7 @@ class SentNotificationResponseEvent extends Event
     private $message;
 
     /**
-     * SentNotificationResponseEvent constructor.
+     * SentResponseEvent constructor.
      *
      * @param string $message
      */

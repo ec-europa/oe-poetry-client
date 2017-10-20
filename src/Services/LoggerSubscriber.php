@@ -7,7 +7,7 @@ use EC\Poetry\Events\Client\ClientRequestEvent;
 use EC\Poetry\Events\ExceptionEvent;
 use EC\Poetry\Events\NotificationEventInterface;
 use EC\Poetry\Events\NotificationHandler\ReceivedNotificationEvent;
-use EC\Poetry\Events\NotificationHandler\SentNotificationResponseEvent;
+use EC\Poetry\Events\NotificationHandler\SentResponseEvent;
 use EC\Poetry\Events\Notifications\StatusUpdatedEvent;
 use EC\Poetry\Events\Notifications\TranslationReceivedEvent;
 use EC\Poetry\Events\ParseNotificationEvent;
@@ -65,7 +65,7 @@ class LoggerSubscriber implements EventSubscriberInterface
             ClientRequestEvent::NAME            => 'onClientRequestEvent',
             ClientResponseEvent::NAME           => 'onClientResponseEvent',
             ReceivedNotificationEvent::NAME     => 'onReceivedNotificationEvent',
-            SentNotificationResponseEvent::NAME => 'onSentNotificationResponseEvent',
+            SentResponseEvent::NAME => 'onSentNotificationResponseEvent',
             ExceptionEvent::NAME                => 'onExceptionEvent',
         ];
     }
@@ -120,11 +120,11 @@ class LoggerSubscriber implements EventSubscriberInterface
     }
 
     /**
-     * @param \EC\Poetry\Events\NotificationHandler\SentNotificationResponseEvent $event
+     * @param \EC\Poetry\Events\NotificationHandler\SentResponseEvent $event
      */
-    public function onSentNotificationResponseEvent(SentNotificationResponseEvent $event)
+    public function onSentNotificationResponseEvent(SentResponseEvent $event)
     {
-        $this->logInfo(SentNotificationResponseEvent::NAME, ['message' => $event->getMessage()]);
+        $this->logInfo(SentResponseEvent::NAME, ['message' => $event->getMessage()]);
     }
 
     /**

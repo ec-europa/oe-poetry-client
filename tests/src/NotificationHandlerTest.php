@@ -158,7 +158,7 @@ class NotificationHandlerTest extends AbstractHttpMockTest
               'poetry.notification_handler.received_notification',
               'poetry.notification.parse',
               'poetry.notification.status_updated',
-              'poetry.notification_handler.sent_notification_response',
+              'poetry.notification_handler.sent_response',
             ],
           ],
           [
@@ -166,7 +166,7 @@ class NotificationHandlerTest extends AbstractHttpMockTest
             [
               'poetry.notification_handler.received_notification',
               'poetry.notification.status_updated',
-              'poetry.notification_handler.sent_notification_response',
+              'poetry.notification_handler.sent_response',
             ],
           ],
         ];

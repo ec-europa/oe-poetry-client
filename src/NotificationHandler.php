@@ -3,7 +3,7 @@
 namespace EC\Poetry;
 
 use EC\Poetry\Events\NotificationHandler\ReceivedNotificationEvent;
-use EC\Poetry\Events\NotificationHandler\SentNotificationResponseEvent;
+use EC\Poetry\Events\NotificationHandler\SentResponseEvent;
 use EC\Poetry\Events\ParseNotificationEvent;
 use EC\Poetry\Exceptions\Notifications\CannotAuthenticateException;
 use EC\Poetry\Exceptions\ParsingException;
@@ -87,8 +87,8 @@ class NotificationHandler
             $response = $this->getErrorStatus($exception->getMessage(), $event->getMessage());
         }
         finally {
-            $event = new SentNotificationResponseEvent($response);
-            $this->eventDispatcher->dispatch(SentNotificationResponseEvent::NAME, $event);
+            $event = new SentResponseEvent($response);
+            $this->eventDispatcher->dispatch(SentResponseEvent::NAME, $event);
 
             return $response;
         }
