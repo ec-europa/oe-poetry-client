@@ -112,7 +112,6 @@ class NotificationHandlerTest extends AbstractHttpMockTest
         $logs = $this->getLogs();
         expect($logs[0]->context->message)
             ->contain('SOAP action header should be defined.')
-            ->and->contain('Content-Type should contain \'application/soap+xml\'.')
             ->and->contain('[raw_post] => test body')
             ->and->contain('[HTTP_X_TEST] => value')
             ->and->contain('[REQUEST_METHOD] => POST');
