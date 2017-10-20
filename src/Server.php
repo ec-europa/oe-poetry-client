@@ -59,7 +59,7 @@ class Server
             $messages['server'] = $_SERVER;
             $messages['raw_post'] = file_get_contents('php://input');
 
-            $this->dispatchExceptionEvent(new ServerException(print_r($messages, true)));
+            $this->dispatchExceptionEvent(new ServerException(print_r($messages, true)), true);
         }
     }
 }
