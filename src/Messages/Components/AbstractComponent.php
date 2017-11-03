@@ -28,27 +28,12 @@ abstract class AbstractComponent implements ComponentInterface
     }
 
     /**
-     * Set a message or a component internal properties given its XML representation.
-     *
-     * @param string $xml
-     *      XML string.
-     *
-     * @return \EC\Poetry\Messages\MessageInterface|\EC\Poetry\Messages\ComponentInterface
+     * {@inheritdoc}
      */
     public function withXml($xml)
     {
         $this->setRaw($xml);
 
-        return $this->parseXml($xml);
+        return $this;
     }
-
-    /**
-     * Parse a XML string into a set of properties.
-     *
-     * @param string $xml
-     *      XML string.
-     *
-     * @return \EC\Poetry\Messages\MessageInterface|\EC\Poetry\Messages\ComponentInterface
-     */
-    abstract protected function parseXml($xml);
 }

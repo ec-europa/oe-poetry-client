@@ -132,7 +132,7 @@ class Contact extends AbstractComponent
     /**
      * {@inheritdoc}
      */
-    protected function parseXml($xml)
+    public function withXml($xml)
     {
         $parser = $this->getParser();
         $parser->addXmlContent($xml);

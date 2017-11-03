@@ -12,7 +12,6 @@ use EC\Poetry\Messages\AbstractMessage;
  */
 abstract class AbstractResponse extends AbstractMessage implements ResponseInterface
 {
-
     /**
      * {@inheritdoc}
      */
@@ -29,32 +28,4 @@ abstract class AbstractResponse extends AbstractMessage implements ResponseInter
      * @param \EC\Poetry\Events\ParseResponseEvent $event
      */
     abstract public function onParseResponse(ParseResponseEvent $event);
-
-    /**
-     * Set a message or a component internal properties given its XML representation.
-     *
-     * @param string $xml
-     *      XML string.
-     *
-     * @return \EC\Poetry\Messages\MessageInterface|\EC\Poetry\Messages\ComponentInterface
-     */
-    public function withXml($xml)
-    {
-        $this->setRaw($xml);
-
-        return $this->parseXml($xml);
-    }
-
-    /**
-     * Parse a XML string into a set of properties.
-     *
-     * @param string $xml
-     *      XML string.
-     *
-     * @return \EC\Poetry\Messages\MessageInterface|\EC\Poetry\Messages\ComponentInterface
-     */
-    protected function parseXml($xml)
-    {
-        return $this;
-    }
 }

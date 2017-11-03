@@ -127,4 +127,20 @@ abstract class AbstractMessage implements MessageInterface
     {
         $this->messageId = $messageId;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function withXml($xml)
+    {
+        $this->setRaw($xml);
+        $parser = $this->getParser();
+        $parser->addXmlContent($xml);
+
+        $xml = $parser->getOuterContent('POETRY/request/demandeId');
+        $this->getIdentifier()->withXml($xml);
+        $this->setMessageId($parser->getAttribute('POETRY/request', 'id'));
+
+        return $this;
+    }
 }

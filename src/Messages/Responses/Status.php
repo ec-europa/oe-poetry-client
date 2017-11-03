@@ -41,15 +41,12 @@ class Status extends AbstractResponse
     /**
      * {@inheritdoc}
      */
-    protected function parseXml($xml)
+    public function withXml($xml)
     {
+        parent::withXml($xml);
+
         $parser = $this->getParser();
         $parser->addXmlContent($xml);
-
-        $xml = $parser->getOuterContent('POETRY/request/demandeId');
-        $this->getIdentifier()->withXml($xml);
-
-        $this->setMessageId($parser->getAttribute('POETRY/request', 'id'));
 
         $parser->eachComponent("POETRY/request/status", function (Parser $component) {
             $this->withStatus()

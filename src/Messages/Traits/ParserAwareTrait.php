@@ -31,10 +31,14 @@ trait ParserAwareTrait
 
     /**
      * @param string $raw
+     *
+     * @return $this
      */
     public function setRaw($raw)
     {
         $this->raw = $raw;
+
+        return $this;
     }
 
     /**
