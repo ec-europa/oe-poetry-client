@@ -47,7 +47,7 @@ class ReturnAddressTest extends TestCase
     public function testParsing($xml, $fixtures)
     {
         /** @var \EC\Poetry\Messages\Components\ReturnAddress $component */
-        $component = $this->getContainer()->get('component.return_address')->fromXml($xml);
+        $component = $this->getContainer()->get('component.return_address')->withXml($xml);
 
         foreach ($fixtures as $method => $value) {
             expect($component->$method())->to->equal($value);

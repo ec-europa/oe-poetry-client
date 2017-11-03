@@ -5,7 +5,6 @@ namespace EC\Poetry\Messages\Requests;
 use EC\Poetry\Messages\AbstractMessage;
 use EC\Poetry\Messages\Components\Identifier;
 use EC\Poetry\Messages\ParserAwareInterface;
-use EC\Poetry\Messages\Traits\ParserAwareTrait;
 use EC\Poetry\Services\Settings;
 
 /**
@@ -15,8 +14,6 @@ use EC\Poetry\Services\Settings;
  */
 abstract class AbstractRequest extends AbstractMessage implements ParserAwareInterface
 {
-    use ParserAwareTrait;
-
     const REQUEST_NEW = 'new';
     const REQUEST_POST = 'post';
     const REQUEST_NEW_POST = 'newPost';
@@ -64,7 +61,7 @@ abstract class AbstractRequest extends AbstractMessage implements ParserAwareInt
      *
      * @return \EC\Poetry\Messages\MessageInterface|\EC\Poetry\Messages\ComponentInterface
      */
-    public function fromXml($xml)
+    public function withXml($xml)
     {
         $this->setRaw($xml);
 

@@ -314,7 +314,7 @@ class Source extends AbstractComponent
         $parser->eachComponent("documentSource/documentSourceLang", function (Parser $language) {
             $this->withSourceLanguage()
             ->setParser($this->getParser())
-            ->fromXml($language->outerHtml());
+            ->withXml($language->outerHtml());
         }, $this);
     }
 

@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Mapping\ClassMetadata;
  *
  * @package EC\Poetry\Messages
  */
-interface ComponentInterface extends \ArrayAccess
+interface ComponentInterface extends ParserAwareInterface, \ArrayAccess
 {
     /**
      * Get template name.

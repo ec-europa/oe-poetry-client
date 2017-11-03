@@ -6,6 +6,7 @@ use EC\Poetry\Messages\Components\Identifier;
 use EC\Poetry\Messages\Traits\ArrayAccessTrait;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Symfony\Component\Validator\Constraints as Assert;
+use EC\Poetry\Messages\Traits\ParserAwareTrait;
 
 /**
  * Class AbstractMessage
@@ -15,6 +16,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 abstract class AbstractMessage implements MessageInterface
 {
     use ArrayAccessTrait;
+    use ParserAwareTrait;
 
     const COMMUNICATION_SYNCHRONOUS = 'synchrone';
     const COMMUNICATION_ASYNCHRONOUS = 'asynchrone';

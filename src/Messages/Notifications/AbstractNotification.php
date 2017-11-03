@@ -4,7 +4,6 @@ namespace EC\Poetry\Messages\Notifications;
 
 use EC\Poetry\Events\ParseNotificationEvent;
 use EC\Poetry\Messages\AbstractMessage;
-use EC\Poetry\Messages\Traits\ParserAwareTrait;
 use EC\Poetry\Messages\ParserAwareInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
@@ -15,7 +14,6 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
  */
 abstract class AbstractNotification extends AbstractMessage implements ParserAwareInterface, EventSubscriberInterface
 {
-    use ParserAwareTrait;
 
     /**
      * {@inheritdoc}
@@ -42,7 +40,7 @@ abstract class AbstractNotification extends AbstractMessage implements ParserAwa
      *
      * @return \EC\Poetry\Messages\MessageInterface|\EC\Poetry\Messages\ComponentInterface
      */
-    public function fromXml($xml)
+    public function withXml($xml)
     {
         $this->setRaw($xml);
 

@@ -44,7 +44,7 @@ class DetailsTest extends TestCase
     public function testParsing($xml, $fixtures)
     {
         /** @var \EC\Poetry\Messages\Components\Details $component */
-        $component = $this->getContainer()->get('component.details')->fromXml($xml);
+        $component = $this->getContainer()->get('component.details')->withXml($xml);
 
         foreach ($fixtures as $method => $value) {
             expect($component->$method())->to->equal($value);

@@ -74,7 +74,7 @@ class StatusUpdatedTest extends AbstractTest
     public function testParsing($xml, $identifier, $statuses, $targets)
     {
         /** @var \EC\Poetry\Messages\Notifications\StatusUpdated $message */
-        $message = $this->getContainer()->get('notification.status_updated')->fromXml($xml);
+        $message = $this->getContainer()->get('notification.status_updated')->withXml($xml);
 
         foreach ($identifier as $method => $expected) {
             expect($message->getIdentifier()->{$method}())->to->equal($expected);

@@ -32,7 +32,7 @@ class TranslationReceived extends AbstractNotification
         $parser = $this->getParser();
         $parser->addXmlContent($event->getXml());
         if ('translation' === $parser->getAttribute('POETRY/request', 'type')) {
-            $this->fromXml($event->getXml());
+            $this->withXml($event->getXml());
             $event->setEvent(new TranslationReceivedEvent($this));
             $event->stopPropagation();
         }
@@ -47,14 +47,14 @@ class TranslationReceived extends AbstractNotification
         $parser->addXmlContent($xml);
 
         $xml = $parser->getOuterContent('POETRY/request/demandeId');
-        $this->getIdentifier()->fromXml($xml);
+        $this->getIdentifier()->withXml($xml);
 
         $this->setMessageId($parser->getAttribute('POETRY/request', 'id'));
 
         $parser->eachComponent("POETRY/request/attributions", function (Parser $component) {
             $this->withTarget()
               ->setParser($this->getParser())
-              ->fromXml($component->outerHtml());
+              ->withXml($component->outerHtml());
         }, $this);
 
         return $this;

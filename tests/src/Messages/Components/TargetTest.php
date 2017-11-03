@@ -64,7 +64,7 @@ class TargetTest extends TestCase
     public function testParsing($xml, $targetProperties, $addressProperties, $contactProperties)
     {
         /** @var \EC\Poetry\Messages\Components\Target $target */
-        $target = $this->getContainer()->get('component.target')->fromXml($xml);
+        $target = $this->getContainer()->get('component.target')->withXml($xml);
 
         foreach ($targetProperties as $method => $value) {
             expect($target->$method())->to->equal($value);

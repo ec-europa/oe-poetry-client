@@ -55,7 +55,7 @@ class IdentifierTest extends TestCase
     public function testParsing($xml, $code, $year, $number, $version, $part, $product)
     {
         /** @var \EC\Poetry\Messages\Components\Identifier $component */
-        $component = $this->getContainer()->get('component.identifier')->fromXml($xml);
+        $component = $this->getContainer()->get('component.identifier')->withXml($xml);
 
         expect($component->getCode())->to->equal($code);
         expect($component->getYear())->to->equal($year);

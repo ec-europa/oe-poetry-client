@@ -4,7 +4,6 @@ namespace EC\Poetry\Messages\Responses;
 
 use EC\Poetry\Events\ParseResponseEvent;
 use EC\Poetry\Messages\AbstractMessage;
-use EC\Poetry\Messages\Traits\ParserAwareTrait;
 
 /**
  * Class AbstractResponse.
@@ -13,7 +12,6 @@ use EC\Poetry\Messages\Traits\ParserAwareTrait;
  */
 abstract class AbstractResponse extends AbstractMessage implements ResponseInterface
 {
-    use ParserAwareTrait;
 
     /**
      * {@inheritdoc}
@@ -40,7 +38,7 @@ abstract class AbstractResponse extends AbstractMessage implements ResponseInter
      *
      * @return \EC\Poetry\Messages\MessageInterface|\EC\Poetry\Messages\ComponentInterface
      */
-    public function fromXml($xml)
+    public function withXml($xml)
     {
         $this->setRaw($xml);
 

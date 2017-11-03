@@ -34,7 +34,7 @@ class StatusUpdated extends AbstractNotification
         $parser = $this->getParser();
         $parser->addXmlContent($event->getXml());
         if ('status' === $parser->getAttribute('POETRY/request', 'type')) {
-            $this->fromXml($event->getXml());
+            $this->withXml($event->getXml());
             $event->setEvent(new StatusUpdatedEvent($this));
             $event->stopPropagation();
         }
@@ -49,20 +49,20 @@ class StatusUpdated extends AbstractNotification
         $parser->addXmlContent($xml);
 
         $xml = $parser->getOuterContent('POETRY/request/demandeId');
-        $this->getIdentifier()->fromXml($xml);
+        $this->getIdentifier()->withXml($xml);
 
         $this->setMessageId($parser->getAttribute('POETRY/request', 'id'));
 
         $parser->eachComponent("POETRY/request/status", function (Parser $component) {
             $this->withStatus()
               ->setParser($this->getParser())
-              ->fromXml($component->outerHtml());
+              ->withXml($component->outerHtml());
         }, $this);
 
         $parser->eachComponent("POETRY/request/attributions", function (Parser $component) {
             $this->withTarget()
               ->setParser($this->getParser())
-              ->fromXml($component->outerHtml());
+              ->withXml($component->outerHtml());
         }, $this);
 
         return $this;

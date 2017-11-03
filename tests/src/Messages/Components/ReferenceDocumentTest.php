@@ -50,7 +50,7 @@ class ReferenceDocumentTest extends TestCase
     public function testParsing($xml, $fixtures)
     {
         /** @var \EC\Poetry\Messages\Components\ReferenceDocument $component */
-        $component = $this->getContainer()->get('component.reference_document')->fromXml($xml);
+        $component = $this->getContainer()->get('component.reference_document')->withXml($xml);
         foreach ($fixtures as $method => $value) {
             expect($component->$method())->to->equal($value);
         }

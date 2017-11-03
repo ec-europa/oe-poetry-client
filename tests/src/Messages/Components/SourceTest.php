@@ -53,7 +53,7 @@ class SourceTest extends TestCase
     public function testParsing($xml, $expected)
     {
         /** @var \EC\Poetry\Messages\Components\Source $component */
-        $component = $this->getContainer()->get('component.source')->fromXml($xml);
+        $component = $this->getContainer()->get('component.source')->withXml($xml);
 
         foreach ($expected as $getComponent => $properties) {
             if ($this->isComponentCollection($properties)) {

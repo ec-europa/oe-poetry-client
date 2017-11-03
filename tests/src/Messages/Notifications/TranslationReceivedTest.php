@@ -54,7 +54,7 @@ class TranslationReceivedTest extends AbstractTest
     public function testParsing($xml, $identifier, $targets)
     {
         /** @var \EC\Poetry\Messages\Notifications\TranslationReceived $message */
-        $message = $this->getContainer()->get('notification.translation_received')->fromXml($xml);
+        $message = $this->getContainer()->get('notification.translation_received')->withXml($xml);
 
         foreach ($identifier as $method => $expected) {
             expect($message->getIdentifier()->{$method}())->to->equal($expected);

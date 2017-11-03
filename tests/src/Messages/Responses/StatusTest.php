@@ -29,7 +29,7 @@ class StatusTest extends AbstractTest
     public function testParsing($xml, $identifier, $statuses)
     {
         /** @var \EC\Poetry\Messages\Responses\Status $message */
-        $message = $this->getContainer()->get('response.status')->fromXml($xml);
+        $message = $this->getContainer()->get('response.status')->withXml($xml);
 
         foreach ($identifier as $method => $expected) {
             expect($message->getIdentifier()->{$method}())->to->equal($expected);
@@ -52,7 +52,7 @@ class StatusTest extends AbstractTest
     public function testValidation($xml, array $expectations)
     {
         /** @var \EC\Poetry\Messages\Responses\Status $message */
-        $message = $this->getContainer()->get('response.status')->fromXml($xml);
+        $message = $this->getContainer()->get('response.status')->withXml($xml);
         foreach ($expectations as $method => $result) {
             if (is_array($result) && is_numeric(key($result))) {
                 foreach ($result as $key => $values) {
