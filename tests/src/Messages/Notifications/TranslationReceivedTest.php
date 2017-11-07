@@ -5,6 +5,7 @@ namespace EC\Poetry\Tests\Messages\Requests;
 use EC\Poetry\Messages\Components\Identifier;
 use EC\Poetry\Messages\Notifications\TranslationReceived;
 use EC\Poetry\Tests\AbstractTest;
+use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 use Symfony\Component\Yaml\Yaml;
 
 /**
@@ -43,27 +44,18 @@ class TranslationReceivedTest extends AbstractTest
     }
 
     /**
-     * Test parsing.
-     *
      * @param string $xml
-     * @param array  $identifier
-     * @param array  $targets
+     * @param array  $expressions
      *
      * @dataProvider parserProvider
      */
-    public function testParsing($xml, $identifier, $targets)
+    public function testWithXml($xml, $expressions)
     {
         /** @var \EC\Poetry\Messages\Notifications\TranslationReceived $message */
-        $message = $this->getContainer()->get('notification.translation_received')->withXml($xml);
-
-        foreach ($identifier as $method => $expected) {
-            expect($message->getIdentifier()->{$method}())->to->equal($expected);
-        }
-        foreach ($targets as $index => $target) {
-            foreach ($target as $method => $expected) {
-                expect($message->getTargets()[$index]->{$method}())->to->equal($expected);
-            }
-        }
+        $message = $this->getContainer()
+          ->get('notification.translation_received')
+          ->withXml($xml);
+        $this->assertExpressions($expressions, ['message' => $message]);
     }
 
     /**
@@ -71,6 +63,6 @@ class TranslationReceivedTest extends AbstractTest
      */
     public function parserProvider()
     {
-        return Yaml::parse($this->getFixture('factories/with-xml/notifications/translationReceived.yml'));
+        return Yaml::parse($this->getFixture('factories/with-xml/notifications/translation-received.yml'));
     }
 }

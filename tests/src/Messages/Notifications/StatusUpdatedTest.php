@@ -62,33 +62,18 @@ class StatusUpdatedTest extends AbstractTest
     }
 
     /**
-     * Test parsing.
-     *
      * @param string $xml
-     * @param array  $identifier
-     * @param array  $statuses
-     * @param array  $targets
+     * @param array  $expressions
      *
      * @dataProvider parserProvider
      */
-    public function testParsing($xml, $identifier, $statuses, $targets)
+    public function testWithXml($xml, $expressions)
     {
-        /** @var \EC\Poetry\Messages\Notifications\StatusUpdated $message */
-        $message = $this->getContainer()->get('notification.status_updated')->withXml($xml);
-
-        foreach ($identifier as $method => $expected) {
-            expect($message->getIdentifier()->{$method}())->to->equal($expected);
-        }
-        foreach ($statuses as $index => $status) {
-            foreach ($status as $method => $expected) {
-                expect($message->getStatuses()[$index]->{$method}())->to->equal($expected);
-            }
-        }
-        foreach ($targets as $index => $target) {
-            foreach ($target as $method => $expected) {
-                expect($message->getTargets()[$index]->{$method}())->to->equal($expected);
-            }
-        }
+        /** @var \EC\Poetry\Messages\Notifications\TranslationReceived $message */
+        $message = $this->getContainer()
+          ->get('notification.status_updated')
+          ->withXml($xml);
+        $this->assertExpressions($expressions, ['message' => $message]);
     }
 
     /**
@@ -96,6 +81,6 @@ class StatusUpdatedTest extends AbstractTest
      */
     public function parserProvider()
     {
-        return Yaml::parse($this->getFixture('factories/with-xml/notifications/statusUpdated.yml'));
+        return Yaml::parse($this->getFixture('factories/with-xml/notifications/status-updated.yml'));
     }
 }

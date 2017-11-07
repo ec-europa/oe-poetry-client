@@ -9,6 +9,7 @@ use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 use Peridot\Leo\Leo;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 
 /**
@@ -155,6 +156,15 @@ abstract class AbstractTest extends TestCase
             } else {
                 expect($component->$getProperty())->to->equal($value);
             }
+        }
+    }
+
+    protected function assertExpressions(array $expressions, $options)
+    {
+        $language = new ExpressionLanguage();
+        foreach ($expressions as $expression) {
+            $result = $language->evaluate($expression, $options);
+            expect($result)->to->be->true("Following expression did not evaluate: ".$expression);
         }
     }
 }
