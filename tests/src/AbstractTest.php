@@ -141,24 +141,9 @@ abstract class AbstractTest extends TestCase
     }
 
     /**
-     * Assert property hash.
-     *
-     * @param $component
-     * @param $properties
+     * @param array $expressions
+     * @param       $options
      */
-    protected function assertProperties($component, $properties)
-    {
-        foreach ($properties as $getProperty => $value) {
-            if ($this->isComponentCollection($value)) {
-                foreach ($value as $i => $property) {
-                    $this->assertProperties($component->$getProperty()[$i], $property);
-                }
-            } else {
-                expect($component->$getProperty())->to->equal($value);
-            }
-        }
-    }
-
     protected function assertExpressions(array $expressions, $options)
     {
         $language = new ExpressionLanguage();

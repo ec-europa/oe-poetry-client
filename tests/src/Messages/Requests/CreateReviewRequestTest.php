@@ -86,11 +86,11 @@ class CreateReviewRequestTest extends AbstractTest
 
     /**
      * @param array $array
-     * @param array $expected
+     * @param array $expressions
      *
      * @dataProvider withArrayProvider
      */
-    public function testWithArray(array $array, array $expected)
+    public function testWithArray(array $array, array $expressions)
     {
         $poetry = new Poetry([
             'identifier.code' => 'STSI',
@@ -102,21 +102,8 @@ class CreateReviewRequestTest extends AbstractTest
             'notification.password' => 'MY-TEST-PASSWORD',
             'client.wsdl' => 'https://example.com/callback/wsdl/PoetryIntegration.wsdl',
         ]);
-        $component = $poetry->get('request.create_review_request');
-        $component->withArray($array);
-
-        foreach ($expected as $getComponent => $properties) {
-            if ($this->isComponentCollection($properties)) {
-                foreach ($properties as $i => $property) {
-                    $this->assertProperties($component->$getComponent()[$i], $property);
-                }
-            } else {
-                $this->assertProperties($component->$getComponent(), $properties);
-            }
-        }
-
-        $violations = $this->getContainer()->getValidator()->validate($component);
-        expect($this->getViolations($violations))->to->be->empty();
+        $message = $poetry->get('request.create_review_request')->withArray($array);
+        $this->assertExpressions($expressions, ['message' => $message]);
     }
 
     /**

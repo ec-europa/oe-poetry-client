@@ -47,26 +47,14 @@ class DetailsTest extends TestCase
 
     /**
      * @param array $array
-     * @param array $expected
+     * @param array $expressions
      *
      * @dataProvider withArrayProvider
      */
-    public function testWithArray(array $array, array $expected)
+    public function testWithArray(array $array, array $expressions)
     {
-        $component = new Details();
-        foreach ($array as $name => $value) {
-            $component[$name] = $value;
-        }
-
-        foreach ($expected as $method => $value) {
-            expect($component->$method())->to->equal($value);
-        }
-
-        $component = new Details();
-        $component->withArray($array);
-        foreach ($expected as $method => $value) {
-            expect($component->$method())->to->equal($value);
-        }
+        $message = $this->getContainer()->get('component.details')->withArray($array);
+        $this->assertExpressions($expressions, ['message' => $message]);
     }
 
     /**
