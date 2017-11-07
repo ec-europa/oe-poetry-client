@@ -40,20 +40,15 @@ class ReferenceDocumentTest extends TestCase
     }
 
     /**
-     * Test parsing.
-     *
      * @param string $xml
-     * @param array  $fixtures
+     * @param array  $expressions
      *
      * @dataProvider parserProvider
      */
-    public function testParsing($xml, $fixtures)
+    public function testWithXml($xml, $expressions)
     {
-        /** @var \EC\Poetry\Messages\Components\ReferenceDocument $component */
-        $component = $this->getContainer()->get('component.reference_document')->withXml($xml);
-        foreach ($fixtures as $method => $value) {
-            expect($component->$method())->to->equal($value);
-        }
+        $message = $this->getContainer()->get('component.reference_document')->withXml($xml);
+        $this->assertExpressions($expressions, ['message' => $message]);
     }
 
     /**
@@ -61,6 +56,6 @@ class ReferenceDocumentTest extends TestCase
      */
     public function parserProvider()
     {
-        return Yaml::parse($this->getFixture('factories/with-xml/components/referenceDocument.yml'));
+        return Yaml::parse($this->getFixture('factories/with-xml/components/reference-document.yml'));
     }
 }

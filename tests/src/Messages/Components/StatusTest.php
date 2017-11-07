@@ -34,27 +34,15 @@ class StatusTest extends TestCase
     }
 
     /**
-     * Test parsing.
-     *
      * @param string $xml
-     * @param string $date
-     * @param string $time
-     * @param string $message
-     * @param string $code
-     * @param string $type
+     * @param array  $expressions
      *
      * @dataProvider parserProvider
      */
-    public function testParsing($xml, $date, $time, $message, $code, $type)
+    public function testWithXml($xml, $expressions)
     {
-        /** @var \EC\Poetry\Messages\Components\Status $component */
-        $component = $this->getContainer()->get('component.status')->withXml($xml);
-
-        expect($component->getDate())->to->equal($date);
-        expect($component->getTime())->to->equal($time);
-        expect($component->getMessage())->to->equal($message);
-        expect($component->getCode())->to->equal($code);
-        expect($component->getType())->to->equal($type);
+        $message = $this->getContainer()->get('component.status')->withXml($xml);
+        $this->assertExpressions($expressions, ['message' => $message]);
     }
 
     /**

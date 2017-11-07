@@ -25,10 +25,7 @@ class StatusTest extends AbstractTest
      */
     public function testWithXml($xml, $expressions)
     {
-        /** @var \EC\Poetry\Messages\Responses\Status $message */
-        $message = $this->getContainer()
-          ->get('response.status')
-          ->withXml($xml);
+        $message = $this->getContainer()->get('response.status')->withXml($xml);
         $this->assertExpressions($expressions, ['message' => $message]);
     }
 

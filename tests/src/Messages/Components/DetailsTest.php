@@ -41,10 +41,7 @@ class DetailsTest extends TestCase
      */
     public function testWithXml($xml, $expressions)
     {
-        /** @var \EC\Poetry\Messages\Responses\Status $message */
-        $message = $this->getContainer()
-          ->get('component.details')
-          ->withXml($xml);
+        $message = $this->getContainer()->get('component.details')->withXml($xml);
         $this->assertExpressions($expressions, ['message' => $message]);
     }
 

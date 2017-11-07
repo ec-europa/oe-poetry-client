@@ -69,10 +69,7 @@ class StatusUpdatedTest extends AbstractTest
      */
     public function testWithXml($xml, $expressions)
     {
-        /** @var \EC\Poetry\Messages\Notifications\TranslationReceived $message */
-        $message = $this->getContainer()
-          ->get('notification.status_updated')
-          ->withXml($xml);
+        $message = $this->getContainer()->get('notification.status_updated')->withXml($xml);
         $this->assertExpressions($expressions, ['message' => $message]);
     }
 

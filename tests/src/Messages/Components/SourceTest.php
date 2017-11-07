@@ -43,27 +43,15 @@ class SourceTest extends TestCase
     }
 
     /**
-     * Test parsing.
-     *
      * @param string $xml
-     * @param array  $expected
+     * @param array  $expressions
      *
      * @dataProvider parserProvider
      */
-    public function testParsing($xml, $expected)
+    public function testWithXml($xml, $expressions)
     {
-        /** @var \EC\Poetry\Messages\Components\Source $component */
-        $component = $this->getContainer()->get('component.source')->withXml($xml);
-
-        foreach ($expected as $getComponent => $properties) {
-            if ($this->isComponentCollection($properties)) {
-                foreach ($properties as $i => $property) {
-                    $this->assertProperties($component->$getComponent()[$i], $property);
-                }
-            } else {
-                expect($component->$getComponent())->to->equal($properties);
-            }
-        }
+        $message = $this->getContainer()->get('component.source')->withXml($xml);
+        $this->assertExpressions($expressions, ['message' => $message]);
     }
 
     /**

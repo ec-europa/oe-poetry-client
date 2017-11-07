@@ -51,10 +51,7 @@ class TranslationReceivedTest extends AbstractTest
      */
     public function testWithXml($xml, $expressions)
     {
-        /** @var \EC\Poetry\Messages\Notifications\TranslationReceived $message */
-        $message = $this->getContainer()
-          ->get('notification.translation_received')
-          ->withXml($xml);
+        $message = $this->getContainer()->get('notification.translation_received')->withXml($xml);
         $this->assertExpressions($expressions, ['message' => $message]);
     }
 
