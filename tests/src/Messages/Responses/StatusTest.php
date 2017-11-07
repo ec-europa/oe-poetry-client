@@ -18,58 +18,18 @@ use Symfony\Component\Yaml\Yaml;
 class StatusTest extends AbstractTest
 {
     /**
-     * Test parsing.
-     *
      * @param string $xml
-     * @param array  $identifier
-     * @param array  $statuses
+     * @param array  $expressions
      *
      * @dataProvider parserProvider
      */
-    public function testParsing($xml, $identifier, $statuses)
+    public function testWithXml($xml, $expressions)
     {
         /** @var \EC\Poetry\Messages\Responses\Status $message */
-        $message = $this->getContainer()->get('response.status')->withXml($xml);
-
-        foreach ($identifier as $method => $expected) {
-            expect($message->getIdentifier()->{$method}())->to->equal($expected);
-        }
-        foreach ($statuses as $index => $status) {
-            foreach ($status as $method => $expected) {
-                expect($message->getStatuses()[$index]->{$method}())->to->equal($expected);
-            }
-        }
-    }
-
-    /**
-     * Test validation.
-     *
-     * @param string $xml
-     * @param array  $expectations
-     *
-     * @dataProvider statusProvider
-     */
-    public function testValidation($xml, array $expectations)
-    {
-        /** @var \EC\Poetry\Messages\Responses\Status $message */
-        $message = $this->getContainer()->get('response.status')->withXml($xml);
-        foreach ($expectations as $method => $result) {
-            if (is_array($result) && is_numeric(key($result))) {
-                foreach ($result as $key => $values) {
-                    $object = $message->$method()[$key];
-                    foreach ($values as $method => $result) {
-                        expect($object->$method())->to->equal($result);
-                    }
-                }
-            } elseif (is_array($result) && !is_numeric(key($result))) {
-                $object = $message->$method();
-                foreach ($result as $key => $value) {
-                    expect($object->$key())->to->equal($value);
-                }
-            } else {
-                expect($message->$method())->to->equal($result);
-            }
-        }
+        $message = $this->getContainer()
+          ->get('response.status')
+          ->withXml($xml);
+        $this->assertExpressions($expressions, ['message' => $message]);
     }
 
     /**
@@ -77,14 +37,6 @@ class StatusTest extends AbstractTest
      */
     public function parserProvider()
     {
-        return Yaml::parse($this->getFixture('factories/with-xml/status.yml'));
-    }
-
-    /**
-     * @return array
-     */
-    public function statusProvider()
-    {
-        return Yaml::parse($this->getFixture('status.yml'));
+        return Yaml::parse($this->getFixture('factories/with-xml/responses/status.yml'));
     }
 }

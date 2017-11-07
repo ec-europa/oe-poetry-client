@@ -1,0 +1,150 @@
+-
+  xml:
+    <POETRY xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="">
+        <request communication="asynchrone" id="DGT/2017/0001/01/00/ABC" type="status">
+            <demandeId>
+                <codeDemandeur>DGT</codeDemandeur>
+                <annee>2017</annee>
+                <numero>0001</numero>
+                <version>01</version>
+                <partie>00</partie>
+                <produit>ABC</produit>
+            </demandeId>
+            <status code="0" type="request">
+                <statusDate format="dd/mm/yyyy">15/01/2017</statusDate>
+                <statusTime format="hh:mm:ss">12:30:00</statusTime>
+                <statusMessage>OK</statusMessage>
+            </status>
+            <status code="0" type="demande">
+                <statusDate format="dd/mm/yyyy">17/01/2017</statusDate>
+                <statusTime format="hh:mm:ss">12:20:00</statusTime>
+                <statusMessage>OK</statusMessage>
+            </status>
+        </request>
+    </POETRY>
+
+  expressions:
+    - message.getIdentifier().getCode() == "DGT"
+    - message.getIdentifier().getYear() == "2017"
+    - message.getIdentifier().getNumber() == "0001"
+    - message.getIdentifier().getVersion() == "01"
+    - message.getIdentifier().getPart() == "00"
+    - message.getIdentifier().getProduct() == "ABC"
+    - message.getStatuses()[0].getDate() == "15/01/2017"
+    - message.getStatuses()[0].getTime() == "12:30:00"
+    - message.getStatuses()[0].getMessage() == "OK"
+    - message.getStatuses()[0].getCode() == "0"
+    - message.getStatuses()[0].getType() == "request"
+    - message.getStatuses()[1].getDate() == "17/01/2017"
+    - message.getStatuses()[1].getTime() == "12:20:00"
+    - message.getStatuses()[1].getMessage() == "OK"
+    - message.getStatuses()[1].getCode() == "0"
+    - message.getStatuses()[1].getType() == "demande"
+
+-
+  xml:
+    <POETRY xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="">
+        <request communication="asynchrone" id="DGT/2017/0001/01/00/ABC" type="status">
+            <demandeId>
+                <codeDemandeur>DGT</codeDemandeur>
+                <annee>2017</annee>
+                <numero>0001</numero>
+                <version>01</version>
+                <partie>00</partie>
+                <produit>ABC</produit>
+            </demandeId>
+            <status code="0" type="request">
+                <statusDate format="dd/mm/yyyy">15/01/2017</statusDate>
+                <statusTime format="hh:mm:ss">12:30:00</statusTime>
+                <statusMessage>OK</statusMessage>
+            </status>
+            <status code="0" type="demande">
+                <statusDate format="dd/mm/yyyy">17/01/2017</statusDate>
+                <statusTime format="hh:mm:ss">12:20:00</statusTime>
+                <statusMessage>OK</statusMessage>
+            </status>
+        </request>
+    </POETRY>
+
+  expressions:
+    - message.isSuccessful() == true
+    - message.hasErrors() == false
+    - message.hasWarnings() == false
+    - message.countErrors() == 0
+    - message.countWarnings() == 0
+    - message.hasDemandStatus() == true
+    - message.hasRequestStatus() == true
+    - message.hasAttributionStatuses() == false
+    - message.getRequestStatus().getCode() == '0'
+    - message.getRequestStatus().getMessage() == 'OK'
+    - message.getDemandStatus().getCode() == '0'
+    - message.getDemandStatus().getMessage() == 'OK'
+
+-
+  xml:
+    <POETRY xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="">
+        <request communication="asynchrone" id="DGT/2017/0001/01/00/ABC" type="status">
+            <demandeId>
+                <codeDemandeur>DGT</codeDemandeur>
+                <annee>2017</annee>
+                <numero>0001</numero>
+                <version>01</version>
+                <partie>00</partie>
+                <produit>ABC</produit>
+            </demandeId>
+            <status code="1" type="request">
+                <statusDate format="dd/mm/yyyy">15/01/2017</statusDate>
+                <statusTime format="hh:mm:ss">12:30:00</statusTime>
+                <statusMessage>Passed with 1 warning</statusMessage>
+            </status>
+            <status code="-1" type="demande">
+                <statusDate format="dd/mm/yyyy">17/01/2017</statusDate>
+                <statusTime format="hh:mm:ss">12:20:00</statusTime>
+                <statusMessage>ID already exist</statusMessage>
+            </status>
+        </request>
+    </POETRY>
+
+  expressions:
+    - message.isSuccessful() == false
+    - message.hasErrors() == true
+    - message.hasWarnings() == true
+    - message.countErrors() == 1
+    - message.countWarnings() == 1
+    - message.getErrors()[0].getMessage() == "ID already exist"
+    - message.getWarnings()[0].getMessage() == "Passed with 1 warning"
+    - message.hasDemandStatus() == true
+    - message.hasRequestStatus() == true
+    - message.hasAttributionStatuses() == false
+    - message.getRequestStatus().getCode() == '1'
+    - message.getRequestStatus().getMessage() == 'Passed with 1 warning'
+    - message.getDemandStatus().getCode() == '-1'
+    - message.getDemandStatus().getMessage() == 'ID already exist'
+
+-
+  xml:
+    <POETRY xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="">
+        <request communication="asynchrone" id="DGT/2017/0001/01/00/ABC" type="status">
+            <demandeId>
+                <codeDemandeur>DGT</codeDemandeur>
+                <annee>2017</annee>
+                <numero>0001</numero>
+                <version>01</version>
+                <partie>00</partie>
+                <produit>ABC</produit>
+            </demandeId>
+            <status code="1" type="attribution">
+                <statusDate format="dd/mm/yyyy">15/01/2017</statusDate>
+                <statusTime format="hh:mm:ss">12:30:00</statusTime>
+                <statusMessage>OK</statusMessage>
+            </status>
+        </request>
+    </POETRY>
+
+  expressions:
+    - message.hasDemandStatus() == false
+    - message.hasRequestStatus() == false
+    - message.hasAttributionStatuses() == true
+    - message.getAttributionStatuses()[0].getCode() == '1'
+    - message.getAttributionStatuses()[0].getType() == 'attribution'
+    - message.getAttributionStatuses()[0].getMessage() == "OK"
