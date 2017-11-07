@@ -62,6 +62,6 @@ class StatusTest extends TestCase
      */
     public function parserProvider()
     {
-        return Yaml::parse($this->getFixture('parsers/components/status.yml'));
+        return Yaml::parse($this->getFixture('factories/with-xml/components/status.yml'));
     }
 }

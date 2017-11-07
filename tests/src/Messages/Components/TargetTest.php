@@ -85,6 +85,6 @@ class TargetTest extends TestCase
      */
     public function parserProvider()
     {
-        return Yaml::parse($this->getFixture('parsers/components/target.yml'));
+        return Yaml::parse($this->getFixture('factories/with-xml/components/target.yml'));
     }
 }

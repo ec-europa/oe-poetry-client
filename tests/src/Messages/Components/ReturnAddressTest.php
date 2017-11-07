@@ -59,6 +59,6 @@ class ReturnAddressTest extends TestCase
      */
     public function parserProvider()
     {
-        return Yaml::parse($this->getFixture('parsers/components/returnAddress.yml'));
+        return Yaml::parse($this->getFixture('factories/with-xml/components/returnAddress.yml'));
     }
 }

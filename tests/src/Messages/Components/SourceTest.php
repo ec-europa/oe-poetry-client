@@ -71,6 +71,6 @@ class SourceTest extends TestCase
      */
     public function parserProvider()
     {
-        return Yaml::parse($this->getFixture('parsers/components/source.yml'));
+        return Yaml::parse($this->getFixture('factories/with-xml/components/source.yml'));
     }
 }

@@ -96,6 +96,6 @@ class StatusUpdatedTest extends AbstractTest
      */
     public function parserProvider()
     {
-        return Yaml::parse($this->getFixture('parsers/notifications/statusUpdated.yml'));
+        return Yaml::parse($this->getFixture('factories/with-xml/notifications/statusUpdated.yml'));
     }
 }

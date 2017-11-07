@@ -124,6 +124,6 @@ class CreateReviewRequestTest extends AbstractTest
      */
     public function withArrayProvider()
     {
-        return Yaml::parse($this->getFixture('arrays/create-review-request.yml'));
+        return Yaml::parse($this->getFixture('factories/with-array/create-review-request.yml'));
     }
 }

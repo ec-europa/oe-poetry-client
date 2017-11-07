@@ -80,7 +80,7 @@ class DetailsTest extends TestCase
      */
     public function parserProvider()
     {
-        return Yaml::parse($this->getFixture('parsers/components/details.yml'));
+        return Yaml::parse($this->getFixture('factories/with-xml/components/details.yml'));
     }
 
     /**
@@ -88,6 +88,6 @@ class DetailsTest extends TestCase
      */
     public function withArrayProvider()
     {
-        return Yaml::parse($this->getFixture('arrays/components/details.yml'));
+        return Yaml::parse($this->getFixture('factories/with-array/components/details.yml'));
     }
 }

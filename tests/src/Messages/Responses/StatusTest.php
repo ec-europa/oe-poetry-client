@@ -77,7 +77,7 @@ class StatusTest extends AbstractTest
      */
     public function parserProvider()
     {
-        return Yaml::parse($this->getFixture('parsers/status.yml'));
+        return Yaml::parse($this->getFixture('factories/with-xml/status.yml'));
     }
 
     /**

@@ -61,6 +61,6 @@ class ReferenceDocumentTest extends TestCase
      */
     public function parserProvider()
     {
-        return Yaml::parse($this->getFixture('parsers/components/referenceDocument.yml'));
+        return Yaml::parse($this->getFixture('factories/with-xml/components/referenceDocument.yml'));
     }
 }

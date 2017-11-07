@@ -71,6 +71,6 @@ class TranslationReceivedTest extends AbstractTest
      */
     public function parserProvider()
     {
-        return Yaml::parse($this->getFixture('parsers/notifications/translationReceived.yml'));
+        return Yaml::parse($this->getFixture('factories/with-xml/notifications/translationReceived.yml'));
     }
 }

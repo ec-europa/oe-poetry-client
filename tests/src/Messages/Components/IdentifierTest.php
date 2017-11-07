@@ -94,6 +94,6 @@ class IdentifierTest extends TestCase
      */
     public function parserProvider()
     {
-        return Yaml::parse($this->getFixture('parsers/components/identifier.yml'));
+        return Yaml::parse($this->getFixture('factories/with-xml/components/identifier.yml'));
     }
 }
