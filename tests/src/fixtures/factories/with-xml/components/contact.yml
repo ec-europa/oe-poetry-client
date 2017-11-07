@@ -1,19 +1,23 @@
 -
-  -
+  xml:
     <contacts type="Secretaire">
         <contactNickname>Username</contactNickname>
         <contactEmail>user@mail.com</contactEmail>
     </contacts>
-  - "Secretaire"
-  - "Username"
-  - "user@mail.com"
+
+  expressions:
+    - message.getType() == "Secretaire"
+    - message.getNickname() == "Username"
+    - message.getEmail() == "user@mail.com"
 
 -
-  -
+  xml:
     <contacts type="Secretaire">
         <contactNickname>Username</contactNickname>
     </contacts>
-  - "Secretaire"
-  - "Username"
-  - null
+
+  expressions:
+    - message.getType() == "Secretaire"
+    - message.getNickname() == "Username"
+    - message.getEmail() == null
 

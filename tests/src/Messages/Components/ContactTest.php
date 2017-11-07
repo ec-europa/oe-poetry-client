@@ -39,23 +39,18 @@ class ContactTest extends TestCase
     }
 
     /**
-     * Test parsing.
-     *
      * @param string $xml
-     * @param string $type
-     * @param string $nickname
-     * @param string $email
+     * @param array  $expressions
      *
      * @dataProvider parserProvider
      */
-    public function testParsing($xml, $type, $nickname, $email)
+    public function testWithXml($xml, $expressions)
     {
-        /** @var \EC\Poetry\Messages\Components\Contact $component */
-        $component = $this->getContainer()->get('component.contact')->withXml($xml);
-
-        expect($component->getType())->to->equal($type);
-        expect($component->getNickname())->to->equal($nickname);
-        expect($component->getEmail())->to->equal($email);
+        /** @var \EC\Poetry\Messages\Responses\Status $message */
+        $message = $this->getContainer()
+          ->get('component.contact')
+          ->withXml($xml);
+        $this->assertExpressions($expressions, ['message' => $message]);
     }
 
     /**

@@ -34,21 +34,18 @@ class DetailsTest extends TestCase
     }
 
     /**
-     * Test parsing.
-     *
      * @param string $xml
-     * @param array  $fixtures
+     * @param array  $expressions
      *
      * @dataProvider parserProvider
      */
-    public function testParsing($xml, $fixtures)
+    public function testWithXml($xml, $expressions)
     {
-        /** @var \EC\Poetry\Messages\Components\Details $component */
-        $component = $this->getContainer()->get('component.details')->withXml($xml);
-
-        foreach ($fixtures as $method => $value) {
-            expect($component->$method())->to->equal($value);
-        }
+        /** @var \EC\Poetry\Messages\Responses\Status $message */
+        $message = $this->getContainer()
+          ->get('component.details')
+          ->withXml($xml);
+        $this->assertExpressions($expressions, ['message' => $message]);
     }
 
     /**
