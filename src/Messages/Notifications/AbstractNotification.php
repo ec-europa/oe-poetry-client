@@ -4,7 +4,6 @@ namespace EC\Poetry\Messages\Notifications;
 
 use EC\Poetry\Events\ParseNotificationEvent;
 use EC\Poetry\Messages\AbstractMessage;
-use EC\Poetry\Messages\ParserAwareInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
@@ -12,7 +11,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
  *
  * @package EC\Poetry\Messages\Notifications
  */
-abstract class AbstractNotification extends AbstractMessage implements ParserAwareInterface, EventSubscriberInterface
+abstract class AbstractNotification extends AbstractMessage implements EventSubscriberInterface
 {
     /**
      * {@inheritdoc}

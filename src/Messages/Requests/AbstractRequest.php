@@ -4,7 +4,6 @@ namespace EC\Poetry\Messages\Requests;
 
 use EC\Poetry\Messages\AbstractMessage;
 use EC\Poetry\Messages\Components\Identifier;
-use EC\Poetry\Messages\ParserAwareInterface;
 use EC\Poetry\Services\Settings;
 
 /**
@@ -12,7 +11,7 @@ use EC\Poetry\Services\Settings;
  *
  * @package EC\Poetry\Messages\Requests
  */
-abstract class AbstractRequest extends AbstractMessage implements ParserAwareInterface
+abstract class AbstractRequest extends AbstractMessage
 {
     const REQUEST_NEW = 'new';
     const REQUEST_POST = 'post';
