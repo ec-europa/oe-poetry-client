@@ -107,10 +107,30 @@ class CreateReviewRequestTest extends AbstractTest
     }
 
     /**
+     * @param string $xml
+     * @param array  $expressions
+     *
+     * @dataProvider parserProvider
+     */
+    public function testWithXml($xml, $expressions)
+    {
+        $message = $this->getContainer()->get('request.create_review_request')->withXml($xml);
+        $this->assertExpressions($expressions, ['message' => $message]);
+    }
+
+    /**
+     * @return array
+     */
+    public function parserProvider()
+    {
+        return Yaml::parse($this->getFixture('factories/with-xml/requests/create-review-request.yml'));
+    }
+
+    /**
      * @return mixed
      */
     public function withArrayProvider()
     {
-        return Yaml::parse($this->getFixture('factories/with-array/create-review-request.yml'));
+        return Yaml::parse($this->getFixture('factories/with-array/requests/create-review-request.yml'));
     }
 }

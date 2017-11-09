@@ -68,4 +68,28 @@ class CreateTranslationRequest extends AbstractRequest
         $metadata->addPropertyConstraint('targets', new Assert\Valid(['traverse' => true]));
         $metadata->addPropertyConstraint('referenceDocuments', new Assert\Valid(['traverse' => true]));
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function withXml($xml)
+    {
+        parent::withXml($xml);
+
+        $parser = $this->getParser();
+        $parser->addXmlContent($xml);
+
+        $parser->eachComponent("POETRY/request/contacts", function (Parser $component) {
+            $this->withContact()
+              ->setParser($this->getParser())
+              ->withXml($component->outerHtml());
+        }, $this);
+
+        $xml = $parser->getOuterContent('POETRY/request/retour');
+        $this->withReturnAddress()
+          ->setParser($this->getParser())
+          ->withXml($xml);
+
+        return $this;
+    }
 }
