@@ -9,16 +9,16 @@
 ?>
 <retour <?= $this->attributes($component->getAttributes()) ?>>
     <?php if ($component->getUser()) : ?>
-        <retourUser><?= $component->getUser() ?></retourUser>
+        <retourUser><![CDATA[<?= $component->getUser() ?>]]></retourUser>
     <?php endif ?>
     <?php if ($component->getPassword()) : ?>
-        <retourPassword><?= $component->getPassword() ?></retourPassword>
+        <retourPassword><![CDATA[<?= $component->getPassword() ?>]]></retourPassword>
     <?php endif ?>
-    <retourAddress><?= $component->getAddress() ?></retourAddress>
+    <retourAddress><![CDATA[<?= $component->getAddress() ?>]]></retourAddress>
     <?php if ($component->getPath()) : ?>
-        <retourPath><?= $component->getPath() ?></retourPath>
+        <retourPath><![CDATA[<?= $component->getPath() ?>]]></retourPath>
     <?php endif ?>
     <?php if ($component->getRemark()) : ?>
-        <retourRemark><?= $component->getRemark() ?></retourRemark>
+        <retourRemark><![CDATA[<?= $component->getRemark() ?>]]></retourRemark>
     <?php endif ?>
 </retour>

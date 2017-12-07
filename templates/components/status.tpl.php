@@ -13,6 +13,6 @@
         <statusTime><?= $component->getTime() ?></statusTime>
     <?php endif ?>
     <?php if ($component->getMessage()) : ?>
-        <statusMessage><?= $component->getMessage() ?></statusMessage>
+        <statusMessage><![CDATA[<?= $component->getMessage() ?>]]></statusMessage>
     <?php endif ?>
 </status>

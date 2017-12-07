@@ -8,8 +8,8 @@
  */
 ?>
 <documentSource <?= $this->attributes($component->getAttributes()) ?>>
-    <documentSourceName><?= $component->getName() ?></documentSourceName>
-    <documentSourceFile><?= $component->getFile() ?></documentSourceFile>
+    <documentSourceName><![CDATA[<?= $component->getName() ?>]]></documentSourceName>
+    <documentSourceFile><![CDATA[<?= $component->getFile() ?>]]></documentSourceFile>
     <?php if ($component->getPath()) : ?>
         <documentSourcePath><?= $component->getPath() ?></documentSourcePath>
     <?php endif ?>
