@@ -8,7 +8,7 @@
  */
 ?>
 <documentReference <?= $this->attributes($component->getAttributes()) ?>>
-    <documentReferenceName><?= $component->getName() ?></documentReferenceName>
+    <documentReferenceName><![CDATA[<?= $component->getName() ?>]]></documentReferenceName>
     <?php if ($component->getPath()) : ?>
         <documentReferencePath><?= $component->getPath() ?></documentReferencePath>
     <?php endif ?>
@@ -16,7 +16,7 @@
         <documentReferenceSize><?= $component->getSize() ?></documentReferenceSize>
     <?php endif ?>
     <?php if ($component->getRemark()) : ?>
-        <documentReferenceRemark><?= $component->getRemark() ?></documentReferenceRemark>
+        <documentReferenceRemark><![CDATA[<?= $component->getRemark() ?>]]></documentReferenceRemark>
     <?php endif ?>
     <documentReferenceFile><?= $component->getFile() ?></documentReferenceFile>
 </documentReference>

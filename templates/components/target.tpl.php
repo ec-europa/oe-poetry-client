@@ -13,7 +13,7 @@
     <?php endif ?>
     format="<?= $component->getFormat() ?>" lgCode="<?= $component->getLanguage() ?>">
     <?php if ($component->getRemark()) : ?>
-        <attributionsRemark><?= $component->getRemark() ?></attributionsRemark>
+        <attributionsRemark><![CDATA[<?= $component->getRemark() ?>]]></attributionsRemark>
     <?php endif ?>
     <?php if ($component->getDelay()) : ?>
         <attributionsDelai

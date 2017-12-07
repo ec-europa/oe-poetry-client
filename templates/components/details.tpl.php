@@ -9,10 +9,10 @@
 ?>
 <demande>
     <?php if ($component->getClientId()) : ?>
-        <userReference><?= $component->getClientId() ?></userReference>
+        <userReference><![CDATA[<?= $component->getClientId() ?>]]></userReference>
     <?php endif ?>
     <?php if ($component->getTitle()) : ?>
-        <titre><?= $component->getTitle() ?></titre>
+        <titre><![CDATA[<?= $component->getTitle() ?>]]></titre>
     <?php endif ?>
     <?php if ($component->getResponsible()) : ?>
         <organisationResponsable><?= $component->getResponsible() ?></organisationResponsable>
@@ -27,7 +27,7 @@
         <applicationReference><?= $component->getApplicationId() ?></applicationReference>
     <?php endif ?>
     <?php if ($component->getRemark()) : ?>
-        <remarque><?= $component->getRemark() ?></remarque>
+        <remarque><![CDATA[<?= $component->getRemark() ?>]]></remarque>
     <?php endif ?>
     <?php if ($component->getDelay()) : ?>
         <delai><?= $component->getDelay() ?></delai>
@@ -45,7 +45,7 @@
         <procedureInterInstitution><?= $component->getInterInstitution() ?></procedureInterInstitution>
     <?php endif ?>
     <?php if ($component->getReferenceFilesRemark()) : ?>
-        <referenceFilesNote><?= $component->getReferenceFilesRemark() ?></referenceFilesNote>
+        <referenceFilesNote><![CDATA[<?= $component->getReferenceFilesRemark() ?>]]></referenceFilesNote>
     <?php endif ?>
     <?php if ($component->getProcedure()) : ?>
         <procedure id="<?= $component->getProcedure() ?>"/>
