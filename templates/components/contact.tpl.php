@@ -8,8 +8,8 @@
  */
 ?>
 <contacts <?= $this->attributes($component->getAttributes()) ?>>
-    <contactNickname><?= $component->getNickname() ?></contactNickname>
+    <contactNickname><![CDATA[<?= $component->getNickname() ?>]]></contactNickname>
     <?php if ($component->getEmail()) : ?>
-        <contactEmail><?= $component->getEmail() ?></contactEmail>
+        <contactEmail><![CDATA[<?= $component->getEmail() ?>]]></contactEmail>
     <?php endif ?>
 </contacts>

@@ -10,13 +10,13 @@
 <documentReference <?= $this->attributes($component->getAttributes()) ?>>
     <documentReferenceName><![CDATA[<?= $component->getName() ?>]]></documentReferenceName>
     <?php if ($component->getPath()) : ?>
-        <documentReferencePath><?= $component->getPath() ?></documentReferencePath>
+        <documentReferencePath><![CDATA[<?= $component->getPath() ?>]]></documentReferencePath>
     <?php endif ?>
     <?php if ($component->getSize()) : ?>
-        <documentReferenceSize><?= $component->getSize() ?></documentReferenceSize>
+        <documentReferenceSize><![CDATA[<?= $component->getSize() ?>]]></documentReferenceSize>
     <?php endif ?>
     <?php if ($component->getRemark()) : ?>
         <documentReferenceRemark><![CDATA[<?= $component->getRemark() ?>]]></documentReferenceRemark>
     <?php endif ?>
-    <documentReferenceFile><?= $component->getFile() ?></documentReferenceFile>
+    <documentReferenceFile><![CDATA[<?= $component->getFile() ?>]]></documentReferenceFile>
 </documentReference>

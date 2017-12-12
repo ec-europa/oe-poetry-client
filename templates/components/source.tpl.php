@@ -11,7 +11,7 @@
     <documentSourceName><![CDATA[<?= $component->getName() ?>]]></documentSourceName>
     <documentSourceFile><![CDATA[<?= $component->getFile() ?>]]></documentSourceFile>
     <?php if ($component->getPath()) : ?>
-        <documentSourcePath><?= $component->getPath() ?></documentSourcePath>
+        <documentSourcePath><![CDATA[<?= $component->getPath() ?>]]></documentSourcePath>
     <?php endif ?>
     <?php if ($component->getSourceLanguages()) : ?>
         <?php foreach ($component->getSourceLanguages() as $target) : ?>
@@ -19,6 +19,6 @@
         <?php endforeach; ?>
     <?php endif; ?>
     <?php if ($component->getSize()) : ?>
-        <documentSourceSize><?= $component->getSize() ?></documentSourceSize>
+        <documentSourceSize><![CDATA[<?= $component->getSize() ?>]]></documentSourceSize>
     <?php endif ?>
 </documentSource>

@@ -73,8 +73,8 @@ class Source extends AbstractComponent
     {
         $attributes = [
             'channel' => $this->getChannel(),
-            'dealine' => $this->getDeadline(),
-            'statusDealine' => $this->getDeadlineStatus(),
+            'deadline' => $this->getDeadline(),
+            'statusDeadline' => $this->getDeadlineStatus(),
             'marked' => $this->getConfidential(),
             'format' => $this->getFormat(),
             'legiswrite' => $this->getLegiswriteFormat(),

@@ -37,7 +37,7 @@ class SanitizationTest extends AbstractTest
 
         $actual = $poetry->get('component.'.$name)->fromXml($xml);
         // If XML is not valid test will fail here.
-        $xml = new \SimpleXMLElement($xml);
+        new \SimpleXMLElement($xml);
         foreach ($getters as $getter => $value) {
             expect($actual->$getter($value))->to->equal($value);
         }
