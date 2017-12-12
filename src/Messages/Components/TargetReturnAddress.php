@@ -9,7 +9,6 @@ namespace EC\Poetry\Messages\Components;
  */
 class TargetReturnAddress extends ReturnAddress
 {
-
     /**
      * {@inheritdoc}
      */

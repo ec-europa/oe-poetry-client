@@ -2,7 +2,6 @@
 
 namespace EC\Poetry\Messages\Responses;
 
-use EC\Poetry\Messages\ParserAwareInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
@@ -10,7 +9,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
  *
  * @package EC\Poetry\Messages\Responses
  */
-interface ResponseInterface extends ParserAwareInterface, EventSubscriberInterface
+interface ResponseInterface extends EventSubscriberInterface
 {
 
 }

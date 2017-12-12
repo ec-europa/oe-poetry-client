@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Mapping\ClassMetadata;
  *
  * @package EC\Poetry\Messages
  */
-interface ComponentInterface extends \ArrayAccess
+interface ComponentInterface extends ParserAwareInterface, \ArrayAccess
 {
     /**
      * Get template name.
@@ -30,9 +30,35 @@ interface ComponentInterface extends \ArrayAccess
      * Construct component from given array.
      *
      * @param array $properties
+     *
      * @return $this
      */
     public function withArray(array $properties);
+
+    /**
+     * Set message or component internal properties given its XML representation.
+     *
+     * @param string $xml
+     *
+     * @return $this
+     */
+    public function withXml($xml);
+
+    /**
+     * Get raw XML.
+     *
+     * @return string
+     */
+    public function getRaw();
+
+    /**
+     * Set raw XML.
+     *
+     * @param string $raw
+     *
+     * @return $this
+     */
+    public function setRaw($raw);
 
     /**
      * @param \Symfony\Component\Validator\Mapping\ClassMetadata $metadata

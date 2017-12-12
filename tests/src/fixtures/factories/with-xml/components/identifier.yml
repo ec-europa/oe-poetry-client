@@ -1,0 +1,36 @@
+-
+  xml:
+    <demandeId>
+        <codeDemandeur>DGT</codeDemandeur>
+        <annee>2017</annee>
+        <numero>0001</numero>
+        <version>01</version>
+        <partie>00</partie>
+        <produit>ABC</produit>
+    </demandeId>
+
+  expressions:
+    - message.getCode() == "DGT"
+    - message.getYear() == "2017"
+    - message.getNumber() == "0001"
+    - message.getVersion() == "01"
+    - message.getPart() == "00"
+    - message.getProduct() == "ABC"
+    - message.getFormattedIdentifier() == "DGT/2017/0001/01/00/ABC"
+
+-
+  xml:
+    <demandeId>
+        <codeDemandeur>DGT</codeDemandeur>
+        <version>01</version>
+        <partie>00</partie>
+        <produit>ABC</produit>
+    </demandeId>
+
+  expressions:
+    - message.getCode() == "DGT"
+    - message.getYear() == null
+    - message.getNumber() == null
+    - message.getVersion() == "01"
+    - message.getPart() == "00"
+    - message.getProduct() == "ABC"

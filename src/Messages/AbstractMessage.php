@@ -6,6 +6,7 @@ use EC\Poetry\Messages\Components\Identifier;
 use EC\Poetry\Messages\Traits\ArrayAccessTrait;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Symfony\Component\Validator\Constraints as Assert;
+use EC\Poetry\Messages\Traits\ParserAwareTrait;
 
 /**
  * Class AbstractMessage
@@ -15,6 +16,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 abstract class AbstractMessage implements MessageInterface
 {
     use ArrayAccessTrait;
+    use ParserAwareTrait;
 
     const COMMUNICATION_SYNCHRONOUS = 'synchrone';
     const COMMUNICATION_ASYNCHRONOUS = 'asynchrone';
@@ -124,5 +126,21 @@ abstract class AbstractMessage implements MessageInterface
     public function setMessageId($messageId)
     {
         $this->messageId = $messageId;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function withXml($xml)
+    {
+        $this->setRaw($xml);
+        $parser = $this->getParser();
+        $parser->addXmlContent($xml);
+
+        $xml = $parser->getOuterContent('POETRY/request/demandeId');
+        $this->getIdentifier()->withXml($xml);
+        $this->setMessageId($parser->getAttribute('POETRY/request', 'id'));
+
+        return $this;
     }
 }

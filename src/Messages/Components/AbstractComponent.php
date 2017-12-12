@@ -5,14 +5,13 @@ namespace EC\Poetry\Messages\Components;
 use EC\Poetry\Messages\ComponentInterface;
 use EC\Poetry\Messages\Traits\ArrayAccessTrait;
 use EC\Poetry\Messages\Traits\ParserAwareTrait;
-use EC\Poetry\Messages\ParserAwareInterface;
 
 /**
  * Class AbstractComponent
  *
  * @package EC\Poetry\Messages\Components
  */
-abstract class AbstractComponent implements ComponentInterface, ParserAwareInterface
+abstract class AbstractComponent implements ComponentInterface
 {
     use ArrayAccessTrait;
     use ParserAwareTrait;
@@ -29,27 +28,12 @@ abstract class AbstractComponent implements ComponentInterface, ParserAwareInter
     }
 
     /**
-     * Set a message or a component internal properties given its XML representation.
-     *
-     * @param string $xml
-     *      XML string.
-     *
-     * @return \EC\Poetry\Messages\MessageInterface|\EC\Poetry\Messages\ComponentInterface
+     * {@inheritdoc}
      */
-    public function fromXml($xml)
+    public function withXml($xml)
     {
         $this->setRaw($xml);
 
-        return $this->parseXml($xml);
+        return $this;
     }
-
-    /**
-     * Parse a XML string into a set of properties.
-     *
-     * @param string $xml
-     *      XML string.
-     *
-     * @return \EC\Poetry\Messages\MessageInterface|\EC\Poetry\Messages\ComponentInterface
-     */
-    abstract protected function parseXml($xml);
 }

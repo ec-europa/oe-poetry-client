@@ -15,7 +15,6 @@ interface ParserAwareInterface
      * Get Parser property.
      *
      * @return \EC\Poetry\Services\Parser
-     *   Property value.
      */
     public function getParser();
 
@@ -23,7 +22,6 @@ interface ParserAwareInterface
      * Set Parser property.
      *
      * @param \EC\Poetry\Services\Parser $parser
-     *   Property value.
      *
      * @return $this
      */

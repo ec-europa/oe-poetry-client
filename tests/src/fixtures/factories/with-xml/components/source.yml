@@ -1,0 +1,31 @@
+-
+  xml:
+    <documentSource channel="POETRY" format="HTML" deadline="11/07/2007" statusDeadline="PUBLIC" marked="No" legiswrite="Yes" trackChanges="No">
+        <documentSourceName>Name</documentSourceName>
+        <documentSourcePath>Path</documentSourcePath>
+        <documentSourceLang lgCode="en">
+            <documentSourceLangPages>1</documentSourceLangPages>
+        </documentSourceLang>
+        <documentSourceLang lgCode="fr">
+            <documentSourceLangPages>2</documentSourceLangPages>
+        </documentSourceLang>
+        <documentSourceSize>10kB</documentSourceSize>
+        <documentSourceFile>File</documentSourceFile>
+    </documentSource>
+
+  expressions:
+    - message.getChannel() == "POETRY"
+    - message.getFormat() == "HTML"
+    - message.getDeadline() == "11/07/2007"
+    - message.getDeadlineStatus() == "PUBLIC"
+    - message.getConfidential() == "No"
+    - message.getLegiswriteFormat() == "Yes"
+    - message.getTrackChanges() == "No"
+    - message.getName() == "Name"
+    - message.getPath() == "Path"
+    - message.getSourceLanguages()[0].getCode() == 'en'
+    - message.getSourceLanguages()[0].getPages() == '1'
+    - message.getSourceLanguages()[1].getCode() == 'fr'
+    - message.getSourceLanguages()[1].getPages() == '2'
+    - message.getSize() == "10kB"
+    - message.getFile() == "File"

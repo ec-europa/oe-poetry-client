@@ -9,6 +9,7 @@ use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 use Peridot\Leo\Leo;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 
 /**
@@ -140,21 +141,15 @@ abstract class AbstractTest extends TestCase
     }
 
     /**
-     * Assert property hash.
-     *
-     * @param $component
-     * @param $properties
+     * @param array $expressions
+     * @param       $options
      */
-    protected function assertProperties($component, $properties)
+    protected function assertExpressions(array $expressions, $options)
     {
-        foreach ($properties as $getProperty => $value) {
-            if ($this->isComponentCollection($value)) {
-                foreach ($value as $i => $property) {
-                    $this->assertProperties($component->$getProperty()[$i], $property);
-                }
-            } else {
-                expect($component->$getProperty())->to->equal($value);
-            }
+        $language = new ExpressionLanguage();
+        foreach ($expressions as $expression) {
+            $result = $language->evaluate($expression, $options);
+            expect($result)->to->be->true("Following expression did not evaluate: ".$expression);
         }
     }
 }

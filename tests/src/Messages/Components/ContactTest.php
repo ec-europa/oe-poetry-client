@@ -39,23 +39,15 @@ class ContactTest extends TestCase
     }
 
     /**
-     * Test parsing.
-     *
      * @param string $xml
-     * @param string $type
-     * @param string $nickname
-     * @param string $email
+     * @param array  $expressions
      *
      * @dataProvider parserProvider
      */
-    public function testParsing($xml, $type, $nickname, $email)
+    public function testWithXml($xml, $expressions)
     {
-        /** @var \EC\Poetry\Messages\Components\Contact $component */
-        $component = $this->getContainer()->get('component.contact')->fromXml($xml);
-
-        expect($component->getType())->to->equal($type);
-        expect($component->getNickname())->to->equal($nickname);
-        expect($component->getEmail())->to->equal($email);
+        $message = $this->getContainer()->get('component.contact')->withXml($xml);
+        $this->assertExpressions($expressions, ['message' => $message]);
     }
 
     /**
@@ -63,6 +55,6 @@ class ContactTest extends TestCase
      */
     public function parserProvider()
     {
-        return Yaml::parse($this->getFixture('parsers/components/contact.yml'));
+        return Yaml::parse($this->getFixture('factories/with-xml/components/contact.yml'));
     }
 }

@@ -52,39 +52,21 @@ class TargetTest extends TestCase
     }
 
     /**
-     * Test parsing.
-     *
      * @param string $xml
-     * @param array  $targetProperties
-     * @param array  $addressProperties
-     * @param array  $contactProperties
+     * @param array  $expressions
      *
      * @dataProvider parserProvider
      */
-    public function testParsing($xml, $targetProperties, $addressProperties, $contactProperties)
+    public function testWithXml($xml, $expressions)
     {
-        /** @var \EC\Poetry\Messages\Components\Target $target */
-        $target = $this->getContainer()->get('component.target')->fromXml($xml);
-
-        foreach ($targetProperties as $method => $value) {
-            expect($target->$method())->to->equal($value);
-        }
-        $returnAddress = $target->getReturnAddresses()[0];
-        foreach ($addressProperties as $method => $value) {
-            expect($returnAddress->$method())->to->equal($value);
-        }
-        expect(count($target->getContacts()))->to->equal(1);
-        $contact = $target->getContacts()[0];
-        foreach ($contactProperties as $method => $value) {
-            expect($contact->$method())->to->equal($value);
-        }
+        $message = $this->getContainer()->get('component.target')->withXml($xml);
+        $this->assertExpressions($expressions, ['message' => $message]);
     }
-
     /**
      * @return mixed
      */
     public function parserProvider()
     {
-        return Yaml::parse($this->getFixture('parsers/components/target.yml'));
+        return Yaml::parse($this->getFixture('factories/with-xml/components/target.yml'));
     }
 }

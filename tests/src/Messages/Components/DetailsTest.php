@@ -34,45 +34,27 @@ class DetailsTest extends TestCase
     }
 
     /**
-     * Test parsing.
-     *
      * @param string $xml
-     * @param array  $fixtures
+     * @param array  $expressions
      *
      * @dataProvider parserProvider
      */
-    public function testParsing($xml, $fixtures)
+    public function testWithXml($xml, $expressions)
     {
-        /** @var \EC\Poetry\Messages\Components\Details $component */
-        $component = $this->getContainer()->get('component.details')->fromXml($xml);
-
-        foreach ($fixtures as $method => $value) {
-            expect($component->$method())->to->equal($value);
-        }
+        $message = $this->getContainer()->get('component.details')->withXml($xml);
+        $this->assertExpressions($expressions, ['message' => $message]);
     }
 
     /**
      * @param array $array
-     * @param array $expected
+     * @param array $expressions
      *
      * @dataProvider withArrayProvider
      */
-    public function testWithArray(array $array, array $expected)
+    public function testWithArray(array $array, array $expressions)
     {
-        $component = new Details();
-        foreach ($array as $name => $value) {
-            $component[$name] = $value;
-        }
-
-        foreach ($expected as $method => $value) {
-            expect($component->$method())->to->equal($value);
-        }
-
-        $component = new Details();
-        $component->withArray($array);
-        foreach ($expected as $method => $value) {
-            expect($component->$method())->to->equal($value);
-        }
+        $message = $this->getContainer()->get('component.details')->withArray($array);
+        $this->assertExpressions($expressions, ['message' => $message]);
     }
 
     /**
@@ -80,7 +62,7 @@ class DetailsTest extends TestCase
      */
     public function parserProvider()
     {
-        return Yaml::parse($this->getFixture('parsers/components/details.yml'));
+        return Yaml::parse($this->getFixture('factories/with-xml/components/details.yml'));
     }
 
     /**
@@ -88,6 +70,6 @@ class DetailsTest extends TestCase
      */
     public function withArrayProvider()
     {
-        return Yaml::parse($this->getFixture('arrays/components/details.yml'));
+        return Yaml::parse($this->getFixture('factories/with-array/components/details.yml'));
     }
 }

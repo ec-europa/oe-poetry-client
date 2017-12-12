@@ -86,11 +86,11 @@ class CreateReviewRequestTest extends AbstractTest
 
     /**
      * @param array $array
-     * @param array $expected
+     * @param array $expressions
      *
      * @dataProvider withArrayProvider
      */
-    public function testWithArray(array $array, array $expected)
+    public function testWithArray(array $array, array $expressions)
     {
         $poetry = new Poetry([
             'identifier.code' => 'STSI',
@@ -102,21 +102,28 @@ class CreateReviewRequestTest extends AbstractTest
             'notification.password' => 'MY-TEST-PASSWORD',
             'client.wsdl' => 'https://example.com/callback/wsdl/PoetryIntegration.wsdl',
         ]);
-        $component = $poetry->get('request.create_review_request');
-        $component->withArray($array);
+        $message = $poetry->get('request.create_review_request')->withArray($array);
+        $this->assertExpressions($expressions, ['message' => $message]);
+    }
 
-        foreach ($expected as $getComponent => $properties) {
-            if ($this->isComponentCollection($properties)) {
-                foreach ($properties as $i => $property) {
-                    $this->assertProperties($component->$getComponent()[$i], $property);
-                }
-            } else {
-                $this->assertProperties($component->$getComponent(), $properties);
-            }
-        }
+    /**
+     * @param string $xml
+     * @param array  $expressions
+     *
+     * @dataProvider parserProvider
+     */
+    public function testWithXml($xml, $expressions)
+    {
+        $message = $this->getContainer()->get('request.create_review_request')->withXml($xml);
+        $this->assertExpressions($expressions, ['message' => $message]);
+    }
 
-        $violations = $this->getContainer()->getValidator()->validate($component);
-        expect($this->getViolations($violations))->to->be->empty();
+    /**
+     * @return array
+     */
+    public function parserProvider()
+    {
+        return Yaml::parse($this->getFixture('factories/with-xml/requests/create-review-request.yml'));
     }
 
     /**
@@ -124,6 +131,6 @@ class CreateReviewRequestTest extends AbstractTest
      */
     public function withArrayProvider()
     {
-        return Yaml::parse($this->getFixture('arrays/create-review-request.yml'));
+        return Yaml::parse($this->getFixture('factories/with-array/requests/create-review-request.yml'));
     }
 }

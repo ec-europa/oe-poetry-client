@@ -1,0 +1,18 @@
+-
+  xml:
+    <retour type="webService" action="INSERT">
+        <retourUser>Username</retourUser>
+        <retourPassword>Password</retourPassword>
+        <retourAddress>Url</retourAddress>
+        <retourPath>Path</retourPath>
+        <retourRemark>Remark</retourRemark>
+    </retour>
+
+  expressions:
+    - message.getType() == "webService"
+    - message.getAction() == "INSERT"
+    - message.getUser() == "Username"
+    - message.getPassword() == "Password"
+    - message.getAddress() == "Url"
+    - message.getPath() == "Path"
+    - message.getRemark() == "Remark"

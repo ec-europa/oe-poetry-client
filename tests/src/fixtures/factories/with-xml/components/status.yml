@@ -1,0 +1,29 @@
+-
+  xml:
+    <status code="0" type="request">
+        <statusDate format="dd/mm/yyyy">15/01/2017</statusDate>
+        <statusTime format="hh:mm:ss">12:30:00</statusTime>
+        <statusMessage>OK</statusMessage>
+    </status>
+
+  expressions:
+    - message.getDate() == "15/01/2017"
+    - message.getTime() == "12:30:00"
+    - message.getMessage() == "OK"
+    - message.getCode() == "0"
+    - message.getType() == "request"
+
+-
+  xml:
+    <status type="request">
+        <statusTime format="hh:mm:ss">12:30:00</statusTime>
+        <statusMessage>OK</statusMessage>
+    </status>
+
+  expressions:
+    - message.getDate() == null
+    - message.getTime() == "12:30:00"
+    - message.getMessage() == "OK"
+    - message.getCode() == null
+    - message.getType() == "request"
+

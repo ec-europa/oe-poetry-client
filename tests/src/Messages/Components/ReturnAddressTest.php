@@ -37,21 +37,15 @@ class ReturnAddressTest extends TestCase
     }
 
     /**
-     * Test parsing.
-     *
      * @param string $xml
-     * @param array  $fixtures
+     * @param array  $expressions
      *
      * @dataProvider parserProvider
      */
-    public function testParsing($xml, $fixtures)
+    public function testWithXml($xml, $expressions)
     {
-        /** @var \EC\Poetry\Messages\Components\ReturnAddress $component */
-        $component = $this->getContainer()->get('component.return_address')->fromXml($xml);
-
-        foreach ($fixtures as $method => $value) {
-            expect($component->$method())->to->equal($value);
-        }
+        $message = $this->getContainer()->get('component.return_address')->withXml($xml);
+        $this->assertExpressions($expressions, ['message' => $message]);
     }
 
     /**
@@ -59,6 +53,6 @@ class ReturnAddressTest extends TestCase
      */
     public function parserProvider()
     {
-        return Yaml::parse($this->getFixture('parsers/components/returnAddress.yml'));
+        return Yaml::parse($this->getFixture('factories/with-xml/components/return-address.yml'));
     }
 }

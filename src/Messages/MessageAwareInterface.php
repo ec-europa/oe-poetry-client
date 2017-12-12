@@ -2,8 +2,6 @@
 
 namespace EC\Poetry\Messages;
 
-use EC\Poetry\Messages\MessageInterface;
-
 /**
  * Interface MessageAwareInterface
  *

@@ -296,7 +296,7 @@ class Source extends AbstractComponent
     /**
      * {@inheritdoc}
      */
-    protected function parseXml($xml)
+    public function withXml($xml)
     {
         $parser = $this->getParser();
         $parser->addXmlContent($xml);
@@ -314,7 +314,7 @@ class Source extends AbstractComponent
         $parser->eachComponent("documentSource/documentSourceLang", function (Parser $language) {
             $this->withSourceLanguage()
             ->setParser($this->getParser())
-            ->fromXml($language->outerHtml());
+            ->withXml($language->outerHtml());
         }, $this);
     }
 

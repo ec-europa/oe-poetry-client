@@ -1,0 +1,166 @@
+-
+  array:
+    details:
+      client_id: 'Job ID 3999'
+      title: 'NE-CMS Erasmus+ - Erasmus Mundus Joint Master Degrees'
+      author: 'IE/CE/EAC'
+      responsible: 'EAC'
+      requester: 'IE/CE/EAC/C/4'
+      applicationId: 'FPFIS'
+      delay: '12/09/2017'
+      reference_files_remark: 'https://ec.europa.eu/programmes/erasmus-plus/opportunities-for-individuals/staff-teaching/erasmus-mundus_en'
+      procedure: 'NEANT'
+      destination: 'PUBLIC'
+      type: 'INTER'
+    source:
+      format: 'HTML'
+      name: 'content.html'
+      file: 'BASE64ENCODEDFILECONTENT'
+      legiswrite_format: 'No'
+      source_language:
+        -
+          code: 'EN'
+          pages: 1
+    contact:
+      -
+        type: 'auteur'
+        nickname: 'john'
+      -
+        type: 'secretaire'
+        nickname: 'john'
+      -
+        type: 'contact'
+        nickname: 'john'
+      -
+        type: 'responsable'
+        nickname: 'mark'
+    target:
+      -
+        action: 'INSERT'
+        format: 'HTML'
+        language: 'EN'
+        delay: '12/09/2017'
+
+  expressions:
+    - message.getIdentifier().getCode() == 'STSI'
+    - message.getIdentifier().getYear() == '2017'
+    - message.getIdentifier().getNumber() == '40017'
+    - message.getIdentifier().getVersion() == '0'
+    - message.getIdentifier().getPart() == '11'
+    - message.getDetails().getClientId() == 'Job ID 3999'
+    - message.getDetails().getTitle() == 'NE-CMS Erasmus+ - Erasmus Mundus Joint Master Degrees'
+    - message.getDetails().getAuthor() == 'IE/CE/EAC'
+    - message.getDetails().getResponsible() == 'EAC'
+    - message.getDetails().getRequester() == 'IE/CE/EAC/C/4'
+    - message.getDetails().getApplicationId() == 'FPFIS'
+    - message.getDetails().getDelay() == '12/09/2017'
+    - message.getDetails().getReferenceFilesRemark() == 'https://ec.europa.eu/programmes/erasmus-plus/opportunities-for-individuals/staff-teaching/erasmus-mundus_en'
+    - message.getDetails().getProcedure() == 'NEANT'
+    - message.getDetails().getDestination() == 'PUBLIC'
+    - message.getDetails().getType() == 'INTER'
+    - message.getReturnAddress().getAction() == 'UPDATE'
+    - message.getReturnAddress().getType() == 'webService'
+    - message.getReturnAddress().getUser() == 'MY-TEST-USER'
+    - message.getReturnAddress().getPassword() == 'MY-TEST-PASSWORD'
+    - message.getReturnAddress().getAddress() == 'https://example.com/callback/wsdl/PoetryIntegration.wsdl'
+    - message.getReturnAddress().getPath() == 'handle'
+    - message.getSource().getFormat() == 'HTML'
+    - message.getSource().getName() == 'content.html'
+    - message.getSource().getFile() == 'BASE64ENCODEDFILECONTENT'
+    - message.getSource().getSourceLanguages()[0].getCode() == 'EN'
+    - message.getSource().getSourceLanguages()[0].getPages() == 1
+    - message.getContacts()[0].getType() == 'auteur'
+    - message.getContacts()[0].getNickname() == 'john'
+    - message.getContacts()[1].getType() == 'secretaire'
+    - message.getContacts()[1].getNickname() == 'john'
+    - message.getContacts()[2].getType() == 'contact'
+    - message.getContacts()[2].getNickname() == 'john'
+    - message.getContacts()[3].getType() == 'responsable'
+    - message.getContacts()[3].getNickname() == 'mark'
+
+-
+  array:
+    details:
+      client_id: 'Job ID 3999'
+      title: 'NE-CMS Erasmus+ - Erasmus Mundus Joint Master Degrees'
+      author: 'IE/CE/EAC'
+      responsible: 'EAC'
+      requester: 'IE/CE/EAC/C/4'
+      applicationId: 'FPFIS'
+      delay: '12/09/2017'
+      reference_files_remark: 'https://ec.europa.eu/programmes/erasmus-plus/opportunities-for-individuals/staff-teaching/erasmus-mundus_en'
+      procedure: 'NEANT'
+      destination: 'PUBLIC'
+      type: 'INTER'
+    source:
+      format: 'HTML'
+      name: 'content.html'
+      file: 'BASE64ENCODEDFILECONTENT'
+      legiswrite_format: 'No'
+      source_language:
+        -
+          code: 'EN'
+          pages: 1
+    contact:
+      -
+        type: 'auteur'
+        nickname: 'john'
+      -
+        type: 'secretaire'
+        nickname: 'john'
+      -
+        type: 'contact'
+        nickname: 'john'
+      -
+        type: 'responsable'
+        nickname: 'mark'
+    target:
+      -
+        action: 'INSERT'
+        format: 'HTML'
+        language: 'EN'
+        delay: '12/09/2017'
+    return_address:
+      action: 'UPDATE'
+      type: 'webService'
+      user: 'MY-TEST-USER-2'
+      password: 'MY-TEST-PASSWORD-2'
+      address: 'https://example.com/callback/wsdl/PoetryIntegration-2.wsdl'
+      path: 'TestReturnPath'
+
+  expressions:
+    - message.getIdentifier().getCode() == 'STSI'
+    - message.getIdentifier().getYear() == '2017'
+    - message.getIdentifier().getNumber() == '40017'
+    - message.getIdentifier().getVersion() == '0'
+    - message.getIdentifier().getPart() == '11'
+    - message.getDetails().getClientId() == 'Job ID 3999'
+    - message.getDetails().getTitle() == 'NE-CMS Erasmus+ - Erasmus Mundus Joint Master Degrees'
+    - message.getDetails().getAuthor() == 'IE/CE/EAC'
+    - message.getDetails().getResponsible() == 'EAC'
+    - message.getDetails().getRequester() == 'IE/CE/EAC/C/4'
+    - message.getDetails().getApplicationId() == 'FPFIS'
+    - message.getDetails().getDelay() == '12/09/2017'
+    - message.getDetails().getReferenceFilesRemark() == 'https://ec.europa.eu/programmes/erasmus-plus/opportunities-for-individuals/staff-teaching/erasmus-mundus_en'
+    - message.getDetails().getProcedure() == 'NEANT'
+    - message.getDetails().getDestination() == 'PUBLIC'
+    - message.getDetails().getType() == 'INTER'
+    - message.getReturnAddress().getAction() == 'UPDATE'
+    - message.getReturnAddress().getType() == 'webService'
+    - message.getReturnAddress().getUser() == 'MY-TEST-USER-2'
+    - message.getReturnAddress().getPassword() == 'MY-TEST-PASSWORD-2'
+    - message.getReturnAddress().getAddress() == 'https://example.com/callback/wsdl/PoetryIntegration-2.wsdl'
+    - message.getReturnAddress().getPath() == 'TestReturnPath'
+    - message.getSource().getFormat() == 'HTML'
+    - message.getSource().getName() == 'content.html'
+    - message.getSource().getFile() == 'BASE64ENCODEDFILECONTENT'
+    - message.getSource().getSourceLanguages()[0].getCode() == 'EN'
+    - message.getSource().getSourceLanguages()[0].getPages() == 1
+    - message.getContacts()[0].getType() == 'auteur'
+    - message.getContacts()[0].getNickname() == 'john'
+    - message.getContacts()[1].getType() == 'secretaire'
+    - message.getContacts()[1].getNickname() == 'john'
+    - message.getContacts()[2].getType() == 'contact'
+    - message.getContacts()[2].getNickname() == 'john'
+    - message.getContacts()[3].getType() == 'responsable'
+    - message.getContacts()[3].getNickname() == 'mark'

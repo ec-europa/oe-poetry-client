@@ -1,0 +1,66 @@
+-
+  xml:
+    <?xml version="1.0" encoding="UTF-8"?>
+    <POETRY xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:noNamespaceSchemaLocation="http://intragate.ec.europa.eu/DGT/poetry_services/poetry.xsd">
+        <request communication="asynchrone" id="STSI/2017/40017/0/11/REV" type="newPost">
+            <demandeId>
+                <codeDemandeur>STSI</codeDemandeur>
+                <annee>2017</annee>
+                <numero>40017</numero>
+                <version>0</version>
+                <partie>11</partie>
+                <produit>REV</produit>
+            </demandeId>
+            <demande>
+                <userReference>Job ID 3999</userReference>
+                <titre>NE-CMS Erasmus+ - Erasmus Mundus Joint Master Degrees</titre>
+                <organisationResponsable>EAC</organisationResponsable>
+                <organisationAuteur>IE/CE/EAC</organisationAuteur>
+                <serviceDemandeur>IE/CE/EAC/C/4</serviceDemandeur>
+                <applicationReference>FPFIS</applicationReference>
+                <delai>12/09/2017</delai>
+                <referenceFilesNote>https://ec.europa.eu/programmes/erasmus-plus/opportunities-for-individuals/staff-teaching/erasmus-mundus_en</referenceFilesNote>
+                <procedure id="NEANT"/>
+                <destination id="PUBLIC"/>
+                <type id="INTER"/>
+                <workflowCode>STS</workflowCode>
+            </demande>
+            <contacts type="auteur"><contactNickname>john</contactNickname></contacts>
+            <contacts type="secretaire"><contactNickname>bob</contactNickname></contacts>
+            <retour action="UPDATE" type="webService">
+                <retourUser>MY-TEST-USER</retourUser>
+                <retourPassword>MY-TEST-PASSWORD</retourPassword>
+                <retourAddress>https://example.com/callback/wsdl/PoetryIntegration.wsdl</retourAddress>
+                <retourPath>TestReturnPath</retourPath>
+            </retour>
+            <documentSource format="HTML" legiswrite="Yes">
+                <documentSourceName>content.html</documentSourceName>
+                <documentSourceFile>BASE64ENCODEDFILECONTENT</documentSourceFile>
+                <documentSourceLang lgCode="EN">
+                    <documentSourceLangPages>1</documentSourceLangPages>
+                </documentSourceLang>
+            </documentSource>
+            <attributions action="INSERT" format="HTML" lgCode="EN"><attributionsDelai format="DD/MM/YYYY">12/09/2017</attributionsDelai></attributions>
+        </request>
+    </POETRY>
+
+  expressions:
+    - message.getIdentifier().getCode() == 'STSI'
+    - message.getIdentifier().getYear() == '2017'
+    - message.getIdentifier().getNumber() == '40017'
+    - message.getIdentifier().getVersion() == '0'
+    - message.getIdentifier().getPart() == '11'
+    - message.getIdentifier().getProduct() == 'REV'
+    - message.getContacts()[0].getType() == 'auteur'
+    - message.getContacts()[0].getNickname() == 'john'
+    - message.getContacts()[0].getEmail() == null
+    - message.getContacts()[1].getType() == 'secretaire'
+    - message.getContacts()[1].getNickname() == 'bob'
+    - message.getContacts()[1].getEmail() == null
+    - message.getReturnAddress().getType() == 'webService'
+    - message.getReturnAddress().getAction() == 'UPDATE'
+    - message.getReturnAddress().getUser() == 'MY-TEST-USER'
+    - message.getReturnAddress().getPassword() == 'MY-TEST-PASSWORD'
+    - message.getReturnAddress().getAddress() == 'https://example.com/callback/wsdl/PoetryIntegration.wsdl'
+    - message.getReturnAddress().getPath() == 'TestReturnPath'

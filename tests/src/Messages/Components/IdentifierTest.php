@@ -40,29 +40,15 @@ class IdentifierTest extends TestCase
     }
 
     /**
-     * Test parsing.
-     *
      * @param string $xml
-     * @param string $code
-     * @param string $year
-     * @param string $number
-     * @param string $version
-     * @param string $part
-     * @param string $product
+     * @param array  $expressions
      *
      * @dataProvider parserProvider
      */
-    public function testParsing($xml, $code, $year, $number, $version, $part, $product)
+    public function testWithXml($xml, $expressions)
     {
-        /** @var \EC\Poetry\Messages\Components\Identifier $component */
-        $component = $this->getContainer()->get('component.identifier')->fromXml($xml);
-
-        expect($component->getCode())->to->equal($code);
-        expect($component->getYear())->to->equal($year);
-        expect($component->getNumber())->to->equal($number);
-        expect($component->getVersion())->to->equal($version);
-        expect($component->getPart())->to->equal($part);
-        expect($component->getProduct())->to->equal($product);
+        $message = $this->getContainer()->get('component.identifier')->withXml($xml);
+        $this->assertExpressions($expressions, ['message' => $message]);
     }
 
     /**
@@ -94,6 +80,6 @@ class IdentifierTest extends TestCase
      */
     public function parserProvider()
     {
-        return Yaml::parse($this->getFixture('parsers/components/identifier.yml'));
+        return Yaml::parse($this->getFixture('factories/with-xml/components/identifier.yml'));
     }
 }

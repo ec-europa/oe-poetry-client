@@ -17,17 +17,13 @@
       </request>
     </POETRY>
 
-
-  identifier:
-    getCode: "WEB"
-    getYear: "2017"
-    getNumber: "40012"
-    getVersion: "0"
-    getPart: "39"
-    getProduct: "TRA"
-
-  targets:
-    -
-      getFormat: "HTML"
-      getLanguage: "FR"
-      getTranslatedFile: "File64"
+  expressions:
+    - message.getIdentifier().getCode() == 'WEB'
+    - message.getIdentifier().getYear() == '2017'
+    - message.getIdentifier().getNumber() == '40012'
+    - message.getIdentifier().getVersion() == '0'
+    - message.getIdentifier().getPart() == '39'
+    - message.getIdentifier().getProduct() == 'TRA'
+    - message.getTargets()[0].getFormat() == 'HTML'
+    - message.getTargets()[0].getLanguage() == 'FR'
+    - message.getTargets()[0].getTranslatedFile() == 'File64'

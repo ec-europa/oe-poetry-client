@@ -1,0 +1,40 @@
+-
+  xml:
+    <attributions format="HTML" lgCode="en" trackChanges="No">
+        <attributionsRemark>Remark</attributionsRemark>
+        <attributionsDelai format="dd/mm/YYYY">10/07/2007</attributionsDelai>
+        <attributionsDelaiAccepted format="dd/mm/YYYY">10/07/2007</attributionsDelaiAccepted>
+        <attributionsSend type="webService">
+            <retourUser>Username</retourUser>
+            <retourPassword>Password</retourPassword>
+            <retourAddress>Url</retourAddress>
+            <retourPath>Path</retourPath>
+            <retourRemark>Remark</retourRemark>
+        </attributionsSend>
+        <attributionsFile>File</attributionsFile>
+        <attributionContact type="Secretaire">
+            <contactNickname>Username</contactNickname>
+            <contactEmail>user@mail.com</contactEmail>
+        </attributionContact>
+    </attributions>
+
+  expressions:
+    - message.getFormat() == "HTML"
+    - message.getLanguage() == "en"
+    - message.getTrackChanges() == "No"
+    - message.getRemark() == "Remark"
+    - message.getDelay() == "10/07/2007"
+    - message.getDelayFormat() == "dd/mm/YYYY"
+    - message.getAcceptedDelay() == "10/07/2007"
+    - message.getAcceptedDelayFormat() == "dd/mm/YYYY"
+    - message.getTranslatedFile() == "File"
+    - message.getRemark() == "Remark"
+    - message.getReturnAddresses()[0].getType() == "webService"
+    - message.getReturnAddresses()[0].getUser() == "Username"
+    - message.getReturnAddresses()[0].getPassword() == "Password"
+    - message.getReturnAddresses()[0].getAddress() == "Url"
+    - message.getReturnAddresses()[0].getPath() == "Path"
+    - message.getReturnAddresses()[0].getRemark() == "Remark"
+    - message.getContacts()[0].getType() == "Secretaire"
+    - message.getContacts()[0].getNickname() == "Username"
+    - message.getContacts()[0].getEmail() == "user@mail.com"

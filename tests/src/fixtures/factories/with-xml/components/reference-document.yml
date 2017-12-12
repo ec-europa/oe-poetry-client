@@ -1,5 +1,5 @@
 -
-  -
+  xml:
     <documentReference lgCode="en" format="HTML" type="REF" action="UPDATE">
         <documentReferenceName>Filename</documentReferenceName>
         <documentReferencePath>path</documentReferencePath>
@@ -7,12 +7,14 @@
         <documentReferenceRemark>Remark</documentReferenceRemark>
         <documentReferenceFile>File</documentReferenceFile>
     </documentReference>
-  - getLanguage : "en"
-    getFormat : "HTML"
-    getType : "REF"
-    getAction : "UPDATE"
-    getName : "Filename"
-    getPath : "path"
-    getSize : "10kB"
-    getRemark : "Remark"
-    getFile : "File"
+
+  expressions:
+    - message.getLanguage() == "en"
+    - message.getFormat() == "HTML"
+    - message.getType() == "REF"
+    - message.getAction() == "UPDATE"
+    - message.getName() == "Filename"
+    - message.getPath() == "path"
+    - message.getSize() == "10kB"
+    - message.getRemark() == "Remark"
+    - message.getFile() == "File"

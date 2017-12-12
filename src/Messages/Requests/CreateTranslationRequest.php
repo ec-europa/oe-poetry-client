@@ -9,6 +9,7 @@ use EC\Poetry\Messages\Traits\WithReferenceDocumentsTrait;
 use EC\Poetry\Messages\Traits\WithReturnAddressTrait;
 use EC\Poetry\Messages\Traits\WithSourceTrait;
 use EC\Poetry\Messages\Traits\WithTargetsTrait;
+use EC\Poetry\Services\Parser;
 use EC\Poetry\Services\Settings;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -66,5 +67,29 @@ class CreateTranslationRequest extends AbstractRequest
         $metadata->addPropertyConstraint('contacts', new Assert\Valid(['traverse' => true]));
         $metadata->addPropertyConstraint('targets', new Assert\Valid(['traverse' => true]));
         $metadata->addPropertyConstraint('referenceDocuments', new Assert\Valid(['traverse' => true]));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function withXml($xml)
+    {
+        parent::withXml($xml);
+
+        $parser = $this->getParser();
+        $parser->addXmlContent($xml);
+
+        $parser->eachComponent("POETRY/request/contacts", function (Parser $component) {
+            $this->withContact()
+              ->setParser($this->getParser())
+              ->withXml($component->outerHtml());
+        }, $this);
+
+        $xml = $parser->getOuterContent('POETRY/request/retour');
+        $this->withReturnAddress()
+          ->setParser($this->getParser())
+          ->withXml($xml);
+
+        return $this;
     }
 }

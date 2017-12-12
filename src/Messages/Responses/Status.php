@@ -33,7 +33,7 @@ class Status extends AbstractResponse
         $parser = $this->getParser();
         $parser->addXmlContent($event->getXml());
         if ($parser->getContent('POETRY/request/status') !== null) {
-            $event->setMessage($this->fromXml($event->getXml()));
+            $event->setMessage($this->withXml($event->getXml()));
             $event->stopPropagation();
         }
     }
@@ -41,20 +41,17 @@ class Status extends AbstractResponse
     /**
      * {@inheritdoc}
      */
-    protected function parseXml($xml)
+    public function withXml($xml)
     {
+        parent::withXml($xml);
+
         $parser = $this->getParser();
         $parser->addXmlContent($xml);
-
-        $xml = $parser->getOuterContent('POETRY/request/demandeId');
-        $this->getIdentifier()->fromXml($xml);
-
-        $this->setMessageId($parser->getAttribute('POETRY/request', 'id'));
 
         $parser->eachComponent("POETRY/request/status", function (Parser $component) {
             $this->withStatus()
                 ->setParser($this->getParser())
-                ->fromXml($component->outerHtml());
+                ->withXml($component->outerHtml());
         }, $this);
 
         return $this;
