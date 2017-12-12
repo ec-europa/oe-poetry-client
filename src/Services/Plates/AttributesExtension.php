@@ -37,9 +37,18 @@ class AttributesExtension implements ExtensionInterface
     {
         $renderedAttributes = [];
         foreach ($attributes as $key => $value) {
-            $renderedAttributes[] = $key.'="'.htmlspecialchars($value, ENT_XML1).'"';
+            $renderedAttributes[] = $key.'="'.$this->escape($value).'"';
         }
 
         return implode(' ', $renderedAttributes);
+    }
+
+    /**
+     * @param string $string
+     * @return string
+     */
+    public function escape($string)
+    {
+        return htmlspecialchars($string, ENT_XML1 | ENT_COMPAT, 'UTF-8');
     }
 }

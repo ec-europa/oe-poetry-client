@@ -391,18 +391,19 @@ class Details extends AbstractComponent
             ->setApplicationId($parser->getContent('demande/applicationReference'))
             ->setAuthor($parser->getContent('demande/organisationAuteur'))
             ->setRequester($parser->getContent('demande/serviceDemandeur'))
+            ->setResponsible($parser->getContent('demande/organisationResponsable'))
             ->setTitle($parser->getContent('demande/titre'))
             ->setRemark($parser->getContent('demande/remarque'))
-            ->setType($parser->getContent('demande/type'))
             ->setWorkflowCode($parser->getContent('demande/workflowCode'))
-            ->setDestination($parser->getContent('demande/destination'))
-            ->setProcedure($parser->getContent('demande/procedure'))
+            ->setProcedure($parser->getAttribute('demande/procedure', 'id'))
+            ->setDestination($parser->getAttribute('demande/destination', 'id'))
+            ->setType($parser->getAttribute('demande/type', 'id'))
             ->setDelay($parser->getContent('demande/delai'))
             ->setRequestDate($parser->getContent('demande/dateDemande'))
             ->setStatus($parser->getContent('demande/statusDemande'))
             ->setInterServices($parser->getContent('demande/consultationInterServices'))
             ->setInterInstitution($parser->getContent('demande/procedureInterInstitution'))
-            ->setReferenceFilesRemark($parser->getContent('demande/reference_files_note'));
+            ->setReferenceFilesRemark($parser->getContent('demande/referenceFilesNote'));
 
         return $this;
     }

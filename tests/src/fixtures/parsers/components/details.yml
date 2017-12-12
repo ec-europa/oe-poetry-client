@@ -7,15 +7,15 @@
         <serviceDemandeur>DGCOMM</serviceDemandeur>
         <titre>Title</titre>
         <remarque>Remark</remarque>
-        <type>INTER</type>
-        <destination>AUTRE</destination>
-        <procedure>NEANT</procedure>
+        <type id="INTER"/>
+        <destination id="AUTRE"/>
+        <procedure id="NEANT"/>
         <delai>11/12/2007</delai>
         <dateDemande>11/12/2007</dateDemande>
         <statusDemande>Ready</statusDemande>
         <consultationInterServices>Yes</consultationInterServices>
         <procedureInterInstitution>Yes</procedureInterInstitution>
-        <reference_files_note>Note</reference_files_note>
+        <referenceFilesNote>Note</referenceFilesNote>
         <workflowCode>STS</workflowCode>
     </demande>
   - getClientId : "clientId"

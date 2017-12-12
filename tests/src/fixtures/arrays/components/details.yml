@@ -15,7 +15,7 @@
     inter_services: "Yes"
     inter_institution: "Yes"
     reference_files_remark: "Note"
-    workflowCode: "STS"
+    workflow_code: "STS"
   expected:
     getClientId: "clientId"
     getApplicationId: "applicationId"
