@@ -1,90 +1,90 @@
-#- component: details
-#  setters:
-#    setClientId: "<ID>"
-#    setResponsible: "</Responsible>"
-#    setApplicationId: "application .>? Id"
-#    setAuthor: "DIGIT \ <> "
-#    setRequester: "DGCOMM \\<>"
-#    setTitle: "Title > <"
-#    setRemark: "Remark!!{}"
-#    setType: "INTER*^%(#"
-#    setDestination: "AUTRE{}<[[]]"
-#    setProcedure: "NEANT"
-#    setDelay: "11/12/\\2007"
-#    setRequestDate: "11\/12/2007"
-#    setStatus: "Ready!><"
-#    setInterServices: "<Yes?"
-#    setInterInstitution: "/<Yes>"
-#    setReferenceFilesRemark: "<<<Note>>>"
-#    setWorkflowCode: "!!STS"
-#  getters:
-#    getClientId: "<ID>"
-#    getResponsible: "</Responsible>"
-#    getApplicationId: "application .>? Id"
-#    getAuthor: "DIGIT \ <> "
-#    getRequester: "DGCOMM \\<>"
-#    getTitle: "Title > <"
-#    getRemark: "Remark!!{}"
-#    getType: "INTER*^%(#"
-#    getDestination: "AUTRE{}<[[]]"
-#    getProcedure: "NEANT"
-#    getDelay: "11/12/\\2007"
-#    getRequestDate: "11\/12/2007"
-#    getStatus: "Ready!><"
-#    getInterServices: "<Yes?"
-#    getInterInstitution: "/<Yes>"
-#    getReferenceFilesRemark: "<<<Note>>>"
-#    getWorkflowCode: "!!STS"
-#
-#- component: contact
-#  setters:
-#    setType: '<Type>'
-#    setAction: '<Action>'
-#    setNickname: '<.> </>*&^%$#@!'
-#    setEmail: 'info@example.org'
-#  getters:
-#    getType: '<Type>'
-#    getAction: '<Action>'
-#    getNickname: '<.> </>*&^%$#@!'
-#    getEmail: 'info@example.org'
-#
-#- component: reference_document
-#  setters:
-#    setLanguage: '< !@#$%^&*()_"''+ >'
-#    setFormat: '< !@#$%^&*()_+ >'
-#    setType: '< !@#$%^&*()_+ >'
-#    setAction: '< !@#$%^&*()_+ >'
-#    setName: '</Name>'
-#    setPath: '<.> </>*&^%$#@!'
-#    setSize: '123Mb<>'
-#    setFile: '<File>'
-#  getters:
-#    getLanguage: '< !@#$%^&*()_"''+ >'
-#    getFormat: '< !@#$%^&*()_+ >'
-#    getType: '< !@#$%^&*()_+ >'
-#    getAction: '< !@#$%^&*()_+ >'
-#    getName: '</Name>'
-#    getPath: '<.> </>*&^%$#@!'
-#    getSize: '123Mb<>'
-#    getFile: '<File>'
-#
-#- component: return_address
-#  setters:
-#    setType: "<'\"!@#$>"
-#    setAction: "<'\"!@#$>"
-#    setUser: "<'\"!@#$>"
-#    setPassword: "<'\"!@#$>"
-#    setAddress: "<'\"!@#$>"
-#    setPath: "<'\"!@#$>"
-#    setRemark: "<'\"!@#$>"
-#  getters:
-#    getType: "<'\"!@#$>"
-#    getAction: "<'\"!@#$>"
-#    getUser: "<'\"!@#$>"
-#    getPassword: "<'\"!@#$>"
-#    getAddress: "<'\"!@#$>"
-#    getPath: "<'\"!@#$>"
-#    getRemark: "<'\"!@#$>"
+- component: details
+  setters:
+    setClientId: "<ID>"
+    setResponsible: "</Responsible>"
+    setApplicationId: "application .>? Id"
+    setAuthor: "DIGIT \ <> "
+    setRequester: "DGCOMM \\<>"
+    setTitle: "Title > <"
+    setRemark: "Remark!!{}"
+    setType: "INTER*^%(#"
+    setDestination: "AUTRE{}<[[]]"
+    setProcedure: "NEANT"
+    setDelay: "11/12/\\2007"
+    setRequestDate: "11\/12/2007"
+    setStatus: "Ready!><"
+    setInterServices: "<Yes?"
+    setInterInstitution: "/<Yes>"
+    setReferenceFilesRemark: "<<<Note>>>"
+    setWorkflowCode: "!!STS"
+  getters:
+    getClientId: "<ID>"
+    getResponsible: "</Responsible>"
+    getApplicationId: "application .>? Id"
+    getAuthor: "DIGIT \ <> "
+    getRequester: "DGCOMM \\<>"
+    getTitle: "Title > <"
+    getRemark: "Remark!!{}"
+    getType: "INTER*^%(#"
+    getDestination: "AUTRE{}<[[]]"
+    getProcedure: "NEANT"
+    getDelay: "11/12/\\2007"
+    getRequestDate: "11\/12/2007"
+    getStatus: "Ready!><"
+    getInterServices: "<Yes?"
+    getInterInstitution: "/<Yes>"
+    getReferenceFilesRemark: "<<<Note>>>"
+    getWorkflowCode: "!!STS"
+
+- component: contact
+  setters:
+    setType: '<Type>'
+    setAction: '<Action>'
+    setNickname: '<.> </>*&^%$#@!'
+    setEmail: 'info@example.org'
+  getters:
+    getType: '<Type>'
+    getAction: '<Action>'
+    getNickname: '<.> </>*&^%$#@!'
+    getEmail: 'info@example.org'
+
+- component: reference_document
+  setters:
+    setLanguage: '< !@#$%^&*()_"''+ >'
+    setFormat: '< !@#$%^&*()_+ >'
+    setType: '< !@#$%^&*()_+ >'
+    setAction: '< !@#$%^&*()_+ >'
+    setName: '</Name>'
+    setPath: '<.> </>*&^%$#@!'
+    setSize: '123Mb<>'
+    setFile: '<File>'
+  getters:
+    getLanguage: '< !@#$%^&*()_"''+ >'
+    getFormat: '< !@#$%^&*()_+ >'
+    getType: '< !@#$%^&*()_+ >'
+    getAction: '< !@#$%^&*()_+ >'
+    getName: '</Name>'
+    getPath: '<.> </>*&^%$#@!'
+    getSize: '123Mb<>'
+    getFile: '<File>'
+
+- component: return_address
+  setters:
+    setType: "<'\"!@#$>"
+    setAction: "<'\"!@#$>"
+    setUser: "<'\"!@#$>"
+    setPassword: "<'\"!@#$>"
+    setAddress: "<'\"!@#$>"
+    setPath: "<'\"!@#$>"
+    setRemark: "<'\"!@#$>"
+  getters:
+    getType: "<'\"!@#$>"
+    getAction: "<'\"!@#$>"
+    getUser: "<'\"!@#$>"
+    getPassword: "<'\"!@#$>"
+    getAddress: "<'\"!@#$>"
+    getPath: "<'\"!@#$>"
+    getRemark: "<'\"!@#$>"
 
 - component: source
   setters:
