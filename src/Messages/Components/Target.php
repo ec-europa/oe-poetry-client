@@ -341,7 +341,6 @@ class Target extends AbstractComponent
             $this->withReturnAddress()
               ->setParser($this->getParser())
               ->setType($component->attr('type'))
-              ->setAction($component->attr('action'))
               ->setUser($component->getContent('attributionsSend/retourUser'))
               ->setPassword($component->getContent('attributionsSend/retourPassword'))
               ->setAddress($component->getContent('attributionsSend/retourAddress'))
@@ -357,6 +356,7 @@ class Target extends AbstractComponent
     {
         $this->setFormat($parser->getAttribute('attributions', 'format'))
           ->setLanguage($parser->getAttribute('attributions', 'lgCode'))
+          ->setAction($parser->getAttribute('attributions', 'action'))
           ->setTrackChanges($parser->getAttribute('attributions', 'trackChanges'))
           ->setRemark($parser->getContent('attributions/attributionsRemark'))
           ->setDelay($parser->getContent('attributions/attributionsDelai'))

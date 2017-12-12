@@ -50,6 +50,7 @@ class MessagesProvider implements ServiceProviderInterface
           'component.source'             => Component\Source::class,
           'component.status'             => Component\Status::class,
           'component.target'             => Component\Target::class,
+          'component.source_language'    => Component\SourceLanguage::class,
         ];
         $this->serviceFactory($messages, $container);
 

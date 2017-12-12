@@ -7,4 +7,6 @@
  * @var \EC\Poetry\Messages\Components\SourceLanguage $component
  */
 ?>
-<documentSourceLang lgCode="<?= $component->getCode() ?>"><documentSourceLangPages><?= $component->getPages() ?></documentSourceLangPages></documentSourceLang>
+<documentSourceLang lgCode="<?= $this->escape($component->getCode()) ?>">
+    <documentSourceLangPages><![CDATA[<?= $component->getPages() ?>]]></documentSourceLangPages>
+</documentSourceLang>

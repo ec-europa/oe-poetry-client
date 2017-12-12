@@ -8,9 +8,9 @@
  */
 ?>
 <status <?= $this->attributes($component->getAttributes()) ?>>
-    <statusDate><?= $component->getDate() ?></statusDate>
+    <statusDate><![CDATA[<?= $component->getDate() ?>]]></statusDate>
     <?php if ($component->getTime()) : ?>
-        <statusTime><?= $component->getTime() ?></statusTime>
+        <statusTime><![CDATA[<?= $component->getTime() ?>]]></statusTime>
     <?php endif ?>
     <?php if ($component->getMessage()) : ?>
         <statusMessage><![CDATA[<?= $component->getMessage() ?>]]></statusMessage>

@@ -111,3 +111,50 @@
     getFile: '<id="setFile"></123>'
     getPath: '<id="setPath"></123>'
     getSize: '<id="setSize"></123>'
+
+- component: source_language
+  setters:
+    setCode: '<id="setChannel"></123>'
+    setPages: '<id="setDeadline"></123>'
+  getters:
+    getCode: '<id="setChannel"></123>'
+    getPages: '<id="setDeadline"></123>'
+
+- component: status
+  setters:
+    setLanguage: '<Test id="setLanguage"/></Foo>'
+    setType: '<Test id="setType"/></Foo>'
+    setCode: '<Test id="setCode"/></Foo>'
+    setDate: '<Test id="setDate"/></Foo>'
+    setTime: '<Test id="setTime"/></Foo>'
+    setMessage: '<Test id="setMessage"/></Foo>'
+  getters:
+    getLanguage: '<Test id="setLanguage"/></Foo>'
+    getType: '<Test id="setType"/></Foo>'
+    getCode: '<Test id="setCode"/></Foo>'
+    getDate: '<Test id="setDate"/></Foo>'
+    getTime: '<Test id="setTime"/></Foo>'
+    getMessage: '<Test id="setMessage"/></Foo>'
+
+- component: target
+  setters:
+    setAction: '<Target id="getAction">'
+    setFormat: '<Target id="getFormat">'
+    setLanguage: '<Target id="getLanguage">'
+    setRemark: '<Target id="getRemark">'
+    setDelayFormat: '<Target id="getDelayFormat">'
+    setDelay: '<Target id="getDelay">'
+    setAcceptedDelay: '<Target id="getAcceptedDelay">'
+    setAcceptedDelayFormat: '<Target id="getAcceptedDelayFormat">'
+    setTranslatedFile: '<Target id="getTranslatedFile">'
+  getters:
+    getAction: '<Target id="getAction">'
+    getFormat: '<Target id="getFormat">'
+    getLanguage: '<Target id="getLanguage">'
+    getRemark: '<Target id="getRemark">'
+    getDelayFormat: '<Target id="getDelayFormat">'
+    getDelay: '<Target id="getDelay">'
+    getAcceptedDelay: '<Target id="getAcceptedDelay">'
+    getAcceptedDelayFormat: '<Target id="getAcceptedDelayFormat">'
+    getTranslatedFile: '<Target id="getTranslatedFile">'
+
