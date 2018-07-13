@@ -1,0 +1,41 @@
+workspace:
+  base: /test
+  path: oe-poetry-client
+
+services:
+  web:
+    image: ${IMAGE_PHP=fpfis/httpd-php-dev:5.6}
+    environment:
+      - DOCUMENT_ROOT=/test/oe-poetry-client
+
+pipeline:
+  composer-install:
+    group: prepare
+    image: ${IMAGE_PHP=fpfis/httpd-php-dev:5.6}
+    volumes:
+      - /cache:/cache
+    commands:
+      - composer install
+
+  grumphp:
+    group: test
+    image: ${IMAGE_PHP=fpfis/httpd-php-dev:5.6}
+    commands:
+      - ./vendor/bin/grumphp run
+
+  phpunit:
+    group: test
+    image: ${IMAGE_PHP=fpfis/httpd-php-dev:5.6}
+    commands:
+      - ./vendor/bin/phpunit
+
+  phpspec:
+    group: test
+    image: ${IMAGE_PHP=fpfis/httpd-php-dev:5.6}
+    commands:
+      - ./vendor/bin/phpspec run
+
+matrix:
+  IMAGE_PHP:
+    - fpfis/httpd-php-dev:5.6
+    - fpfis/httpd-php-dev:7.1
