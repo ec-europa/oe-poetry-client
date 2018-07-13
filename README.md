@@ -1,6 +1,5 @@
 # Poetry Client Library
-
-[![Build Status](https://travis-ci.org/ec-europa/oe-poetry-client.svg?branch=master)](https://travis-ci.org/ec-europa/oe-poetry-client)
+[![Build Status](https://drone.fpfis.eu/api/badges/openeuropa/oe-poetry-client/status.svg)](https://drone.fpfis.eu/openeuropa/oe-poetry-client/)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/ec-europa/oe-poetry-client/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/ec-europa/oe-poetry-client/?branch=master)
 
 The Poetry Client Library aims to hide Poetry service complexity behind and easy-to-use client library so that
