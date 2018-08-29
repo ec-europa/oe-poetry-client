@@ -32,8 +32,11 @@ class CreateTranslationRequest extends AbstractRequest
      */
     public function __construct(Identifier $identifier, Settings $settings)
     {
+        if (empty($identifier->getProduct())) {
+            $identifier->setProduct('TRA');
+        }
+
         parent::__construct($identifier, $settings);
-        $this->getIdentifier()->setProduct('TRA');
 
         if ($settings->get('client.wsdl') && $settings->get('notification.username') && $settings->get('notification.password')) {
             $this->withReturnAddress()
