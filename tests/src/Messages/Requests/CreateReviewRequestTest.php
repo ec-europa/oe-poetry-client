@@ -19,6 +19,39 @@ use Symfony\Component\Yaml\Yaml;
 class CreateReviewRequestTest extends AbstractTest
 {
     /**
+     * Test default product.
+     */
+    public function testProductDefault()
+    {
+        $identifier = new Identifier();
+        $identifier->setCode('STSI')
+            ->setYear(2017)
+            ->setNumber('40017')
+            ->setVersion('0')
+            ->setPart('11');
+
+        new CreateReviewRequest($identifier, new Settings());
+        expect($identifier->getProduct())->to->equal('REV');
+    }
+
+    /**
+     * Test custom product.
+     */
+    public function testProductCustom()
+    {
+        $identifier = new Identifier();
+        $identifier->setCode('STSI')
+            ->setYear(2017)
+            ->setNumber('40017')
+            ->setVersion('0')
+            ->setPart('11')
+            ->setProduct('ABC');
+
+        new CreateReviewRequest($identifier, new Settings());
+        expect($identifier->getProduct())->to->equal('ABC');
+    }
+
+    /**
      * Test rendering.
      */
     public function testRender()
