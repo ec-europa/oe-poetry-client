@@ -2,27 +2,30 @@
     "name": "ec-europa/oe-poetry-client",
     "description": "Client library for the European Commission Poetry Service",
     "type": "library",
-    "minimum-stability": "alpha",
+    "minimum-stability": "stable",
     "prefer-stable": true,
     "license": "EUPL-1.2",
     "require": {
-        "php": ">=5.6",
         "ext-soap": "*",
-        "symfony/validator": "^2.8 || ^3.0",
-        "symfony/event-dispatcher": "^2.8 || ^3.0",
-        "symfony/expression-language": "^2.8 || ^3.0",
-        "symfony/dom-crawler": "^2.8 || ^3.0",
-        "league/plates": "^3.3",
-        "pimple/pimple": "^3.1",
-        "psr/log": "^1.0"
+        "jeremeamia/superclosure": "~2.2",
+        "league/plates": "^3.3.0",
+        "php": ">=5.6",
+        "pimple/pimple": "~3.2.3",
+        "psr/log": "~1.0.2",
+        "symfony/dom-crawler": "^2.8|^3.0",
+        "symfony/event-dispatcher": "^2.8|^3.0",
+        "symfony/expression-language": "^2.8|^3.0",
+        "symfony/validator": "^2.8|^3.0",
+        "symfony/yaml": "~3.3|~4.0"
     },
     "require-dev": {
-        "openeuropa/code-review": "~0.2",
-        "phpunit/phpunit": "^5||^6",
-        "peridot-php/leo": "^1.6",
+        "guzzle/guzzle": "~2.7|~3.0",
+        "internations/http-mock": "~0.8",
         "mockery/mockery": "^0.9.9",
-        "phpspec/phpspec": "^4.0",
-        "internations/http-mock": "^0.8"
+        "openeuropa/code-review": "~1.0@alpha",
+        "peridot-php/leo": "~1.6",
+        "phpspec/phpspec": "~4.0@alpha",
+        "phpunit/phpunit": "~5.5|~6"
     },
     "suggest": {
         "monolog/monolog": "Log Poetry requests and responses via Monolog",
@@ -30,13 +33,13 @@
     },
     "autoload": {
         "psr-4": {
-            "EC\\Poetry\\": "./src"
+            "EC\\Poetry\\": "./src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "EC\\Poetry\\Tests\\": "./tests/src",
-            "spec\\EC\\Poetry\\": "./spec"
+            "EC\\Poetry\\Tests\\": "./tests/src/",
+            "spec\\EC\\Poetry\\": "./spec/"
         }
     }
 }
