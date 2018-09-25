@@ -5,8 +5,10 @@ namespace EC\Poetry\Tests\Messages\Requests;
 use EC\Poetry\Messages\Components\Contact;
 use EC\Poetry\Messages\Components\Identifier;
 use EC\Poetry\Messages\Requests\CreateTranslationRequest;
+use EC\Poetry\Poetry;
 use EC\Poetry\Services\Settings;
 use EC\Poetry\Tests\AbstractTest;
+use Symfony\Component\Yaml\Yaml;
 
 /**
  * Class CreateTranslationRequestTest
@@ -109,9 +111,53 @@ class CreateTranslationRequestTest extends AbstractTest
             ->setDestination("PUBLIC")
             ->setProcedure("NEANT")
             ->setRequestDate('14/09/2017')
-            ->setDelay('14/09/2017');
+            ->setDelay('14/09/2017')
+            ->setReferenceNumber('ABC/123/12345');
 
         $output = $renderer->render($message);
         expect($output)->to->have->same->xml('messages/requests/create-translation-request.xml');
+    }
+
+    /**
+     * @param array $array
+     * @param array $expected
+     *
+     * @dataProvider withArrayProvider
+     */
+    public function testWithArray(array $array, array $expected)
+    {
+        $poetry = new Poetry([
+          'identifier.code' => 'STSI',
+          'identifier.year' => '2017',
+          'identifier.number' => '40017',
+          'identifier.version' => '0',
+          'identifier.part' => '11',
+          'notification.username' => 'MY-TEST-USER',
+          'notification.password' => 'MY-TEST-PASSWORD',
+          'client.wsdl' => 'https://example.com/callback/wsdl/PoetryIntegration.wsdl',
+        ]);
+        $component = $poetry->get('request.create_translation_request');
+        $component->withArray($array);
+
+        foreach ($expected as $getComponent => $properties) {
+            if ($this->isComponentCollection($properties)) {
+                foreach ($properties as $i => $property) {
+                    $this->assertProperties($component->$getComponent()[$i], $property);
+                }
+            } else {
+                $this->assertProperties($component->$getComponent(), $properties);
+            }
+        }
+
+        $violations = $this->getContainer()->getValidator()->validate($component);
+        expect($this->getViolations($violations))->to->be->empty();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function withArrayProvider()
+    {
+        return Yaml::parse($this->getFixture('arrays/create-translation-request.yml'));
     }
 }

@@ -18,6 +18,7 @@
             <destination id="PUBLIC"/>
             <type id="INTER"/>
             <workflowCode>STS</workflowCode>
+            <referenceNumber>ABC/123/12345</referenceNumber>
         </demande>
         <contacts type="auteur"><contactNickname>john</contactNickname></contacts>
         <contacts type="secretaire"><contactNickname>john</contactNickname></contacts>

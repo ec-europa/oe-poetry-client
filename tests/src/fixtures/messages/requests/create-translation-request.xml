@@ -21,6 +21,7 @@
             <procedure id="NEANT"/>
             <destination id="PUBLIC"/>
             <type id="PUB"/>
+            <referenceNumber>ABC/123/12345</referenceNumber>
         </demande>
     </request>
 </POETRY>
