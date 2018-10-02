@@ -30,6 +30,7 @@ class Details extends AbstractComponent
     private $interServices;
     private $interInstitution;
     private $referenceFilesRemark;
+    private $referenceNumber;
 
     /**
      * {@inheritdoc}
@@ -54,6 +55,7 @@ class Details extends AbstractComponent
         $metadata->addPropertyConstraint('procedure', new Constraint\DetailsProcedure());
         $metadata->addPropertyConstraint('status', new Assert\Type('string'));
         $metadata->addPropertyConstraint('referenceFilesRemark', new Assert\Type('string'));
+        $metadata->addPropertyConstraint('referenceNumber', new Assert\Type('string'));
     }
 
     /**
@@ -380,6 +382,25 @@ class Details extends AbstractComponent
     }
 
     /**
+     * @return mixed
+     */
+    public function getReferenceNumber()
+    {
+        return $this->referenceNumber;
+    }
+
+    /**
+     * @param string $referenceNumber
+     * @return \EC\Poetry\Messages\Components\Details
+     */
+    public function setReferenceNumber($referenceNumber)
+    {
+        $this->referenceNumber = $referenceNumber;
+
+        return $this;
+    }
+
+    /**
      * {@inheritdoc}
      */
     protected function parseXml($xml)
@@ -403,7 +424,8 @@ class Details extends AbstractComponent
             ->setStatus($parser->getContent('demande/statusDemande'))
             ->setInterServices($parser->getContent('demande/consultationInterServices'))
             ->setInterInstitution($parser->getContent('demande/procedureInterInstitution'))
-            ->setReferenceFilesRemark($parser->getContent('demande/referenceFilesNote'));
+            ->setReferenceFilesRemark($parser->getContent('demande/referenceFilesNote'))
+            ->setReferenceNumber($parser->getContent('demande/referenceNumber'));
 
         return $this;
     }

@@ -59,4 +59,7 @@
     <?php if ($component->getWorkflowCode()) : ?>
         <workflowCode><![CDATA[<?= $component->getWorkflowCode() ?>]]></workflowCode>
     <?php endif ?>
+    <?php if ($component->getReferenceNumber()) : ?>
+        <referenceNumber><![CDATA[<?= $component->getReferenceNumber() ?>]]></referenceNumber>
+    <?php endif ?>
 </demande>

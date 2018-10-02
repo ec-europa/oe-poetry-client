@@ -80,7 +80,8 @@ class CreateReviewRequestTest extends AbstractTest
             ->setProcedure('NEANT')
             ->setDestination('PUBLIC')
             ->setType('INTER')
-            ->setWorkflowCode('STS');
+            ->setWorkflowCode('STS')
+            ->setReferenceNumber('ABC/123/12345');
 
         $message->withContact()->setType('auteur')->setNickname('john');
         $message->withContact()->setType('secretaire')->setNickname('john');
