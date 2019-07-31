@@ -17,7 +17,7 @@ class Poetry extends Container implements ContainerInterface
     /**
      * @var \EC\Poetry\Poetry
      */
-    static private $container = null;
+    private static $container = null;
 
     /**
      * {@inheritdoc}
