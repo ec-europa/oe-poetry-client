@@ -4,9 +4,6 @@ namespace EC\Poetry\Messages\Requests;
 
 use EC\Poetry\Messages\Components\Identifier;
 use EC\Poetry\Messages\Traits\WithDetailsTrait;
-use EC\Poetry\Messages\Traits\WithReferenceDocumentsTrait;
-use EC\Poetry\Messages\Traits\WithReturnAddressTrait;
-use EC\Poetry\Messages\Traits\WithSourceTrait;
 use EC\Poetry\Messages\Traits\WithTargetsTrait;
 use EC\Poetry\Services\Settings;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
@@ -20,7 +17,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 class AddLanguagesRequest extends AbstractRequest
 {
     use WithDetailsTrait;
-    use WithReturnAddressTrait;
     use WithTargetsTrait;
 
     /**

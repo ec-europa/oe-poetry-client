@@ -17,4 +17,4 @@
     <?php foreach ($message->getTargets() as $target) : ?>
         <?= $this->component($target); ?>
     <?php endforeach; ?>
-<?php endif; ?>
+<?php endif;
