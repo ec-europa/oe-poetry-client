@@ -11,6 +11,10 @@
         </demandeId>
         <attributions format="HTML" lgCode="FR">
             <attributionsDelai>14/09/2017</attributionsDelai>
+            <attributionsSend type="webService">
+                <retourUser>MY-TEST-USER</retourUser>
+                <retourAddress>Url</retourAddress>
+            </attributionsSend>
         </attributions>
     </request>
 </POETRY>

@@ -56,7 +56,11 @@ class AddLanguagesRequestTest extends AbstractTest
         $message->withTarget()
             ->setLanguage('FR')
             ->setFormat('HTML')
-            ->setDelay('14/09/2017');
+            ->setDelay('14/09/2017')
+            ->withReturnAddress()
+            ->setType('webService')
+            ->setUser('MY-TEST-USER')
+            ->setAddress('Url');
 
         $output = $renderer->render($message);
         expect($output)->to->have->same->xml('messages/requests/add-languages-request.xml');
