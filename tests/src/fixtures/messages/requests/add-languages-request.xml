@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <POETRY xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://intragate.ec.europa.eu/DGT/poetry_services/poetry.xsd">
-    <request communication="synchrone" id="DGT/2017/00001/01/00/TRA" type="newPost">
+    <request communication="synchrone" id="DGT/2017/00001/01/00/TRA" type="modificationPost">
         <demandeId>
             <codeDemandeur>DGT</codeDemandeur>
             <annee>2017</annee>
@@ -9,7 +9,7 @@
             <partie>00</partie>
             <produit>TRA</produit>
         </demandeId>
-        <attributions format="HTML" lgCode="FR">
+        <attributions action="INSERT" format="HTML" lgCode="FR">
             <attributionsDelai>14/09/2017</attributionsDelai>
             <attributionsSend type="webService">
                 <retourUser>MY-TEST-USER</retourUser>
@@ -18,3 +18,4 @@
         </attributions>
     </request>
 </POETRY>
+

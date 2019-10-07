@@ -32,7 +32,7 @@ class AddLanguagesRequest extends AbstractRequest
      */
     public function getType()
     {
-        return self::REQUEST_NEW_POST;
+        return self::REQUEST_MODIFICATION_POST;
     }
 
     /**
