@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * Template file.
+ * Return address template file.
  *
  * @var \EC\Poetry\Services\Plates\Template $this
  * @var \EC\Poetry\Messages\Components\ReturnAddress $component
