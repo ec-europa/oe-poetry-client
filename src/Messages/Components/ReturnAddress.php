@@ -35,7 +35,7 @@ class ReturnAddress extends AbstractComponent
     public static function getConstraints(ClassMetadata $metadata)
     {
         $metadata->addPropertyConstraints('type', [
-            new Assert\Choice(['webService', 'email']),
+            new Assert\Choice(['webService', 'email', 'smtp']),
             new Assert\NotBlank(),
         ]);
         $metadata->addPropertyConstraint('action', new Assert\Choice(['INSERT', 'UPDATE']));
@@ -44,11 +44,11 @@ class ReturnAddress extends AbstractComponent
             new Assert\NotBlank(),
         ]);
         $metadata->addPropertyConstraint('password', new Assert\Expression([
-            'expression' => 'this.getType() == "webService"',
+            'expression' => 'this.getType() == "webService" or this.getPassword() == ""',
             'message' => 'The return type you selected can\'t have a password.',
         ]));
         $metadata->addPropertyConstraint('path', new Assert\Expression([
-            'expression' => 'this.getType() == "webService"',
+            'expression' => 'this.getType() == "webService" or this.getPath() == ""',
             'message' => 'The return type you selected can\'t have a path.',
         ]));
     }
