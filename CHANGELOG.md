@@ -1,10 +1,18 @@
 # Change Log
 
+## [0.4.0](https://github.com/ec-europa/oe-poetry-client/tree/0.4.0) (2020-04-08)
+[Full Changelog](https://github.com/ec-europa/oe-poetry-client/compare/0.3.8...0.4.0)
+
+**Merged pull requests:**
+
+- OPENEUROPA-2251: Allow adding languages into an ongoing translation. [\#83](https://github.com/ec-europa/oe-poetry-client/pull/83) ([dxvargas](https://github.com/dxvargas))
+
 ## [0.3.8](https://github.com/ec-europa/oe-poetry-client/tree/0.3.8) (2019-12-02)
 [Full Changelog](https://github.com/ec-europa/oe-poetry-client/compare/0.3.7...0.3.8)
 
 **Merged pull requests:**
 
+- Update CHANGELOG.md for release 0.3.8. [\#84](https://github.com/ec-europa/oe-poetry-client/pull/84) ([ademarco](https://github.com/ademarco))
 - OPENEUROPA-2105: Increasing the PSR Log version. [\#80](https://github.com/ec-europa/oe-poetry-client/pull/80) ([upchuk](https://github.com/upchuk))
 
 ## [0.3.7](https://github.com/ec-europa/oe-poetry-client/tree/0.3.7) (2018-09-27)
