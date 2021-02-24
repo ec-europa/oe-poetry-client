@@ -39,6 +39,7 @@ matrix:
   IMAGE_PHP:
     - fpfis/httpd-php-dev:5.6
     - fpfis/httpd-php-dev:7.1
+    - fpfis/httpd-php-dev:7.2
   COMPOSER_BOUNDARY:
     - '--prefer-lowest'
     - ''
