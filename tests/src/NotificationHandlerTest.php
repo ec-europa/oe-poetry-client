@@ -3,16 +3,12 @@
 namespace EC\Poetry\Tests;
 
 use EC\Poetry\Events\Notifications\StatusUpdatedEvent;
-use EC\Poetry\Messages\Components\Identifier;
 use EC\Poetry\Messages\Notifications\StatusUpdated;
-use EC\Poetry\Messages\Responses\Status;
 use EC\Poetry\Poetry;
 use EC\Poetry\Events\NotificationEventInterface;
 use EC\Poetry\Messages\Notifications\TranslationReceived;
 use EC\Poetry\Server;
-use Monolog\Formatter\JsonFormatter;
-use Monolog\Handler\StreamHandler;
-use Monolog\Logger;
+use EC\Poetry\Tests\Logger\TestFileLoggerFactory;
 use Psr\Log\LogLevel;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -41,7 +37,6 @@ class NotificationHandlerTest extends AbstractHttpMockTest
             $poetry = new Poetry([
                 'notification.username' => 'username',
                 'notification.password' => 'password',
-                'log_level' => LogLevel::INFO,
             ]);
             $poetry->getEventDispatcher()->addListener(StatusUpdatedEvent::NAME, function (StatusUpdatedEvent $event) {
                 expect($event->hasMessage())->be->true();
@@ -83,24 +78,49 @@ class NotificationHandlerTest extends AbstractHttpMockTest
     }
 
     /**
+     * Test response event.
+     *
+     * @param string $level
+     * @param array  $messages
+     *
+     * @dataProvider loggingCycleDataProvider
+     */
+    public function testLoggingCycle($level, array $messages)
+    {
+        $file = $this->logFile;
+        $callback = function (Response $response) use ($file, $level) {
+            $poetry = new Poetry([
+                'notification.username' => 'username',
+                'notification.password' => 'password',
+                'logger' => TestFileLoggerFactory::getInstance($file),
+                'log_level' => $level,
+            ]);
+            $poetry->getServer()->handle();
+        };
+
+        $this->setupServer('/notification', $callback);
+
+        $message = $this->getFixture('messages/notifications/status-updated.xml');
+        $this->notifyServer('/notification', 'username', 'password', $message);
+
+        $logs = $this->getLogs();
+        foreach ($messages as $key => $expected) {
+            expect($logs[$key]->message)->to->equal($expected);
+        }
+    }
+
+    /**
      * Test bad request.
      */
     public function testBadRequest()
     {
         $file = $this->logFile;
         $callback = function (Response $response) use ($file) {
-            @unlink($file);
-            $formatter = new JsonFormatter();
-            $stream = new StreamHandler($file, Logger::INFO);
-            $stream->setFormatter($formatter);
-            $logger = new Logger('Test Logger');
-            $logger->pushHandler($stream);
-
             $poetry = new Poetry([
                 'notification.username' => 'username',
                 'notification.password' => 'password',
                 'exceptions' => false,
-                'logger' => $logger,
+                'logger' => TestFileLoggerFactory::getInstance($file),
                 'log_level' => LogLevel::INFO,
             ]);
             $poetry->getServer()->handle();
@@ -124,5 +144,31 @@ class NotificationHandlerTest extends AbstractHttpMockTest
     {
         expect($event->hasMessage())->be->true();
         expect($event->getMessage())->to->be->instanceof(TranslationReceived::class);
+    }
+
+    /**
+     * @return array
+     */
+    public function loggingCycleDataProvider()
+    {
+        return [
+          [
+            LogLevel::DEBUG,
+            [
+              'poetry.notification_handler.received_notification',
+              'poetry.notification.parse',
+              'poetry.notification.status_updated',
+              'poetry.notification_handler.sent_response',
+            ],
+          ],
+          [
+            LogLevel::INFO,
+            [
+              'poetry.notification_handler.received_notification',
+              'poetry.notification.status_updated',
+              'poetry.notification_handler.sent_response',
+            ],
+          ],
+        ];
     }
 }

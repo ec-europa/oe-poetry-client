@@ -7,6 +7,7 @@ use EC\Poetry\Events\Client\ClientRequestEvent;
 use EC\Poetry\Events\ExceptionEvent;
 use EC\Poetry\Events\NotificationEventInterface;
 use EC\Poetry\Events\NotificationHandler\ReceivedNotificationEvent;
+use EC\Poetry\Events\NotificationHandler\SentResponseEvent;
 use EC\Poetry\Events\Notifications\StatusUpdatedEvent;
 use EC\Poetry\Events\Notifications\TranslationReceivedEvent;
 use EC\Poetry\Events\ParseNotificationEvent;
@@ -57,14 +58,15 @@ class LoggerSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            ParseResponseEvent::NAME        => 'onParseResponseEvent',
-            ParseNotificationEvent::NAME    => 'onParseNotificationEvent',
-            StatusUpdatedEvent::NAME        => 'onNotificationEvent',
-            TranslationReceivedEvent::NAME  => 'onNotificationEvent',
-            ClientRequestEvent::NAME        => 'onClientRequestEvent',
-            ClientResponseEvent::NAME       => 'onClientResponseEvent',
-            ReceivedNotificationEvent::NAME => 'onReceivedNotificationEvent',
-            ExceptionEvent::NAME            => 'onExceptionEvent',
+            ParseResponseEvent::NAME            => 'onParseResponseEvent',
+            ParseNotificationEvent::NAME        => 'onParseNotificationEvent',
+            StatusUpdatedEvent::NAME            => 'onNotificationEvent',
+            TranslationReceivedEvent::NAME      => 'onNotificationEvent',
+            ClientRequestEvent::NAME            => 'onClientRequestEvent',
+            ClientResponseEvent::NAME           => 'onClientResponseEvent',
+            ReceivedNotificationEvent::NAME     => 'onReceivedNotificationEvent',
+            SentResponseEvent::NAME             => 'onSentNotificationResponseEvent',
+            ExceptionEvent::NAME                => 'onExceptionEvent',
         ];
     }
 
@@ -73,7 +75,7 @@ class LoggerSubscriber implements EventSubscriberInterface
      */
     public function onParseResponseEvent(ParseResponseEvent $event)
     {
-        $this->logInfo(ParseResponseEvent::NAME, ['message' => $event->getXml()]);
+        $this->logDebug(ParseResponseEvent::NAME, ['message' => $event->getXml()]);
     }
 
     /**
@@ -81,7 +83,7 @@ class LoggerSubscriber implements EventSubscriberInterface
      */
     public function onParseNotificationEvent(ParseNotificationEvent $event)
     {
-        $this->logInfo(ParseNotificationEvent::NAME, ['message' => $event->getXml()]);
+        $this->logDebug(ParseNotificationEvent::NAME, ['message' => $event->getXml()]);
     }
 
     /**
@@ -115,6 +117,14 @@ class LoggerSubscriber implements EventSubscriberInterface
             'password' => $this->hidePassword($event->getPassword()),
             'message' => $event->getMessage(),
         ]);
+    }
+
+    /**
+     * @param \EC\Poetry\Events\NotificationHandler\SentResponseEvent $event
+     */
+    public function onSentNotificationResponseEvent(SentResponseEvent $event)
+    {
+        $this->logInfo(SentResponseEvent::NAME, ['message' => $event->getMessage()]);
     }
 
     /**
@@ -165,6 +175,19 @@ class LoggerSubscriber implements EventSubscriberInterface
     {
         if ($this->canLogLevel(LogLevel::INFO)) {
             $this->logger->info($message, $context);
+        }
+    }
+
+    /**
+     * Log debug messages.
+     *
+     * @param string $message
+     * @param array  $context
+     */
+    private function logDebug($message, array $context = [])
+    {
+        if ($this->canLogLevel(LogLevel::DEBUG)) {
+            $this->logger->debug($message, $context);
         }
     }
 

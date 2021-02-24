@@ -35,21 +35,24 @@ class LoggerSubscriberTest extends AbstractHttpMockTest
             'service.password' => 'password',
             'soap_client' => $mock,
             'logger' => $logger,
-            'log_level' => LogLevel::INFO,
+            'log_level' => LogLevel::DEBUG,
         ]);
 
         $poetry->getClient()->send($request);
         $logs = $logger->getLogs()[LogLevel::INFO];
 
-        expect($logs)->to->have->keys([
-            'poetry.client.request',
-            'poetry.client.response',
-            'poetry.response.parse',
-        ]);
+        expect($logs)
+          ->to->have->keys(['poetry.client.request', 'poetry.client.response'])
+          ->and->not->to->have->keys(['poetry.response.parse']);
         expect($logs['poetry.client.response']['message'])->to->have->same->xml('messages/responses/response-status.xml');
         expect($logs['poetry.client.request']['message'])->to->contain('<request communication="synchrone" id="DGT/2017/00001/3/0/TRA" type="newPost">');
         expect($logs['poetry.client.request']['username'])->to->equal('username');
         expect($logs['poetry.client.request']['password'])->to->equal('p******d');
+
+        $logs = $logger->getLogs()[LogLevel::DEBUG];
+        expect($logs)
+          ->to->have->keys(['poetry.response.parse'])
+          ->and->not->to->have->keys(['poetry.client.request', 'poetry.client.response']);
         expect($logs['poetry.response.parse']['message'])->to->have->same->xml('messages/responses/response-status.xml');
     }
 
