@@ -70,7 +70,7 @@ class Parser extends DomCrawler\Crawler
      *
      * @return string
      */
-    public function outerHtml()
+    public function outerHtml(): string
     {
         if (!count($this)) {
             new ParserException('The current node list is empty.');
