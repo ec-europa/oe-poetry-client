@@ -43,17 +43,17 @@ class Poetry extends Container implements ContainerInterface
     /**
      * {@inheritdoc}
      */
-    public function get($name)
+    public function get(string $id)
     {
-        return $this[$name];
+        return $this[$id];
     }
 
     /**
      * {@inheritdoc}
      */
-    public function has($name)
+    public function has(string $id)
     {
-        return $this->offsetExists($name);
+        return $this->offsetExists($id);
     }
 
     /**

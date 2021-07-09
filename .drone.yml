@@ -4,41 +4,56 @@ workspace:
 
 services:
   web:
-    image: ${IMAGE_PHP=fpfis/httpd-php-dev:5.6}
+    image: registry.fpfis.eu/fpfis/httpd-php:${PHP_VERSION}-ci
     environment:
       - DOCUMENT_ROOT=/test/oe-poetry-client
 
 pipeline:
   composer-install:
     group: prepare
-    image: ${IMAGE_PHP=fpfis/httpd-php-dev:5.6}
+    image: registry.fpfis.eu/fpfis/httpd-php:${PHP_VERSION}-ci
     volumes:
       - /cache:/cache
     commands:
-      - composer update ${COMPOSER_BOUNDARY}
+      - composer install --ansi --no-suggest --no-progress
+
+  composer-update-lowest:
+    group: post-prepare
+    image: registry.fpfis.eu/fpfis/httpd-php:${PHP_VERSION}-ci
+    volumes:
+      - /cache:/cache
+    commands:
+      - composer update --prefer-lowest --prefer-stable --ansi --no-suggest --no-progress
+    when:
+      matrix:
+        COMPOSER_BOUNDARY: lowest
 
   grumphp:
     group: test
-    image: ${IMAGE_PHP=fpfis/httpd-php-dev:5.6}
+    image: registry.fpfis.eu/fpfis/httpd-php:${PHP_VERSION}-ci
     commands:
       - ./vendor/bin/grumphp run
 
   phpunit:
     group: test
-    image: ${IMAGE_PHP=fpfis/httpd-php-dev:5.6}
+    image: registry.fpfis.eu/fpfis/httpd-php:${PHP_VERSION}-ci
     commands:
       - ./vendor/bin/phpunit
 
   phpspec:
     group: test
-    image: ${IMAGE_PHP=fpfis/httpd-php-dev:5.6}
+    image: registry.fpfis.eu/fpfis/httpd-php:${PHP_VERSION}-ci
     commands:
       - ./vendor/bin/phpspec run
+    when:
+      event:
+        exclude: tag
+      matrix:
+        TYPE: phpunit
 
 matrix:
-  IMAGE_PHP:
-    - fpfis/httpd-php-dev:5.6
-    - fpfis/httpd-php-dev:7.1
   COMPOSER_BOUNDARY:
-    - '--prefer-lowest'
-    - ''
+    - lowest
+    - highest
+  PHP_VERSION:
+    - 7.3

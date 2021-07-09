@@ -7,25 +7,25 @@
     "license": "EUPL-1.2",
     "require": {
         "ext-soap": "*",
-        "jeremeamia/superclosure": "~2.2",
-        "league/plates": "^3.3.0",
-        "php": ">=5.6",
-        "pimple/pimple": "~3.2.3",
+        "jeremeamia/superclosure": "^2.4",
+        "league/plates": "^3.4",
+        "php": ">=7.3",
+        "pimple/pimple": "^3.4",
         "psr/log": "~1",
-        "symfony/dom-crawler": "^2.8|^3.0",
-        "symfony/event-dispatcher": "^2.8|^3.0",
-        "symfony/expression-language": "^2.8|^3.0",
-        "symfony/validator": "^2.8|^3.0",
-        "symfony/yaml": "~3.3|~4.0"
+        "symfony/dom-crawler": "^3.4 || ^4.4",
+        "symfony/event-dispatcher": "^3.4 || ^4.4",
+        "symfony/expression-language": "^3.4 || ^4.4",
+        "symfony/validator": "^3.4 || ^4.4",
+        "symfony/yaml": "^3.4 || ^4.4"
     },
     "require-dev": {
-        "guzzle/guzzle": "~2.7|~3.0",
-        "internations/http-mock": "~0.8",
-        "mockery/mockery": "^0.9.9",
-        "openeuropa/code-review": "1.0.0-alpha1",
-        "peridot-php/leo": "~1.6",
-        "phpspec/phpspec": "~4.0@alpha",
-        "phpunit/phpunit": "~5.5|~6"
+        "guzzle/guzzle": "^3.8",
+        "internations/http-mock": "^0.14",
+        "mockery/mockery": "^1.4",
+        "openeuropa/code-review": "^1.6",
+        "peridot-php/leo": "^1.6",
+        "phpspec/phpspec": "^7.1",
+        "phpunit/phpunit": "^8.5"
     },
     "suggest": {
         "monolog/monolog": "Log Poetry requests and responses via Monolog",

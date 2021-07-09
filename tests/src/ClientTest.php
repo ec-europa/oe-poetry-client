@@ -2,12 +2,9 @@
 
 namespace EC\Poetry\Tests;
 
-use EC\Poetry\Events\ParseNotificationEvent;
 use EC\Poetry\Messages\Requests\CreateTranslationRequest;
-use EC\Poetry\Messages\Responses\Status;
 use EC\Poetry\Poetry;
 use EC\Poetry\Services\Settings;
-use EC\Poetry\Tests\Logger\TestLogger;
 use Psr\Log\LogLevel;
 
 /**

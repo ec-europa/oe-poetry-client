@@ -3,9 +3,7 @@
 namespace EC\Poetry\Tests;
 
 use EC\Poetry\Events\Notifications\StatusUpdatedEvent;
-use EC\Poetry\Messages\Components\Identifier;
 use EC\Poetry\Messages\Notifications\StatusUpdated;
-use EC\Poetry\Messages\Responses\Status;
 use EC\Poetry\Poetry;
 use EC\Poetry\Events\NotificationEventInterface;
 use EC\Poetry\Messages\Notifications\TranslationReceived;
