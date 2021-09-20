@@ -25,9 +25,9 @@ class AddLanguagesRequestTest extends AbstractTest
         $request = new AddLanguagesRequest($identifier, new Settings());
 
         $request->withTarget()
-                ->setLanguage('FR')
-                ->setFormat('HTML')
-                ->setDelay('14/09/2017');
+            ->setLanguage('FR')
+            ->setFormat('HTML')
+            ->setDelay('14/09/2017');
 
         $violations = $this->getContainer()->get('validator')->validate($request);
         expect($this->getViolations($violations))->to->be->empty();
@@ -45,23 +45,23 @@ class AddLanguagesRequestTest extends AbstractTest
 
         $identifier = new Identifier();
         $identifier->setCode('DGT')
-          ->setYear(2017)
-          ->setNumber('00001')
-          ->setVersion('01')
-          ->setPart('00')
-          ->setProduct('TRA');
+            ->setYear(2017)
+            ->setNumber('00001')
+            ->setVersion('01')
+            ->setPart('00')
+            ->setProduct('TRA');
 
         $message = new AddLanguagesRequest($identifier, new Settings());
 
         $message->withTarget()
-                ->setAction('INSERT')
-                ->setLanguage('FR')
-                ->setFormat('HTML')
-                ->setDelay('14/09/2017')
-                ->withReturnAddress()
-                ->setType('webService')
-                ->setUser('MY-TEST-USER')
-                ->setAddress('Url');
+            ->setAction('INSERT')
+            ->setLanguage('FR')
+            ->setFormat('HTML')
+            ->setDelay('14/09/2017')
+            ->withReturnAddress()
+            ->setType('webService')
+            ->setUser('MY-TEST-USER')
+            ->setAddress('Url');
 
         $output = $renderer->render($message);
         expect($output)->to->have->same->xml('messages/requests/add-languages-request.xml');

@@ -27,11 +27,11 @@ class IdentifierTest extends TestCase
         expect($violations->count())->to->be->above(0);
 
         $expected = [
-          'code' => "This value should not be blank.",
-          'part' => "This value should not be blank.",
-          'product' => "This value should not be blank.",
-          'version' => "This value should not be blank.",
-          'year' => "This value should be greater than 2000.",
+            'code' => "This value should not be blank.",
+            'part' => "This value should not be blank.",
+            'product' => "This value should not be blank.",
+            'version' => "This value should not be blank.",
+            'year' => "This value should be greater than 2000.",
         ];
         $violations = $this->getViolations($violations);
         foreach ($expected as $name => $violation) {
@@ -85,8 +85,8 @@ class IdentifierTest extends TestCase
         $message = $poetry->get('request.create_translation_request');
         $rendered = $poetry->getRenderer()->render($message);
         expect($rendered)
-          ->to->contain('<sequence>NEXT_EUROPA_COUNTER</sequence>')
-          ->and->not->to->contain('<numero>');
+            ->to->contain('<sequence>NEXT_EUROPA_COUNTER</sequence>')
+            ->and->not->to->contain('<numero>');
     }
 
     /**

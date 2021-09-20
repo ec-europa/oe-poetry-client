@@ -53,8 +53,8 @@ class TranslationReceived extends AbstractNotification
 
         $parser->eachComponent("POETRY/request/attributions", function (Parser $component) {
             $this->withTarget()
-              ->setParser($this->getParser())
-              ->fromXml($component->outerHtml());
+                ->setParser($this->getParser())
+                ->fromXml($component->outerHtml());
         }, $this);
 
         return $this;

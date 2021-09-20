@@ -26,10 +26,10 @@ class GetNewNumberTest extends AbstractTest
 
         $identifier = new Identifier();
         $identifier->setCode('DGT')
-          ->setYear('2017')
-          ->setSequence('MY_SEQUENCE')
-          ->setVersion('01')
-          ->setPart('00');
+            ->setYear('2017')
+            ->setSequence('MY_SEQUENCE')
+            ->setVersion('01')
+            ->setPart('00');
 
         $message = new GetNewNumber($identifier, new Settings());
 

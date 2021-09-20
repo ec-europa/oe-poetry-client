@@ -46,8 +46,8 @@ class Contact extends AbstractComponent
     public function getAttributes()
     {
         $attributes = [
-          'type' => $this->getType(),
-          'action' => $this->getAction(),
+            'type' => $this->getType(),
+            'action' => $this->getAction(),
         ];
 
         return array_filter($attributes);
@@ -138,9 +138,9 @@ class Contact extends AbstractComponent
         $parser->addXmlContent($xml);
 
         $this->setNickname($parser->getContent('contacts/contactNickname'))
-          ->setEmail($parser->getContent('contacts/contactEmail'))
-          ->setType($parser->attr('type'))
-          ->setAction($parser->attr('action'));
+            ->setEmail($parser->getContent('contacts/contactEmail'))
+            ->setType($parser->attr('type'))
+            ->setAction($parser->attr('action'));
 
         return $this;
     }

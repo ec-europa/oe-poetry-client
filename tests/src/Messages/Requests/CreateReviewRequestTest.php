@@ -61,10 +61,10 @@ class CreateReviewRequestTest extends AbstractTest
 
         $identifier = new Identifier();
         $identifier->setCode('STSI')
-          ->setYear(2017)
-          ->setNumber('40017')
-          ->setVersion('0')
-          ->setPart('11');
+            ->setYear(2017)
+            ->setNumber('40017')
+            ->setVersion('0')
+            ->setPart('11');
 
         $message = new CreateReviewRequest($identifier, new Settings());
 
@@ -101,8 +101,8 @@ class CreateReviewRequestTest extends AbstractTest
             ->setFile('BASE64ENCODEDFILECONTENT')
             ->setLegiswriteFormat('Yes')
             ->withSourceLanguage()
-                ->setCode('EN')
-                ->setPages(1);
+            ->setCode('EN')
+            ->setPages(1);
 
         $message->withTarget()
             ->setAction('INSERT')

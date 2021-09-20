@@ -306,15 +306,15 @@ class Source extends AbstractComponent
         return $this;
     }
 
-  /**
-   * @param \EC\Poetry\Services\Parser $parser
-   */
+    /**
+     * @param \EC\Poetry\Services\Parser $parser
+     */
     private function parseSourceLanguage(Parser $parser)
     {
         $parser->eachComponent("documentSource/documentSourceLang", function (Parser $language) {
             $this->withSourceLanguage()
-            ->setParser($this->getParser())
-            ->fromXml($language->outerHtml());
+                ->setParser($this->getParser())
+                ->fromXml($language->outerHtml());
         }, $this);
     }
 
@@ -324,15 +324,15 @@ class Source extends AbstractComponent
     private function parseDocumentSource(Parser $parser)
     {
         $this->setChannel($parser->getAttribute('documentSource', 'channel'))
-        ->setDeadline($parser->getAttribute('documentSource', 'deadline'))
-        ->setDeadlineStatus($parser->getAttribute('documentSource', 'statusDeadline'))
-        ->setConfidential($parser->getAttribute('documentSource', 'marked'))
-        ->setFormat($parser->getAttribute('documentSource', 'format'))
-        ->setLegiswriteFormat($parser->getAttribute('documentSource', 'legiswrite'))
-        ->setTrackChanges($parser->getAttribute('documentSource', 'trackChanges'))
-        ->setName($parser->getContent('documentSource/documentSourceName'))
-        ->setPath($parser->getContent('documentSource/documentSourcePath'))
-        ->setSize($parser->getContent('documentSource/documentSourceSize'))
-        ->setFile($parser->getContent('documentSource/documentSourceFile'));
+            ->setDeadline($parser->getAttribute('documentSource', 'deadline'))
+            ->setDeadlineStatus($parser->getAttribute('documentSource', 'statusDeadline'))
+            ->setConfidential($parser->getAttribute('documentSource', 'marked'))
+            ->setFormat($parser->getAttribute('documentSource', 'format'))
+            ->setLegiswriteFormat($parser->getAttribute('documentSource', 'legiswrite'))
+            ->setTrackChanges($parser->getAttribute('documentSource', 'trackChanges'))
+            ->setName($parser->getContent('documentSource/documentSourceName'))
+            ->setPath($parser->getContent('documentSource/documentSourcePath'))
+            ->setSize($parser->getContent('documentSource/documentSourceSize'))
+            ->setFile($parser->getContent('documentSource/documentSourceFile'));
     }
 }

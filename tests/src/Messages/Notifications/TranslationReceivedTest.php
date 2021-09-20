@@ -25,18 +25,18 @@ class TranslationReceivedTest extends AbstractTest
 
         $identifier = new Identifier();
         $identifier->setCode('WEB')
-          ->setYear(2017)
-          ->setNumber('40012')
-          ->setVersion('0')
-          ->setPart('39')
-          ->setProduct('TRA');
+            ->setYear(2017)
+            ->setNumber('40012')
+            ->setVersion('0')
+            ->setPart('39')
+            ->setProduct('TRA');
 
         $message = new TranslationReceived($identifier);
         $message->setMessageId('7685067');
         $message->withTarget()
-          ->setFormat('HTML')
-          ->setLanguage('FR')
-          ->setTranslatedFile('File64');
+            ->setFormat('HTML')
+            ->setLanguage('FR')
+            ->setTranslatedFile('File64');
 
         $output = $renderer->render($message);
         expect($output)->to->have->same->xml('messages/notifications/translation-received.xml');

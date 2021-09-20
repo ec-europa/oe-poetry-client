@@ -23,7 +23,7 @@ abstract class AbstractNotification extends AbstractMessage implements ParserAwa
     public static function getSubscribedEvents()
     {
         return [
-          ParseNotificationEvent::NAME => 'onParseNotification',
+            ParseNotificationEvent::NAME => 'onParseNotification',
         ];
     }
 

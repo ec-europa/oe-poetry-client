@@ -126,11 +126,11 @@ class NotificationHandler
         $status = new Status($notification->getIdentifier());
         $status->setMessageId($notification->getMessageId());
         $status->withStatus()
-          ->setType('request')
-          ->setTime(date('H:i:s'))
-          ->setDate(date('d/m/Y'))
-          ->setCode('0')
-          ->setMessage('OK');
+            ->setType('request')
+            ->setTime(date('H:i:s'))
+            ->setDate(date('d/m/Y'))
+            ->setCode('0')
+            ->setMessage('OK');
 
         return $this->renderer->render($status);
     }
@@ -146,11 +146,11 @@ class NotificationHandler
         $status = new Status($notification->getIdentifier());
         $status->setMessageId($notification->getMessageId());
         $status->withStatus()
-          ->setType('request')
-          ->setTime(date('H:i:s'))
-          ->setDate(date('d/m/Y'))
-          ->setCode('-1')
-          ->setMessage($message);
+            ->setType('request')
+            ->setTime(date('H:i:s'))
+            ->setDate(date('d/m/Y'))
+            ->setCode('-1')
+            ->setMessage($message);
 
         return $this->renderer->render($status);
     }

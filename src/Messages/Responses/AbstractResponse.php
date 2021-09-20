@@ -21,7 +21,7 @@ abstract class AbstractResponse extends AbstractMessage implements ResponseInter
     public static function getSubscribedEvents()
     {
         return [
-          ParseResponseEvent::NAME => 'onParseResponse',
+            ParseResponseEvent::NAME => 'onParseResponse',
         ];
     }
 
