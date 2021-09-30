@@ -40,12 +40,12 @@ class CreateTranslationRequest extends AbstractRequest
 
         if ($settings->get('client.wsdl') && $settings->get('notification.username') && $settings->get('notification.password')) {
             $this->withReturnAddress()
-              ->setAction('UPDATE')
-              ->setType('webService')
-              ->setUser($settings->get('notification.username'))
-              ->setPassword($settings->get('notification.password'))
-              ->setAddress($settings->get('client.wsdl'))
-              ->setPath('handle');
+                ->setAction('UPDATE')
+                ->setType('webService')
+                ->setUser($settings->get('notification.username'))
+                ->setPassword($settings->get('notification.password'))
+                ->setAddress($settings->get('client.wsdl'))
+                ->setPath('handle');
         }
     }
 

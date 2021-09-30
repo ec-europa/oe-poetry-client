@@ -67,9 +67,9 @@ class Status extends AbstractComponent
     public function getAttributes()
     {
         $attributes = [
-          'lgCode' => $this->getLanguage(),
-          'type' => $this->getType(),
-          'code' => $this->getCode(),
+            'lgCode' => $this->getLanguage(),
+            'type' => $this->getType(),
+            'code' => $this->getCode(),
         ];
 
         return array_filter($attributes, function ($value) {

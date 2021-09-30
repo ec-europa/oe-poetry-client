@@ -25,7 +25,7 @@ class Wsdl
      * @var array
      */
     protected $headers = [
-      'content-type' => 'application/xml; utf-8',
+        'content-type' => 'application/xml; utf-8',
     ];
 
     /**

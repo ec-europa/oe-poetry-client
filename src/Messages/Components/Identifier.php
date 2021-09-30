@@ -259,10 +259,10 @@ class Identifier extends AbstractComponent
     public function getGroupSequence()
     {
         return [
-          [
-            'Identifier',
-            empty($this->getNumber()) ? 'sequence' : 'number',
-          ],
+            [
+                'Identifier',
+                empty($this->getNumber()) ? 'sequence' : 'number',
+            ],
         ];
     }
 

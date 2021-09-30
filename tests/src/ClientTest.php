@@ -30,14 +30,14 @@ class ClientTest extends AbstractTest
 
         $mock = $this->getSoapClientMock();
         $mock->shouldReceive('requestService')
-          ->withArgs([$username, $password, $rendererRequest])
-          ->andReturn($this->getFixture('messages/responses/response-status.xml'));
+            ->withArgs([$username, $password, $rendererRequest])
+            ->andReturn($this->getFixture('messages/responses/response-status.xml'));
 
         $parameters = [
-          'service.username' => $username,
-          'service.password' => $password,
-          'soap_client' => $mock,
-          'log_level' => LogLevel::INFO,
+            'service.username' => $username,
+            'service.password' => $password,
+            'soap_client' => $mock,
+            'log_level' => LogLevel::INFO,
         ];
         $poetry = new Poetry($parameters);
 

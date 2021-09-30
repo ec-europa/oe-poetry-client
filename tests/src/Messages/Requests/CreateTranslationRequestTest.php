@@ -22,10 +22,10 @@ class CreateTranslationRequestTest extends AbstractTest
     {
         $identifier = new Identifier();
         $identifier->setCode('DGT')
-          ->setYear(2017)
-          ->setNumber('00001')
-          ->setVersion('01')
-          ->setPart('00');
+            ->setYear(2017)
+            ->setNumber('00001')
+            ->setVersion('01')
+            ->setPart('00');
 
         new CreateTranslationRequest($identifier, new Settings());
         expect($identifier->getProduct())->to->equal('TRA');
@@ -38,11 +38,11 @@ class CreateTranslationRequestTest extends AbstractTest
     {
         $identifier = new Identifier();
         $identifier->setCode('DGT')
-          ->setYear(2017)
-          ->setNumber('00001')
-          ->setVersion('01')
-          ->setPart('00')
-          ->setProduct('ABC');
+            ->setYear(2017)
+            ->setNumber('00001')
+            ->setVersion('01')
+            ->setPart('00')
+            ->setProduct('ABC');
 
         new CreateTranslationRequest($identifier, new Settings());
         expect($identifier->getProduct())->to->equal('ABC');
@@ -90,11 +90,11 @@ class CreateTranslationRequestTest extends AbstractTest
 
         $identifier = new Identifier();
         $identifier->setCode('DGT')
-          ->setYear(2017)
-          ->setNumber('00001')
-          ->setVersion('01')
-          ->setPart('00')
-          ->setProduct('TRA');
+            ->setYear(2017)
+            ->setNumber('00001')
+            ->setVersion('01')
+            ->setPart('00')
+            ->setProduct('TRA');
 
         $message = new CreateTranslationRequest($identifier, new Settings());
 

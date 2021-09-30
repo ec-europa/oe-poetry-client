@@ -80,12 +80,12 @@ class ServicesProvider implements ServiceProviderInterface
         $container['renderer.engine'] = function (Container $container) {
             $root = $container['renderer.engine.template_folder'];
             $engine = (new Engine($root))
-              ->setFileExtension('tpl.php')
-              ->loadExtension(new ComponentExtension())
-              ->loadExtension(new AttributesExtension())
-              ->addFolder('messages', $root.'/messages')
-              ->addFolder('components', $root.'/components')
-              ->addFolder('notifications', $root.'/notifications');
+                ->setFileExtension('tpl.php')
+                ->loadExtension(new ComponentExtension())
+                ->loadExtension(new AttributesExtension())
+                ->addFolder('messages', $root.'/messages')
+                ->addFolder('components', $root.'/components')
+                ->addFolder('notifications', $root.'/notifications');
 
             return $engine;
         };

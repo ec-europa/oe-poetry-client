@@ -4,14 +4,14 @@ workspace:
 
 services:
   web:
-    image: ${IMAGE_PHP=fpfis/httpd-php-dev:5.6}
+    image: ${IMAGE_PHP=registry.fpfis.eu/fpfis/httpd-php:7.3-ci}
     environment:
       - DOCUMENT_ROOT=/test/oe-poetry-client
 
 pipeline:
   composer-install:
     group: prepare
-    image: ${IMAGE_PHP=fpfis/httpd-php-dev:5.6}
+    image: ${IMAGE_PHP=registry.fpfis.eu/fpfis/httpd-php:7.3-ci}
     volumes:
       - /cache:/cache
     commands:
@@ -19,26 +19,25 @@ pipeline:
 
   grumphp:
     group: test
-    image: ${IMAGE_PHP=fpfis/httpd-php-dev:5.6}
+    image: ${IMAGE_PHP=registry.fpfis.eu/fpfis/httpd-php:7.3-ci}
     commands:
       - ./vendor/bin/grumphp run
 
   phpunit:
     group: test
-    image: ${IMAGE_PHP=fpfis/httpd-php-dev:5.6}
+    image: ${IMAGE_PHP=registry.fpfis.eu/fpfis/httpd-php:7.3-ci}
     commands:
       - ./vendor/bin/phpunit
 
   phpspec:
     group: test
-    image: ${IMAGE_PHP=fpfis/httpd-php-dev:5.6}
+    image: ${IMAGE_PHP=registry.fpfis.eu/fpfis/httpd-php:7.3-ci}
     commands:
       - ./vendor/bin/phpspec run
 
 matrix:
   IMAGE_PHP:
-    - fpfis/httpd-php-dev:5.6
-    - fpfis/httpd-php-dev:7.1
+    - registry.fpfis.eu/fpfis/httpd-php:7.3-ci
   COMPOSER_BOUNDARY:
     - '--prefer-lowest'
     - ''

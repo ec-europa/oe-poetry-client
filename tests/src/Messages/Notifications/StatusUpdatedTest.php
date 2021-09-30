@@ -25,37 +25,37 @@ class StatusUpdatedTest extends AbstractTest
 
         $identifier = new Identifier();
         $identifier->setCode('WEB')
-          ->setYear(2017)
-          ->setNumber('40029')
-          ->setVersion('0')
-          ->setPart('0')
-          ->setProduct('TRA');
+            ->setYear(2017)
+            ->setNumber('40029')
+            ->setVersion('0')
+            ->setPart('0')
+            ->setProduct('TRA');
 
         $message = new StatusUpdated($identifier);
         $message->setMessageId('1069698');
         $message->withStatus()
-          ->setCode('0')
-          ->setType('request')
-          ->setDate('29/09/2017')
-          ->setTime('15:44:02')
-          ->setMessage('OK');
+            ->setCode('0')
+            ->setType('request')
+            ->setDate('29/09/2017')
+            ->setTime('15:44:02')
+            ->setMessage('OK');
         $message->withStatus()
-          ->setCode('ONG')
-          ->setType('demande')
-          ->setDate('29/09/2017')
-          ->setTime('15:42:34')
-          ->setMessage('REQUEST ACCEPTED');
+            ->setCode('ONG')
+            ->setType('demande')
+            ->setDate('29/09/2017')
+            ->setTime('15:42:34')
+            ->setMessage('REQUEST ACCEPTED');
         $message->withStatus()
-          ->setCode('ONG')
-          ->setType('attribution')
-          ->setDate('29/09/2017')
-          ->setTime('00:00:00')
-          ->setLanguage('FR');
+            ->setCode('ONG')
+            ->setType('attribution')
+            ->setDate('29/09/2017')
+            ->setTime('00:00:00')
+            ->setLanguage('FR');
         $message->withTarget()
-          ->setFormat('HTML')
-          ->setLanguage('FR')
-          ->setDelay('04/10/2017 23:59')
-          ->setAcceptedDelay('04/10/2017 23:59');
+            ->setFormat('HTML')
+            ->setLanguage('FR')
+            ->setDelay('04/10/2017 23:59')
+            ->setAcceptedDelay('04/10/2017 23:59');
 
         $output = $renderer->render($message);
         expect($output)->to->have->same->xml('messages/notifications/status-updated.xml');

@@ -189,14 +189,14 @@ class LoggerSubscriber implements EventSubscriberInterface
     private function canLogLevel($level)
     {
         $levels = [
-          LogLevel::DEBUG,
-          LogLevel::INFO,
-          LogLevel::NOTICE,
-          LogLevel::WARNING,
-          LogLevel::ERROR,
-          LogLevel::CRITICAL,
-          LogLevel::ALERT,
-          LogLevel::EMERGENCY,
+            LogLevel::DEBUG,
+            LogLevel::INFO,
+            LogLevel::NOTICE,
+            LogLevel::WARNING,
+            LogLevel::ERROR,
+            LogLevel::CRITICAL,
+            LogLevel::ALERT,
+            LogLevel::EMERGENCY,
         ];
         $key = array_search($this->settings['log_level'], $levels);
         $levels = array_slice($levels, $key);

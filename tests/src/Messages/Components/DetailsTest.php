@@ -26,7 +26,7 @@ class DetailsTest extends TestCase
         expect($violations->count())->to->be->above(0);
 
         $expected = [
-          'type' => "The value you selected is not a valid choice.",
+            'type' => "The value you selected is not a valid choice.",
         ];
         foreach ($this->getViolations($violations) as $name => $violation) {
             expect($violation)->to->be->equal($expected[$name]);

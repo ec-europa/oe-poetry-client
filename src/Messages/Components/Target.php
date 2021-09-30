@@ -324,11 +324,11 @@ class Target extends AbstractComponent
     {
         $parser->eachComponent("attributions/attributionContact", function (Parser $component) {
             $this->withContact()
-              ->setParser($this->getParser())
-              ->setNickname($component->getContent('attributionContact/contactNickname'))
-              ->setEmail($component->getContent('attributionContact/contactEmail'))
-              ->setType($component->attr('type'))
-              ->setAction($component->attr('action'));
+                ->setParser($this->getParser())
+                ->setNickname($component->getContent('attributionContact/contactNickname'))
+                ->setEmail($component->getContent('attributionContact/contactEmail'))
+                ->setType($component->attr('type'))
+                ->setAction($component->attr('action'));
         }, $this);
     }
 
@@ -339,13 +339,13 @@ class Target extends AbstractComponent
     {
         $parser->eachComponent("attributions/attributionsSend", function (Parser $component) {
             $this->withReturnAddress()
-              ->setParser($this->getParser())
-              ->setType($component->attr('type'))
-              ->setUser($component->getContent('attributionsSend/retourUser'))
-              ->setPassword($component->getContent('attributionsSend/retourPassword'))
-              ->setAddress($component->getContent('attributionsSend/retourAddress'))
-              ->setPath($component->getContent('attributionsSend/retourPath'))
-              ->setRemark($component->getContent('attributionsSend/retourRemark'));
+                ->setParser($this->getParser())
+                ->setType($component->attr('type'))
+                ->setUser($component->getContent('attributionsSend/retourUser'))
+                ->setPassword($component->getContent('attributionsSend/retourPassword'))
+                ->setAddress($component->getContent('attributionsSend/retourAddress'))
+                ->setPath($component->getContent('attributionsSend/retourPath'))
+                ->setRemark($component->getContent('attributionsSend/retourRemark'));
         }, $this);
     }
 
@@ -355,14 +355,14 @@ class Target extends AbstractComponent
     private function parseAttributions(Parser $parser)
     {
         $this->setFormat($parser->getAttribute('attributions', 'format'))
-          ->setLanguage($parser->getAttribute('attributions', 'lgCode'))
-          ->setAction($parser->getAttribute('attributions', 'action'))
-          ->setTrackChanges($parser->getAttribute('attributions', 'trackChanges'))
-          ->setRemark($parser->getContent('attributions/attributionsRemark'))
-          ->setDelay($parser->getContent('attributions/attributionsDelai'))
-          ->setDelayFormat($parser->getAttribute('attributions/attributionsDelai', 'format'))
-          ->setAcceptedDelay($parser->getContent('attributions/attributionsDelaiAccepted'))
-          ->setAcceptedDelayFormat($parser->getAttribute('attributions/attributionsDelaiAccepted', 'format'))
-          ->setTranslatedFile($parser->getContent('attributions/attributionsFile'));
+            ->setLanguage($parser->getAttribute('attributions', 'lgCode'))
+            ->setAction($parser->getAttribute('attributions', 'action'))
+            ->setTrackChanges($parser->getAttribute('attributions', 'trackChanges'))
+            ->setRemark($parser->getContent('attributions/attributionsRemark'))
+            ->setDelay($parser->getContent('attributions/attributionsDelai'))
+            ->setDelayFormat($parser->getAttribute('attributions/attributionsDelai', 'format'))
+            ->setAcceptedDelay($parser->getContent('attributions/attributionsDelaiAccepted'))
+            ->setAcceptedDelayFormat($parser->getAttribute('attributions/attributionsDelaiAccepted', 'format'))
+            ->setTranslatedFile($parser->getContent('attributions/attributionsFile'));
     }
 }

@@ -63,11 +63,11 @@ abstract class AbstractTest extends TestCase
     {
         $identifier = new Identifier();
         $identifier->setCode('DGT')
-          ->setYear(2017)
-          ->setNumber('00001')
-          ->setVersion('3')
-          ->setPart('0')
-          ->setProduct('TRA');
+            ->setYear(2017)
+            ->setNumber('00001')
+            ->setVersion('3')
+            ->setPart('0')
+            ->setProduct('TRA');
 
         return $identifier;
     }
