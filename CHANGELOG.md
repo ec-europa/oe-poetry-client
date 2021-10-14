@@ -1,10 +1,19 @@
 # Change Log
 
+## [0.5.0](https://github.com/ec-europa/oe-poetry-client/tree/0.5.0) (2021-10-14)
+[Full Changelog](https://github.com/ec-europa/oe-poetry-client/compare/0.4.0...0.5.0)
+
+**Merged pull requests:**
+
+- EWPP-917: Update minimum PHP version and Symfony components [\#87](https://github.com/ec-europa/oe-poetry-client/pull/87) ([ademarco](https://github.com/ademarco))
+- EWPP-917: Drupal 9 compatibility update [\#86](https://github.com/ec-europa/oe-poetry-client/pull/86) ([GilNovacomm](https://github.com/GilNovacomm))
+
 ## [0.4.0](https://github.com/ec-europa/oe-poetry-client/tree/0.4.0) (2020-04-08)
 [Full Changelog](https://github.com/ec-europa/oe-poetry-client/compare/0.3.8...0.4.0)
 
 **Merged pull requests:**
 
+- Update CHANGELOG.md for release 0.4.0. [\#85](https://github.com/ec-europa/oe-poetry-client/pull/85) ([sergepavle](https://github.com/sergepavle))
 - OPENEUROPA-2251: Allow adding languages into an ongoing translation. [\#83](https://github.com/ec-europa/oe-poetry-client/pull/83) ([dxvargas](https://github.com/dxvargas))
 
 ## [0.3.8](https://github.com/ec-europa/oe-poetry-client/tree/0.3.8) (2019-12-02)
