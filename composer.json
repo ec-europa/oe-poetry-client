@@ -2,30 +2,30 @@
     "name": "ec-europa/oe-poetry-client",
     "description": "Client library for the European Commission Poetry Service",
     "type": "library",
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "prefer-stable": true,
     "license": "EUPL-1.2",
     "require": {
         "ext-soap": "*",
         "jeremeamia/superclosure": "~2.2",
         "league/plates": "^3.3.0",
-        "php": ">=7.3",
+        "php": ">=7.4",
         "pimple/pimple": "~3.2.3",
         "psr/log": "~1",
-        "symfony/dom-crawler": "^3.4 || ^4.4",
+        "symfony/dom-crawler": "^3.4 || ^4.4.12",
         "symfony/event-dispatcher": "^3.4 || ^4.4",
         "symfony/expression-language": "^3.4 || ^4.4",
         "symfony/validator": "^3.4 || ^4.4",
         "symfony/yaml": "^3.4 || ^4.4"
     },
     "require-dev": {
-        "guzzle/guzzle": "~2.7 || ~3.0",
-        "internations/http-mock": "~0.8",
-        "mockery/mockery": "^0.9.9",
-        "openeuropa/code-review": "~1.7",
-        "peridot-php/leo": "~1.6",
-        "phpspec/phpspec": "~4.0@alpha",
-        "phpunit/phpunit": "~6.0"
+        "guzzle/guzzle": "^2.7 || ^3.0",
+        "internations/http-mock": "dev-php74#cd52a62136c98b1b66eca6edbd564a3a91f7e79c",
+        "mockery/mockery": "^1.5",
+        "openeuropa/code-review": "^2.0",
+        "peridot-php/leo": "^1.6",
+        "phpspec/phpspec": "^7.0",
+        "phpunit/phpunit": "^8.0"
     },
     "suggest": {
         "monolog/monolog": "Log Poetry requests and responses via Monolog",
@@ -40,6 +40,14 @@
         "psr-4": {
             "EC\\Poetry\\Tests\\": "./tests/src/",
             "spec\\EC\\Poetry\\": "./spec/"
+        }
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "cweagans/composer-patches": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "phpro/grumphp": true
         }
     }
 }

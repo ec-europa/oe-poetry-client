@@ -26,7 +26,7 @@ abstract class AbstractTest extends TestCase
     /**
      * {@inheritdoc}
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $assertion = Leo::assertion();
         $unit = $this;
