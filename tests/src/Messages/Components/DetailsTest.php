@@ -23,13 +23,13 @@ class DetailsTest extends TestCase
         $details = (new Details())->setType('TEST');
 
         $violations = $validator->validate($details);
-        expect($violations->count())->to->be->above(0);
+        $this->assertGreaterThan(0, $violations->count());
 
         $expected = [
             'type' => "The value you selected is not a valid choice.",
         ];
         foreach ($this->getViolations($violations) as $name => $violation) {
-            expect($violation)->to->be->equal($expected[$name]);
+            $this->assertEquals($expected[$name], $violation);
         }
     }
 
@@ -47,7 +47,7 @@ class DetailsTest extends TestCase
         $component = $this->getContainer()->get('component.details')->fromXml($xml);
 
         foreach ($fixtures as $method => $value) {
-            expect($component->$method())->to->equal($value);
+            $this->assertEquals($value, $component->$method());
         }
     }
 
@@ -65,13 +65,13 @@ class DetailsTest extends TestCase
         }
 
         foreach ($expected as $method => $value) {
-            expect($component->$method())->to->equal($value);
+            $this->assertEquals($value, $component->$method());
         }
 
         $component = new Details();
         $component->withArray($array);
         foreach ($expected as $method => $value) {
-            expect($component->$method())->to->equal($value);
+            $this->assertEquals($value, $component->$method());
         }
     }
 

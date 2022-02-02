@@ -34,6 +34,6 @@ class GetNewNumberTest extends AbstractTest
         $message = new GetNewNumber($identifier, new Settings());
 
         $output = $renderer->render($message);
-        expect($output)->to->have->same->xml('messages/requests/get-new-number.xml');
+        $this->assertXmlFromFixture('messages/requests/get-new-number.xml', $output);
     }
 }

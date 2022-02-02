@@ -24,7 +24,7 @@ class ReturnAddressTest extends TestCase
         $returnAddress->setPassword('PASSWORD');
 
         $violations = $validator->validate($returnAddress);
-        expect($violations->count())->to->be->above(0);
+        $this->assertGreaterThan(0, $violations->count());
 
         $expected = [
             'address' => "This value should not be blank.",
@@ -32,7 +32,7 @@ class ReturnAddressTest extends TestCase
             'path' => "The return type you selected can't have a path.",
         ];
         foreach ($this->getViolations($violations) as $name => $violation) {
-            expect($violation)->to->be->equal($expected[$name]);
+            $this->assertEquals($expected[$name], $violation);
         }
     }
 
@@ -50,7 +50,7 @@ class ReturnAddressTest extends TestCase
         $component = $this->getContainer()->get('component.return_address')->fromXml($xml);
 
         foreach ($fixtures as $method => $value) {
-            expect($component->$method())->to->equal($value);
+            $this->assertEquals($value, $component->$method());
         }
     }
 

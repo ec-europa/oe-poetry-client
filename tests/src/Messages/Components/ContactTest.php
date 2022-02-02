@@ -24,9 +24,8 @@ class ContactTest extends TestCase
         $contact->setAction('action');
         $contact->setEmail('email');
 
-
         $violations = $validator->validate($contact);
-        expect($violations->count())->to->be->above(0);
+        $this->assertGreaterThan(0, $violations->count());
         $expected = [
             'type' => "The value you selected is not a valid choice.",
             'action' => "The value you selected is not a valid choice.",
@@ -34,7 +33,7 @@ class ContactTest extends TestCase
             'email' => "This value is not a valid email address.",
         ];
         foreach ($this->getViolations($violations) as $name => $violation) {
-            expect($violation)->to->be->equal($expected[$name]);
+            $this->assertEquals($expected[$name], $violation);
         }
     }
 
@@ -53,9 +52,9 @@ class ContactTest extends TestCase
         /** @var \EC\Poetry\Messages\Components\Contact $component */
         $component = $this->getContainer()->get('component.contact')->fromXml($xml);
 
-        expect($component->getType())->to->equal($type);
-        expect($component->getNickname())->to->equal($nickname);
-        expect($component->getEmail())->to->equal($email);
+        $this->assertEquals($type, $component->getType());
+        $this->assertEquals($nickname, $component->getNickname());
+        $this->assertEquals($email, $component->getEmail());
     }
 
     /**

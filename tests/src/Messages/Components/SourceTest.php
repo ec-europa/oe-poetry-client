@@ -29,7 +29,7 @@ class SourceTest extends TestCase
         $source->withSourceLanguage()->setCode('it')->setPages(1);
 
         $violations = $validator->validate($source);
-        expect($violations->count())->to->be->above(0);
+        $this->assertGreaterThan(0, $violations->count());
         $expected = [
             'format' => "This value should not be blank.",
             'legiswriteFormat' => "This value should not be blank.",
@@ -38,7 +38,7 @@ class SourceTest extends TestCase
         ];
         $violations = $this->getViolations($violations);
         foreach ($expected as $name => $violation) {
-            expect($violations[$name])->to->be->equal($violation);
+            $this->assertEquals($violation, $violations[$name]);
         }
     }
 
@@ -61,7 +61,7 @@ class SourceTest extends TestCase
                     $this->assertProperties($component->$getComponent()[$i], $property);
                 }
             } else {
-                expect($component->$getComponent())->to->equal($properties);
+                $this->assertEquals($properties, $component->$getComponent());
             }
         }
     }

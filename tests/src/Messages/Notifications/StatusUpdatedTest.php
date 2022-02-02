@@ -58,7 +58,7 @@ class StatusUpdatedTest extends AbstractTest
             ->setAcceptedDelay('04/10/2017 23:59');
 
         $output = $renderer->render($message);
-        expect($output)->to->have->same->xml('messages/notifications/status-updated.xml');
+        $this->assertXmlFromFixture('messages/notifications/status-updated.xml', $output);
     }
 
     /**
@@ -77,16 +77,16 @@ class StatusUpdatedTest extends AbstractTest
         $message = $this->getContainer()->get('notification.status_updated')->fromXml($xml);
 
         foreach ($identifier as $method => $expected) {
-            expect($message->getIdentifier()->{$method}())->to->equal($expected);
+            $this->assertEquals($expected, $message->getIdentifier()->{$method}());
         }
         foreach ($statuses as $index => $status) {
             foreach ($status as $method => $expected) {
-                expect($message->getStatuses()[$index]->{$method}())->to->equal($expected);
+                $this->assertEquals($expected, $message->getStatuses()[$index]->{$method}());
             }
         }
         foreach ($targets as $index => $target) {
             foreach ($target as $method => $expected) {
-                expect($message->getTargets()[$index]->{$method}())->to->equal($expected);
+                $this->assertEquals($expected, $message->getTargets()[$index]->{$method}());
             }
         }
     }

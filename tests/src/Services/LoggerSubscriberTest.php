@@ -41,16 +41,14 @@ class LoggerSubscriberTest extends AbstractHttpMockTest
         $poetry->getClient()->send($request);
         $logs = $logger->getLogs()[LogLevel::INFO];
 
-        expect($logs)->to->have->keys([
-            'poetry.client.request',
-            'poetry.client.response',
-            'poetry.response.parse',
-        ]);
-        expect($logs['poetry.client.response']['message'])->to->have->same->xml('messages/responses/response-status.xml');
-        expect($logs['poetry.client.request']['message'])->to->contain('<request communication="synchrone" id="DGT/2017/00001/3/0/TRA" type="newPost">');
-        expect($logs['poetry.client.request']['username'])->to->equal('username');
-        expect($logs['poetry.client.request']['password'])->to->equal('p******d');
-        expect($logs['poetry.response.parse']['message'])->to->have->same->xml('messages/responses/response-status.xml');
+        $this->assertArrayHasKey('poetry.client.request', $logs);
+        $this->assertArrayHasKey('poetry.client.response', $logs);
+        $this->assertArrayHasKey('poetry.response.parse', $logs);
+        $this->assertXmlFromFixture('messages/responses/response-status.xml', $logs['poetry.client.response']['message']);
+        $this->assertStringContainsString('<request communication="synchrone" id="DGT/2017/00001/3/0/TRA" type="newPost">', $logs['poetry.client.request']['message']);
+        $this->assertEquals('username', $logs['poetry.client.request']['username']);
+        $this->assertEquals('p******d', $logs['poetry.client.request']['password']);
+        $this->assertXmlFromFixture('messages/responses/response-status.xml', $logs['poetry.response.parse']['message']);
     }
 
     /**
@@ -75,11 +73,10 @@ class LoggerSubscriberTest extends AbstractHttpMockTest
 
         $poetry->getClient()->send($request);
         $logs = $logger->getLogs()[LogLevel::ERROR];
-        expect($logs['poetry.exception']['message'])
-            ->contain('identifier.code: This value should not be blank.')
-            ->contain('identifier.year: This value should not be blank.')
-            ->contain('identifier.version: This value should not be blank.')
-            ->contain('identifier.part: This value should not be blank.');
+        $this->assertStringContainsString('identifier.code: This value should not be blank.', $logs['poetry.exception']['message']);
+        $this->assertStringContainsString('identifier.year: This value should not be blank.', $logs['poetry.exception']['message']);
+        $this->assertStringContainsString('identifier.version: This value should not be blank.', $logs['poetry.exception']['message']);
+        $this->assertStringContainsString('identifier.part: This value should not be blank.', $logs['poetry.exception']['message']);
     }
 
     /**
@@ -98,8 +95,8 @@ class LoggerSubscriberTest extends AbstractHttpMockTest
             $poetry->getServer()->handle();
 
             $logs = $logger->getLogs()[LogLevel::INFO];
-            expect($logs)->not->empty();
-            expect($logs[ReceivedNotificationEvent::NAME])->not->empty();
+            self::assertNotEmpty($logs);
+            self::assertNotEmpty($logs[ReceivedNotificationEvent::NAME]);
         };
 
         $this->setupServer('/notification', $callback);
@@ -122,8 +119,8 @@ class LoggerSubscriberTest extends AbstractHttpMockTest
             ]);
             $poetry->getServer()->handle();
 
-            expect($logger->getLogs()[LogLevel::INFO])->empty();
-            expect($logger->getLogs()[LogLevel::ERROR])->empty();
+            self::assertEmpty($logger->getLogs()[LogLevel::INFO]);
+            self::assertEmpty($logger->getLogs()[LogLevel::ERROR]);
         };
 
         $this->setupServer('/notification', $callback);

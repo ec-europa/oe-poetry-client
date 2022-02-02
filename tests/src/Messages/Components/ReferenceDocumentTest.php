@@ -24,9 +24,8 @@ class ReferenceDocumentTest extends TestCase
         $referenceDocument->setType('type');
         $referenceDocument->setAction('action');
 
-
         $violations = $validator->validate($referenceDocument);
-        expect($violations->count())->to->be->above(0);
+        $this->assertGreaterThan(0, $violations->count());
         $expected = [
             'format' => "The value you selected is not a valid choice.",
             'language' => "This value should not be blank.",
@@ -35,7 +34,7 @@ class ReferenceDocumentTest extends TestCase
             'name' => "This value should not be blank.",
         ];
         foreach ($this->getViolations($violations) as $name => $violation) {
-            expect($violation)->to->be->equal($expected[$name]);
+            $this->assertEquals($expected[$name], $violation);
         }
     }
 
@@ -52,7 +51,7 @@ class ReferenceDocumentTest extends TestCase
         /** @var \EC\Poetry\Messages\Components\ReferenceDocument $component */
         $component = $this->getContainer()->get('component.reference_document')->fromXml($xml);
         foreach ($fixtures as $method => $value) {
-            expect($component->$method())->to->equal($value);
+            $this->assertEquals($value, $component->$method());
         }
     }
 

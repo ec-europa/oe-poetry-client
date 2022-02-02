@@ -39,7 +39,7 @@ class TranslationReceivedTest extends AbstractTest
             ->setTranslatedFile('File64');
 
         $output = $renderer->render($message);
-        expect($output)->to->have->same->xml('messages/notifications/translation-received.xml');
+        $this->assertXmlFromFixture('messages/notifications/translation-received.xml', $output);
     }
 
     /**
@@ -57,11 +57,11 @@ class TranslationReceivedTest extends AbstractTest
         $message = $this->getContainer()->get('notification.translation_received')->fromXml($xml);
 
         foreach ($identifier as $method => $expected) {
-            expect($message->getIdentifier()->{$method}())->to->equal($expected);
+            $this->assertEquals($expected, $message->getIdentifier()->{$method}());
         }
         foreach ($targets as $index => $target) {
             foreach ($target as $method => $expected) {
-                expect($message->getTargets()[$index]->{$method}())->to->equal($expected);
+                $this->assertEquals($expected, $message->getTargets()[$index]->{$method}());
             }
         }
     }

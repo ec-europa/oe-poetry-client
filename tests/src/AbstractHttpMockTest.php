@@ -38,14 +38,6 @@ abstract class AbstractHttpMockTest extends AbstractTest
     }
 
     /**
-     * {@inheritdoc}
-     */
-    public function tearDown(): void
-    {
-        $this->tearDownHttpMock();
-    }
-
-    /**
      * Setup notification endpoint.
      */
     protected function setupServer($endpoint, \Closure $callback, $method = 'POST')
@@ -80,6 +72,6 @@ abstract class AbstractHttpMockTest extends AbstractTest
         $wsdl = 'data://text/plain;base64,'.base64_encode($rendered);
         $client = new \SoapClient($wsdl, ['cache_wsdl' => WSDL_CACHE_NONE]);
 
-        return $client->__soapCall('handle', [$username, $password, $message]);
+        return $client->handle($username, $password, $message);
     }
 }
