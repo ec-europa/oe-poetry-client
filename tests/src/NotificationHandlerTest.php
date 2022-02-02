@@ -106,7 +106,7 @@ class NotificationHandlerTest extends AbstractHttpMockTest
         };
 
         $this->setupServer('/bad-request', $callback);
-        $request = new Request('HEAD', 'http://httpbin.org/head', ['x-test' => 'value'], 'test body');
+        $request = new Request('POST', 'http://localhost:8082/bad-request', ['x-test' => 'value'], 'test body');
         $this->http->client->sendRequest($request);
 
         $logs = $this->getLogs();
