@@ -87,8 +87,8 @@ class NotificationHandlerTest extends AbstractHttpMockTest
     public function testBadRequest()
     {
         $file = $this->logFile;
+        touch($file);
         $callback = function (Response $response) use ($file) {
-            @unlink($file);
             $formatter = new JsonFormatter();
             $stream = new StreamHandler($file, Logger::INFO);
             $stream->setFormatter($formatter);

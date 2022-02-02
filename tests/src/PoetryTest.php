@@ -2,7 +2,6 @@
 
 namespace EC\Poetry\Tests;
 
-use EC\Poetry\Messages\Requests\AbstractRequest;
 use EC\Poetry\Messages\Requests\CreateTranslationRequest;
 use EC\Poetry\Poetry;
 use EC\Poetry\Tests\AbstractTest as TestCase;
