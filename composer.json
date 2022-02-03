@@ -25,6 +25,10 @@
         "phpspec/phpspec": "^7.0",
         "phpunit/phpunit": "^8.0"
     },
+    "_readme": [
+        "We need to lock internations/http-mock on dev branch with a stable commit since the component doesn't support php7.4 yet.",
+        "We need to set symfony/dom-crawler as minimum 4.4.12 due to potential errors on higher php versions."
+    ],
     "suggest": {
         "monolog/monolog": "Log Poetry requests and responses via Monolog",
         "ec-europa/oe-poetry-behat": "Test Poetry service integration with Behat"
