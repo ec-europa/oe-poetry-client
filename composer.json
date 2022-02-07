@@ -20,6 +20,7 @@
     },
     "require-dev": {
         "internations/http-mock": "dev-php74#cd52a62136c98b1b66eca6edbd564a3a91f7e79c",
+        "lstrojny/hmmmath": "^0.8",
         "mockery/mockery": "^1.5",
         "openeuropa/code-review": "^2.0",
         "phpspec/phpspec": "^7.0",
@@ -27,7 +28,8 @@
     },
     "_readme": [
         "We need to lock internations/http-mock on dev branch with a stable commit since the component doesn't support php7.4 yet.",
-        "We need to set symfony/dom-crawler as minimum 4.4.12 due to potential errors on higher php versions."
+        "We need to set symfony/dom-crawler as minimum 4.4.12 due to potential errors on higher php versions.",
+        "We need to add dependency of lstrojny/hmmmath to guarantee correct compatiblity with lower versions."
     ],
     "suggest": {
         "monolog/monolog": "Log Poetry requests and responses via Monolog",
