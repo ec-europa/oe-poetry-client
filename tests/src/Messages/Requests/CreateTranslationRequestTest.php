@@ -28,7 +28,7 @@ class CreateTranslationRequestTest extends AbstractTest
             ->setPart('00');
 
         new CreateTranslationRequest($identifier, new Settings());
-        expect($identifier->getProduct())->to->equal('TRA');
+        $this->assertEquals('TRA', $identifier->getProduct());
     }
 
     /**
@@ -45,7 +45,7 @@ class CreateTranslationRequestTest extends AbstractTest
             ->setProduct('ABC');
 
         new CreateTranslationRequest($identifier, new Settings());
-        expect($identifier->getProduct())->to->equal('ABC');
+        $this->assertEquals('ABC', $identifier->getProduct());
     }
 
     /**
@@ -74,10 +74,10 @@ class CreateTranslationRequestTest extends AbstractTest
             ->setDestination('INTERNE');
 
         $violations = $this->getContainer()->get('validator')->validate($request);
-        expect($this->getViolations($violations))->to->be->empty();
-        expect($request->getContacts()[0])->to->be->instanceof(Contact::class);
-        expect($request->getContacts()[1])->to->be->instanceof(Contact::class);
-        expect($request->getDetails()->getType())->be->equal('IMG');
+        $this->assertEmpty($this->getViolations($violations));
+        $this->assertInstanceOf(Contact::class, $request->getContacts()[0]);
+        $this->assertInstanceOf(Contact::class, $request->getContacts()[1]);
+        $this->assertEquals('IMG', $request->getDetails()->getType());
     }
 
     /**
@@ -112,6 +112,6 @@ class CreateTranslationRequestTest extends AbstractTest
             ->setDelay('14/09/2017');
 
         $output = $renderer->render($message);
-        expect($output)->to->have->same->xml('messages/requests/create-translation-request.xml');
+        $this->assertXmlFromFixture('messages/requests/create-translation-request.xml', $output);
     }
 }

@@ -2,7 +2,6 @@
 
 namespace EC\Poetry\Tests;
 
-use EC\Poetry\Messages\Requests\AbstractRequest;
 use EC\Poetry\Messages\Requests\CreateTranslationRequest;
 use EC\Poetry\Poetry;
 use EC\Poetry\Tests\AbstractTest as TestCase;
@@ -24,11 +23,11 @@ class PoetryTest extends TestCase
     {
         $poetry = new Poetry();
         $message = $poetry->get('request.create_translation_request');
-        expect($message)->to->be->instanceof(CreateTranslationRequest::class);
+        $this->assertInstanceOf(CreateTranslationRequest::class, $message);
 
         /** @var \Symfony\Component\Validator\ConstraintViolationListInterface $violations */
         $violations = $poetry->get('validator')->validate($message);
-        expect($violations->count())->not->to->be->empty();
+        $this->assertNotEquals(0, $violations->count());
 
         $poetry = new Poetry([
             'identifier.code' => 'DGT',
@@ -40,7 +39,7 @@ class PoetryTest extends TestCase
         ]);
         $message = $poetry->get('request.create_translation_request');
         $violations = $poetry->get('validator')->validate($message);
-        expect($violations->count())->to->be->empty();
+        $this->assertEquals(0, $violations->count());
     }
 
     /**
@@ -51,12 +50,12 @@ class PoetryTest extends TestCase
         $poetry = new Poetry();
 
         $service = $poetry->get('renderer');
-        expect($service)->to->be->instanceof(Renderer::class);
+        $this->assertInstanceOf(Renderer::class, $service);
 
         $service = $poetry->get('renderer.engine');
-        expect($service)->to->be->instanceof(Engine::class);
+        $this->assertInstanceOf(Engine::class, $service);
 
         $service = $poetry->get('validator');
-        expect($service)->to->be->instanceof(RecursiveValidator::class);
+        $this->assertInstanceOf(RecursiveValidator::class, $service);
     }
 }

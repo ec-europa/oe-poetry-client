@@ -24,7 +24,7 @@ class IdentifierTest extends TestCase
         $identifier = (new Identifier())->setYear(1017);
 
         $violations = $validator->validate($identifier);
-        expect($violations->count())->to->be->above(0);
+        $this->assertGreaterThan(0, $violations->count());
 
         $expected = [
             'code' => "This value should not be blank.",
@@ -35,7 +35,7 @@ class IdentifierTest extends TestCase
         ];
         $violations = $this->getViolations($violations);
         foreach ($expected as $name => $violation) {
-            expect($violations[$name])->to->be->equal($violation);
+            $this->assertEquals($violation, $violations[$name]);
         }
     }
 
@@ -57,12 +57,12 @@ class IdentifierTest extends TestCase
         /** @var \EC\Poetry\Messages\Components\Identifier $component */
         $component = $this->getContainer()->get('component.identifier')->fromXml($xml);
 
-        expect($component->getCode())->to->equal($code);
-        expect($component->getYear())->to->equal($year);
-        expect($component->getNumber())->to->equal($number);
-        expect($component->getVersion())->to->equal($version);
-        expect($component->getPart())->to->equal($part);
-        expect($component->getProduct())->to->equal($product);
+        $this->assertEquals($code, $component->getCode());
+        $this->assertEquals($year, $component->getYear());
+        $this->assertEquals($number, $component->getNumber());
+        $this->assertEquals($version, $component->getVersion());
+        $this->assertEquals($part, $component->getPart());
+        $this->assertEquals($product, $component->getProduct());
     }
 
     /**
@@ -80,13 +80,12 @@ class IdentifierTest extends TestCase
         ]);
 
         $actual = $poetry->getIdentifier()->getFormattedIdentifier();
-        expect($actual)->to->equal('STS/2017/NEXT_EUROPA_COUNTER/0/0/TRA');
+        $this->assertEquals('STS/2017/NEXT_EUROPA_COUNTER/0/0/TRA', $actual);
 
         $message = $poetry->get('request.create_translation_request');
         $rendered = $poetry->getRenderer()->render($message);
-        expect($rendered)
-            ->to->contain('<sequence>NEXT_EUROPA_COUNTER</sequence>')
-            ->and->not->to->contain('<numero>');
+        $this->assertStringContainsString('<sequence>NEXT_EUROPA_COUNTER</sequence>', $rendered);
+        $this->assertStringNotContainsString('<numero>', $rendered);
     }
 
     /**

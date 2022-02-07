@@ -2,11 +2,6 @@
 
 namespace EC\Poetry\Tests\Messages\Requests;
 
-use EC\Poetry\Messages\Components\Contact;
-use EC\Poetry\Messages\Components\Identifier;
-use EC\Poetry\Messages\Requests\CreateTranslationRequest;
-use EC\Poetry\Messages\Responses\Status;
-use EC\Poetry\Parsers\StatusParser;
 use EC\Poetry\Tests\AbstractTest;
 use Symfony\Component\Yaml\Yaml;
 
@@ -32,11 +27,11 @@ class StatusTest extends AbstractTest
         $message = $this->getContainer()->get('response.status')->fromXml($xml);
 
         foreach ($identifier as $method => $expected) {
-            expect($message->getIdentifier()->{$method}())->to->equal($expected);
+            $this->assertEquals($expected, $message->getIdentifier()->{$method}());
         }
         foreach ($statuses as $index => $status) {
             foreach ($status as $method => $expected) {
-                expect($message->getStatuses()[$index]->{$method}())->to->equal($expected);
+                $this->assertEquals($expected, $message->getStatuses()[$index]->{$method}());
             }
         }
     }
@@ -58,16 +53,16 @@ class StatusTest extends AbstractTest
                 foreach ($result as $key => $values) {
                     $object = $message->$method()[$key];
                     foreach ($values as $method => $result) {
-                        expect($object->$method())->to->equal($result);
+                        $this->assertEquals($result, $object->$method());
                     }
                 }
             } elseif (is_array($result) && !is_numeric(key($result))) {
                 $object = $message->$method();
                 foreach ($result as $key => $value) {
-                    expect($object->$key())->to->equal($value);
+                    $this->assertEquals($value, $object->$key());
                 }
             } else {
-                expect($message->$method())->to->equal($result);
+                $this->assertEquals($result, $message->$method());
             }
         }
     }

@@ -2,9 +2,7 @@
 
 namespace EC\Poetry\Tests;
 
-use EC\Poetry\Poetry;
-use InterNations\Component\HttpMock\PHPUnit\HttpMockTrait;
-use Symfony\Component\HttpFoundation\Response;
+use InterNations\Component\HttpMock\PHPUnit\HttpMock;
 
 /**
  * Class AbstractHttpMockTest
@@ -13,12 +11,12 @@ use Symfony\Component\HttpFoundation\Response;
  */
 abstract class AbstractHttpMockTest extends AbstractTest
 {
-    use HttpMockTrait;
+    use HttpMock;
 
     /**
      * {@inheritdoc}
      */
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void
     {
         static::setUpHttpMockBeforeClass('8082', 'localhost');
     }
@@ -26,7 +24,7 @@ abstract class AbstractHttpMockTest extends AbstractTest
     /**
      * {@inheritdoc}
      */
-    public static function tearDownAfterClass()
+    public static function tearDownAfterClass(): void
     {
         static::tearDownHttpMockAfterClass();
     }
@@ -34,17 +32,9 @@ abstract class AbstractHttpMockTest extends AbstractTest
     /**
      * {@inheritdoc}
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->setUpHttpMock();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function tearDown()
-    {
-        $this->tearDownHttpMock();
     }
 
     /**
@@ -82,6 +72,6 @@ abstract class AbstractHttpMockTest extends AbstractTest
         $wsdl = 'data://text/plain;base64,'.base64_encode($rendered);
         $client = new \SoapClient($wsdl, ['cache_wsdl' => WSDL_CACHE_NONE]);
 
-        return $client->__soapCall('handle', [$username, $password, $message]);
+        return $client->handle($username, $password, $message);
     }
 }

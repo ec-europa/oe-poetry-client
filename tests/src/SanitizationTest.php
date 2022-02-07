@@ -39,7 +39,7 @@ class SanitizationTest extends AbstractTest
         // If XML is not valid test will fail here.
         new \SimpleXMLElement($xml);
         foreach ($getters as $getter => $value) {
-            expect($actual->$getter($value))->to->equal($value);
+            $this->assertEquals($value, $actual->$getter($value));
         }
     }
 

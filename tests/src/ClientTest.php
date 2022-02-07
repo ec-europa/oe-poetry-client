@@ -2,12 +2,9 @@
 
 namespace EC\Poetry\Tests;
 
-use EC\Poetry\Events\ParseNotificationEvent;
 use EC\Poetry\Messages\Requests\CreateTranslationRequest;
-use EC\Poetry\Messages\Responses\Status;
 use EC\Poetry\Poetry;
 use EC\Poetry\Services\Settings;
-use EC\Poetry\Tests\Logger\TestLogger;
 use Psr\Log\LogLevel;
 
 /**
@@ -43,7 +40,7 @@ class ClientTest extends AbstractTest
 
         $response = $poetry->getClient()->send($request);
         $rendererResponse = $this->getContainer()->get('renderer')->render($response);
-        expect($rendererResponse)->has->same->xml('messages/responses/response-status.xml');
+        $this->assertXmlFromFixture('messages/responses/response-status.xml', $rendererResponse);
     }
 
     /**
@@ -53,17 +50,17 @@ class ClientTest extends AbstractTest
     {
         $poetry = new Poetry();
         $actual = $poetry->getWsdl()->getXml();
-        expect($actual)->to->contain('<soap:address location="" />');
+        $this->assertStringContainsString('<soap:address location="" />', $actual);
 
         $poetry = new Poetry([
             'notification.endpoint' => 'http://example.com/notification/endpoint',
         ]);
         $actual = $poetry->getWsdl()->getXml();
-        expect($actual)->to->contain('<soap:address location="http://example.com/notification/endpoint" />');
+        $this->assertStringContainsString('<soap:address location="http://example.com/notification/endpoint" />', $actual);
 
         $actual = $poetry->getWsdl()->getHeaders();
-        expect($actual)->to->equal([
+        $this->assertEquals([
             'content-type' => 'application/xml; utf-8',
-        ]);
+        ], $actual);
     }
 }

@@ -7,7 +7,6 @@ use EC\Poetry\Poetry;
 use Monolog\Formatter\JsonFormatter;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
-use Peridot\Leo\Leo;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 
@@ -22,31 +21,6 @@ abstract class AbstractTest extends TestCase
      * @var string
      */
     protected $logFile = __DIR__.'/log.txt';
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function setUp()
-    {
-        $assertion = Leo::assertion();
-        $unit = $this;
-        $assertion->addMethod('xml', function ($fixture) use ($unit) {
-            $actual = $this->getActual();
-            $expected = $unit->getFixture($fixture);
-
-            $doc1 = new \DOMDocument();
-            $doc1->loadXML($actual);
-
-            $doc2 = new \DOMDocument();
-            $doc2->loadXML($expected);
-
-            $element1 = $doc1->getElementsByTagName('POETRY')->item(0);
-            $element2 = $doc2->getElementsByTagName('POETRY')->item(0);
-
-            $unit->assertXmlStringEqualsXmlString($expected, $actual);
-            $unit->assertEqualXMLStructure($element1, $element2);
-        });
-    }
 
     /**
      * @return \EC\Poetry\Poetry
@@ -153,8 +127,33 @@ abstract class AbstractTest extends TestCase
                     $this->assertProperties($component->$getProperty()[$i], $property);
                 }
             } else {
-                expect($component->$getProperty())->to->equal($value);
+                $this->assertEquals($value, $component->$getProperty());
             }
         }
+    }
+
+    /**
+     * Assert given XML equals the one contained in given fixture file.
+     *
+     * @param $fixture
+     * @param $actual
+     *
+     * @return void
+     */
+    protected function assertXmlFromFixture($fixture, $actual)
+    {
+        $expected = $this->getFixture($fixture);
+
+        $doc1 = new \DOMDocument();
+        $doc1->loadXML($actual);
+
+        $doc2 = new \DOMDocument();
+        $doc2->loadXML($expected);
+
+        $element1 = $doc1->getElementsByTagName('POETRY')->item(0);
+        $element2 = $doc2->getElementsByTagName('POETRY')->item(0);
+
+        $this->assertXmlStringEqualsXmlString($expected, $actual);
+        $this->assertEqualXMLStructure($element1, $element2);
     }
 }

@@ -31,7 +31,7 @@ class CreateReviewRequestTest extends AbstractTest
             ->setPart('11');
 
         new CreateReviewRequest($identifier, new Settings());
-        expect($identifier->getProduct())->to->equal('REV');
+        $this->assertEquals('REV', $identifier->getProduct());
     }
 
     /**
@@ -48,7 +48,7 @@ class CreateReviewRequestTest extends AbstractTest
             ->setProduct('ABC');
 
         new CreateReviewRequest($identifier, new Settings());
-        expect($identifier->getProduct())->to->equal('ABC');
+        $this->assertEquals('ABC', $identifier->getProduct());
     }
 
     /**
@@ -113,8 +113,8 @@ class CreateReviewRequestTest extends AbstractTest
 
         $output = $renderer->render($message);
         $violations = $this->getContainer()->getValidator()->validate($message);
-        expect($this->getViolations($violations))->to->be->empty();
-        expect($output)->to->have->same->xml('messages/requests/create-review-request.xml');
+        $this->assertEmpty($this->getViolations($violations));
+        $this->assertXmlFromFixture('messages/requests/create-review-request.xml', $output);
     }
 
     /**
@@ -149,7 +149,7 @@ class CreateReviewRequestTest extends AbstractTest
         }
 
         $violations = $this->getContainer()->getValidator()->validate($component);
-        expect($this->getViolations($violations))->to->be->empty();
+        $this->assertEmpty($this->getViolations($violations));
     }
 
     /**

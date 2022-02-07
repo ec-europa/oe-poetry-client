@@ -30,7 +30,7 @@ class TargetTest extends TestCase
 
 
         $violations = $validator->validate($source);
-        expect($violations->count())->to->be->above(0);
+        $this->assertGreaterThan(0, $violations->count());
         $expected = [
             'format' => "The value you selected is not a valid choice.",
             'language' => "This value should not be blank.",
@@ -47,7 +47,7 @@ class TargetTest extends TestCase
 
         ];
         foreach ($this->getViolations($violations) as $name => $violation) {
-            expect($violation)->to->be->equal($expected[$name]);
+            $this->assertEquals($expected[$name], $violation);
         }
     }
 
@@ -67,16 +67,16 @@ class TargetTest extends TestCase
         $target = $this->getContainer()->get('component.target')->fromXml($xml);
 
         foreach ($targetProperties as $method => $value) {
-            expect($target->$method())->to->equal($value);
+            $this->assertEquals($value, $target->$method());
         }
         $returnAddress = $target->getReturnAddresses()[0];
         foreach ($addressProperties as $method => $value) {
-            expect($returnAddress->$method())->to->equal($value);
+            $this->assertEquals($value, $returnAddress->$method());
         }
-        expect(count($target->getContacts()))->to->equal(1);
+        $this->assertEquals(1, count($target->getContacts()));
         $contact = $target->getContacts()[0];
         foreach ($contactProperties as $method => $value) {
-            expect($contact->$method())->to->equal($value);
+            $this->assertEquals($value, $contact->$method());
         }
     }
 

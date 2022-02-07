@@ -4,4 +4,4 @@ phpunit.xml
 composer.lock
 .idea
 log.txt
-docker-compose.yml
+.phpunit.result.cache

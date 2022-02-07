@@ -30,9 +30,9 @@ class AddLanguagesRequestTest extends AbstractTest
             ->setDelay('14/09/2017');
 
         $violations = $this->getContainer()->get('validator')->validate($request);
-        expect($this->getViolations($violations))->to->be->empty();
-        expect($request->getTargets()[0])->to->be->instanceof(Target::class);
-        expect($request->getTargets()[0]->getLanguage())->be->equal('FR');
+        $this->assertEmpty($this->getViolations($violations));
+        $this->assertInstanceOf(Target::class, $request->getTargets()[0]);
+        $this->assertEquals('FR', $request->getTargets()[0]->getLanguage());
     }
 
     /**
@@ -64,6 +64,6 @@ class AddLanguagesRequestTest extends AbstractTest
             ->setAddress('Url');
 
         $output = $renderer->render($message);
-        expect($output)->to->have->same->xml('messages/requests/add-languages-request.xml');
+        $this->assertXmlFromFixture('messages/requests/add-languages-request.xml', $output);
     }
 }

@@ -24,12 +24,12 @@ class StatusTest extends TestCase
         $status->setCode(1);
 
         $violations = $validator->validate($status);
-        expect($violations->count())->to->be->above(0);
+        $this->assertGreaterThan(0, $violations->count());
         $expected = [
             'code' => "The value you selected is not a valid choice.",
         ];
         foreach ($this->getViolations($violations) as $name => $violation) {
-            expect($violation)->to->be->equal($expected[$name]);
+            $this->assertEquals($expected[$name], $violation);
         }
     }
 
@@ -50,11 +50,11 @@ class StatusTest extends TestCase
         /** @var \EC\Poetry\Messages\Components\Status $component */
         $component = $this->getContainer()->get('component.status')->fromXml($xml);
 
-        expect($component->getDate())->to->equal($date);
-        expect($component->getTime())->to->equal($time);
-        expect($component->getMessage())->to->equal($message);
-        expect($component->getCode())->to->equal($code);
-        expect($component->getType())->to->equal($type);
+        $this->assertEquals($date, $component->getDate());
+        $this->assertEquals($time, $component->getTime());
+        $this->assertEquals($message, $component->getMessage());
+        $this->assertEquals($code, $component->getCode());
+        $this->assertEquals($type, $component->getType());
     }
 
     /**
