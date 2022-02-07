@@ -1,14 +1,25 @@
-# Change Log
+# Changelog
+
+## [0.6.0](https://github.com/ec-europa/oe-poetry-client/tree/0.6.0) (2022-02-07)
+
+[Full Changelog](https://github.com/ec-europa/oe-poetry-client/compare/0.5.0...0.6.0)
+
+**Merged pull requests:**
+
+- EWPP-1908: Update to php8. [\#89](https://github.com/ec-europa/oe-poetry-client/pull/89) ([nagyad](https://github.com/nagyad))
 
 ## [0.5.0](https://github.com/ec-europa/oe-poetry-client/tree/0.5.0) (2021-10-14)
+
 [Full Changelog](https://github.com/ec-europa/oe-poetry-client/compare/0.4.0...0.5.0)
 
 **Merged pull requests:**
 
+- Prepare changelog for release 0.5.0. [\#88](https://github.com/ec-europa/oe-poetry-client/pull/88) ([brummbar](https://github.com/brummbar))
 - EWPP-917: Update minimum PHP version and Symfony components [\#87](https://github.com/ec-europa/oe-poetry-client/pull/87) ([ademarco](https://github.com/ademarco))
 - EWPP-917: Drupal 9 compatibility update [\#86](https://github.com/ec-europa/oe-poetry-client/pull/86) ([GilNovacomm](https://github.com/GilNovacomm))
 
 ## [0.4.0](https://github.com/ec-europa/oe-poetry-client/tree/0.4.0) (2020-04-08)
+
 [Full Changelog](https://github.com/ec-europa/oe-poetry-client/compare/0.3.8...0.4.0)
 
 **Merged pull requests:**
@@ -17,6 +28,7 @@
 - OPENEUROPA-2251: Allow adding languages into an ongoing translation. [\#83](https://github.com/ec-europa/oe-poetry-client/pull/83) ([dxvargas](https://github.com/dxvargas))
 
 ## [0.3.8](https://github.com/ec-europa/oe-poetry-client/tree/0.3.8) (2019-12-02)
+
 [Full Changelog](https://github.com/ec-europa/oe-poetry-client/compare/0.3.7...0.3.8)
 
 **Merged pull requests:**
@@ -25,6 +37,7 @@
 - OPENEUROPA-2105: Increasing the PSR Log version. [\#80](https://github.com/ec-europa/oe-poetry-client/pull/80) ([upchuk](https://github.com/upchuk))
 
 ## [0.3.7](https://github.com/ec-europa/oe-poetry-client/tree/0.3.7) (2018-09-27)
+
 [Full Changelog](https://github.com/ec-europa/oe-poetry-client/compare/0.3.6...0.3.7)
 
 **Merged pull requests:**
@@ -33,6 +46,7 @@
 - OPENEUROPA-778: Relax dependencies. [\#77](https://github.com/ec-europa/oe-poetry-client/pull/77) ([voidtek](https://github.com/voidtek))
 
 ## [0.3.6](https://github.com/ec-europa/oe-poetry-client/tree/0.3.6) (2018-08-29)
+
 [Full Changelog](https://github.com/ec-europa/oe-poetry-client/compare/0.3.5...0.3.6)
 
 **Closed issues:**
@@ -49,6 +63,7 @@
 - OPENEUROPA-325: Use OpenEuropa components. [\#70](https://github.com/ec-europa/oe-poetry-client/pull/70) ([ademarco](https://github.com/ademarco))
 
 ## [0.3.5](https://github.com/ec-europa/oe-poetry-client/tree/0.3.5) (2017-12-12)
+
 [Full Changelog](https://github.com/ec-europa/oe-poetry-client/compare/0.3.4...0.3.5)
 
 **Closed issues:**
@@ -60,6 +75,7 @@
 - Issue \#67: Fix tests and details parsing. [\#68](https://github.com/ec-europa/oe-poetry-client/pull/68) ([ademarco](https://github.com/ademarco))
 
 ## [0.3.4](https://github.com/ec-europa/oe-poetry-client/tree/0.3.4) (2017-12-07)
+
 [Full Changelog](https://github.com/ec-europa/oe-poetry-client/compare/0.3.3...0.3.4)
 
 **Merged pull requests:**
@@ -67,6 +83,7 @@
 - Issue \#65: Add CDATA. [\#66](https://github.com/ec-europa/oe-poetry-client/pull/66) ([ademarco](https://github.com/ademarco))
 
 ## [0.3.3](https://github.com/ec-europa/oe-poetry-client/tree/0.3.3) (2017-10-20)
+
 [Full Changelog](https://github.com/ec-europa/oe-poetry-client/compare/0.3.2...0.3.3)
 
 **Closed issues:**
@@ -75,12 +92,15 @@
 - Log bad notification requests [\#55](https://github.com/ec-europa/oe-poetry-client/issues/55)
 
 ## [0.3.2](https://github.com/ec-europa/oe-poetry-client/tree/0.3.2) (2017-10-20)
+
 [Full Changelog](https://github.com/ec-europa/oe-poetry-client/compare/0.3.1...0.3.2)
 
 ## [0.3.1](https://github.com/ec-europa/oe-poetry-client/tree/0.3.1) (2017-10-20)
+
 [Full Changelog](https://github.com/ec-europa/oe-poetry-client/compare/0.3.0...0.3.1)
 
 ## [0.3.0](https://github.com/ec-europa/oe-poetry-client/tree/0.3.0) (2017-10-19)
+
 [Full Changelog](https://github.com/ec-europa/oe-poetry-client/compare/0.2.0...0.3.0)
 
 **Closed issues:**
@@ -95,6 +115,7 @@
 - Log bad notification requests \#55 [\#56](https://github.com/ec-europa/oe-poetry-client/pull/56) ([ademarco](https://github.com/ademarco))
 
 ## [0.2.0](https://github.com/ec-europa/oe-poetry-client/tree/0.2.0) (2017-10-19)
+
 [Full Changelog](https://github.com/ec-europa/oe-poetry-client/compare/0.1.0...0.2.0)
 
 **Merged pull requests:**
@@ -102,6 +123,9 @@
 - Issue \#52: Added workflow property. [\#53](https://github.com/ec-europa/oe-poetry-client/pull/53) ([imanoleguskiza](https://github.com/imanoleguskiza))
 
 ## [0.1.0](https://github.com/ec-europa/oe-poetry-client/tree/0.1.0) (2017-10-10)
+
+[Full Changelog](https://github.com/ec-europa/oe-poetry-client/compare/68ca72c9b873ca41a917fc4251c7e66850ee5c22...0.1.0)
+
 **Closed issues:**
 
 - getStatuses - we need to have more pleasant way to reach properties [\#50](https://github.com/ec-europa/oe-poetry-client/issues/50)
@@ -154,4 +178,4 @@
 
 
 
-\* *This Change Log was automatically generated by [github_changelog_generator](https://github.com/skywinder/Github-Changelog-Generator)*
+\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
