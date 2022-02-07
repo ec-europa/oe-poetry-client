@@ -4,41 +4,58 @@ workspace:
 
 services:
   web:
-    image: ${IMAGE_PHP=registry.fpfis.eu/fpfis/httpd-php:8.0-ci}
+    image: registry.fpfis.eu/fpfis/httpd-php:${PHP_VERSION}-ci
     environment:
+      - COMPOSERVER=--2
       - DOCUMENT_ROOT=/test/oe-poetry-client
 
 pipeline:
   composer-install:
     group: prepare
-    image: ${IMAGE_PHP=registry.fpfis.eu/fpfis/httpd-php:8.0-ci}
+    image: registry.fpfis.eu/fpfis/httpd-php:${PHP_VERSION}-ci
     volumes:
       - /cache:/cache
     commands:
-      - composer update ${COMPOSER_BOUNDARY}
+      - composer self-update --2
+      - composer install --ansi --no-progress
+    when:
+      matrix:
+        COMPOSER_BOUNDARY: highest
+
+  composer-update-lowest:
+    group: prepare
+    image: registry.fpfis.eu/fpfis/httpd-php:${PHP_VERSION}-ci
+    volumes:
+      - /cache:/cache
+    commands:
+      - composer self-update --2
+      - composer update --prefer-lowest --prefer-stable --ansi --no-progress
+    when:
+      matrix:
+        COMPOSER_BOUNDARY: lowest
 
   grumphp:
     group: test
-    image: ${IMAGE_PHP=registry.fpfis.eu/fpfis/httpd-php:8.0-ci}
+    image: registry.fpfis.eu/fpfis/httpd-php:${PHP_VERSION}-ci
     commands:
       - ./vendor/bin/grumphp run
 
   phpunit:
     group: test
-    image: ${IMAGE_PHP=registry.fpfis.eu/fpfis/httpd-php:8.0-ci}
+    image: registry.fpfis.eu/fpfis/httpd-php:${PHP_VERSION}-ci
     commands:
       - ./vendor/bin/phpunit
 
   phpspec:
     group: test
-    image: ${IMAGE_PHP=registry.fpfis.eu/fpfis/httpd-php:8.0-ci}
+    image: registry.fpfis.eu/fpfis/httpd-php:${PHP_VERSION}-ci
     commands:
       - ./vendor/bin/phpspec run
 
 matrix:
-  IMAGE_PHP:
-    - registry.fpfis.eu/fpfis/httpd-php:8.0-ci
-    - registry.fpfis.eu/fpfis/httpd-php:7.4-ci
   COMPOSER_BOUNDARY:
-    - '--prefer-lowest'
-    - ''
+    - lowest
+    - highest
+  PHP_VERSION:
+    - 7.4
+    - 8.0
