@@ -9,7 +9,7 @@
         "ext-soap": "*",
         "jeremeamia/superclosure": "~2.2",
         "league/plates": "^3.3.0",
-        "php": ">=7.4",
+        "php": ">=8.0",
         "pimple/pimple": "~3.2.3",
         "psr/log": "~1",
         "symfony/dom-crawler": "^3.4 || ^4.4.12",
