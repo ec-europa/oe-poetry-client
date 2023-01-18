@@ -12,6 +12,7 @@ trait ArrayAccessTrait
     /**
      * {@inheritdoc}
      */
+    #[\ReturnTypeWillChange]
     public function offsetExists($offset)
     {
         return property_exists($this, $offset);
@@ -20,6 +21,7 @@ trait ArrayAccessTrait
     /**
      * {@inheritdoc}
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return $this->hasGetMethod($offset) ? $this->{$this->getGetMethod($offset)}() : '';
@@ -28,6 +30,7 @@ trait ArrayAccessTrait
     /**
      * {@inheritdoc}
      */
+    #[\ReturnTypeWillChange]
     public function offsetSet($offset, $value)
     {
         if ($this->isComponentCollection($offset, $value)) {
@@ -42,6 +45,7 @@ trait ArrayAccessTrait
     /**
      * {@inheritdoc}
      */
+    #[\ReturnTypeWillChange]
     public function offsetUnset($offset)
     {
         unset($this->{$offset});
