@@ -9,8 +9,8 @@
         "ext-soap": "*",
         "jeremeamia/superclosure": "~2.2",
         "league/plates": "^3.3.0",
-        "php": ">=7.4",
-        "pimple/pimple": "~3.2.3",
+        "php": ">=8.0",
+        "pimple/pimple": "~3.2",
         "psr/log": "~1",
         "symfony/dom-crawler": "^3.4 || ^4.4.12",
         "symfony/event-dispatcher": "^3.4 || ^4.4",
@@ -24,7 +24,7 @@
         "mockery/mockery": "^1.5",
         "openeuropa/code-review": "^2.0",
         "phpspec/phpspec": "^7.0",
-        "phpunit/phpunit": "^8.0"
+        "phpunit/phpunit": "^8.5.20"
     },
     "_readme": [
         "We need to lock internations/http-mock on dev branch with a stable commit since the component doesn't support php7.4 yet.",
