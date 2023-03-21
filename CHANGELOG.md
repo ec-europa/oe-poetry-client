@@ -1,11 +1,21 @@
 # Changelog
 
+## [0.7.0](https://github.com/ec-europa/oe-poetry-client/tree/0.7.0) (2023-03-21)
+
+[Full Changelog](https://github.com/ec-europa/oe-poetry-client/compare/0.6.0...0.7.0)
+
+**Merged pull requests:**
+
+- EWPP-2948: Supress missing return type warnings. [\#92](https://github.com/ec-europa/oe-poetry-client/pull/92) ([22Alexandra](https://github.com/22Alexandra))
+- EWPP-2948: Update to PHP 8.1. [\#91](https://github.com/ec-europa/oe-poetry-client/pull/91) ([22Alexandra](https://github.com/22Alexandra))
+
 ## [0.6.0](https://github.com/ec-europa/oe-poetry-client/tree/0.6.0) (2022-02-07)
 
 [Full Changelog](https://github.com/ec-europa/oe-poetry-client/compare/0.5.0...0.6.0)
 
 **Merged pull requests:**
 
+- EWPP-0000: Prepare for release 0.6.0. [\#90](https://github.com/ec-europa/oe-poetry-client/pull/90) ([hernani](https://github.com/hernani))
 - EWPP-1908: Update to php8. [\#89](https://github.com/ec-europa/oe-poetry-client/pull/89) ([nagyad](https://github.com/nagyad))
 
 ## [0.5.0](https://github.com/ec-europa/oe-poetry-client/tree/0.5.0) (2021-10-14)
