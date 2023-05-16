@@ -6,17 +6,17 @@
     "prefer-stable": true,
     "license": "EUPL-1.2",
     "require": {
+        "php": ">=8.0",
         "ext-soap": "*",
         "jeremeamia/superclosure": "~2.2",
         "league/plates": "^3.3.0",
-        "php": ">=8.0",
         "pimple/pimple": "~3.2",
-        "psr/log": "~1",
-        "symfony/dom-crawler": "^3.4 || ^4.4.12",
-        "symfony/event-dispatcher": "^3.4 || ^4.4",
-        "symfony/expression-language": "^3.4 || ^4.4",
-        "symfony/validator": "^3.4 || ^4.4",
-        "symfony/yaml": "^3.4 || ^4.4"
+        "psr/log": "~1 || ^3",
+        "symfony/dom-crawler": "^3.4 || ^4.4.12 || ^6.2",
+        "symfony/event-dispatcher": "^3.4 || ^4.4 || ^6.2",
+        "symfony/expression-language": "^3.4 || ^4.4 || ^6.2",
+        "symfony/validator": "^3.4 || ^4.4 || ^6.2",
+        "symfony/yaml": "^3.4 || ^4.4 || ^6.2"
     },
     "require-dev": {
         "internations/http-mock": "dev-php74#cd52a62136c98b1b66eca6edbd564a3a91f7e79c",
@@ -51,7 +51,8 @@
         "allow-plugins": {
             "cweagans/composer-patches": true,
             "dealerdirect/phpcodesniffer-composer-installer": true,
-            "phpro/grumphp": true
+            "phpro/grumphp": true,
+            "php-http/discovery": false
         }
     }
 }
