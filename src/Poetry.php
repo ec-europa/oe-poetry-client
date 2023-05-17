@@ -43,7 +43,7 @@ class Poetry extends Container implements ContainerInterface
     /**
      * {@inheritdoc}
      */
-    public function get($name)
+    public function get(string $name)
     {
         return $this[$name];
     }
@@ -51,7 +51,7 @@ class Poetry extends Container implements ContainerInterface
     /**
      * {@inheritdoc}
      */
-    public function has($name)
+    public function has(string $name): bool
     {
         return $this->offsetExists($name);
     }
